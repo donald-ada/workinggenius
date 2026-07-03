@@ -1,0 +1,20 @@
+{
+  "name": "workinggenius",
+  "version": "0.1.0",
+  "description": "A development workflow that walks every piece of work through the six Working Geniuses — Wonder, Invention, Discernment, Galvanizing, Enablement, Tenacity — so no stage gets skipped.",
+  "author": {
+    "name": "zhangxiaolong",
+    "email": "long001027@gmail.com"
+  },
+  "homepage": "https://github.com/donald-ada/workinggenius",
+  "repository": "https://github.com/donald-ada/workinggenius",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "working-genius",
+    "planning",
+    "tdd",
+    "code-review",
+    "engineering"
+  ]
+}
