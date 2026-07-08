@@ -50,7 +50,7 @@ Skips are visible on purpose: when work goes wrong later, the recorded skips are
 
 ## Small work
 
-Not everything deserves six stages. If the user asks to track something genuinely small (a fix, a tweak), create the file with Wonder filled in one paragraph, mark Invention and Discernment skipped with reason "small work — single obvious approach", and set `stage: galvanizing`. The express path is a first-class citizen, not a violation.
+Not everything deserves six stages. If the user asks to track something genuinely small (a fix, a tweak), create the file with Wonder filled in one paragraph, mark Invention and Discernment skipped with reason "small work — single obvious approach", and set `stage: galvanizing`. Record `base:` as the current commit — no separate plan commit needed; the work file rides in the slice commit. The express path is a first-class citizen, not a violation.
 
 ## Done
 

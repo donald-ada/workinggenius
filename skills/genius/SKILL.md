@@ -28,7 +28,7 @@ Underneath the flow runs one vocabulary layer: the `domain-glossary` skill keeps
 
 ## What to do when invoked
 
-**No argument** → report status. Scan every non-done work file — frontmatter, gate checklists, and skip markers are enough; don't load full files just for status. For each, show: slug, current stage, unchecked gate items, recorded skips, and the exact next command. Flag anything stale (created long ago, build log silent) and offer to resume or abandon it. If nothing is in flight, show the flow table and how to start.
+**No argument** → report status. Scan every non-done work file — frontmatter, the `**Gate — <Stage>**` checklists, skip markers, and the current stage's section body; don't load whole files just for status. Done files get one summary line. For each in-flight item show: slug, current stage, unchecked gate items, recorded skips, and the exact next command — and if the stage sits **ahead of** an earlier gate that's neither checked nor skipped, the next command is repairing that gate, not the stage command. Flag anything untouched for roughly two weeks or more as stale and offer to resume or abandon it. If nothing is in flight, show the flow table and how to start.
 
 **An idea or request** → start work. First, size it honestly and say which path you'd take:
 
@@ -50,7 +50,11 @@ When work feels wrong, the skipped or rushed genius is the usual cause. Read the
 - "Huge diff, no tests, works on my machine" → Enablement drifted from the seams
 - "It was 'done' three times" → Tenacity's gate was claimed without fresh evidence
 
-Name the gap, then recommend re-running that one genius — not the whole flow.
+Three rules of the diagnosis:
+
+- **Compound causes are normal.** Name every gap the file shows, then recommend repairing the **most upstream** one first — downstream stages inherit its fix. Never prescribe re-running the whole flow.
+- **The loudest smell is an unrecorded bypass** — a stage that ran while an earlier gate sits unchecked with no skip line. Recorded skips are honest suspects; unrecorded bypasses are usually the culprit. (And repeated false "done" is the three-failed-fixes rule wearing different clothes: stop re-fixing, question the setup.)
+- **Evidence isn't only in the file.** When a claim begs verification ("exported fine on my machine"), look at the repo: does the code exist, does anything test it?
 
 ## Entering mid-flow
 
@@ -59,4 +63,4 @@ Not everything starts at Wonder:
 - **A design already agreed in conversation** → start at `/galvanize`; backfill Wonder and Discernment sections from the conversation, marked as backfilled.
 - **A bug with an obvious fix** → express path (see the `genius-file` skill).
 - **A bug that resists diagnosis** → that's Wonder for bugs: question the symptom until you have a tight reproduction — no fix before a root cause. After three failed fixes, stop fixing and question the architecture; the fourth attempt is where thrashing starts.
-- **Someone else's plan handed to you** → `/discern` it first; imported plans deserve an attack before they deserve slices.
+- **Someone else's plan handed to you** → `/discern` it first; imported plans deserve an attack before they deserve slices. Record the plan as an imported option (Invention skipped, reason recorded). The attack will surface questions the plan never answered — those are Wonder's questions: settle them with a targeted mini-interview (or `assumed:` lines), write them into a Wonder section marked backfilled, and check its gate before slicing. Imported plans import unexamined problems.
