@@ -1,7 +1,6 @@
 ---
 name: wonder
-description: Question the work before doing it — a relentless interview that turns a raw idea into a confirmed problem statement.
-disable-model-invocation: true
+description: Question the work before doing it — the interview that turns a raw idea into a confirmed problem statement. Use when a tracked piece of work is at its wonder stage, or when starting the Working Genius flow on a new idea.
 argument-hint: "the idea or request to question"
 ---
 
@@ -19,7 +18,9 @@ Rules of the interview:
 
 - **One question at a time.** A batch of questions is bewildering; a sequence is a conversation.
 - **Recommend an answer with every question.** You have context the user may not have loaded; a question with a recommendation is twice as easy to answer.
-- **If the codebase can answer it, don't ask.** Explore first; spend the user's attention only on questions the code cannot settle.
+- **If the codebase can answer it, don't ask.** Explore first; facts are yours to look up — only *decisions* belong to the user.
+- **Depth matches stakes.** A contained change earns a short walk; work that creates concepts, crosses interfaces, or is expensive to redo earns the full tree. Relentless means every question earns its place — not that questions never end.
+- **The user can call it.** "Enough — go with your recommendations" is a legitimate answer at any point: fill the remaining branches with your recommended answers, record each as `assumed:` in the work file, and move on.
 - **Ask the question behind the request.** "Add a retry button" is a solution wearing a problem's clothes. What failure is the user actually seeing? Would they still want the button if the failure went away?
 - **Collide words with the glossary.** Run the `domain-glossary` skill as the interview runs: a term that conflicts with `CONTEXT.md`, or one fuzzy word doing two jobs, gets resolved on the spot and written into the glossary inline. The interview is where the project's language gets sharp — that sharpness outlives this piece of work.
 

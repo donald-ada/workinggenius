@@ -37,6 +37,11 @@ Then, in any project:
 
 `/genius` at any time shows where every piece of work stands and what to run next. Optional: `/setup-working-genius` pins your verify commands per repo.
 
+Not everything needs the full six — and not everyone wants to babysit them:
+
+- **`/genius express <idea>`** — small work: Wonder in one paragraph, Invention/Discernment skipped (recorded), straight to slices.
+- **Modes** — `guided` (default: checkpoints as written), `delegated` (runs on its own recommendations, records every assumption, stops once — at the plan review), `auto` (no stops; for when you said "run it all"). Pick when work starts; recorded in the work file.
+
 ## How it works
 
 **One piece of work = one markdown file** under `.genius/`. The file — not conversation memory — carries the work: the confirmed problem, the options and their kill-reasons, the slices and their acceptance criteria, the build log, the close-out evidence. Any fresh session picks up exactly where the last one stopped.
@@ -51,21 +56,24 @@ Then, in any project:
 
 ## Skills
 
-**User-invoked** (you type them; zero context cost until then):
+**The map** (user-invoked only — the flow never hijacks work you didn't put in it):
 
-- **/genius** — the map: status of all work, next commands, genius-gap diagnosis, mid-flow entry points
-- **/wonder** — relentless interview: one question at a time, recommended answers, codebase-answerable questions never asked
+- **/genius** — status of all work, sizing (express vs full flow), mode choice, genius-gap diagnosis, mid-flow entry points
+
+**The six stages** (type them as commands, or let the flow carry itself forward in delegated/auto mode):
+
+- **/wonder** — the interview: one question at a time, a recommended answer with each, codebase-answerable questions never asked, depth matched to stakes — and "enough, go with your recommendations" always works
 - **/invent** — divergence with rules: structurally different options, no judging yet, parallel subagents for big designs, throwaway prototypes for questions paper can't settle
 - **/discern** — adversarial judgment: try to kill every option, choose opinionated, record kill-reasons, offer ADRs sparingly
-- **/galvanize** — the brief, agreed test seams, tracer-bullet vertical slices with verifiable acceptance criteria
-- **/enable** — red-before-green at the agreed seams, one slice at a time, plan deviations surfaced instead of improvised
-- **/tenacity** — no completion claim without fresh evidence: line-by-line verification, two-axis diff review (spec + standards), cleanup, commit, post-mortem
-- **/setup-working-genius** — optional per-repo pinning of directories and verify commands
+- **/galvanize** — the brief, agreed test seams, tracer-bullet vertical slices with verifiable acceptance criteria, the `base:` commit Tenacity will diff against
+- **/enable** — red-before-green at the agreed seams, one slice at a time, each slice committed as it closes, plan deviations surfaced instead of improvised
+- **/tenacity** — no completion claim without fresh evidence: line-by-line verification, one context-isolated reviewer returning both axes (spec + standards), cleanup, commit, post-mortem
 
-**Model-invoked** (Claude reaches for it on its own):
+**Support:**
 
-- **genius-file** — the work-file discipline: format, read/write rules, the gate rule, the skip protocol, the express path
-- **domain-glossary** — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/discern`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
+- **/setup-working-genius** — optional per-repo pinning of the work-file directory and verify commands (which `/enable` and `/tenacity` then use)
+- **genius-file** (model-invoked) — the work-file discipline: format, read/write rules, the gate rule, the skip protocol, modes, the express path
+- **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/discern`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
 ## Lineage
 

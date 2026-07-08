@@ -1,7 +1,6 @@
 ---
 name: discern
-description: Judge the invented options adversarially and choose one, with recorded reasons and kill-reasons.
-disable-model-invocation: true
+description: Judge the invented options adversarially and choose one, with recorded reasons and kill-reasons. Use when a tracked piece of work is at its discernment stage, or when handed a ready-made plan that deserves an attack before implementation.
 ---
 
 # Discernment

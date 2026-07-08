@@ -30,7 +30,12 @@ Underneath the flow runs one vocabulary layer: the `domain-glossary` skill keeps
 
 **No argument** → report status. Scan every non-done work file — frontmatter, gate checklists, and skip markers are enough; don't load full files just for status. For each, show: slug, current stage, unchecked gate items, recorded skips, and the exact next command. Flag anything stale (created long ago, build log silent) and offer to resume or abandon it. If nothing is in flight, show the flow table and how to start.
 
-**An idea or request** → start work. Run the `genius-file` skill to create the work file, then hand to `/wonder`. If the work is genuinely small, offer the express path (Wonder in one paragraph, Invention/Discernment skipped with reason, straight to `/galvanize`).
+**An idea or request** → start work. First, size it honestly and say which path you'd take:
+
+- **Express** — single obvious approach, one seam, fits one session, no new concept. Wonder in one paragraph, Invention/Discernment skipped with reason, straight to `/galvanize`. (`/genius express <idea>` forces this path.)
+- **Full flow** — everything else. Run the `genius-file` skill to create the work file, then hand to `/wonder`.
+
+For the full flow, also ask how much rope you have — `mode: guided` (checkpoints as written), `delegated` (run on your recommendations, one stop at the Galvanizing breakdown), or `auto` (no stops; the user explicitly asked for hands-off). Modes live in the work file; the `genius-file` skill owns their semantics.
 
 **A work slug** → deep status on that one: read its file, summarize where it stands, flag anything smelly (see below), and name the next command.
 
@@ -53,5 +58,5 @@ Not everything starts at Wonder:
 
 - **A design already agreed in conversation** → start at `/galvanize`; backfill Wonder and Discernment sections from the conversation, marked as backfilled.
 - **A bug with an obvious fix** → express path (see the `genius-file` skill).
-- **A bug that resists diagnosis** → that's Wonder for bugs: question the symptom until you have a tight reproduction, then flow on.
+- **A bug that resists diagnosis** → that's Wonder for bugs: question the symptom until you have a tight reproduction — no fix before a root cause. After three failed fixes, stop fixing and question the architecture; the fourth attempt is where thrashing starts.
 - **Someone else's plan handed to you** → `/discern` it first; imported plans deserve an attack before they deserve slices.

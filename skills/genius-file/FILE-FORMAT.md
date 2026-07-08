@@ -6,6 +6,7 @@ Path: `.genius/<slug>.md`. Slug is short kebab-case, named for the outcome (`che
 ---
 work: checkout-discounts
 stage: discernment
+mode: guided   # guided | delegated | auto — see the genius-file skill
 created: 2026-07-03
 base: <commit sha at Galvanizing — Tenacity reviews the diff from here>
 ---

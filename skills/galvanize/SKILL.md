@@ -1,7 +1,6 @@
 ---
 name: galvanize
-description: Turn the chosen design into mobilized work — a brief, vertical slices with acceptance criteria, and agreed test seams.
-disable-model-invocation: true
+description: Turn the chosen design into mobilized work — a brief, vertical slices with acceptance criteria, and agreed test seams. Use when a tracked piece of work is at its galvanizing stage.
 ---
 
 # Galvanizing

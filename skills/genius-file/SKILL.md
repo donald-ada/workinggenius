@@ -22,6 +22,16 @@ Default `.genius/<slug>.md` at the repo root. A `## Working Genius` section in `
 - Each stage owns one section of the file and ends it with its **gate** — a checklist of completion criteria. Check items off only when they are true; never pre-check.
 - Keep entries behavioral: interfaces, contracts, acceptance criteria. No file paths or line numbers — they go stale before the next session.
 
+## Modes
+
+`mode:` in the frontmatter sets how much the flow leans on the user (default `guided`):
+
+- **`guided`** — every stage's user checkpoints run as written. The default; right when the user is present and the work is theirs to shape.
+- **`delegated`** — wherever a stage would ask the user, adopt your recommended answer and record it in that section as `assumed: <question> → <answer>`. Stop exactly once: at Galvanizing's breakdown approval, where the design and the plan are visible together. Then build through to done.
+- **`auto`** — as `delegated`, but even that checkpoint becomes a recorded assumption. Only enter this mode when the user explicitly asked for hands-off ("run it all, don't stop me").
+
+Assumptions are gate-satisfying: a "user confirmed" gate item may be checked in delegated/auto mode when the corresponding `assumed:` line exists. They are also the first thing a returning user should review — surface them.
+
 ## The gate rule
 
 A stage skill may not begin until the previous stage's gate is fully checked **or** an explicit skip is recorded. When you hit an unchecked gate, stop and offer the user two options: run the missing stage, or skip it.

@@ -1,7 +1,6 @@
 ---
 name: tenacity
-description: Drive the work to actually-done — fresh verification of every claim, two-axis diff review, cleanup, commit, post-mortem.
-disable-model-invocation: true
+description: Drive the work to actually-done — fresh verification of every claim, two-axis diff review, cleanup, commit, post-mortem. Use when a tracked piece of work has all slices built and is at its tenacity stage.
 ---
 
 # Tenacity
@@ -29,12 +28,12 @@ Then the project-wide sweep, each run fresh, each output read: **full test suite
 
 ### 3. Review the diff on two axes
 
-Review the full diff of the work — from the `base:` commit recorded in the work file's frontmatter to the current tree (fall back to asking the user for the baseline if `base:` is missing). Spawn a subagent per axis for anything sizable, so neither review pollutes the other:
+Review the full diff of the work — from the `base:` commit recorded in the work file's frontmatter to the current tree (fall back to asking the user for the baseline if `base:` is missing). For anything sizable, spawn **one fresh reviewer subagent**, isolated from this session's history so it judges the work, not your reasoning about the work. Hand it the diff and the work file *as files*, never pasted summaries, and ask for both verdicts:
 
 - **Spec** — does the diff faithfully implement the brief? Anything asked-for missing? Anything present that nobody asked for (scope creep — check it against Wonder's no-list)?
 - **Standards** — does the diff follow this repo's conventions and documented standards? Skip anything tooling already enforces.
 
-Report the two axes separately; fix what's real; re-run step 2's sweep after any fix.
+Don't tell the reviewer what not to flag. When findings come back: verify before implementing, push back with reasons where a finding is wrong — findings are claims to evaluate, not orders. Fix what's real; re-run step 2's sweep after any fix.
 
 ### 4. Clean up
 
@@ -58,3 +57,5 @@ Report the two axes separately; fix what's real; re-run step 2's sweep after any
 - [ ] Committed; work file marked done, post-mortem written
 
 Only when every box is checked may you tell the user the work is done — and say it with the evidence, not instead of it.
+
+If you catch yourself writing "should pass", "probably fine", "seems to work", or "passed earlier" — that's the tell. Each of those words means a command you haven't run in this session. Run it.

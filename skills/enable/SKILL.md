@@ -1,7 +1,6 @@
 ---
 name: enable
-description: Build one slice at a time with red-before-green tests at the agreed seams and tight feedback loops.
-disable-model-invocation: true
+description: Build one slice at a time with red-before-green tests at the agreed seams and tight feedback loops. Use when a tracked piece of work is at its enablement stage and a slice needs building.
 argument-hint: "work slug and slice number, e.g. 'checkout-discounts, slice 2'"
 ---
 
