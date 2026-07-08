@@ -43,3 +43,5 @@ Not everything deserves six stages. If the user asks to track something genuinel
 ## Done
 
 When Tenacity's gate is fully checked, set `stage: done` and add a one-line post-mortem: which genius was weakest this run. Done files stay in place as decision history.
+
+Abandoning work is also a way to be done: set `stage: done` with post-mortem `abandoned — <reason>`. An honest abandonment beats a zombie file nagging every session.

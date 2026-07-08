@@ -28,7 +28,7 @@ Underneath the flow runs one vocabulary layer: the `domain-glossary` skill keeps
 
 ## What to do when invoked
 
-**No argument** → report status. Run the `genius-file` skill to read every non-done work file; for each, show: slug, current stage, unchecked gate items, recorded skips, and the exact next command. If nothing is in flight, show the flow table and how to start.
+**No argument** → report status. Scan every non-done work file — frontmatter, gate checklists, and skip markers are enough; don't load full files just for status. For each, show: slug, current stage, unchecked gate items, recorded skips, and the exact next command. Flag anything stale (created long ago, build log silent) and offer to resume or abandon it. If nothing is in flight, show the flow table and how to start.
 
 **An idea or request** → start work. Run the `genius-file` skill to create the work file, then hand to `/wonder`. If the work is genuinely small, offer the express path (Wonder in one paragraph, Invention/Discernment skipped with reason, straight to `/galvanize`).
 
