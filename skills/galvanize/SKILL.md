@@ -17,7 +17,7 @@ Condense Wonder's problem and Discernment's chosen approach into 2–5 sentences
 
 ### 2. Agree the test seams
 
-Name the public interfaces the tests will target — existing seams preferred, the fewest and highest seams possible. Confirm them with the user: seams agreed here are where Enablement writes tests, no renegotiation mid-build.
+Name the public interfaces the tests will target — existing seams preferred, the fewest and highest seams possible. A seam is a **contract, not a bare signature**: inputs, the encoding of every outcome, who owns side effects, and any ordering rule between this seam and its neighbors (which error wins? does a refused call still count?). A fresh session will inherit whatever the plan leaves open — decided by whoever can't ask you. Confirm the seams with the user: agreed here is where Enablement writes tests, no renegotiation mid-build.
 
 ### 3. Slice vertically
 
@@ -26,7 +26,8 @@ Break the work into **tracer-bullet slices**. Each slice:
 - cuts through **all** layers end-to-end (schema, logic, API, UI — whatever the change touches), never one layer of everything
 - is **demoable on its own** — a person could see it work
 - is **independently grabbable** — a fresh session with only the work file can build it
-- lists **acceptance criteria** that are each independently verifiable ("running X shows Y", not "works correctly")
+- lists **acceptance criteria** that are each independently verifiable ("running X shows Y", not "works correctly"). Mark criteria that only assert existing behavior still holds with `(verify)` — they can't honestly fail before the change, so Enablement checks them rather than red-greens them
+- pins **every value it mentions**: a "sensible default", a limit, a timeout named anywhere in a slice is a decision — write the number, don't defer it to a session that can't ask
 - names its blockers (`blocked by: 2`) or `blocked by: none`
 
 Any prefactoring ("make the change easy, then make the easy change") is its own first slice.
@@ -37,7 +38,7 @@ Show the numbered slices with blockers and acceptance criteria. Ask: granularity
 
 ### 5. Set up the sessions
 
-Write the approved slices into the work file, and record the starting point in its frontmatter: `base: <current commit sha>` — Tenacity reviews the whole work's diff against this. Then advise the user on context hygiene:
+Write the approved slices into the work file and commit it; then record that commit's sha in the frontmatter as `base:` — Tenacity reviews the whole work's diff against this, so it must be the last commit before building starts. Then advise the user on context hygiene:
 
 - **Multi-slice work**: run each slice in a **fresh session** — open it, say `/enable <work-slug>, slice N`, and the work file carries everything needed. Fresh context per slice keeps every session sharp. Slices with no blocker between them can even run in parallel sessions (separate worktrees).
 - **Single-slice work**: continue right here with `/enable`.
