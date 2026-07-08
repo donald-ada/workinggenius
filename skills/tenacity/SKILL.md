@@ -15,6 +15,8 @@ Run the `genius-file` skill: read the work file. Enablement's gate must be check
 
 Read the **entire** work file top to bottom — the problem, the scope edges, the chosen design, every slice's acceptance criteria. The file is the contract; your memory of it is not.
 
+Collect every `assumed:` line while reading: each is a decision nobody reviewed. Walk them with the user if present; otherwise attack each one yourself against the brief and the success criteria, exactly as Discernment would. An assumption that contradicts the brief is a defect, however green the tests.
+
 ### 2. Verify line by line
 
 For every acceptance criterion in every slice:
