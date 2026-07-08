@@ -20,17 +20,17 @@ Default `.genius/<slug>.md` at the repo root. A `## Working Genius` section in `
 
 - **Write at the moment a decision lands**, not in a batch at the end. A gate that passed but wasn't written down did not pass.
 - Each stage owns one section of the file and ends it with its **gate** — a checklist of completion criteria. Check items off only when they are true; never pre-check. A conditional item whose condition never arose gets checked with an inline `(n/a — reason)` — honesty needs an idiom, or it hesitates.
-- Keep entries behavioral: interfaces, contracts, acceptance criteria. No file paths or line numbers — they go stale before the next session.
+- Keep entries behavioral: interfaces, contracts, acceptance criteria. No *code* paths or line numbers — they go stale before the next session. Pointers to durable artifacts (an ADR, a spec doc) are fine; that's what they're for.
 
 ## Modes
 
 `mode:` in the frontmatter sets how much the flow leans on the user (default `guided`):
 
 - **`guided`** — every stage's user checkpoints run as written. The default; right when the user is present and the work is theirs to shape.
-- **`delegated`** — wherever a stage would ask the user, adopt your recommended answer and record it in that section as `assumed: <question> → <answer>`. Stop exactly once: at Galvanizing's breakdown approval, where the design and the plan are visible together. Then build through to done.
+- **`delegated`** — wherever a stage would ask the user, adopt your recommended answer and record it in that section as `assumed: <question> → <answer>`. Stop exactly once: at Galvanizing's breakdown approval — this one stop **subsumes** every checkpoint Galvanizing names (seam agreement included); present design, seams, and slices together there rather than logging theater `assumed:` lines for things visible at the same stop. Commit the plan before stopping. Then build through to done.
 - **`auto`** — as `delegated`, but even that checkpoint becomes a recorded assumption. Only enter this mode when the user explicitly asked for hands-off ("run it all, don't stop me").
 
-Assumptions are gate-satisfying: a "user confirmed" gate item may be checked in delegated/auto mode when the corresponding `assumed:` line exists. They are also the first thing a returning user should review — surface them.
+Assumptions are gate-satisfying: a "user confirmed" gate item may be checked in delegated/auto mode when the corresponding `assumed:` line exists — annotate the checkbox `(via assumed: — delegated)` so the page reads honestly. They are also the first thing a returning user should review — surface them.
 
 `assumed:` is not mode-exclusive: in **any** mode, a question that arises when the user isn't reachable gets the same treatment — adopt your recommended answer, record `assumed: <question> → <answer>` in the current stage's section, surface it at next contact.
 

@@ -28,6 +28,7 @@ _Avoid_: client, buyer, account
 Rules of the file:
 
 - **Be opinionated.** When several words name one concept, pick the best and list the rivals under `_Avoid_`.
+- **Published API names outrank opinion.** A misleading name that's public API (a decade-old keyword argument) can't be renamed — define it *against* its general meaning instead ("not actually a cryptographic salt; the name is API, the definition rules"). The glossary's job there is disambiguation, not renaming.
 - **Tight definitions.** One or two sentences; define what it *is*.
 - **Project concepts only.** General programming concepts (retries, timeouts, error types) don't belong, however often the project uses them.
 - **No implementation details.** `CONTEXT.md` is not a spec, a scratchpad, or a decision log — decisions go in the work file or an ADR.

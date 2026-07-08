@@ -32,13 +32,15 @@ Break the work into **tracer-bullet slices**. Each slice:
 
 Any prefactoring ("make the change easy, then make the easy change") is its own first slice.
 
+Two licensed exceptions to the vertical rule: **non-code slices** (docs, changelog, release notes — mandatory deliverables in most real projects) are allowed as closing slices with their own checkable criteria, marked `(non-code)`. And **compat invariants** — "the old path is byte-identical", the central promise of any opt-in change — are `(verify)` criteria too, but list them first; they're the acceptance test of the design's core promise, not an afterthought.
+
 ### 4. Quiz the user on the breakdown
 
 Show the numbered slices with blockers and acceptance criteria. Ask: granularity right? dependencies right? merge or split anything? Iterate until approved.
 
 ### 5. Set up the sessions
 
-Write the approved slices into the work file and commit it; then record that commit's sha in the frontmatter as `base:` — Tenacity reviews the whole work's diff against this, so it must be the last commit before building starts. Then advise the user on context hygiene:
+Record the sha of HEAD **as it stands now** in the frontmatter as `base:`, write the approved slices into the work file, and commit — one commit, no self-reference (the plan commit itself lands after `base:`, which is correct: the plan is part of the work Tenacity reviews). In delegated mode, commit the plan *before* stopping for review; if the review changes it, amend and recommit. Then advise the user on context hygiene:
 
 - **Multi-slice work**: every slice should build in a **fresh context** — the work file carries everything needed. Default: stay right here and run `/enable <work-slug>` — it coordinates, dispatching one subagent per slice. Alternative (no subagents, or the user wants to drive each slice): a fresh session per slice, opened with `/enable <work-slug>, slice N`.
 - **Single-slice work**: continue right here with `/enable`.
