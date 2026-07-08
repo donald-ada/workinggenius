@@ -7,6 +7,7 @@ Path: `.genius/<slug>.md`. Slug is short kebab-case, named for the outcome (`che
 work: checkout-discounts
 stage: discernment
 created: 2026-07-03
+base: <commit sha at Galvanizing — Tenacity reviews the diff from here>
 ---
 
 # Checkout discounts
@@ -19,10 +20,11 @@ created: 2026-07-03
 **Parked questions:** <questions deferred, with why deferring is safe>
 
 **Gate — Wonder**
-- [x] Problem statement confirmed by the user
+- [x] Problem statement confirmed by the user in their own words
 - [x] Success criteria are observable
 - [x] Out-of-scope list written
 - [x] No open question blocks design
+- [x] Terms resolved during the interview recorded in the glossary
 
 ## Invention — the options
 
@@ -35,6 +37,7 @@ Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
 **Gate — Invention**
 - [x] At least two structurally different options recorded
 - [x] Each option states what it makes easy and what it makes hard
+- [x] Any prototype's question and answer captured; its code deleted or absorbed
 
 ## Discernment — the decision
 
@@ -46,6 +49,7 @@ Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
 - [ ] One option chosen, with reasons
 - [ ] Every rejected option has a recorded kill-reason
 - [ ] User confirmed the choice
+- [ ] ADR written, or "not warranted" recorded
 
 ## Galvanizing — the plan
 
@@ -60,9 +64,11 @@ Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
    - [ ] …
 
 **Gate — Galvanizing**
-- [ ] Every slice is a vertical cut, demoable on its own
-- [ ] Every slice has testable acceptance criteria
+- [ ] Brief written — behavioral, no paths
 - [ ] Test seams agreed with the user
+- [ ] Every slice is a vertical cut, demoable on its own
+- [ ] Every slice has independently verifiable acceptance criteria
+- [ ] User approved the breakdown
 
 ## Enablement — the build log
 
@@ -71,6 +77,7 @@ Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
 **Gate — Enablement**
 - [ ] Every slice built, red-before-green at the agreed seams
 - [ ] Every acceptance criterion checked against real output
+- [ ] Every plan deviation recorded in the work file
 
 ## Tenacity — the close-out
 
@@ -78,9 +85,9 @@ Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
 - [ ] Full test suite run fresh; output read; zero failures
 - [ ] Typecheck/lint run fresh; clean
 - [ ] Every acceptance criterion re-verified line by line, with evidence
-- [ ] Diff reviewed against the brief (spec) and repo conventions (standards)
+- [ ] Diff reviewed on both axes (spec + standards); findings resolved
 - [ ] Debug artifacts removed; prototypes deleted or absorbed
-- [ ] Committed
+- [ ] Committed; work file marked done, post-mortem written
 
 **Post-mortem:** <one line — which genius was weakest this run>
 ```
@@ -88,5 +95,6 @@ Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
 ## Rules
 
 - Sections for stages not yet reached may be absent — add them when the stage runs.
+- The stage skills own the gate wording; this template mirrors them. If they ever disagree, the skill wins.
 - A skipped stage keeps its heading with only the `> ⚠ Skipped — reason` line.
 - Gates are append-only during a run: never delete a criterion because it's inconvenient; renegotiate it with the user and record the change.

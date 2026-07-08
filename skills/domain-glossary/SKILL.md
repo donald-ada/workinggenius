@@ -32,6 +32,7 @@ Rules of the file:
 - **Project concepts only.** General programming concepts (retries, timeouts, error types) don't belong, however often the project uses them.
 - **No implementation details.** `CONTEXT.md` is not a spec, a scratchpad, or a decision log — decisions go in the work file or an ADR.
 - **Create lazily.** No `CONTEXT.md`? Create it when the first term is resolved, not before.
+- **Don't hijack.** If `CONTEXT.md` already exists with non-glossary content, leave that content alone: append the `## Language` section to it and keep the discipline scoped to that section.
 
 ## The discipline
 

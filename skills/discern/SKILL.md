@@ -23,6 +23,8 @@ For each option — including the one you privately prefer — attack it:
 
 Record each wound in the work file under its option. An option that takes no wounds hasn't been attacked hard enough.
 
+If **every** option takes a fatal wound, that's a finding, not a failure: go back to `/invent` with the wounds as new constraints — or to `/wonder` if the wounds reveal the problem itself was mis-stated. Record the loop-back in the work file.
+
 ### 2. Choose one — opinionated
 
 Pick the survivor and say why in plain language. Do not present a menu and make the user choose from silence — recommend, with reasons, then let them overrule.

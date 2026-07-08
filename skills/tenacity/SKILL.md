@@ -25,11 +25,11 @@ For every acceptance criterion in every slice:
 3. Read the output — exit code, failure count, the actual numbers.
 4. Only then check it off, noting the evidence.
 
-Then the project-wide sweep, each run fresh, each output read: **full test suite**, **typecheck**, **lint/format** (whatever the project has). "It passed earlier" is not a pass. "Should pass" is not a pass.
+Then the project-wide sweep, each run fresh, each output read: **full test suite**, **typecheck**, **lint/format** — using the commands pinned in the `## Working Genius` section of `CLAUDE.md`/`AGENTS.md` if present, else whatever the project has. "It passed earlier" is not a pass. "Should pass" is not a pass.
 
 ### 3. Review the diff on two axes
 
-Review the full diff of the work (spawn a subagent per axis for anything sizable, so neither review pollutes the other):
+Review the full diff of the work — from the `base:` commit recorded in the work file's frontmatter to the current tree (fall back to asking the user for the baseline if `base:` is missing). Spawn a subagent per axis for anything sizable, so neither review pollutes the other:
 
 - **Spec** — does the diff faithfully implement the brief? Anything asked-for missing? Anything present that nobody asked for (scope creep — check it against Wonder's no-list)?
 - **Standards** — does the diff follow this repo's conventions and documented standards? Skip anything tooling already enforces.
@@ -44,7 +44,7 @@ Report the two axes separately; fix what's real; re-run step 2's sweep after any
 
 ### 5. Commit and close
 
-- Commit with a message that states the problem and the chosen approach (the Discernment one-liner is usually the perfect body).
+- Commit anything not yet committed, with a message that states the problem and the chosen approach (the Discernment one-liner is usually the perfect body). Slices were committed as they closed; if the history would read better squashed or reworded, offer it — don't just do it.
 - Set `stage: done` in the work file.
 - Write the post-mortem line: **which genius was weakest this run?** (Wonder that missed a requirement? Discernment that let a wounded option through? Enablement that drifted from the seams?) One honest sentence — it's the input that improves the next run.
 

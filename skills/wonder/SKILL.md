@@ -39,7 +39,7 @@ Write results into the work file as they land, then check the gate:
 - [ ] Success criteria are observable
 - [ ] Out-of-scope list written
 - [ ] No open question blocks design (park non-blocking ones, with why parking is safe)
-- [ ] Every term resolved during the interview is recorded in `CONTEXT.md`
+- [ ] Terms resolved during the interview recorded in the glossary
 
 If the verdict was "don't build this": record why, set `stage: done`, and stop — that's Wonder earning its keep.
 

@@ -5,7 +5,18 @@
 
 set -euo pipefail
 
+# The work dir defaults to .genius but may be overridden by a
+# "Work files: `<dir>`" line in the ## Working Genius section of
+# CLAUDE.md / AGENTS.md (written by /setup-working-genius).
 WORK_DIR=".genius"
+for f in CLAUDE.md AGENTS.md; do
+  [ -f "$f" ] || continue
+  override=$(sed -n 's/^Work files:[[:space:]]*`\([^`]*\)`.*/\1/p' "$f" | head -1)
+  if [ -n "$override" ]; then
+    WORK_DIR="${override%/}"
+    break
+  fi
+done
 
 items=""
 if [ -d "$WORK_DIR" ]; then
@@ -22,6 +33,8 @@ fi
 context="<workinggenius>\nThis project uses the Working Genius workflow: /wonder -> /invent -> /discern -> /galvanize -> /enable -> /tenacity. Type /genius for the map and status. Work files live in ${WORK_DIR}/."
 if [ -n "$items" ]; then
   context="${context}\n\nIn-flight work:${items}\nBefore touching any of these, read its work file first (workinggenius:genius-file skill)."
+else
+  context="${context}\nWhen the user asks for a substantive piece of development work (a feature, a refactor, a stubborn bug) outside the flow, suggest starting it with /genius — once, briefly; their call."
 fi
 context="${context}\n</workinggenius>"
 
