@@ -8,7 +8,7 @@ argument-hint: "a work slug to coordinate all slices, or 'slug, slice N' to buil
 
 The genius of doing the work the work needs. Its failure mode is flying blind: code produced without feedback until a big-bang reveal at the end. Enablement keeps the loop tight — every few minutes, reality gets a vote.
 
-Run the `genius-file` skill: read the work file. Galvanizing's gate must be checked (or skipped, recorded) before this stage begins.
+Run the `genius-file` skill: read the work file. Galvanizing's gate must be **fully** checked (or skipped, recorded) before this stage begins — count the boxes, don't skim. Unchecked boxes but the file records the user's approval? That's housekeeping the approving session forgot: repair the boxes, note it in the build log, proceed. Unchecked and genuinely unsatisfied? Stop and surface it — building through an open gate is how "the agent rushed ahead" comes back.
 
 ## Who builds
 
