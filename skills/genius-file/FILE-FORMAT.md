@@ -16,6 +16,7 @@ base: <commit sha at Galvanizing — Tenacity reviews the diff from here>
 ## Wonder — the problem
 
 **Problem:** <the problem behind the request, from the user's perspective, user-confirmed>
+**Already exists:** <prior art covering part of the ask, with evidence — the problem shrinks to the gap; or "nothing relevant">
 **Success looks like:** <observable outcomes, not implementation>
 **Out of scope:** <explicit no-list>
 **Parked questions:** <questions deferred, with why deferring is safe>

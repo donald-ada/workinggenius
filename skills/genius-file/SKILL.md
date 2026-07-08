@@ -20,7 +20,7 @@ Default `.genius/<slug>.md` at the repo root. A `## Working Genius` section in `
 
 - **Write at the moment a decision lands**, not in a batch at the end. A gate that passed but wasn't written down did not pass.
 - Each stage owns one section of the file and ends it with its **gate** — a checklist of completion criteria. Check items off only when they are true; never pre-check. A conditional item whose condition never arose gets checked with an inline `(n/a — reason)` — honesty needs an idiom, or it hesitates.
-- Keep entries behavioral: interfaces, contracts, acceptance criteria. No *code* paths or line numbers — they go stale before the next session. Pointers to durable artifacts (an ADR, a spec doc) are fine; that's what they're for.
+- Keep entries behavioral: interfaces, contracts, acceptance criteria. No *code* paths or line numbers — they go stale before the next session. Pointers to durable artifacts (an ADR, a spec doc, a docs page or tested snippet) are fine; that's what they're for.
 
 ## Modes
 

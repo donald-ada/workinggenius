@@ -27,10 +27,11 @@ Rules of the interview:
 Branches to walk (skip any the conversation has already settled):
 
 1. **The problem** — what hurts, for whom, how often? What happens if we do nothing?
-2. **Worth doing?** — Wonder has standing to challenge the premise. If the work looks like it shouldn't happen, say so with reasons. "Don't build this" is a successful outcome, not a failed one.
-3. **Success** — what observable change proves it worked? Numbers, behaviors, absences of complaints — not implementation.
-4. **Scope edges** — what nearby things are explicitly *not* part of this? The no-list prevents gold-plating later.
-5. **Constraints** — deadlines, compatibility, things that must not break, decisions already made that this must respect.
+2. **What already exists** — in a mature codebase the ask is often half-built. Record the prior art with evidence, and shrink the problem to the genuine gap. "Build much less than asked" is Wonder's best outcome in a large project.
+3. **Worth doing?** — Wonder has standing to challenge the premise. If the work looks like it shouldn't happen, say so with reasons. "Don't build this" is a successful outcome, not a failed one.
+4. **Success** — what observable change proves it worked? Numbers, behaviors, absences of complaints — not implementation.
+5. **Scope edges** — what nearby things are explicitly *not* part of this? The no-list prevents gold-plating later.
+6. **Constraints** — deadlines, compatibility, things that must not break, decisions already made that this must respect.
 
 ## Gate — Wonder
 
