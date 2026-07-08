@@ -10,7 +10,7 @@ The genius of doing the work the work needs. Its failure mode is flying blind: c
 
 Run the `genius-file` skill: read the work file. Galvanizing's gate must be checked (or skipped, recorded) before this stage begins. Identify which slice you're building — from the user's argument, or the first unblocked, unbuilt slice.
 
-Check `CLAUDE.md` / `AGENTS.md` for a `## Working Genius` section: if verify commands (typecheck, test, lint) are pinned there, use them exactly — that's what they're for. Otherwise discover them from the project's task runner once, and reuse all session.
+Check `CLAUDE.md` / `AGENTS.md` for pinned verify commands (typecheck, test, lint) — in a `## Working Genius` section or plainly stated anywhere else — and use them exactly. Otherwise discover them from the project's task runner once, and reuse all session. If a verify command's baseline is already dirty (pre-existing failures), record the baseline in the build log and hold the line at **no new failures** — don't adopt the dirt, don't silently fix unrelated code.
 
 ## The loop
 
@@ -33,17 +33,19 @@ Rules that hold every cycle:
 
 If the design doesn't survive contact with the code — the seam is wrong, a criterion is unbuildable, a dependency lied — **don't silently improvise**. Enablement responds to what the work actually needs: surface the problem, propose the adjustment, record the change in the work file (plan changes are decisions too), then continue. A quiet workaround today is an unexplainable diff next month.
 
+The plan being **silent** is the same case in miniature: a value, contract, or ordering the plan never fixed. If the user is reachable, ask (with a recommendation). If not — whatever the mode — adopt your recommended answer and record it as `assumed:` in the Enablement section, flagged for review at next contact. Never let a silent gap become an invisible convention.
+
 ## Closing a slice
 
 - Run the slice's tests plus the tests of anything it touched; read the output.
 - Check off the slice's acceptance criteria **only against real command output**.
-- **Commit the slice** (message: what behavior landed). A slice that only exists in the working tree dies with the session; Tenacity reviews and can still reshape history, but every closed slice deserves to survive a crash.
-- Append one line to the build log: slice, what landed, anything the next session should know.
+- Append to the build log: what landed, **every convention you introduced** (injection mechanisms, error orderings, body shapes, test-setup idioms — the things the next session would otherwise reverse-engineer from code), and **known untested edges**. The next session reads this instead of your mind.
+- **Commit the slice, work-file update included** (message: what behavior landed). A slice that only exists in the working tree dies with the session; Tenacity reviews and can still reshape history, but every closed slice deserves to survive a crash.
 
-More unblocked slices → tell the user the next one (fresh session recommended). All slices built → set `stage: tenacity` and tell the user: next is `/tenacity`.
+More unblocked slices → tell the user the next one (fresh session recommended). All slices built → check the Enablement gate below in the work file, set `stage: tenacity`, and tell the user: next is `/tenacity`.
 
 ## Gate — Enablement
 
-- [ ] Every slice built, red-before-green at the agreed seams
+- [ ] Every slice built, red-before-green at the agreed seams (recorded exceptions — `(verify)` criteria, observed-not-tested checks — allowed)
 - [ ] Every acceptance criterion checked against real output
-- [ ] Every plan deviation recorded in the work file
+- [ ] Every plan deviation and `assumed:` recorded in the work file

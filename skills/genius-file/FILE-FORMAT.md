@@ -31,6 +31,7 @@ base: <commit sha at Galvanizing — Tenacity reviews the diff from here>
 
 ### Option A — <name>
 Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
+Wounds: <filled in by Discernment's attack — one line per wound>
 
 ### Option B — <name>
 …
@@ -60,7 +61,7 @@ Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
 ### Slices
 1. **<slice title>** — blocked by: none
    - [ ] <acceptance criterion, independently verifiable>
-   - [ ] <acceptance criterion>
+   - [ ] <criterion that only asserts existing behavior still holds> (verify)
 2. **<slice title>** — blocked by: 1
    - [ ] …
 
@@ -73,12 +74,13 @@ Shape: <what changes, at what interface> / Makes easy: … / Makes hard: …
 
 ## Enablement — the build log
 
-- Slice 1: <status — one line per session that touched it>
+- Slice 1: <per session: what landed; conventions introduced; known untested edges>
+- assumed: <question the plan left open> → <answer adopted> (flag for review)
 
 **Gate — Enablement**
-- [ ] Every slice built, red-before-green at the agreed seams
+- [ ] Every slice built, red-before-green at the agreed seams (recorded exceptions allowed)
 - [ ] Every acceptance criterion checked against real output
-- [ ] Every plan deviation recorded in the work file
+- [ ] Every plan deviation and `assumed:` recorded in the work file
 
 ## Tenacity — the close-out
 

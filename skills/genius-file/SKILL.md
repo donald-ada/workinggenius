@@ -19,7 +19,7 @@ Default `.genius/<slug>.md` at the repo root. A `## Working Genius` section in `
 ## Write discipline
 
 - **Write at the moment a decision lands**, not in a batch at the end. A gate that passed but wasn't written down did not pass.
-- Each stage owns one section of the file and ends it with its **gate** — a checklist of completion criteria. Check items off only when they are true; never pre-check.
+- Each stage owns one section of the file and ends it with its **gate** — a checklist of completion criteria. Check items off only when they are true; never pre-check. A conditional item whose condition never arose gets checked with an inline `(n/a — reason)` — honesty needs an idiom, or it hesitates.
 - Keep entries behavioral: interfaces, contracts, acceptance criteria. No file paths or line numbers — they go stale before the next session.
 
 ## Modes
@@ -31,6 +31,8 @@ Default `.genius/<slug>.md` at the repo root. A `## Working Genius` section in `
 - **`auto`** — as `delegated`, but even that checkpoint becomes a recorded assumption. Only enter this mode when the user explicitly asked for hands-off ("run it all, don't stop me").
 
 Assumptions are gate-satisfying: a "user confirmed" gate item may be checked in delegated/auto mode when the corresponding `assumed:` line exists. They are also the first thing a returning user should review — surface them.
+
+`assumed:` is not mode-exclusive: in **any** mode, a question that arises when the user isn't reachable gets the same treatment — adopt your recommended answer, record `assumed: <question> → <answer>` in the current stage's section, surface it at next contact.
 
 ## The gate rule
 
