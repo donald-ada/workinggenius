@@ -24,6 +24,7 @@ Name the public interfaces the tests will target — existing seams preferred, t
 Break the work into **tracer-bullet slices**. Each slice:
 
 - cuts through **all** layers end-to-end (schema, logic, API, UI — whatever the change touches), never one layer of everything
+- keeps a behavior and its proof together: the slice that builds a behavior owns the tests that pin it. A criteria-only slice ("guarantees", "hardening") forces its builder to fake red with implementation mutations — if you find yourself writing one, its criteria belong to the slice that builds the behavior
 - is **demoable on its own** — a person could see it work
 - is **independently grabbable** — a fresh session with only the work file can build it
 - lists **acceptance criteria** that are each independently verifiable ("running X shows Y", not "works correctly"). Mark criteria that only assert existing behavior still holds with `(verify)` — they can't honestly fail before the change, so Enablement checks them rather than red-greens them
