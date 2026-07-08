@@ -40,7 +40,7 @@ Show the numbered slices with blockers and acceptance criteria. Ask: granularity
 
 Write the approved slices into the work file and commit it; then record that commit's sha in the frontmatter as `base:` — Tenacity reviews the whole work's diff against this, so it must be the last commit before building starts. Then advise the user on context hygiene:
 
-- **Multi-slice work**: run each slice in a **fresh session** — open it, say `/enable <work-slug>, slice N`, and the work file carries everything needed. Fresh context per slice keeps every session sharp. Slices with no blocker between them can even run in parallel sessions (separate worktrees).
+- **Multi-slice work**: every slice should build in a **fresh context** — the work file carries everything needed. Default: stay right here and run `/enable <work-slug>` — it coordinates, dispatching one subagent per slice. Alternative (no subagents, or the user wants to drive each slice): a fresh session per slice, opened with `/enable <work-slug>, slice N`.
 - **Single-slice work**: continue right here with `/enable`.
 
 ## Gate — Galvanizing

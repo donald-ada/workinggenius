@@ -1,14 +1,24 @@
 ---
 name: enable
 description: Build one slice at a time with red-before-green tests at the agreed seams and tight feedback loops. Use when a tracked piece of work is at its enablement stage and a slice needs building.
-argument-hint: "work slug and slice number, e.g. 'checkout-discounts, slice 2'"
+argument-hint: "a work slug to coordinate all slices, or 'slug, slice N' to build one"
 ---
 
 # Enablement
 
 The genius of doing the work the work needs. Its failure mode is flying blind: code produced without feedback until a big-bang reveal at the end. Enablement keeps the loop tight — every few minutes, reality gets a vote.
 
-Run the `genius-file` skill: read the work file. Galvanizing's gate must be checked (or skipped, recorded) before this stage begins. Identify which slice you're building — from the user's argument, or the first unblocked, unbuilt slice.
+Run the `genius-file` skill: read the work file. Galvanizing's gate must be checked (or skipped, recorded) before this stage begins.
+
+## Who builds
+
+Decide your role from the invocation:
+
+- **A specific slice named** ("slug, slice N") → you are the **builder**: build that one slice by the loop below.
+- **Only the work named, multiple slices, subagents available** → you are the **coordinator**: dispatch each slice to a fresh subagent, in dependency order. Hand each subagent the *work file path* and its slice number — never a pasted summary of earlier slices; the work file and build log are the whole handoff (a summary would anchor it on your reading and rot as slices land). When a subagent returns: read its build-log entry, **re-run the slice's tests fresh yourself**, and confirm the criteria boxes against that output before dispatching the next — a subagent's word is not evidence. Unblocked slices touching disjoint areas may run in parallel (separate worktrees); when in doubt, sequential. You never write product code — coordinating and building don't share a context.
+- **No subagents, or the user wants to drive each slice** → fresh session per slice: tell the user to open one and say `/enable <slug>, slice N`.
+
+Either way, each slice is built inside a fresh context — that's the point: the work file carries the work so no context has to.
 
 Check `CLAUDE.md` / `AGENTS.md` for pinned verify commands (typecheck, test, lint) — in a `## Working Genius` section or plainly stated anywhere else — and use them exactly. Otherwise discover them from the project's task runner once, and reuse all session. If a verify command's baseline is already dirty (pre-existing failures), record the baseline in the build log and hold the line at **no new failures** — don't adopt the dirt, don't silently fix unrelated code.
 
@@ -42,7 +52,7 @@ The plan being **silent** is the same case in miniature: a value, contract, or o
 - Append to the build log: what landed, **every convention you introduced** (injection mechanisms, error orderings, body shapes, test-setup idioms — the things the next session would otherwise reverse-engineer from code), and **known untested edges**. The next session reads this instead of your mind.
 - **Commit the slice, work-file update included** (message: what behavior landed). A slice that only exists in the working tree dies with the session; Tenacity reviews and can still reshape history, but every closed slice deserves to survive a crash.
 
-More unblocked slices → tell the user the next one (fresh session recommended). All slices built → check the Enablement gate below in the work file, set `stage: tenacity`, and tell the user: next is `/tenacity`.
+More unblocked slices → as coordinator, dispatch the next; as builder, report done and name the next slice. All slices built → check the Enablement gate below in the work file, set `stage: tenacity`, and tell the user: next is `/tenacity`.
 
 ## Gate — Enablement
 

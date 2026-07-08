@@ -66,7 +66,7 @@ Not everything needs the full six — and not everyone wants to babysit them:
 - **/invent** — divergence with rules: structurally different options, no judging yet, parallel subagents for big designs, throwaway prototypes for questions paper can't settle
 - **/discern** — adversarial judgment: try to kill every option, choose opinionated, record kill-reasons, offer ADRs sparingly
 - **/galvanize** — the brief, agreed test seams, tracer-bullet vertical slices with verifiable acceptance criteria, the `base:` commit Tenacity will diff against
-- **/enable** — red-before-green at the agreed seams, one slice at a time, each slice committed as it closes, plan deviations surfaced instead of improvised
+- **/enable** — red-before-green at the agreed seams, one slice at a time, each slice committed as it closes, plan deviations surfaced instead of improvised. Given just the work slug it coordinates: one fresh subagent per slice, verified on return — no new session needed
 - **/tenacity** — no completion claim without fresh evidence: line-by-line verification, one context-isolated reviewer returning both axes (spec + standards), cleanup, commit, post-mortem
 
 **Support:**
