@@ -38,6 +38,8 @@ Assumptions are gate-satisfying: a "user confirmed" gate item may be checked in 
 
 A stage skill may not begin until the previous stage's gate is fully checked **or** an explicit skip is recorded. When you hit an unchecked gate, stop and offer the user two options: run the missing stage, or skip it.
 
+The rule is also enforced mechanically. `${CLAUDE_PLUGIN_ROOT}/hooks/scripts/genius-gates.sh check` scans every in-flight file for a stage sitting past an earlier gate that is neither fully checked nor skipped, and a Stop hook runs the same check before a session ends — one loud, repairable refusal per session. If it blocks you, the honest ways out are the same as ever: check the open items against reality (only if they truly hold), record the skip with its reason, or move `stage:` back. The hook enforces the letter of the rule; the honesty of each checked box is still yours.
+
 ## The skip protocol
 
 Skipping a genius is allowed — silently skipping is not. To skip, record in the skipped stage's section:
@@ -50,7 +52,7 @@ Skips are visible on purpose: when work goes wrong later, the recorded skips are
 
 ## Small work
 
-Not everything deserves six stages. If the user asks to track something genuinely small (a fix, a tweak), create the file with Wonder filled in one paragraph, mark Invention and Discernment skipped with reason "small work — single obvious approach", and set `stage: galvanizing`. Record `base:` as the current commit — no separate plan commit needed; the work file rides in the slice commit. The express path is a first-class citizen, not a violation.
+Not everything deserves six stages. If the user asks to track something genuinely small (a fix, a tweak), create the file with Wonder filled in one paragraph — gate included and checked against it; small isn't exempt from honesty — mark Invention and Discernment skipped with reason "small work — single obvious approach", and set `stage: galvanizing`. Record `base:` as the current commit — no separate plan commit needed; the work file rides in the slice commit. The express path is a first-class citizen, not a violation.
 
 ## Done
 

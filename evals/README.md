@@ -9,6 +9,7 @@ This is also what keeps the plugin's voice its own: lines survive because they c
 - `triggers.md` — should-trigger / should-not-trigger prompt sets for every model-invoked skill; the near-misses are the valuable rows
 - `scenarios/<skill>.md` — three behavior scenarios per skill, each named for the failure mode it tests, each with a graded checklist
 - `fixtures/` — `scratch.sh` builds the scratch project the scenarios run in; canonical work files (`checkout-discounts.md`, `done/`) the setups reference
+- `gates.test.sh` — deterministic suite for the gate parser and Stop hook, the one part of the plugin that is code rather than prose; no model involved, run it directly: `bash evals/gates.test.sh`
 - `RESULTS.md` — the run log; created lazily on the first recorded run
 
 ## Running a scenario

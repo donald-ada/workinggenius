@@ -1,34 +1,26 @@
 #!/usr/bin/env bash
 # SessionStart hook for the workinggenius plugin.
-# Injects a one-line map of the workflow plus any in-flight work items,
-# so both the human and the model know where each piece of work stands.
+# Injects a one-line map of the workflow plus any in-flight work items —
+# including bypassed gates, so a fresh session inherits the warning, not
+# the mystery. All parsing lives in genius-gates.sh; this script formats.
 
 set -euo pipefail
 
-# The work dir defaults to .genius but may be overridden by a
-# "Work files: `<dir>`" line in the ## Working Genius section of
-# CLAUDE.md / AGENTS.md (written by /setup-working-genius).
-WORK_DIR=".genius"
-for f in CLAUDE.md AGENTS.md; do
-  [ -f "$f" ] || continue
-  override=$(sed -n 's/^Work files:[[:space:]]*`\([^`]*\)`.*/\1/p' "$f" | head -1)
-  if [ -n "$override" ]; then
-    WORK_DIR="${override%/}"
-    break
-  fi
-done
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+GATES="$SCRIPT_DIR/genius-gates.sh"
+
+WORK_DIR=$("$GATES" dir 2>/dev/null || echo ".genius")
 
 items=""
-if [ -d "$WORK_DIR" ]; then
-  for f in "$WORK_DIR"/*.md; do
-    [ -e "$f" ] || continue
-    stage=$(sed -n 's/^stage:[[:space:]]*//p' "$f" | head -1 | tr -d '\r')
-    [ -z "$stage" ] && continue
-    [ "$stage" = "done" ] && continue
-    name=$(basename "$f" .md)
-    items="${items}\n- ${name} — at ${stage}"
-  done
-fi
+while IFS=$'\t' read -r slug stage mode gatef bypf nogf; do
+  [ -z "$slug" ] && continue
+  gate="${gatef#gate:}"; byp="${bypf#bypass:}"; nog="${nogf#nogate:}"
+  entry="- ${slug} — at ${stage}"
+  [ "$gate" != "-" ] && entry="${entry} (gate ${gate})"
+  [ "$byp" != "none" ] && entry="${entry} ⚠ bypassed with no recorded skip: ${byp} — repair that gate before anything else"
+  [ "$nog" != "none" ] && entry="${entry} (note: ${nog} ran without a recorded gate)"
+  items="${items}\n${entry}"
+done < <("$GATES" status 2>/dev/null || true)
 
 context="<workinggenius>\nThis project uses the Working Genius workflow: /wonder -> /invent -> /discern -> /galvanize -> /enable -> /tenacity. Type /genius for the map and status. Work files live in ${WORK_DIR}/."
 if [ -n "$items" ]; then
