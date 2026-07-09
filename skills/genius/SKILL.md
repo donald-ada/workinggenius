@@ -7,7 +7,7 @@ argument-hint: "optional: a work slug, or a new idea to start tracking"
 
 # The Genius Map
 
-You don't remember every skill, so ask the map. This skill routes; it never builds.
+The map answers three questions: where every piece of work stands, what runs next, and which genius went missing when something feels wrong. It routes; it never builds.
 
 ## The flow
 
@@ -28,7 +28,7 @@ Underneath the flow runs one vocabulary layer: the `domain-glossary` skill keeps
 
 ## What to do when invoked
 
-**No argument** → report status. Scan every non-done work file — frontmatter, the `**Gate — <Stage>**` checklists, skip markers, and the current stage's section body; don't load whole files just for status. Done files get one summary line. For each in-flight item show: slug, current stage, unchecked gate items, recorded skips, and the exact next command — and if the stage sits **ahead of** an earlier gate that's neither checked nor skipped, the next command is repairing that gate, not the stage command. Flag anything untouched for roughly two weeks or more as stale and offer to resume or abandon it. If nothing is in flight, show the flow table and how to start.
+**No argument** → report status. Start mechanical: run `${CLAUDE_PLUGIN_ROOT}/hooks/scripts/genius-gates.sh status` — one line per in-flight file: slug, stage, mode, current-gate progress, bypassed gates, gateless sections. Trust its arithmetic over your own skim; read a file's current section body only where the report needs substance (the unchecked items' wording, a skip's reason) — don't load whole files just for status. (Script not on disk — skills installed without the plugin? Do the same scan by hand: each non-done file's `stage:`, its `**Gate — <Stage>**` checkboxes, and skip markers.) Done files get one summary line — and their `**Post-mortem:**` lines get read **as a set** (grep the lines, not the files; only lines naming a genius vote — placeholders and `abandoned —` lines don't): when the same genius comes up weakest in two or more of the recent ones, report the pattern with the calibration it implies ("Wonder weakest in 3 of the last 5 — interview deeper before offering express"). Once is a data point; twice is a calibration. For each in-flight item show: slug, current stage, unchecked gate items, recorded skips, and the exact next command — and if the stage sits **ahead of** an earlier gate that's neither checked nor skipped, the next command is repairing that gate, not the stage command. Flag anything untouched for roughly two weeks or more as stale and offer to resume or abandon it. If nothing is in flight, show the flow table and how to start.
 
 **An idea or request** → start work. First, size it honestly and say which path you'd take:
 
@@ -36,6 +36,8 @@ Underneath the flow runs one vocabulary layer: the `domain-glossary` skill keeps
 - **Full flow** — everything else. Run the `genius-file` skill to create the work file, then hand to `/wonder`.
 
 For the full flow, also ask how much rope you have — `mode: guided` (checkpoints as written), `delegated` (run on your recommendations, one stop at the Galvanizing breakdown), or `auto` (no stops; the user explicitly asked for hands-off). Modes live in the work file; the `genius-file` skill owns their semantics.
+
+Both calls — sizing and mode — get bent by the record: check recent post-mortems (and any `Lessons:` in the `## Working Genius` section) before recommending. A genius that keeps coming up weakest argues for the path that exercises it — repeated weak Wonder → slower to offer express; repeated weak Tenacity → recommend guided over auto. Say when the record changed your recommendation; that's the post-mortems earning their keep.
 
 **A work slug** → deep status on that one: read its file, summarize where it stands, flag anything smelly (see below), and name the next command.
 
@@ -54,7 +56,7 @@ Three rules of the diagnosis:
 
 - **Compound causes are normal.** Name every gap the file shows, then recommend repairing the **most upstream** one first — downstream stages inherit its fix. Never prescribe re-running the whole flow.
 - **The loudest smell is an unrecorded bypass** — a stage that ran while an earlier gate sits unchecked with no skip line. Recorded skips are honest suspects; unrecorded bypasses are usually the culprit. (And repeated false "done" is the three-failed-fixes rule wearing different clothes: stop re-fixing, question the setup.)
-- **Evidence isn't only in the file.** When a claim begs verification ("exported fine on my machine"), look at the repo: does the code exist, does anything test it?
+- **Evidence isn't only in the file.** When a claim begs verification ("exported fine on my machine"), look at the repo: does the code exist, does anything test it? And the done files' post-mortems are prior evidence: a suspected gap that matches a repeated weakest-genius is close to confirmed.
 
 ## Entering mid-flow
 

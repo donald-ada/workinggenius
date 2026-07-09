@@ -31,13 +31,13 @@ Break the work into **tracer-bullet slices**. Each slice:
 - pins **every value it mentions**: a "sensible default", a limit, a timeout named anywhere in a slice is a decision — write the number, don't defer it to a session that can't ask
 - names its blockers (`blocked by: 2`) or `blocked by: none`
 
-Any prefactoring ("make the change easy, then make the easy change") is its own first slice.
+Any prefactoring ("make the change easy, then make the easy change" — Kent Beck) is its own first slice.
 
 Two licensed exceptions to the vertical rule: **non-code slices** (docs, changelog, release notes — mandatory deliverables in most real projects) are allowed as closing slices with their own checkable criteria, marked `(non-code)`. And **compat invariants** — "the old path is byte-identical", the central promise of any opt-in change — are `(verify)` criteria too, but list them first; they're the acceptance test of the design's core promise, not an afterthought.
 
 ### 4. Quiz the user on the breakdown
 
-Show the numbered slices with blockers and acceptance criteria. Ask: granularity right? dependencies right? merge or split anything? Iterate until approved.
+Show the numbered slices with blockers and acceptance criteria, then have the user pressure-test the cut itself: which slice would they demo first? does any slice hide two behaviors — or do two slices share one? is any blocker real, or just ordering out of habit? Reshape until they approve; approval of a breakdown they never pushed on is approval of nothing.
 
 ### 5. Set up the sessions
 

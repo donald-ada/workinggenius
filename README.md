@@ -46,11 +46,13 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 **One piece of work = one markdown file** under `.genius/`. The file — not conversation memory — carries the work: the confirmed problem, the options and their kill-reasons, the slices and their acceptance criteria, the build log, the close-out evidence. Any fresh session picks up exactly where the last one stopped.
 
-**Every stage ends in a gate** — a checklist of criteria that must be checked against reality before the next stage will start. Gates are how "the agent rushed ahead" stops happening.
+**Every stage ends in a gate** — a checklist of criteria that must be checked against reality before the next stage will start. Gates are how "the agent rushed ahead" stops happening. And the gate rule is code, not just prose: a shared parser (`hooks/scripts/genius-gates.sh`) mechanically detects any stage that ran past an earlier gate that's neither checked nor skipped; a **Stop hook** refuses to end a session while one exists (once per session, always naming the repair), and the SessionStart hook hands the same warning to the next session.
 
 **Skips are explicit.** A small fix doesn't need six stages; the express path fills Wonder in one paragraph and marks Invention/Discernment skipped *with a reason*. When work goes wrong later, recorded skips are the first suspects — `/genius` reads them to diagnose the gap.
 
 **A SessionStart hook** injects a two-line map plus your in-flight work into every session, so both you and the model always know what's mid-flight and what's next.
+
+**Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend sizing and mode for new work, and a lesson that keeps recurring gets promoted — sparingly, by a three-condition test — into `CLAUDE.md`, where every future session reads it. The workflow's weakest stage is data, not a mystery.
 
 **Fresh context per slice.** Galvanizing produces slices a cold session can grab; running each slice in a new session keeps every context window sharp instead of degraded.
 
@@ -58,7 +60,7 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 **The map** (user-invoked only — the flow never hijacks work you didn't put in it):
 
-- **/genius** — status of all work, sizing (express vs full flow), mode choice, genius-gap diagnosis, mid-flow entry points
+- **/genius** — status of all work, sizing (express vs full flow), mode choice, genius-gap diagnosis, post-mortem patterns across finished work, mid-flow entry points
 
 **The six stages** (type them as commands, or let the flow carry itself forward in delegated/auto mode):
 
@@ -67,13 +69,17 @@ Not everything needs the full six — and not everyone wants to babysit them:
 - **/discern** — adversarial judgment: try to kill every option, choose opinionated, record kill-reasons, offer ADRs sparingly
 - **/galvanize** — the brief, agreed test seams, tracer-bullet vertical slices with verifiable acceptance criteria, the `base:` commit Tenacity will diff against
 - **/enable** — red-before-green at the agreed seams, one slice at a time, each slice committed as it closes, plan deviations surfaced instead of improvised. Given just the work slug it coordinates: one fresh subagent per slice, verified on return — no new session needed
-- **/tenacity** — no completion claim without fresh evidence: line-by-line verification, one context-isolated reviewer returning both axes (spec + standards), cleanup, commit, post-mortem
+- **/tenacity** — no completion claim without fresh evidence: line-by-line verification, one context-isolated reviewer returning both axes (spec + standards), cleanup, commit, and a post-mortem written against the previous ones — recurring lessons promoted (sparingly) to `CLAUDE.md`
 
 **Support:**
 
 - **/setup-working-genius** — optional per-repo pinning of the work-file directory and verify commands (which `/enable` and `/tenacity` then use)
 - **genius-file** (model-invoked) — the work-file discipline: format, read/write rules, the gate rule, the skip protocol, modes, the express path
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/discern`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
+
+## Iterating on the plugin
+
+Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios for each of the nine working skills, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
 
 ## Lineage
 
