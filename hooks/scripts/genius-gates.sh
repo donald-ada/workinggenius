@@ -78,7 +78,10 @@ for f in "$WORK_DIR"/*.md; do
       if (gate != "") {
         if ($0 ~ /^- \[[xX]\]/)      { total[gate]++; checked[gate]++ }
         else if ($0 ~ /^- \[ \]/)    { total[gate]++ }
-        else if ($0 !~ /^[[:space:]]*$/) gate = ""
+        else if ($0 != "" && $0 !~ /^[[:space:]]/) gate = ""
+        # A blank line or an indented continuation (a wrapped gate item, a
+        # sub-bullet) keeps the block open; only a fresh non-indented,
+        # non-checkbox line ends it. Wrapped items are common in real files.
       }
     }
     END {

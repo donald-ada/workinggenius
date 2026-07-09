@@ -148,6 +148,82 @@ sed 's/^work: clean/work: moved/' "$P1/.genius/clean.md" > work/items/moved.md
 check "override: dir resolved"      [ "$("$GATES" dir)" = "work/items" ]
 check "override: file found"        grep -q '^moved' <<<"$("$GATES" status)"
 
+# --- Fixture 7: multi-line gate items (wrapped continuation lines) ---------
+# Real work files wrap gate items onto indented continuation lines and add
+# inline annotations. A continuation must NOT end the gate block, or later
+# boxes go uncounted — and a checked box followed by a continuation followed
+# by an unchecked box would hide a real bypass from the Stop hook.
+P7="$TMP/p7"; mkdir -p "$P7/.genius"; cd "$P7"
+mkfile .genius/wrapped.md <<'EOF'
+---
+work: wrapped
+stage: galvanizing
+mode: guided
+---
+# Wrapped
+
+## Wonder — the problem
+
+**Gate — Wonder**
+- [x] Problem statement confirmed by the user in their own words
+      — confirmed verbally, quote recorded above
+- [x] Success criteria are observable
+
+## Invention — the options
+
+**Gate — Invention**
+- [x] Two structurally different options recorded
+      (Option A and Option B, see above)
+- [ ] Each option states what it makes easy and what it makes hard
+      — Option B's "makes hard" is still blank; this box is honestly open
+- [x] Any prototype captured
+
+## Discernment — the decision
+
+**Gate — Discernment**
+- [x] One option chosen, with reasons
+- [x] User confirmed the choice
+EOF
+out=$("$GATES" status)
+# Wonder's two boxes are both checked but both wrapped; if a continuation ended
+# the block early, Wonder would look unfinished and show up in bypass. It must not.
+check "wrapped: wrapped checks counted"   not grep -qE 'bypass:[A-Za-z,]*Wonder' <<<"$out"
+# Invention's unchecked box sits AFTER a continuation line — the dangerous case.
+check "wrapped: bypass caught past cont." grep -q 'bypass:Invention' <<<"$out"
+rep=$("$GATES" check); rc=$?
+check "wrapped: check exits 1"            [ "$rc" -eq 1 ]
+# A clean multi-line gate (all boxes checked, all wrapped) must NOT false-flag.
+mkfile .genius/wrapped2.md <<'EOF'
+---
+work: wrapped2
+stage: discernment
+mode: guided
+---
+# Wrapped2
+
+## Wonder — the problem
+
+**Gate — Wonder**
+- [x] Problem confirmed
+      — long wrapped annotation that must not end the block early
+- [x] Success criteria observable
+
+## Invention — the options
+
+**Gate — Invention**
+- [x] Two options recorded
+- [x] Costs stated
+      (with a trailing continuation line)
+
+## Discernment — the decision
+
+**Gate — Discernment**
+- [ ] One option chosen
+EOF
+out=$("$GATES" status | grep '^wrapped2')
+check "wrapped2: earlier gates satisfied" grep -q 'bypass:none' <<<"$out"
+check "wrapped2: current gate 0/1"        grep -q 'gate:0/1' <<<"$out"
+
 # --- Stop hook -------------------------------------------------------------
 cd "$P2"  # the bypassed project
 rm -f "${TMPDIR:-/tmp}"/wg-stop-gate-wgtest-*
