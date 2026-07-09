@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 The workflow runs fine on defaults (`.genius/` for work files, verify commands discovered per run). This skill pins those choices per repo so no session has to rediscover them. Run it once, or never.
 
-This is a prompt-driven skill: explore, present findings, confirm each decision with the user one at a time, then write.
+Run it as a conversation, not a script: look first, propose what you found, and let the user correct each choice before anything gets written.
 
 ## Process
 

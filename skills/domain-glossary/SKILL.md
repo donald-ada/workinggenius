@@ -39,8 +39,8 @@ Rules of the file:
 
 While any conversation is shaping work:
 
-- **Collide words with the glossary.** The user's term conflicts with an entry → call it out immediately: "Your glossary defines *cancellation* as X, but you seem to mean Y — which is it?"
-- **Sharpen fuzzy terms.** One word doing two jobs ("account" meaning both Customer and User) → propose a precise canonical term for each job.
+- **Collide words with the glossary.** The user's term conflicts with an entry → stop and hold the two meanings up side by side: "The glossary says an *archived* account is restorable, but you're describing permanent deletion — which do you mean?" No building on a word that means two things at once.
+- **Sharpen fuzzy terms.** One word doing two jobs ("account" naming both the merchant and a staff member's login) → propose a precise canonical term for each job.
 - **Collide claims with the code.** The user says how something works; the code disagrees → surface the contradiction, don't paper over it.
 - **Update inline.** The moment a term resolves, write it into `CONTEXT.md` — not batched at the end. A resolution that isn't written down will be re-litigated.
 

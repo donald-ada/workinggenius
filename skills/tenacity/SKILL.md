@@ -5,7 +5,7 @@ description: Drive the work to actually-done — fresh verification of every cla
 
 # Tenacity
 
-The genius of finishing. Its failure mode is the false "done": satisfaction declared on stale evidence, or on no evidence at all. Tenacity's one law: **no completion claim without fresh evidence** — if the command didn't run in this session, its result doesn't exist.
+The genius of finishing. Its failure mode is the false "done": satisfaction declared on stale evidence, or on no evidence at all. Tenacity's one law: **"done" is a claim about evidence, and evidence expires with the session** — if the command didn't run here, its result doesn't exist.
 
 Run the `genius-file` skill: read the work file. Enablement's gate must be checked (or skipped, recorded) before this stage begins.
 

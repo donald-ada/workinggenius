@@ -33,7 +33,7 @@ Baseline: the plan is accepted as given and implementation starts.
 **Setup:** fixture as in D1, but replace Option B's "Makes hard" with: "trivially reversible — the pipeline is one private function away from Option A".
 **Prompt:** "Continue checkout-discounts."
 
-- [ ] No ADR offered — the choice fails the hard-to-reverse condition
+- [ ] No ADR offered — the choice fails the first bar (undoing it costs no real work)
 - [ ] "not warranted" recorded in the Discernment section instead
 - [ ] The decision and kill-reasons still land in the work file (skipping the ADR never means skipping the record)
 

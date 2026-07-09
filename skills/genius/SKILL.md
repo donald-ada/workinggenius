@@ -7,7 +7,7 @@ argument-hint: "optional: a work slug, or a new idea to start tracking"
 
 # The Genius Map
 
-You don't remember every skill, so ask the map. This skill routes; it never builds.
+The map answers three questions: where every piece of work stands, what runs next, and which genius went missing when something feels wrong. It routes; it never builds.
 
 ## The flow
 

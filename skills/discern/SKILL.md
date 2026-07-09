@@ -20,7 +20,7 @@ For each option — including the one you privately prefer — attack it:
 - **Against the codebase**: does it fight an existing convention, contradict a recorded decision (check `docs/adr/` if present), or demand a migration nobody scoped?
 - **Against the future**: what does the next change in this area cost under this option?
 
-Record each wound in the work file under its option. An option that takes no wounds hasn't been attacked hard enough.
+Record each wound in the work file under its option. An option with no wounds usually means a soft attack — go harder before concluding it's clean. But wounds are **found, never manufactured**: an attacker told to find problems will report some even when the design is sound, and an invented wound corrupts the record every later stage trusts. If an option genuinely survives an angle, write down *which attacks it survived* — survival under fire is information too.
 
 If **every** option takes a fatal wound, that's a finding, not a failure: go back to `/invent` with the wounds as new constraints — or to `/wonder` if the wounds reveal the problem itself was mis-stated. Record the loop-back in the work file.
 
@@ -36,13 +36,13 @@ For every rejected option, write one line: what killed it. This is the part futu
 
 ### 4. Offer an ADR — sparingly
 
-Offer to write an ADR (`docs/adr/NNNN-slug.md`, a paragraph is enough) only when all three hold:
+Offer to write an ADR (`docs/adr/NNNN-slug.md`, a paragraph is enough) only when the decision clears all three bars:
 
-1. **Hard to reverse** — changing your mind later costs real work
-2. **Surprising without context** — a future reader would wonder "why on earth?"
-3. **A real trade-off** — genuine alternatives existed and you picked one for specific reasons
+1. **Undoing it costs real work** — not a rename away
+2. **The kill-reasons won't be readable from the code** — a year from now, the code shows *what* was chosen but nothing shows what died or why
+3. **Something real died** — a live alternative was killed for reasons, not a strawman knocked over for form
 
-Any of the three missing → skip the ADR; the work file's Discernment section already records the decision.
+Miss any bar → no ADR; the work file's Discernment section is already the record.
 
 ## Gate — Discernment
 

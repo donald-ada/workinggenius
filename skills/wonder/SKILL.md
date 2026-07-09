@@ -12,14 +12,14 @@ Run the `genius-file` skill: create the work file (or read it if it exists) and 
 
 ## The interview
 
-Interview the user relentlessly about the idea until you reach shared understanding. Walk down each branch of the question tree, resolving one branch before opening the next.
+The interview runs until the problem statement survives restatement — the user says "yes, that's it" to words *you* wrote back to them. Work the branches below in order, closing each before opening the next.
 
 Rules of the interview:
 
-- **One question at a time.** A batch of questions is bewildering; a sequence is a conversation.
-- **Recommend an answer with every question.** You have context the user may not have loaded; a question with a recommendation is twice as easy to answer.
-- **If the codebase can answer it, don't ask.** Explore first; facts are yours to look up — only *decisions* belong to the user.
-- **Depth matches stakes.** A contained change earns a short walk; work that creates concepts, crosses interfaces, or is expensive to redo earns the full tree. Relentless means every question earns its place — not that questions never end.
+- **One question per message.** The user decides best one decision at a time; a stack of questions gets a stack of half-answers, and the half-answers are where misbuilds hide.
+- **Every question arrives with your best answer attached.** You've read code the user may not have loaded; "A or B? I'd pick A, because…" can be answered with one word.
+- **Look it up before you ask it.** Whatever the repo, the history, or the docs can settle is homework, not a question. What's left for the user is the one thing only they own: what they actually want.
+- **Depth matches stakes.** A contained change earns a short walk; work that creates concepts, crosses interfaces, or is expensive to redo earns the full tree. The interview ends when the gate below can be checked honestly — not when the questions run out.
 - **The user can call it.** "Enough — go with your recommendations" is a legitimate answer at any point: fill the remaining branches with your recommended answers, record each as `assumed:` in the work file, and move on.
 - **Ask the question behind the request.** "Add a retry button" is a solution wearing a problem's clothes. What failure is the user actually seeing? Would they still want the button if the failure went away?
 - **Collide words with the glossary.** Run the `domain-glossary` skill as the interview runs: a term that conflicts with `CONTEXT.md`, or one fuzzy word doing two jobs, gets resolved on the spot and written into the glossary inline. The interview is where the project's language gets sharp — that sharpness outlives this piece of work.
