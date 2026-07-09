@@ -77,6 +77,10 @@ Not everything needs the full six — and not everyone wants to babysit them:
 - **genius-file** (model-invoked) — the work-file discipline: format, read/write rules, the gate rule, the skip protocol, modes, the express path
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/discern`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
+## Iterating on the plugin
+
+Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios per skill, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
+
 ## Lineage
 
 The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://www.workinggenius.com/)*, applied to agentic development. The skill design borrows deliberately from two excellent projects:
