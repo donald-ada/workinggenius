@@ -26,7 +26,7 @@ This is a prompt-driven skill: explore, present findings, confirm each decision 
 
 ### 3. Write
 
-Pick the file: `CLAUDE.md` if it exists, else `AGENTS.md` if it exists; if neither, ask which to create — never create one when the other already exists. If a `## Working Genius` section already exists, update it in place — don't append a duplicate.
+Pick the file: `CLAUDE.md` if it exists, else `AGENTS.md` if it exists; if neither, ask which to create — never create one when the other already exists. If a `## Working Genius` section already exists, update it in place — don't append a duplicate, and preserve any `Lessons:` list Tenacity has grown there (it's project memory, not setup output).
 
 ```markdown
 ## Working Genius
@@ -38,6 +38,8 @@ Verify commands:
 - test: `<command>`
 - lint: `<command>`
 ```
+
+Don't seed a `Lessons:` list — Tenacity creates it lazily, the first time a lesson recurs across work and earns promotion.
 
 If the user chose gitignore, add the directory to `.gitignore`.
 

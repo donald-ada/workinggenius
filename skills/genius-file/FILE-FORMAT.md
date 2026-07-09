@@ -91,9 +91,9 @@ Wounds: <filled in by Discernment's attack — one line per wound>
 - [ ] Every acceptance criterion re-verified line by line, with evidence
 - [ ] Diff reviewed on both axes (spec + standards); findings resolved
 - [ ] Debug artifacts removed; prototypes deleted or absorbed
-- [ ] Committed; work file marked done, post-mortem written
+- [ ] Committed; work file marked done, post-mortem written against the prior post-mortems (recurring lesson promoted, or not warranted)
 
-**Post-mortem:** <one line — which genius was weakest this run>
+**Post-mortem:** <one line — which genius was weakest this run; if it has been weakest before, also the adjustment>
 ```
 
 ## Rules

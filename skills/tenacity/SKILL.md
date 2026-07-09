@@ -47,7 +47,17 @@ Don't tell the reviewer what not to flag. When findings come back: verify before
 
 - Commit anything not yet committed, with a message that states the problem and the chosen approach (the Discernment one-liner is usually the perfect body). Slices were committed as they closed; if the history would read better squashed or reworded, offer it — don't just do it.
 - Set `stage: done` in the work file.
-- Write the post-mortem line: **which genius was weakest this run?** (Wonder that missed a requirement? Discernment that let a wounded option through? Enablement that drifted from the seams?) One honest sentence — it's the input that improves the next run.
+- Write the post-mortem line: **which genius was weakest this run?** (Wonder that missed a requirement? Discernment that let a wounded option through? Enablement that drifted from the seams?) One honest sentence — but written against the record, not in a vacuum: first grep `**Post-mortem:**` across the done files in the work dir (the lines, not the files). If this run's weakest genius has been weakest before, say so to the user and put the **adjustment** in the line, not just the diagnosis — "Wonder weakest again; next interview walks scope edges before offering express" teaches the next run something; "Wonder weakest" for the third time teaches it nothing.
+
+### 6. Promote a lesson — sparingly
+
+Post-mortems live in their work files; `/genius` reads them as a set. Promote a lesson up into a `Lessons:` list in the `## Working Genius` section of `CLAUDE.md`/`AGENTS.md` — where every future session sees it without asking — only when all three hold:
+
+1. **It recurred** — the same weakness or surprise across two or more pieces of work
+2. **It changes behavior** — a future run acting on it would concretely act differently
+3. **It has no better home** — not a term (glossary), not a decision (ADR or work file), not a command (verify commands)
+
+Any of the three missing → the post-mortem line already carries it; don't promote. One line per lesson, created lazily (no empty `Lessons:` list, and no section at all if setup never ran — offer `/setup-working-genius` instead). When adding one, reread the ones already there: a lesson that stopped changing behavior gets pruned — the list only compounds if every future session actually reads all of it.
 
 ## Gate — Tenacity
 
@@ -56,7 +66,7 @@ Don't tell the reviewer what not to flag. When findings come back: verify before
 - [ ] Every acceptance criterion re-verified line by line, with evidence
 - [ ] Diff reviewed on both axes; findings resolved
 - [ ] Debug artifacts removed; prototypes deleted or absorbed
-- [ ] Committed; work file marked done, post-mortem written
+- [ ] Committed; work file marked done, post-mortem written against the prior post-mortems (recurring lesson promoted, or not warranted)
 
 Only when every box is checked may you tell the user the work is done — and say it with the evidence, not instead of it.
 
