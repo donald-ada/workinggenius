@@ -224,6 +224,175 @@ out=$("$GATES" status | grep '^wrapped2')
 check "wrapped2: earlier gates satisfied" grep -q 'bypass:none' <<<"$out"
 check "wrapped2: current gate 0/1"        grep -q 'gate:0/1' <<<"$out"
 
+# --- Fixture 8: gate-block grammar under real-file mess ---------------------
+# Four reproduced field bugs: a prose note between items must not end the
+# block (it hid an unchecked box -> false pass); a mid-line "Gate — X" mention
+# must not retarget the count; a skip line naming a gate is still a skip; a
+# **Post-mortem:** line ends the block so a stray todo after it isn't counted.
+P8="$TMP/p8"; mkdir -p "$P8/.genius"; cd "$P8"
+mkfile .genius/messy.md <<'EOF'
+---
+work: messy
+stage: invention
+mode: guided
+---
+# Messy
+
+## Wonder — the problem
+
+**Gate — Wonder**
+- [x] Problem confirmed
+Note: the success-criteria box below was discussed at length.
+- [ ] Success criteria are observable
+
+## Invention — the options
+EOF
+out=$("$GATES" status)
+check "grammar: prose note stays inside"  grep -q 'bypass:Wonder' <<<"$out"
+mkfile .genius/mention.md <<'EOF'
+---
+work: mention
+stage: discernment
+mode: guided
+---
+# Mention
+
+## Wonder — the problem
+
+**Gate — Wonder**
+- [x] Problem confirmed
+
+## Invention — the options
+
+**Gate — Invention**
+- [x] Two options recorded
+      — both survived the Gate — Wonder criteria review
+- [ ] Costs stated
+
+## Discernment — the decision
+EOF
+out=$("$GATES" status | grep '^mention')
+check "grammar: mid-line mention no retarget" grep -q 'bypass:Invention' <<<"$out"
+check "grammar: Wonder not falsely bypassed"  not grep -qE 'bypass:[A-Za-z,]*Wonder' <<<"$out"
+mkfile .genius/skipmention.md <<'EOF'
+---
+work: skipmention
+stage: discernment
+mode: guided
+---
+# Skipmention
+
+## Wonder — the problem
+
+**Gate — Wonder**
+- [x] Problem confirmed
+
+## Invention — the options
+
+> ⚠ Skipped — small work; Gate — Invention not needed here
+
+## Discernment — the decision
+EOF
+out=$("$GATES" status | grep '^skipmention')
+check "grammar: skip naming a gate is a skip" grep -q 'bypass:none' <<<"$out"
+mkfile .genius/postmortem.md <<'EOF'
+---
+work: postmortem
+stage: tenacity
+mode: guided
+---
+# Postmortem
+
+## Wonder — the problem
+
+> ⚠ Skipped — test fixture
+
+## Invention — the options
+
+> ⚠ Skipped — test fixture
+
+## Discernment — the decision
+
+> ⚠ Skipped — test fixture
+
+## Galvanizing — the plan
+
+> ⚠ Skipped — test fixture
+
+## Enablement — the build log
+
+> ⚠ Skipped — test fixture
+
+## Tenacity — the close-out
+
+**Gate — Tenacity**
+- [x] Suite run fresh
+- [x] Committed
+
+**Post-mortem:** to be written
+- [ ] stray todo jotted after the close-out
+EOF
+out=$("$GATES" status | grep '^postmortem')
+check "grammar: bold line ends the block"  grep -q 'gate:2/2' <<<"$out"
+
+# --- Fixture 9: frontmatter values ------------------------------------------
+P9="$TMP/p9"; mkdir -p "$P9/.genius"; cd "$P9"
+mkfile .genius/commented.md <<'EOF'
+---
+work: commented
+stage: wonder
+mode: guided   # guided | delegated | auto — see the genius-file skill
+---
+# Commented
+
+## Wonder — the problem
+EOF
+out=$("$GATES" status | grep '^commented')
+check "frontmatter: inline comment stripped" grep -q "$(printf '\tguided\t')" <<<"$out"
+check "frontmatter: no CR in output"         not grep -q "$(printf '\r')" <<<"$out"
+mkfile .genius/typo.md <<'EOF'
+---
+work: typo
+stage: enable
+mode: guided
+---
+# Typo
+
+## Wonder — the problem
+
+**Gate — Wonder**
+- [ ] Problem confirmed
+EOF
+out=$("$GATES" status | grep '^typo')
+check "unknown stage: surfaced in status"   grep -q 'bypass:unrecognized-stage' <<<"$out"
+rep=$("$GATES" check); rc=$?
+check "unknown stage: check exits 1"        [ "$rc" -eq 1 ]
+check "unknown stage: named in report"      grep -q 'typo: unrecognized stage "enable"' <<<"$rep"
+
+# --- Fixture 10: work-dir resolution walks UP from cwd ----------------------
+# A monorepo package with its own CLAUDE.md override must resolve to the
+# package (the old cd-to-git-root made subdirectory projects invisible to
+# both hooks); a plain subdir with no config walks up to the root's .genius.
+P10="$TMP/p10"; mkdir -p "$P10"; cd "$P10"
+git init -q .
+mkdir -p .genius packages/app/work src
+sed 's/^stage: discernment/stage: enablement/; s/^work: clean/work: rootwork/' \
+  "$TMP/p1/.genius/clean.md" > .genius/rootwork.md   # bypassed at root
+printf '## Working Genius\n\nWork files: `work` (committed).\n' > packages/app/CLAUDE.md
+sed 's/^work: clean/work: appwork/' "$TMP/p1/.genius/clean.md" > packages/app/work/appwork.md
+cd "$P10/packages/app"
+check "walkup: package override wins"       [ "$("$GATES" dir)" = "work" ]
+out=$("$GATES" status)
+check "walkup: sees only package work"      grep -q '^appwork' <<<"$out"
+check "walkup: root work not dragged in"    not grep -q 'rootwork' <<<"$out"
+check "walkup: package check clean"         "$GATES" check
+cd "$P10/src"
+out=$("$GATES" status)
+check "walkup: bare subdir finds root"      grep -q '^rootwork' <<<"$out"
+cd "$P10"
+out=$("$GATES" status)
+check "walkup: root sees root"              grep -q '^rootwork' <<<"$out"
+
 # --- Stop hook -------------------------------------------------------------
 cd "$P2"  # the bypassed project
 rm -f "${TMPDIR:-/tmp}"/wg-stop-gate-wgtest-*
@@ -231,12 +400,28 @@ err=$(printf '{"session_id":"wgtest-%s","cwd":"%s","hook_event_name":"Stop"}' "$
 check "stop: blocks with exit 2"    [ "$rc" -eq 2 ]
 check "stop: stderr names the work" grep -q 'rushed' <<<"$err"
 printf '{"session_id":"wgtest-%s","cwd":"%s","hook_event_name":"Stop"}' "$$" "$P2" | "$STOP" 2>/dev/null; rc=$?
-check "stop: blocks once per session" [ "$rc" -eq 0 ]
+check "stop: same state reported once" [ "$rc" -eq 0 ]
+# A DIFFERENT bypass in the same session must block again (the old
+# once-per-session marker swallowed every later, unrelated bypass).
+sed 's/^stage: discernment/stage: galvanizing/; s/^work: clean/work: second/' \
+  "$TMP/p1/.genius/clean.md" > .genius/second.md
+printf '{"session_id":"wgtest-%s","cwd":"%s"}' "$$" "$P2" | "$STOP" 2>/dev/null; rc=$?
+check "stop: distinct bypass re-blocks" [ "$rc" -eq 2 ]
+rm -f .genius/second.md
 printf '{"session_id":"other-%s","cwd":"%s","stop_hook_active": true}' "$$" "$P2" | "$STOP" 2>/dev/null; rc=$?
 check "stop: honors stop_hook_active" [ "$rc" -eq 0 ]
+# A session id that sanitizes to nothing gets NO marker: fail toward blocking,
+# never toward a machine-wide shared 'nosession' suppression.
+printf '{"session_id":"!!!","cwd":"%s"}' "$P2" | "$STOP" 2>/dev/null; rc1=$?
+printf '{"session_id":"!!!","cwd":"%s"}' "$P2" | "$STOP" 2>/dev/null; rc2=$?
+check "stop: unusable id still blocks"  [ "$rc1$rc2" = "22" ]
 cd "$P1"  # the clean project
 printf '{"session_id":"wgclean-%s","cwd":"%s"}' "$$" "$P1" | "$STOP" 2>/dev/null; rc=$?
 check "stop: clean project passes"  [ "$rc" -eq 0 ]
+# A clean check clears the marker, so a later fresh bypass blocks again.
+printf '{"session_id":"wgtest-%s","cwd":"%s"}' "$$" "$P1" | "$STOP" 2>/dev/null
+printf '{"session_id":"wgtest-%s","cwd":"%s"}' "$$" "$P2" | "$STOP" 2>/dev/null; rc=$?
+check "stop: clean run resets the gate" [ "$rc" -eq 2 ]
 rm -f "${TMPDIR:-/tmp}"/wg-stop-gate-wgtest-* "${TMPDIR:-/tmp}"/wg-stop-gate-wgclean-* "${TMPDIR:-/tmp}"/wg-stop-gate-other-*
 
 echo

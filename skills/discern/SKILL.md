@@ -39,7 +39,7 @@ For every rejected option, write one line: what killed it. This is the part futu
 Offer to write an ADR (`docs/adr/NNNN-slug.md`, a paragraph is enough) only when the decision clears all three bars:
 
 1. **Undoing it costs real work** — not a rename away
-2. **The kill-reasons won't be readable from the code** — a year from now, the code shows *what* was chosen but nothing shows what died or why
+2. **A future reader would ask "why on earth?"** — the choice looks arbitrary or wrong without its kill-reasons, and nothing in the code can supply them (an unsurprising choice needs no memo, however irreversible)
 3. **Something real died** — a live alternative was killed for reasons, not a strawman knocked over for form
 
 Miss any bar → no ADR; the work file's Discernment section is already the record.

@@ -38,7 +38,7 @@ Assumptions are gate-satisfying: a "user confirmed" gate item may be checked in 
 
 A stage skill may not begin until the previous stage's gate is fully checked **or** an explicit skip is recorded. When you hit an unchecked gate, stop and offer the user two options: run the missing stage, or skip it.
 
-The rule is also enforced mechanically. `${CLAUDE_PLUGIN_ROOT}/hooks/scripts/genius-gates.sh check` scans every in-flight file for a stage sitting past an earlier gate that is neither fully checked nor skipped, and a Stop hook runs the same check before a session ends — one loud, repairable refusal per session. If it blocks you, the honest ways out are the same as ever: check the open items against reality (only if they truly hold), record the skip with its reason, or move `stage:` back. The hook enforces the letter of the rule; the honesty of each checked box is still yours.
+The rule is also enforced mechanically. `${CLAUDE_PLUGIN_ROOT}/hooks/scripts/genius-gates.sh check` scans every in-flight file for a stage sitting past an earlier gate that is neither fully checked nor skipped, and a Stop hook runs the same check before a session ends — one loud, repairable refusal per distinct bypass. If it blocks you, the honest ways out are the same as ever: check the open items against reality (only if they truly hold), record the skip with its reason, or move `stage:` back. (Script not on disk — skills installed without the plugin? Apply the same check by hand before starting a stage.) The hook enforces the letter of the rule; the honesty of each checked box is still yours.
 
 ## The skip protocol
 

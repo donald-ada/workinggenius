@@ -22,10 +22,10 @@ base: <commit sha at Galvanizing — Tenacity reviews the diff from here>
 **Parked questions:** <questions deferred, with why deferring is safe>
 
 **Gate — Wonder**
-- [x] Problem statement confirmed by the user in their own words
+- [x] Problem statement confirmed by the user in their own words ("yes, that's it")
 - [x] Success criteria are observable
 - [x] Out-of-scope list written
-- [x] No open question blocks design
+- [x] No open question blocks design (park non-blocking ones, with why parking is safe)
 - [x] Terms resolved during the interview recorded in the glossary
 
 ## Invention — the options
@@ -49,7 +49,7 @@ Wounds: <filled in by Discernment's attack — one line per wound>
 **ADR:** <path, or "not warranted">
 
 **Gate — Discernment**
-- [ ] One option chosen, with reasons
+- [ ] One option chosen, with reasons stated in the work file
 - [ ] Every rejected option has a recorded kill-reason
 - [ ] User confirmed the choice
 - [ ] ADR written, or "not warranted" recorded
@@ -79,7 +79,7 @@ Wounds: <filled in by Discernment's attack — one line per wound>
 - assumed: <question the plan left open> → <answer adopted> (flag for review)
 
 **Gate — Enablement**
-- [ ] Every slice built, red-before-green at the agreed seams (recorded exceptions allowed)
+- [ ] Every slice built, red-before-green at the agreed seams (recorded exceptions — `(verify)` criteria, observed-not-tested checks — allowed)
 - [ ] Every acceptance criterion checked against real output
 - [ ] Every plan deviation and `assumed:` recorded in the work file
 
@@ -89,7 +89,7 @@ Wounds: <filled in by Discernment's attack — one line per wound>
 - [ ] Full test suite run fresh; output read; zero failures
 - [ ] Typecheck/lint run fresh; clean
 - [ ] Every acceptance criterion re-verified line by line, with evidence
-- [ ] Diff reviewed on both axes (spec + standards); findings resolved
+- [ ] Diff reviewed on both axes; findings resolved
 - [ ] Debug artifacts removed; prototypes deleted or absorbed
 - [ ] Committed; work file marked done, post-mortem written against the prior post-mortems (recurring lesson promoted, or not warranted)
 

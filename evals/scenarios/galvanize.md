@@ -37,4 +37,4 @@ Fail: a slice hands a "sensible default" to a builder with no one to ask. That d
 - [ ] `base:` set to the sha of HEAD as it stands, then the plan committed once
 - [ ] Gate checked only after the approval; ends by naming `/enable` and the fresh-context advice
 
-Baseline failure this guards: a plan that was never put back to the user, or `base:` recorded after the plan commit it's supposed to exclude.
+Baseline failure this guards: a plan that was never put back to the user, or `base:` recorded after the plan commit — which would leave the plan itself outside the diff Tenacity reviews (the contract is `base:` first, plan commit after, so the plan is part of the reviewed work).

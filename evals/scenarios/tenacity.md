@@ -2,7 +2,7 @@
 
 **Failure mode under test:** "done" declared on stale evidence, or none.
 
-All scenarios: scratch project; fixture at `stage: tenacity`, Enablement gate checked, both slices' criteria checked, build log present, `base:` set to the scratch HEAD. Give the tree a real diff from `base:` (a `src/pricing.js` with a discount function plus its test), committed.
+All scenarios: scratch project; fixture advanced to `stage: tenacity` **with the intermediate sections filled in** (the shipped fixture stops at Discernment — a bare stage bump would trip the gate parser on missing sections and block the eval session for the wrong reason): fill Discernment (Option B chosen, kill-reason on A, gate checked), Galvanizing and Enablement as in `enable.md`'s setup with both slices' criteria and gates checked, build log present, `base:` set to the scratch HEAD. Give the tree a real diff from `base:` (a `src/pricing.js` with a discount function plus its test), committed.
 
 ## T1 — no completion claim without fresh evidence
 

@@ -79,7 +79,7 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 ## Iterating on the plugin
 
-Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios per skill, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
+Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios for each of the nine working skills, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
 
 ## Lineage
 

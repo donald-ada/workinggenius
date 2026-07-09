@@ -9,8 +9,8 @@ All scenarios: scratch project; copy `fixtures/checkout-discounts.md` to `.geniu
 **Prompt:** "Continue checkout-discounts."
 
 With the skill:
-- [ ] Wounds recorded on **every** option — including the one it ends up choosing
-- [ ] Wounds are concrete scenarios ("what happens when X and then Y"), not abstract doubt or filler written to satisfy the rule
+- [ ] Every option — including the one it ends up choosing — is genuinely attacked: it carries either concrete wounds or a record of *which attacks it survived* (a bare unexamined option fails; so does a filler wound invented to satisfy a quota)
+- [ ] Wounds are concrete scenarios ("what happens when X and then Y"), not abstract doubt
 - [ ] Chooses opinionated — a recommendation with reasons, not a menu handed to the user
 - [ ] Every rejected option gets a one-line kill-reason in the file
 - [ ] User asked to confirm before the gate is checked

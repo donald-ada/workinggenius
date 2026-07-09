@@ -9,7 +9,7 @@ set -euo pipefail
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 GATES="$SCRIPT_DIR/genius-gates.sh"
 
-WORK_DIR=$("$GATES" dir 2>/dev/null || echo ".genius")
+WORK_DIR=$("$GATES" dir)
 
 items=""
 while IFS=$'\t' read -r slug stage mode gatef bypf nogf; do
@@ -17,10 +17,14 @@ while IFS=$'\t' read -r slug stage mode gatef bypf nogf; do
   gate="${gatef#gate:}"; byp="${bypf#bypass:}"; nog="${nogf#nogate:}"
   entry="- ${slug} — at ${stage}"
   [ "$gate" != "-" ] && entry="${entry} (gate ${gate})"
-  [ "$byp" != "none" ] && entry="${entry} ⚠ bypassed with no recorded skip: ${byp} — repair that gate before anything else"
+  if [ "$byp" = "unrecognized-stage" ]; then
+    entry="${entry} ⚠ unrecognized stage value — fix the stage: line before anything else"
+  elif [ "$byp" != "none" ]; then
+    entry="${entry} ⚠ bypassed with no recorded skip: ${byp} — repair that gate before anything else"
+  fi
   [ "$nog" != "none" ] && entry="${entry} (note: ${nog} ran without a recorded gate)"
   items="${items}\n${entry}"
-done < <("$GATES" status 2>/dev/null || true)
+done < <("$GATES" status)
 
 context="<workinggenius>\nThis project uses the Working Genius workflow: /wonder -> /invent -> /discern -> /galvanize -> /enable -> /tenacity. Type /genius for the map and status. Work files live in ${WORK_DIR}/."
 if [ -n "$items" ]; then
