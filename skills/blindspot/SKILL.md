@@ -30,6 +30,8 @@ Read only — the code, its tests, its docs, and its history (log and blame of t
 3. **Potholes** — where this area has bitten before, with the evidence: the reverted commit, the FIXME cluster, the test named after a bug. No history of bites? Say so — potholes are found, never manufactured.
 4. **A sharper ask** — the user's request rewritten with the found unknowns settled or explicitly parked. Offer it back: "this is what I'd put in the brief."
 
+Before offering any of it, collide your recommended answers with your own findings: a recommendation that quietly disables a safety net you just reported as a pothole, or divides money you just said must not be divided, is the pass contradicting itself — and it reads authoritative precisely because the rest of the report is right.
+
 Route the findings where they live: questions join the interview (`/wonder`), a term that wobbled goes to the `domain-glossary` skill, potholes become attack material for `/discern`, the sharper ask goes into the work file. The pass writes no code and checks no gate — it exists so the stages that do have real material.
 
 ## Move 2 — teach before judging (at a choice)

@@ -14,8 +14,11 @@ With the skill:
 - [ ] Reports questions the user didn't know to ask, each with a recommended answer — not a tour of the files
 - [ ] Names what "good" looks like in this area (existing conventions, invariants) with evidence from the code
 - [ ] Potholes reported with evidence, or honestly reported absent — never manufactured to fill the section
+- [ ] Every recommended answer survives the pass's own findings — no recommendation that disables a safety net or violates a constraint the report itself names (graded against the territory, not against the report's internal formatting)
 - [ ] Ends by offering a sharper version of the ask — and writes no code
 Baseline: answers with a code walkthrough or dives into implementation; questions, if any, arrive as a batch with no recommendations.
+
+Grading note from the 2026-07-10 ad-hoc run (see RESULTS.md): on frontier models the baseline *also* mines the territory when the ask ends in "what am I missing?" — the reliably baseline-differentiating items are questions-with-recommendations, the sharper ask, and self-consistency; the discovery items differentiate mainly on smaller models. Sharpen here first if this scenario goes soft.
 
 ## B2 — the hollow confirmation *(interactive)*
 
