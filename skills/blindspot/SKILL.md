@@ -23,7 +23,7 @@ An interview can't reach the fourth kind: it only asks questions someone thought
 
 When work enters an area the user names as unfamiliar, when interview answers keep coming back "I don't know", or when a whole discipline nobody on the work has judgment in walks in (a new subsystem, a new domain entirely) — walk the territory before anyone writes the brief.
 
-Read only — the code, its tests, its docs, and its history (log and blame of the area; reverted commits and bug-fix clusters are where it bit last time). Then report four things, nothing else:
+Read only — the code, its tests, its docs, and its history (log and blame of the area; reverted commits and bug-fix clusters are where it bit last time). The pass is exploration, not judgment — **spawn it as a subagent on the cheapest capable model tier** (measured: a small model's pass scored 9/10 against the frontier model's 10/10 at a fifth of the price) and let the session's main model spend its tokens consuming the report, not re-walking the files. Then report four things, nothing else:
 
 1. **Questions you didn't know to ask** — decision points the territory forces that the ask never mentions. Each arrives as a question with your recommended answer, same discipline as the interview.
 2. **What "good" looks like here** — the conventions, invariants, and quality bars this area already enforces; what a reviewer of this area would reject without discussion.
@@ -32,7 +32,7 @@ Read only — the code, its tests, its docs, and its history (log and blame of t
 
 Before offering any of it, collide your recommended answers with your own findings: a recommendation that quietly disables a safety net you just reported as a pothole, or divides money you just said must not be divided, is the pass contradicting itself — and it reads authoritative precisely because the rest of the report is right.
 
-Route the findings where they live: questions join the interview (`/wonder`), a term that wobbled goes to the `domain-glossary` skill, potholes become attack material for `/discern`, the sharper ask goes into the work file. The pass writes no code and checks no gate — it exists so the stages that do have real material.
+Route the findings where they live: questions join the interview (`/wonder`), a term that wobbled goes to the `domain-glossary` skill, potholes become attack material for `/discern`, the sharper ask goes into the work file. Findings carry their evidence (the commit, the file, the test name) so consuming stages cite the report instead of re-exploring — a pass that gets re-verified file by file cost double and bought nothing. The pass writes no code and checks no gate — it exists so the stages that do have real material.
 
 ## Move 2 — teach before judging (at a choice)
 

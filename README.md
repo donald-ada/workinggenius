@@ -78,6 +78,16 @@ Not everything needs the full six — and not everyone wants to babysit them:
 - **genius-file** (model-invoked) — the work-file discipline: format, read/write rules, the gate rule, the skip protocol, modes, the express path
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/discern`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
+## Token economics
+
+The flow's structure is also its cost model: stages differ in how much intelligence they need, so they shouldn't all run on the same model. Three tiering rules are now built into the skills, derived from measured runs (see `evals/RESULTS.md`):
+
+- **Exploration is cheap-model work.** The blindspot territory pass is reading, not judging — a small-model subagent scored 9/10 against the frontier model's 10/10 at a fifth of the price. The main model consumes the report; it never re-walks the files (findings carry their evidence for exactly this reason).
+- **Review is mid-model work, and scoped.** Tenacity's reviewer judges a diff against a brief — hand it the diff and the work file, not the repo. An unscoped frontier-model reviewer was the most expensive single step in measured runs ($6.55 of a $20 session) at no gain over a scoped mid-tier one.
+- **Building is where the frontier model earns its rate.** Divergence (Invention's parallel option drafts) doesn't need it either — Discernment's attack is where quality gets enforced.
+
+The macro lever remains sizing: the express path exists because six stages on small work is the most expensive mistake available. In measured discovery-stage runs, the tiered flow beat the no-skill frontier baseline on quality (9–10/10 vs 8/10) at 60–79% lower stage cost; across a full feature workflow the arithmetic clears a 20% total saving even with the build stage unchanged.
+
 ## Iterating on the plugin
 
 Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios for each of the ten working skills, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.

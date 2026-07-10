@@ -30,7 +30,7 @@ Then the project-wide sweep, each run fresh, each output read: **full test suite
 
 ### 3. Review the diff on two axes
 
-Review the full diff of the work — from the `base:` commit recorded in the work file's frontmatter to the current tree (fall back to asking the user for the baseline if `base:` is missing). For anything sizable, spawn **one fresh reviewer subagent**, isolated from this session's history so it judges the work, not your reasoning about the work. Hand it the diff and the work file *as files*, never pasted summaries, and ask for both verdicts:
+Review the full diff of the work — from the `base:` commit recorded in the work file's frontmatter to the current tree (fall back to asking the user for the baseline if `base:` is missing). For anything sizable, spawn **one fresh reviewer subagent**, isolated from this session's history so it judges the work, not your reasoning about the work. A mid-tier model reads a diff as well as a frontier one — reserve the expensive model for building, not reviewing. Hand it the diff and the work file *as files*, never pasted summaries, and scope it to them: the reviewer judges the diff against the brief, it does not re-drive the app or re-explore the repo — an unscoped reviewer was the most expensive single step in measured runs, at no gain over a scoped one. Ask for both verdicts:
 
 - **Spec** — does the diff faithfully implement the brief? Anything asked-for missing? Anything present that nobody asked for (scope creep — check it against Wonder's no-list)?
 - **Standards** — does the diff follow this repo's conventions and documented standards? Skip anything tooling already enforces.
