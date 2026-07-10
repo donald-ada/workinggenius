@@ -28,6 +28,8 @@ If **every** option takes a fatal wound, that's a finding, not a failure: go bac
 
 Pick the survivor and say why in plain language. Do not present a menu and make the user choose from silence — recommend, with reasons, then let them overrule.
 
+A confirmation is worth what the confirmer can evaluate. If the user signals they can't tell the options apart ("whichever you think", "they all look fine"), run the `blindspot` skill: teach the judgment before extracting the choice — or record an honest `assumed:` instead of a hollow confirmation.
+
 Name the choice in the project's language: if the decision christens a new concept or settles an overloaded term, run the `domain-glossary` skill and update `CONTEXT.md` inline — the deepened module deserves a name the whole project will keep using.
 
 ### 3. Record the kill-reasons

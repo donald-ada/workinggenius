@@ -24,7 +24,7 @@ Every piece of work travels through six geniuses, in three pairs:
 
 State lives in `.genius/<slug>.md` (the `genius-file` skill owns the format). Each stage ends in a gate; the next stage checks it. Skips are allowed but always recorded — that's how gaps stay visible.
 
-Underneath the flow runs one vocabulary layer: the `domain-glossary` skill keeps `CONTEXT.md`, the project's shared language. `/wonder` and `/discern` drive it actively; every other stage just speaks it. Unlike work files, it's project-level — it compounds across all work.
+Underneath the flow run two cross-cutting layers. The `domain-glossary` skill keeps `CONTEXT.md`, the project's shared language — `/wonder` and `/discern` drive it actively; every other stage just speaks it. Unlike work files, it's project-level: it compounds across all work. The `blindspot` skill hunts the unknowns the stages can't reach — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with built work. `/wonder`, `/discern`, and `/tenacity` drive it; `/blindspot <area>` calls it directly.
 
 ## What to do when invoked
 

@@ -73,13 +73,14 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 **Support:**
 
+- **/blindspot** — the unknowns layer, built on one truth: the map (your prompt, the work file, the glossary) is not the territory (the codebase and its real constraints), and the gap between them is where work fails. Three moves at the three moments the gap is widest: a read-only **territory pass** before unfamiliar work (the questions you didn't know to ask, what "good" looks like here, the potholes, a sharper ask), **teach-before-judging** when the user is confirming a choice they can't evaluate, and a **pre-acceptance quiz** that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
 - **/setup-working-genius** — optional per-repo pinning of the work-file directory and verify commands (which `/enable` and `/tenacity` then use)
 - **genius-file** (model-invoked) — the work-file discipline: format, read/write rules, the gate rule, the skip protocol, modes, the express path
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/discern`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
 ## Iterating on the plugin
 
-Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios for each of the nine working skills, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
+Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios for each of the ten working skills, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
 
 ## Lineage
 
@@ -87,6 +88,7 @@ The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://w
 
 - [mattpocock/skills](https://github.com/mattpocock/skills) — small composable skills, user- vs model-invocation, the router pattern, grilling, vertical slices, gates as checkable completion criteria
 - [obra/superpowers](https://github.com/obra/superpowers) — the SessionStart injection, evidence-before-claims verification, workflow-as-discipline
+- Thariq Shihipar's [A Field Guide to Fable: Finding Your Unknowns](https://x.com/trq212/article/2073100352921215386) — the map/territory framing, the four kinds of unknowns, the blindspot pass, teach-before-judging, and the pre-acceptance quiz (`/blindspot`)
 
 Both are worth studying in full.
 

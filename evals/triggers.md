@@ -76,6 +76,18 @@ Should NOT trigger:
 - [bare] "Summarize the README."
 - [tracked] "What does CONTEXT.md say 'adjustment' means?" — glossary lookup, not work-file discipline.
 
+## blindspot
+
+Should trigger:
+- [bare] "I need to add an SSO provider but I've never touched the auth code in this repo — do a blindspot pass and help me figure out my unknown unknowns."
+- [bare] "Before I write the brief for the exports rework: what am I missing about how exports work today? What questions should I be asking?"
+- [tracked, stage: tenacity] "Before I accept the discounts work, quiz me on what actually changed."
+
+Should NOT trigger:
+- [bare] "Explain how src/http.js works." — a read-back of code the user already points at; an explanation, not an unknowns hunt.
+- [bare] "Review this diff before I merge." — judging the work is review (Tenacity's reviewer); the quiz judges the user's map, and this prompt asks for the former.
+- [tracked, stage: wonder] "Pick up the checkout-discounts work." — Wonder's row; the pass joins only if the interview hits unfamiliar territory.
+
 ## domain-glossary
 
 Should trigger:
