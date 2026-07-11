@@ -11,6 +11,7 @@ GATES="$SCRIPT_DIR/genius-gates.sh"
 
 WORK_DIR=$("$GATES" dir)
 
+nl=$'\n'
 items=""
 while IFS=$'\t' read -r slug stage mode gatef bypf nogf; do
   [ -z "$slug" ] && continue
@@ -23,16 +24,16 @@ while IFS=$'\t' read -r slug stage mode gatef bypf nogf; do
     entry="${entry} ⚠ bypassed with no recorded skip: ${byp} — repair that gate before anything else"
   fi
   [ "$nog" != "none" ] && entry="${entry} (note: ${nog} ran without a recorded gate)"
-  items="${items}\n${entry}"
+  items="${items}${nl}${entry}"
 done < <("$GATES" status)
 
-context="<workinggenius>\nThis project uses the Working Genius workflow: /wonder -> /invent -> /discern -> /galvanize -> /enable -> /tenacity. Type /genius for the map and status. Work files live in ${WORK_DIR}/."
+context="<workinggenius>${nl}This project uses the Working Genius workflow: /wonder -> /invent -> /discern -> /galvanize -> /enable -> /tenacity. Type /genius for the map and status. Work files live in ${WORK_DIR}/."
 if [ -n "$items" ]; then
-  context="${context}\n\nIn-flight work:${items}\nBefore touching any of these, read its work file first (workinggenius:genius-file skill)."
+  context="${context}${nl}${nl}In-flight work:${items}${nl}Before touching any of these, read its work file first (workinggenius:genius-file skill)."
 else
-  context="${context}\nWhen the user asks for a substantive piece of development work (a feature, a refactor, a stubborn bug) outside the flow, suggest starting it with /genius — once, briefly; their call."
+  context="${context}${nl}When the user asks for a substantive piece of development work (a feature, a refactor, a stubborn bug) outside the flow, suggest starting it with /genius — once, briefly; their call."
 fi
-context="${context}\n</workinggenius>"
+context="${context}${nl}</workinggenius>"
 
 # Escape for JSON embedding.
 escape_for_json() {
@@ -45,7 +46,7 @@ escape_for_json() {
   printf '%s' "$s"
 }
 
-escaped=$(escape_for_json "$(printf '%b' "$context")")
+escaped=$(escape_for_json "$context")
 
 printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$escaped"
 
