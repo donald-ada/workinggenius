@@ -82,11 +82,11 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 The flow's structure is also its cost model: stages differ in how much intelligence they need, so they shouldn't all run on the same model. Three tiering rules are now built into the skills, derived from measured runs (see `evals/RESULTS.md`):
 
-- **Exploration is cheap-model work.** The blindspot territory pass is reading, not judging — a small-model subagent scored 9/10 against the frontier model's 10/10 at a fifth of the price. The main model consumes the report; it never re-walks the files (findings carry their evidence for exactly this reason).
+- **Exploration is frontier-model work.** The blindspot territory pass hunts unknown unknowns — judgment, not reading. A cheap-model pass scores well on potholes that are already written down, then mis-calls the ones that aren't: in a measured greenfield run it recommended the exact render path the project's fixed constraint forbade, and two later frontier stages paid to correct it. Run the pass on the session's main model or better; the saving is in the *shape* — a fresh subagent explores, the main session consumes the report and never re-walks the files (findings carry their evidence for exactly this reason).
 - **Review is mid-model work, and scoped.** Tenacity's reviewer judges a diff against a brief — hand it the diff and the work file, not the repo. An unscoped frontier-model reviewer was the most expensive single step in measured runs ($6.55 of a $20 session) at no gain over a scoped mid-tier one.
 - **Building is where the frontier model earns its rate.** Divergence (Invention's parallel option drafts) doesn't need it either — Discernment's attack is where quality gets enforced.
 
-The macro lever remains sizing: the express path exists because six stages on small work is the most expensive mistake available. In measured discovery-stage runs, the tiered flow beat the no-skill frontier baseline on quality (9–10/10 vs 8/10) at 60–79% lower stage cost; across a full feature workflow the arithmetic clears a 20% total saving even with the build stage unchanged.
+The macro lever remains sizing: the express path exists because six stages on small work is the most expensive mistake available. The cost levers are the scoped mid-tier reviewer, mid-tier divergence drafts, no-re-exploration handoffs, and sizing — not the pass. An earlier revision tiered the pass down to the cheapest model on the strength of a checklist score; a full-flow run showed the cheap pass mis-calling the load-bearing constraint, and the guidance was reversed (see `evals/RESULTS.md`). Quality of the pass is upstream of every stage that follows it; pay for it.
 
 ## Iterating on the plugin
 
