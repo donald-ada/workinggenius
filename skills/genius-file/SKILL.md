@@ -58,6 +58,6 @@ Not everything deserves six stages. If the user asks to track something genuinel
 
 When Tenacity's gate is fully checked, set `stage: done` and add a one-line post-mortem: which genius was weakest this run. Done files stay in place as decision history.
 
-Post-mortems have readers — that's what makes them worth writing honestly. Tenacity reads the earlier ones before writing a new one (a repeat weakness must name its adjustment); `/genius` reads them as a set to spot the genius that keeps coming up weakest and to calibrate sizing and mode for new work. Write each one as if the next run will act on it, because it will.
+Post-mortems have readers — that's what makes them worth writing honestly. Tenacity owns the writing discipline (against the record, repeat weaknesses name their adjustment); `/genius` owns the reading (as a set, to calibrate sizing and mode). Write each one as if the next run will act on it, because it will.
 
 Abandoning work is also a way to be done: set `stage: done` with post-mortem `abandoned — <reason>`. An honest abandonment beats a zombie file nagging every session.
