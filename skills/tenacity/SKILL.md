@@ -35,7 +35,7 @@ Review the full diff of the work — from the `base:` commit recorded in the wor
 - **Spec** — does the diff faithfully implement the brief? Anything asked-for missing? Anything present that nobody asked for (scope creep — check it against Wonder's no-list)?
 - **Standards** — does the diff follow this repo's conventions and documented standards? Skip anything tooling already enforces.
 
-Don't tell the reviewer what not to flag. When findings come back: verify before implementing, push back with reasons where a finding is wrong — findings are claims to evaluate, not orders. Fix what's real; re-run step 2's sweep after any fix.
+Don't tell the reviewer what not to flag. When findings come back: verify before implementing, push back with reasons where a finding is wrong — findings are claims to evaluate, not orders. Fix what's real; re-run step 2's sweep after any fix. Spawn the reviewer so its result reaches you — synchronously (foreground) unless you are certain the harness re-wakes you when it finishes; ending your turn to "await the reviewer" in a context that won't be woken is a stall, not a wait.
 
 ### 4. Clean up
 

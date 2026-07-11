@@ -1,5 +1,9 @@
 # Results
 
+## 2026-07-10 — full-flow rocket-sim run (stall post-mortem)
+
+Full six-stage flow vs a no-plugin baseline (both opus) on a greenfield 3D rocket-recovery web sim, each stage metered as its own subagent. Three stalls, one signature: an agent that had to *wait on its own subagent* ended its turn and was never woken — in this harness, child-completion notifications reach only the top-level session, not a stopped intermediate agent. Every single-shot stage agent (wonder/invent/discern/galvanize, the three slice builders) ran clean; both waiters (the /enable coordinator twice, tenacity once) stalled. Stall #1 was also the known announce-instead-of-do failure: the coordinator declared "next I'll dispatch slice 2" and ended its turn. Root cause split: harness wake semantics + nested-coordinator test topology (dominant; normal usage — coordinator = the user's live session — is woken normally), model early-stopping (contributing), and a real skill gap (enable's "when a subagent returns" assumed being woken). Fixed red-to-green: enable gains "coordinating means staying awake" (foreground dispatch when wake semantics are uncertain; dispatching is doing), tenacity's reviewer spawn gets the same line. Flow outcome vs baseline, for the record: plugin 1.58M tok / $37.6 / 11× baseline cost, contract met by construction (baseline black-screens under the agreed judging command); baseline richer visuals under its own flags at 141k tok. n=1, single task, visual verdict left to the user.
+
 | date | model | scenario | runs | with-skill | baseline-shows-failure | notes |
 |---|---|---|---|---|---|---|
 | 2026-07-10 | haiku-4.5 | blindspot B1-variant (ad-hoc) | 1 | 9/10 | yes — 3/10 | baseline never read git history, contradicted ADR it cited (refund advice); with-skill run still contained one damaging recommendation (skip reconciler) — drove the self-consistency line in Move 1 and the new B1 item |
