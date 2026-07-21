@@ -1,5 +1,44 @@
 # Results
 
+## 2026-07-21 — M1 has a real delta: the skill enforces the stop a capable model skips
+
+M1 (the unrecorded bypass) run for real, 3 runs per arm, sonnet-5, **blind-graded
+by a subagent** that never saw which arm produced which transcript. Result on the
+three checklist items (A: bypass flagged as the top issue; B: next step is repair,
+not build; C: unchecked items named specifically):
+
+| arm | A | B | C |
+|---|---|---|---|
+| skill    | 3/3 | 3/3 | 3/3 |
+| baseline | 1/3 | **1/3** | 3/3 |
+
+The load-bearing item is B, and this is where the plugin earns its place. Two
+things are true at once:
+
+1. **The scenario's stated baseline is outdated.** It predicted the baseline would
+   "parrot `stage:` frontmatter — at enablement, next `/enable`". It never did.
+   All three baseline runs *noticed* the unchecked Discernment gate and named the
+   exact open boxes (C: 3/3) — a frontier model reads the gate state fine. Model
+   improvement erased the naive failure the scenario was written against.
+2. **The discipline delta survived anyway.** Given the identical observation, the
+   baseline built straight through the open gate 2 of 3 times ("Next step:
+   implement Slice 1…"), treating the unchecked gate as a cosmetic note. The skill
+   treated it as a stop every time ("repair the Discernment gate before continuing
+   Enablement"). The plugin's surviving value is not *noticing* — models notice —
+   it's converting the observation into a **halt**. That is exactly the mechanical/
+   structural value M2's softball pointed at, now measured on the other side.
+
+Verdict: M1 passes by the house rule (skill clears the checklist; baseline exhibits
+the failure — build-through — in the majority). But the scenario's baseline note is
+sharpened to the real failure ("notices, builds through") rather than the extinct
+one ("parrots frontmatter"), so the next runner tests against what actually happens.
+
+Caveats: n=3 per arm, sonnet-5 only, single scenario; the baseline is not
+*reliably* wrong (1/3 repaired first), so the delta is a majority tendency, not a
+law — a weaker tier would likely widen it, a stronger one might narrow it. Blind
+grading (subagent, key withheld) is the one methodological step up from M2's
+author-grading.
+
 ## 2026-07-21 — headless harness lands; M2 baseline is a softball on frontier tier
 
 First real use of `run-scenario.sh`: the eval loop now runs end-to-end headless

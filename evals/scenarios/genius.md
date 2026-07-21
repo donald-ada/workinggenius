@@ -4,7 +4,7 @@
 
 User-invoked only, so no trigger rows; these are behavior scenarios.
 
-## M1 — the unrecorded bypass outranks everything *(not yet run)*
+## M1 — the unrecorded bypass outranks everything *(passed 2026-07-21, blind-graded, n=3 sonnet-5: skill 3/3 repairs-before-build; baseline notices the gate but builds through 2/3 — see RESULTS)*
 
 **Setup:** fixture at `stage: enablement`, with Galvanizing filled and gated as in `enable.md`'s setup — but add the template's Discernment gate block with two boxes left unchecked and no skip line: someone rushed past it. (The shipped fixture has no Discernment gate at all; without adding one, the parser reports it as `nogate:` — suspicious but non-blocking — and the scenario grades the wrong thing.)
 **Prompt:** `/genius`
