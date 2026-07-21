@@ -6,17 +6,20 @@ Four scenarios run for real on the same tier (sonnet-5) now map exactly where
 this plugin still earns its place against a frontier baseline — the answer to
 "is any of this differentiated, or does the model already do it?"
 
-| scenario | the discipline it enforces | skill | baseline | delta |
-|---|---|---|---|---|
-| M2 | consult history to **size** the work | does it | **does it** | none — softball |
-| T1 | **verify fresh** before declaring done | 1/1 caught | **3/3 caught** | none — softball |
-| M1 | **halt** on an open gate you could proceed past | 3/3 halt | 1/3 halt | partial |
-| E1 | write the **failing test first**, before the code | 3/3 | **0/3** | clean |
+| scenario | the discipline it enforces | against momentum? | skill | baseline | delta |
+|---|---|---|---|---|---|
+| M2 | consult history to **size** the work | no | does it | **does it** | none — softball |
+| T1 | **verify fresh** before declaring done | no | 1/1 | **3/3** | none — softball |
+| M1 | **halt** on an open gate you could pass | soft | 3/3 halt | 1/3 halt | partial |
+| E1 | write the **failing test first** | yes | 3/3 | **0/3** | clean |
+| W1 | **question the ask** before building it | yes | 3/3 ask | **0/3 ask** | clean |
 
 The first cut looked like "soft advisory = commodity, mechanical = differentiated."
 T1 breaks that: verifying-before-done is mechanical, yet the baseline does it every
 time. The real axis is sharper and more useful — **does the discipline ask the model
-to act against its own default momentum?**
+to act against its own default momentum?** — and it now has predictive power: it was
+stated after four scenarios, used to *predict* W1 would show a delta (questioning the
+literal ask is momentum-contrary), and W1 came back a clean 3/0 exactly as forecast.
 
 - Where the discipline *aligns* with what a careful model already does when asked
   (size sensibly given history — M2; run the tests before calling it done when told
@@ -36,6 +39,31 @@ already-aligned behaviors (M2, T1) are honest softballs to retire or down-weight
 This is a sharper cut than the roadmap's "invest in enforcement, treat advisory as
 erodible" — enforcement of *momentum-contrary* discipline is the differentiator;
 enforcement of what the model already does when asked is not. Measured, not asserted.
+
+## 2026-07-21 — W1 confirms the thesis by prediction: question-the-ask is a clean delta (3/0)
+
+W1 (the question behind the request) was run *after* the momentum thesis was written,
+as a test of it. The thesis predicted a delta: questioning a literal request before
+building it runs against the model's build-what-was-asked momentum. Prompt: "users
+keep losing uploads on flaky wifi — add a retry flag to the upload command", in a
+scratch repo whose `src/http.js` ships an unused `retry()` helper. Graded from the
+event stream: did the run write code directly, or stop and question the ask first?
+
+- **Skill: 0/3 built directly, 3/3 questioned first.** Every run surfaced the question
+  behind the request — one even noticed there is no CLI "upload command" to add a flag
+  to, and asked what the user actually wants before writing anything.
+- **Baseline: 3/3 built directly, 0/3 questioned.** Every run found the `retry()`
+  helper (frontier models explore fine) and immediately wired it in with tests — "All
+  4 tests pass." It built the ask *well*, and never asked whether the ask was right.
+
+The tell is not competence — the baseline's implementation was clean and back-compat.
+The tell is that it optimized for *implement the request*; the skill optimized for
+*make sure the request is right* — and that is momentum-contrary, so the delta is
+clean (3/0), the same shape as E1. A thesis that predicts a new result before the run
+is worth more than one that only fits the runs it was built from; this is that.
+Caveats: n=3 per arm, sonnet-5, graded on the build-first-vs-question-first split
+(the finer checklist items — one-question-at-a-time, recommended answers — were not
+scored across all six).
 
 ## 2026-07-21 — T1 softball: fresh-verify-before-done is what a careful model already does
 

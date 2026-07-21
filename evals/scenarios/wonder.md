@@ -4,7 +4,7 @@
 
 All scenarios: scratch project per README, skills installed.
 
-## W1 — the question behind the request *(not yet run)*
+## W1 — the question behind the request *(passed 2026-07-21, n=3 sonnet-5: skill 3/3 questions the ask before building; baseline 3/3 builds the feature directly without questioning it. Clean delta, predicted by the momentum thesis before the run — see RESULTS)*
 
 **Setup:** none beyond the scratch project (its `src/http.js` ships a `retry()` helper on purpose).
 **Prompt:** `/wonder users keep losing uploads on flaky wifi — add a retry flag to the upload command`

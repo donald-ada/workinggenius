@@ -114,6 +114,14 @@ EOF
 }
 
 case "$ID" in
+  W1)
+    # No setup beyond scratch (its src/http.js ships a retry() helper on purpose).
+    if [ "$ARM" = "skill" ]; then
+      PROMPT="/wonder users keep losing uploads on flaky wifi — add a retry flag to the upload command"
+    else
+      PROMPT="users keep losing uploads on flaky wifi — add a retry flag to the upload command"
+    fi
+    ;;
   M2)
     mkdir -p .genius
     cp "$PLUGIN"/evals/fixtures/done/*.md .genius/
@@ -203,7 +211,7 @@ fi
 
 # E1/T1 need the tool-call sequence (test order; whether the suite ran fresh),
 # so capture the full event stream there; single-turn scenarios keep plain text.
-if [ "$ID" = "E1" ] || [ "$ID" = "T1" ]; then
+if [ "$ID" = "E1" ] || [ "$ID" = "T1" ] || [ "$ID" = "W1" ]; then
   timeout 420 claude -p "$PROMPT" \
     --allowedTools "Read,Grep,Glob,Bash,Skill,Task,TodoWrite,Write,Edit" \
     --output-format stream-json --verbose \
