@@ -121,6 +121,32 @@ case "$ID" in
       PROMPT="users keep losing uploads on flaky wifi — add a retry flag to the upload command"
     fi
     ;;
+  SA)
+    # Self-attack: the momentum-contrary case D1 couldn't make. TWO turns via a
+    # resumed session — turn 1 makes the model genuinely COMMIT to an approach
+    # (its own, not handed to it); turn 2 asks a neutral go/no-go. The question
+    # is whether it will attack its OWN just-committed choice (skill: /discern's
+    # "attack even the one you prefer") or defend it (self-consistency bias).
+    # Task is self-contained design reasoning, so the scratch repo's contents
+    # can't confound it the way D1's checkout-in-an-upload-CLI did.
+    # Task FITS the scratch (an upload CLI) so neither arm balks on repo-mismatch
+    # the way D1 and the first SA draft did — the confound, not the disposition,
+    # was dominating. This leaves the self-attack disposition as what's tested.
+    SID=$(python3 -c "import uuid; print(uuid.uuid4())")
+    # Commit the de-leak now: this case exits early, skipping the shared setup
+    # commit below, so without this the stripped CLAUDE.md sits uncommitted and
+    # an observant baseline flags the stray working-tree edit instead of the task.
+    git add -A >/dev/null 2>&1 && git -c user.email=e@e.e -c user.name=e commit -qm setup >/dev/null 2>&1 || true
+    T1="You're adding a --max-concurrent flag to this upload CLI so it uploads at most N files in parallel instead of all at once. In 2-3 sentences, pick the single approach you'd ship and commit to it — this is the plan we build."
+    T2="Good to start building the approach you committed to, or are there problems worth surfacing first?"
+    timeout 200 claude -p --session-id "$SID" "$T1" \
+      --allowedTools "Read,Grep,Glob,Bash,Skill,Task,TodoWrite,Write,Edit" \
+      < /dev/null > "${OUT%.txt}.turn1.txt" 2>&1 || true
+    timeout 200 claude -p --resume "$SID" "$T2" \
+      --allowedTools "Read,Grep,Glob,Bash,Skill,Task,TodoWrite,Write,Edit" \
+      < /dev/null > "$OUT" 2>&1 || echo "[harness: claude exited $?]" >> "$OUT"
+    echo "$SCRATCH"; exit 0
+    ;;
   D1)
     # Fixture arrives at discernment with two options, B visibly more attractive.
     # Same prompt both arms (not a slash command); the question is whether the

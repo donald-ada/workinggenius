@@ -52,6 +52,50 @@ This is a sharper cut than the roadmap's "invest in enforcement, treat advisory 
 erodible" — enforcement of *momentum-contrary* discipline is the differentiator;
 enforcement of what the model already does when asked is not. Measured, not asserted.
 
+Sharpest form, after the SA probe (below) tried and failed to find a self-critique
+delta: **the delta is never in eliciting reflection, only in forcing the action.**
+Ask a capable model to think — size this, verify before done, is my plan sound — and it
+thinks fine, unaided (M2, T1, SA: softballs). The skill earns its keep only where the
+model must *act against its own momentum without being asked*: fail the test before the
+code (E1), question the ask instead of building it (W1), halt at the gate instead of
+proceeding (M1). Build the plugin's case on the action moments; retire the ones that
+only ask it to reflect.
+
+## 2026-07-21 — SA (self-attack probe): softball, and the insight that unifies everything
+
+An ad-hoc two-turn probe built to make the momentum-contrary case D1 couldn't: turn 1
+makes the model genuinely *commit* to an approach (its own), turn 2 asks a go/no-go.
+Does the discipline make it attack its own just-committed choice, or defend it? (Not a
+canonical scenario — a purpose-built probe, like the earlier blindspot B1-variant.)
+
+- **Draft 1** (rate-limit a Node API) was confounded exactly as D1 was: the task didn't
+  fit the upload-CLI scratch, so the baseline balked at the repo mismatch instead of
+  self-reviewing. Second time this fixture-fit problem bit — it's now a documented
+  limit of the scratch substrate for design-reasoning scenarios.
+- **Draft 2** (repo-fitting: a `--max-concurrent` flag on the upload command), n=1 per
+  arm, sonnet-5: **both arms self-attacked their own plan identically.** Each committed
+  to a worker-pool, then in turn 2 surfaced the same real wound — "there's no multi-file
+  CLI here yet, so this is bigger scope than the plan implied" — and raised the
+  unaddressed fail-fast-vs-collect-errors decision. The baseline was if anything *more*
+  observant (it also caught a stray uncommitted CLAUDE.md edit — a harness artifact,
+  since fixed). Softball.
+
+Why it's a softball, and why that matters most: turn 2 *asks* "good to build, or problems
+first?" — it **invites** the critique. A model asked to review its own plan reviews it
+fine; that's not skill-dependent. Every attempt to make self-attack momentum-contrary
+collapses: *invite* the review and both arms do it (softball); *pressure to ship* and
+you're testing sycophancy, a different axis; just say *"build it"* and you're back to
+E1/W1's build-vs-stop. That collapse **is the finding**, and it unifies all seven runs:
+
+**The delta is never in eliciting reflection — it is in forcing the action.** When the
+prompt asks the model to think (size this — M2; verify before done — T1; is my plan good
+— SA), a capable model thinks fine, unaided: softball. The skill earns its place only at
+the moments where the model must *act against its own momentum without being asked* —
+write the failing test before the code (E1, 0/3 baseline), question the literal ask
+instead of building it (W1, 0/3), halt at the open gate instead of proceeding (M1, 1/3).
+Reflection-on-request is commodity; the disciplined *action at the decision point* is the
+product. That is the single sentence the whole day's measurement converges on.
+
 ## 2026-07-21 — D1 inconclusive: a failed prediction that sharpens the thesis
 
 D1 (attack every option, including the favorite) run as a second predictive test. The
