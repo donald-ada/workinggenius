@@ -71,6 +71,17 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 **Fresh context per slice.** Galvanizing produces slices a cold session can grab; running each slice in a new session keeps every context window sharp instead of degraded.
 
+## Built for codebases with history
+
+Every workflow tool demos greenfield. This one's sharpest moves feed on mess, and get better the older the repo:
+
+- **Wonder's prior-art pass** shrinks the ask to the genuine gap — in a mature codebase the request is often half-built, and "build much less than asked" is the interview's best outcome.
+- **The blindspot territory pass** mines `git log` and `git blame`: reverted commits, bug-fix clusters, FIXME middens. Where the code bit last time is the best predictor of where it bites next — evidence a greenfield project simply doesn't have yet.
+- **Discernment attacks options against the record** — existing conventions, `docs/adr/` decisions, the codebase's grain — not against a blank slate.
+- **The domain glossary** exists precisely because ten-year-old repos speak three dialects; it makes the collision explicit instead of letting new work pick a fourth.
+
+A fresh repo gives these moves nothing to grip. A legacy system is where they earn their keep.
+
 ## Skills
 
 **The map** (user-invoked only — the flow never hijacks work you didn't put in it):
