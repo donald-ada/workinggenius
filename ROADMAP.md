@@ -60,11 +60,13 @@ The claims table is only as good as its weakest row. Close the gap between
 - **1.1 Sync the markers, then run down the debt.** Step zero (done 2026-07-21):
   every scenario without a graded `RESULTS.md` row carries the *(not yet run)*
   marker — 31 of 31 at the time of writing; that number is the honest baseline,
-  not an embarrassment to hide. Then the runs, in priority order: first the
-  scenarios that back README claims-table rows, then the highest-stakes scenario
-  per skill; each at the house rule (three runs, majority, baseline arm).
+  not an embarrassment to hide. Then the runs, enumerated so a cold reader can
+  check the box — one core-failure-mode scenario per skill: W1, I1, D1, G1, E1,
+  T1, M1, F1, B1 (canonical, not the variant), V1 — plus M4, which backs the
+  claims-table's priced-ceremony row; each at the house rule (three runs,
+  majority, baseline arm).
   *Accept:* markers mechanically match RESULTS (no unmarked-unrun scenario
-  exists); the priority subset has RESULTS rows; every remaining marker is
+  exists); those eleven scenarios have RESULTS rows; every remaining marker is
   acknowledged inventory — and the README's "prose is tested" row states actual
   graded coverage instead of implying totality.
 - **1.2 Bound every public number.** Each measured claim cited in README or a
