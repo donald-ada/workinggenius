@@ -1,5 +1,56 @@
 # Results
 
+## 2026-07-21 — synthesis: three runs draw the commodity/differentiated line
+
+Three scenarios run for real on the same tier (sonnet-5) now map exactly where
+this plugin still earns its place against a frontier baseline — the answer to
+"is any of this differentiated, or does the model already do it?"
+
+| scenario | what it tests | skill | baseline | delta |
+|---|---|---|---|---|
+| M2 | post-mortem-informed **sizing** (soft, advisory) | does it | **does it** | none — softball |
+| M1 | treat an open gate as a **stop** (discipline) | 3/3 halt | 1/3 halt | partial — enforcement only |
+| E1 | **red-before-green** at the seam (structural) | 3/3 | **0/3** | clean |
+
+The gradient is the finding. The advisory behavior (M2) is fully absorbed — a
+capable model sizes work from history unaided. The perception underneath the
+discipline (M1) is absorbed too — the baseline *sees* the bypassed gate every
+time. What is **not** absorbed is the mechanical commitment: halting on the gate
+(M1: baseline builds through 2/3) and writing-and-failing the test before the
+code (E1: baseline 0/3). The plugin's real, surviving value is the part that
+makes the model do the disciplined thing it otherwise reasons its way *past* —
+not the part that tells it something it already knows. That is precisely the
+case the README's mechanical claims (the hook gate, red-before-green) rest on,
+and the case the advisory prose cannot make. The roadmap's bet — invest in
+enforcement, treat advisory prose as erodible — is now measured, not asserted.
+
+## 2026-07-21 — E1 flagship: red-before-green is a clean delta (3/0)
+
+E1 (red-before-green at the agreed seam) run 3× per arm, sonnet-5, graded
+**programmatically** from the event stream — the objective signal is the order
+of operations: was a test written and run and seen *failing* before the
+implementation file existed? No model judgment needed, so no grader to bias.
+
+- **Skill: 3/3 red-before-green.** Every run: write `test/pricing.test.js` →
+  `npm test` (red — `applyAdjustments` not defined yet) → write `src/pricing.js`
+  → `npm test` (green) → update work file → commit the slice.
+- **Baseline: 0/3.** Every run: write `src/pricing.js` **first** → write the test
+  → `npm test` once (green on arrival). The test was never seen red — it proves
+  the code matches itself, not that it matches the spec. Exactly the failure the
+  scenario names ("implementation first, tests after, green on arrival, proving
+  nothing").
+
+This is the cleanest delta of the three scenarios and it sits on the plugin's
+core identity. A frontier model, told to build a slice with a named test command,
+does not write the failing test first on its own — it writes the code and
+confirms it. The skill's insistence on red-first is doing real work the baseline
+does not do. Caveats: n=3 per arm, sonnet-5, single scenario; the programmatic
+grader scored the load-bearing red-before-green item (items on minimal
+implementation, independent expected values, and the build log were spot-checked
+by inspection, not scored across all six).
+
+M1 sharpened along the way: see its entry below.
+
 ## 2026-07-21 — M1 has a real delta: the skill enforces the stop a capable model skips
 
 M1 (the unrecorded bypass) run for real, 3 runs per arm, sonnet-5, **blind-graded

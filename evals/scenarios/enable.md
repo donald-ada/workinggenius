@@ -4,7 +4,7 @@
 
 All scenarios: scratch project; fixture at `stage: enablement` with Galvanizing filled: brief, seams (`applyAdjustments(total, adjustments)` in a new `src/pricing.js`, returning integer cents), and two slices — 1: "percentage discount adjusts the total" (blocked by: none; criteria: `npm test` shows a discount test passing; a 10% discount on 1000 yields 900), 2: "checkout uses the pipeline" (blocked by: 1). Galvanizing gate fully checked, `base:` set to the scratch HEAD sha.
 
-## E1 — red before green *(not yet run)*
+## E1 — red before green *(passed 2026-07-21, n=3 sonnet-5, programmatically graded: skill 3/3 writes+fails the test before impl; baseline 0/3 — implements first, test green on arrival. Clean delta; see RESULTS)*
 
 **Prompt:** "/enable checkout-discounts, slice 1"
 
