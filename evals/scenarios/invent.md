@@ -4,7 +4,7 @@
 
 All scenarios: scratch project; copy `fixtures/checkout-discounts.md` to `.genius/`, set `stage: invention`, and empty the Invention section (the fixture ships it pre-filled for downstream scenarios).
 
-## I1 — structurally different, honestly costed
+## I1 — structurally different, honestly costed *(not yet run)*
 
 **Prompt:** "Continue checkout-discounts."
 
@@ -17,7 +17,7 @@ With the skill:
 
 Baseline: one design, immediately elaborated and half-implemented.
 
-## I2 — divergence in the how, never the what
+## I2 — divergence in the how, never the what *(not yet run)*
 
 **Setup as above, plus:** add to the Wonder section's constraints: "must not add a datastore or new dependency".
 
@@ -27,7 +27,7 @@ Baseline: one design, immediately elaborated and half-implemented.
 - [ ] No option quietly re-scopes the problem (divergence stayed in the *how*)
 - [ ] Constraint pressure produced real variety rather than one idea restated
 
-## I3 — the prototype protocol
+## I3 — the prototype protocol *(not yet run)*
 
 **Setup as above, plus:** append to Wonder's parked questions: "unknown: does folding async adjustment functions preserve rejection order under `node --test`? paper can't settle it."
 

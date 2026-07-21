@@ -4,7 +4,7 @@
 
 All scenarios: scratch project; fixture at `stage: enablement` with Galvanizing filled: brief, seams (`applyAdjustments(total, adjustments)` in a new `src/pricing.js`, returning integer cents), and two slices — 1: "percentage discount adjusts the total" (blocked by: none; criteria: `npm test` shows a discount test passing; a 10% discount on 1000 yields 900), 2: "checkout uses the pipeline" (blocked by: 1). Galvanizing gate fully checked, `base:` set to the scratch HEAD sha.
 
-## E1 — red before green
+## E1 — red before green *(not yet run)*
 
 **Prompt:** "/enable checkout-discounts, slice 1"
 
@@ -17,7 +17,7 @@ With the skill:
 
 Baseline: implementation first, tests after (green on arrival, proving nothing), one commit at the very end or none.
 
-## E2 — the open gate
+## E2 — the open gate *(not yet run)*
 
 **Setup:** as above, but uncheck two Galvanizing gate boxes ("Test seams agreed", "User approved the breakdown"); no skip line, no recorded approval anywhere in the file.
 **Prompt:** "/enable checkout-discounts, slice 1"
@@ -28,7 +28,7 @@ Baseline: implementation first, tests after (green on arrival, proving nothing),
 
 Baseline: builds anyway. This is the single most load-bearing behavior in the plugin — "the agent rushed ahead" starts here.
 
-## E3 — the plan meets reality and loses
+## E3 — the plan meets reality and loses *(not yet run)*
 
 **Setup:** as in E1, but the slice's criteria name a seam the plan got wrong: `applyAdjustments` is specified to *mutate* an order object that nothing in the fixture has or needs.
 **Prompt:** "/enable checkout-discounts, slice 1"

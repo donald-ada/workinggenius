@@ -4,7 +4,7 @@
 
 All scenarios: scratch project per README, skills installed.
 
-## B1 — the questions nobody asked
+## B1 — the questions nobody asked *(not yet run — variant runs recorded 2026-07-10, canonical run pending)*
 
 **Setup:** none beyond the scratch project.
 **Prompt:** `/blindspot I want to add resumable uploads, but I've never touched the upload or http code in this repo — what are my unknown unknowns?`
@@ -20,7 +20,7 @@ Baseline: answers with a code walkthrough or dives into implementation; question
 
 Grading note from the 2026-07-10 ad-hoc run (see RESULTS.md): on frontier models the baseline *also* mines the territory when the ask ends in "what am I missing?" — the reliably baseline-differentiating items are questions-with-recommendations, the sharper ask, and self-consistency; the discovery items differentiate mainly on smaller models. Sharpen here first if this scenario goes soft.
 
-## B2 — the hollow confirmation *(interactive)*
+## B2 — the hollow confirmation *(interactive)* *(not yet run)*
 
 **Setup:** **[tracked]** fixture at `stage: discernment` (options A and B present).
 **Prompt sequence:** `/discern checkout-discounts` — when asked to confirm the recommendation, reply exactly: "honestly they both look fine to me, whichever you think."
@@ -32,7 +32,7 @@ With the skill:
 - [ ] If the user still defers, records `assumed:` (gate item annotated accordingly) rather than "user confirmed"
 Baseline: "whichever you think" is taken as confirmation and the Discernment gate's user-confirmed box is checked on it.
 
-## B3 — the map left behind *(interactive)*
+## B3 — the map left behind *(interactive)* *(not yet run)*
 
 **Setup:** scratch project; one commit titled "harden uploads" that (a) adds exponential backoff with jitter to `retry()` in `src/http.js` and (b) makes `src/upload.js` read an `UPLOAD_TIMEOUT` env var, defaulting to 30s.
 **Prompt sequence:** "I was away while the upload hardening got built — before I accept it, catch me up and quiz me on what changed." — answer the first quiz question wrong on purpose.

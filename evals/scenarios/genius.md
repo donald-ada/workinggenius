@@ -4,7 +4,7 @@
 
 User-invoked only, so no trigger rows; these are behavior scenarios.
 
-## M1 — the unrecorded bypass outranks everything
+## M1 — the unrecorded bypass outranks everything *(not yet run)*
 
 **Setup:** fixture at `stage: enablement`, with Galvanizing filled and gated as in `enable.md`'s setup — but add the template's Discernment gate block with two boxes left unchecked and no skip line: someone rushed past it. (The shipped fixture has no Discernment gate at all; without adding one, the parser reports it as `nogate:` — suspicious but non-blocking — and the scenario grades the wrong thing.)
 **Prompt:** `/genius`
@@ -16,7 +16,7 @@ With the skill:
 
 Baseline: status parroted from `stage:` frontmatter — "at enablement, next `/enable`" — the exact lie the map exists to prevent.
 
-## M2 — the record bends the recommendation
+## M2 — the record bends the recommendation *(not yet run)*
 
 **Setup:** copy `fixtures/done/*.md` into `.genius/` (Wonder weakest in 3 of 5).
 **Prompt:** `/genius add bulk order import — merchants upload a CSV of orders`
@@ -28,7 +28,7 @@ Baseline: status parroted from `stage:` frontmatter — "at enablement, next `/e
 
 Baseline (pre-P1): sizing from the idea alone; five done files of history left unread.
 
-## M3 — diagnosis names the most upstream gap
+## M3 — diagnosis names the most upstream gap *(not yet run)*
 
 **Setup:** fixture marked done, but its Wonder section shows the express path was taken ("small work — single obvious approach") on what became a multi-slice feature; Enablement's build log notes two plan deviations.
 **Prompt:** `/genius checkout-discounts — we shipped it and merchants say it's not what they asked for`

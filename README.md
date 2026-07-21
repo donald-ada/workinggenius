@@ -26,7 +26,7 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 | Claim | Evidence |
 |---|---|
 | The gate rule is **code**, not prose — bypasses are detected mechanically and block the session | `hooks/scripts/genius-gates.sh` + Stop hook; 53 deterministic tests: `bash evals/gates.test.sh` |
-| The prose is **tested** — a skill edit earns its place through a scenario that failed before it and passes after it, against a no-plugin baseline | `evals/scenarios/` (per-skill), discipline in `evals/README.md` |
+| The prose is **tested** — a skill edit earns its place through a scenario that failed before it and passes after it, against a no-plugin baseline | `evals/scenarios/` (31 scenarios; graded-run coverage is tracked honestly by *(not yet run)* markers — running down that debt is [ROADMAP](ROADMAP.md) Phase 1), discipline in `evals/README.md` |
 | The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
 | The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline, which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
 

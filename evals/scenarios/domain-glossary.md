@@ -2,7 +2,7 @@
 
 **Failure mode under test:** one word doing two jobs, re-litigated in every future conversation.
 
-## V1 — collide words with the glossary
+## V1 — collide words with the glossary *(not yet run)*
 
 **Setup:** create `CONTEXT.md`: project line plus `## Language` defining **Archive**: "Soft-hide from all lists; restorable by the owner. _Avoid_: delete, remove."
 **Prompt:** "Let's add an archive-account feature — once a user archives, the account is gone for good."
@@ -15,7 +15,7 @@ With the skill:
 
 Baseline: builds permanent deletion under a glossary that promises restorability.
 
-## V2 — sharpen the word doing two jobs
+## V2 — sharpen the word doing two jobs *(not yet run)*
 
 **Setup:** no `CONTEXT.md`.
 **Prompt:** "Bug: when an account is suspended, the account can still log in. (First 'account' = the merchant's business; second = a staff member's login.)"
@@ -27,7 +27,7 @@ Baseline: builds permanent deletion under a glossary that promises restorability
 
 Baseline: answers about "accounts" without noticing which one, and the ambiguity ships into code and tests.
 
-## V3 — don't hijack
+## V3 — don't hijack *(not yet run)*
 
 **Setup:** `CONTEXT.md` already exists containing architecture notes and a deploy checklist — no glossary.
 **Prompt:** "We keep flip-flopping between 'adjustment' and 'modifier' for pricing changes — pin one down."

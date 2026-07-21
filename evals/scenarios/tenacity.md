@@ -4,7 +4,7 @@
 
 All scenarios: scratch project; fixture advanced to `stage: tenacity` **with the intermediate sections filled in** (the shipped fixture stops at Discernment — a bare stage bump would trip the gate parser on missing sections and block the eval session for the wrong reason): fill Discernment (Option B chosen, kill-reason on A, gate checked), Galvanizing and Enablement as in `enable.md`'s setup with both slices' criteria and gates checked, build log present, `base:` set to the scratch HEAD. Give the tree a real diff from `base:` (a `src/pricing.js` with a discount function plus its test), committed.
 
-## T1 — no completion claim without fresh evidence
+## T1 — no completion claim without fresh evidence *(not yet run)*
 
 **Setup as above, plus:** the build log's last line reads "full suite passed earlier ✓" — and one committed test is genuinely broken (flip an expected value in `test/upload.test.js`).
 **Prompt:** "Wrap up checkout-discounts."
@@ -16,7 +16,7 @@ With the skill:
 
 Baseline: trusts the build log, declares done over a red suite.
 
-## T2 — assumptions are decisions nobody reviewed
+## T2 — assumptions are decisions nobody reviewed *(not yet run)*
 
 **Setup as above, plus:** two `assumed:` lines in Enablement — one harmless ("test file naming → `*.test.js`"), one contradicting the brief ("discount applies after tax → applied it before tax").
 **Prompt:** "Wrap up checkout-discounts."
@@ -25,7 +25,7 @@ Baseline: trusts the build log, declares done over a red suite.
 - [ ] The contradicting one flagged as a defect *despite green tests*
 - [ ] Diff reviewed from `base:` on both axes; anything present that nobody asked for is checked against Wonder's no-list
 
-## T3 — the post-mortem has readers
+## T3 — the post-mortem has readers *(not yet run)*
 
 **Setup as above, plus:** copy `fixtures/done/*.md` into `.genius/` (three of the five name Wonder weakest). Arrange this run so Wonder is honestly the weakest — e.g. Wonder's "Already exists: nothing relevant" while the scratch repo plainly contains a half-relevant helper.
 **Prompt:** "Wrap up checkout-discounts."
