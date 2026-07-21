@@ -30,7 +30,7 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 | The gate rule is **code**, not prose — bypasses are detected mechanically and block the session | `hooks/scripts/genius-gates.sh` + Stop hook; 53 deterministic tests: `bash evals/gates.test.sh` |
 | The prose is **tested** — a skill edit earns its place through a scenario that failed before it and passes after it, against a no-plugin baseline | `evals/scenarios/` (31 scenarios; graded-run coverage is tracked honestly by *(not yet run)* markers — running down that debt is [ROADMAP](ROADMAP.md) Phase 1), discipline in `evals/README.md` |
 | The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
-| The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline, which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
+| The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task), which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
 
 Anything in this README that sounds like a measurement should trace to a line in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
 
@@ -108,7 +108,7 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 ## Token economics
 
-The flow's structure is also its cost model: stages differ in how much intelligence they need, so they shouldn't all run on the same model. Three tiering rules are now built into the skills, derived from measured runs (see `evals/RESULTS.md`):
+The flow's structure is also its cost model: stages differ in how much intelligence they need, so they shouldn't all run on the same model. Three tiering rules are now built into the skills, derived from measured runs (see `evals/RESULTS.md`). Every number in this section is a single metered run — **n=1 per cell**, output-token pricing only — so read them as directional, not statistical; the run log states each caveat, and closing that gap is [ROADMAP](ROADMAP.md) Phase 1:
 
 - **Exploration is frontier-model work.** The blindspot territory pass hunts unknown unknowns — judgment, not reading. A cheap-model pass scores well on potholes that are already written down, then mis-calls the ones that aren't: in a measured greenfield run it recommended the exact render path the project's fixed constraint forbade, and two later frontier stages paid to correct it. Run the pass on the session's main model or better; the saving is in the *shape* — a fresh subagent explores, the main session consumes the report and never re-walks the files (findings carry their evidence for exactly this reason).
 - **Review is mid-model work, and scoped.** Tenacity's reviewer judges a diff against a brief — hand it the diff and the work file, not the repo. An unscoped frontier-model reviewer was the most expensive single step in measured runs ($6.55 of a $20 session) at no gain over a scoped mid-tier one.

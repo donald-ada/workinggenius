@@ -39,7 +39,7 @@ Phase names are free. Prose is free. Neither is a moat.
 
 **The two abandonment killers to design against:** fixed ceremony on
 variable-sized work, and token burn. Our own full-flow measurement (11× baseline,
-`RESULTS.md` 2026-07-10) sits squarely in the blast radius. Every phase below
+n=1, `RESULTS.md` 2026-07-10) sits squarely in the blast radius. Every phase below
 either sharpens a rare asset or bends one of those two curves.
 
 ## Already landed (July 2026)
