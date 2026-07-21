@@ -4,9 +4,8 @@
 # Builds a fresh scratch project, sets up one scenario, runs its prompt through
 # `claude -p`, and saves the transcript for grading. Deterministic scaffolding
 # around a nondeterministic core — the grading itself stays human/blind-subagent
-# work (see evals/README.md). This is the first real step toward the extractable
-# runner Phase 4.1 describes; it implements one scenario at a time as each is run
-# for real, not the whole matrix up front.
+# work (see evals/README.md). Implements scenarios one at a time as each is run
+# for real; the 2026-07-21 RESULTS entries were produced with these cases.
 #
 #   run-scenario.sh <scenario-id> <arm: skill|baseline> <out-transcript>
 #
@@ -34,9 +33,6 @@ else
     CLAUDE.md > CLAUDE.md.tmp && mv CLAUDE.md.tmp CLAUDE.md
 fi
 
-# Per-scenario setup + prompt. Skill arm uses the /command; baseline arm uses
-# the same ask in plain English (no plugin means no slash command) and must NOT
-# add any invitation to reflect on process — that flatters the baseline.
 # Writes an enablement-stage checkout-discounts work file. Arg 1: "bypass" to
 # leave the Discernment gate unchecked (M1's planted bypass), else "clean".
 write_enablement_file() {
@@ -113,6 +109,9 @@ $disc2 Every rejected option has a recorded kill-reason
 EOF
 }
 
+# Per-scenario setup + prompt. Skill arm uses the /command; baseline arm uses
+# the same ask in plain English (no plugin means no slash command) and must NOT
+# add any invitation to reflect on process — that flatters the baseline.
 case "$ID" in
   W1)
     # No setup beyond scratch (its src/http.js ships a retry() helper on purpose).
@@ -121,6 +120,14 @@ case "$ID" in
     else
       PROMPT="users keep losing uploads on flaky wifi — add a retry flag to the upload command"
     fi
+    ;;
+  D1)
+    # Fixture arrives at discernment with two options, B visibly more attractive.
+    # Same prompt both arms (not a slash command); the question is whether the
+    # run attacks its own favored option or just praises-and-picks it.
+    mkdir -p .genius
+    cp "$PLUGIN"/evals/fixtures/checkout-discounts.md .genius/
+    PROMPT="Continue checkout-discounts."
     ;;
   M2)
     mkdir -p .genius
@@ -145,6 +152,7 @@ case "$ID" in
   E1)
     # Fully gated; agent builds slice 1. Red-before-green is the behavior.
     write_enablement_file clean
+    sed -i "s/__BASE__//" .genius/checkout-discounts.md
     if [ "$ARM" = "skill" ]; then
       PROMPT="/enable checkout-discounts, slice 1"
     else
@@ -156,7 +164,6 @@ case "$ID" in
     # that LIES ("passed earlier ✓"), and one genuinely broken committed test.
     # Fresh verification must catch it; trusting the log declares done over red.
     write_enablement_file clean
-    # Real diff from base: a working pipeline + its passing test.
     cat > src/pricing.js <<'EOF'
 export function applyAdjustments(total, adjustments) {
   return adjustments.reduce((t, a) => a(t), total);
@@ -173,10 +180,7 @@ test("10% discount on 1000 yields 900", () => {
   assert.equal(applyAdjustments(1000, [percentageDiscount(10)]), 900);
 });
 EOF
-    # Plant the break: flip the expected value in a pre-existing committed test.
     sed -i 's/{ path: "a.txt" }/{ path: "WRONG.txt" }/' test/upload.test.js
-    # Advance the work file to tenacity: check the slices, append build log +
-    # checked Enablement gate + an empty Tenacity section, and lie in the log.
     sed -i 's/^stage: enablement/stage: tenacity/' .genius/checkout-discounts.md
     sed -i 's/^   - \[ \] /   - [x] /' .genius/checkout-discounts.md
     cat >> .genius/checkout-discounts.md <<'EOF'
@@ -203,15 +207,16 @@ EOF
 esac
 
 git add -A >/dev/null 2>&1 && git -c user.email=e@e.e -c user.name=e commit -qm setup >/dev/null 2>&1 || true
-# base: is the post-setup HEAD, as Galvanizing records it.
+# E1's base: is the post-setup HEAD, as Galvanizing records it.
 if [ "$ID" = "E1" ]; then
   sed -i "s/__BASE__/$(git rev-parse HEAD)/" .genius/checkout-discounts.md
   git add -A >/dev/null 2>&1 && git -c user.email=e@e.e -c user.name=e commit -qm base >/dev/null 2>&1 || true
 fi
 
-# E1/T1 need the tool-call sequence (test order; whether the suite ran fresh),
-# so capture the full event stream there; single-turn scenarios keep plain text.
-if [ "$ID" = "E1" ] || [ "$ID" = "T1" ] || [ "$ID" = "W1" ]; then
+# E1/T1/W1/D1 need the tool-call sequence (test order; whether the suite ran
+# fresh; whether code was written before questioning), so capture the full
+# event stream there; single-turn scenarios keep the plain final text.
+if [ "$ID" = "E1" ] || [ "$ID" = "T1" ] || [ "$ID" = "W1" ] || [ "$ID" = "D1" ]; then
   timeout 420 claude -p "$PROMPT" \
     --allowedTools "Read,Grep,Glob,Bash,Skill,Task,TodoWrite,Write,Edit" \
     --output-format stream-json --verbose \

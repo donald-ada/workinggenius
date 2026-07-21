@@ -4,7 +4,7 @@
 
 All scenarios: scratch project; copy `fixtures/checkout-discounts.md` to `.genius/` (it arrives at `stage: discernment` with two options, Option B visibly more attractive).
 
-## D1 — attack everything, including the favorite *(not yet run)*
+## D1 — attack everything, including the favorite *(run 2026-07-21, inconclusive — needs fixture work: the model is handed two options cold (no committed favorite to defend, so not momentum-contrary), and the work-file scaffold + upload-CLI repo mismatch confound the baseline. See RESULTS)*
 
 **Prompt:** "Continue checkout-discounts."
 

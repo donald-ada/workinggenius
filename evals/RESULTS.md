@@ -13,6 +13,11 @@ this plugin still earns its place against a frontier baseline — the answer to
 | M1 | **halt** on an open gate you could pass | soft | 3/3 halt | 1/3 halt | partial |
 | E1 | write the **failing test first** | yes | 3/3 | **0/3** | clean |
 | W1 | **question the ask** before building it | yes | 3/3 ask | **0/3 ask** | clean |
+| D1 | attack a **cold-handed** option set | no* | n=1 clean | inconsistent | inconclusive — see note |
+
+\* D1 was *predicted* to be momentum-contrary and wasn't: handed two options cold, the
+model has no committed favorite to defend, so critiquing them is ordinary analysis. The
+failed prediction is what drew the "no" — momentum must be real, not hypothetical.
 
 The first cut looked like "soft advisory = commodity, mechanical = differentiated."
 T1 breaks that: verifying-before-done is mechanical, yet the baseline does it every
@@ -20,6 +25,13 @@ time. The real axis is sharper and more useful — **does the discipline ask the
 to act against its own default momentum?** — and it now has predictive power: it was
 stated after four scenarios, used to *predict* W1 would show a delta (questioning the
 literal ask is momentum-contrary), and W1 came back a clean 3/0 exactly as forecast.
+A second predictive test — D1 — went the other way and was more useful for it: the
+thesis was mis-applied to predict a delta, the run came back inconclusive, and the
+diagnosis drew the thesis's boundary precisely (see the D1 entry). *Momentum-contrary*
+means the model must oppose momentum it actually built — its own code, its own
+instinct to build the literal ask — not merely evaluate options handed to it cold. A
+thesis that survives a failed prediction by sharpening is stronger than one that only
+collects confirmations.
 
 - Where the discipline *aligns* with what a careful model already does when asked
   (size sensibly given history — M2; run the tests before calling it done when told
@@ -39,6 +51,50 @@ already-aligned behaviors (M2, T1) are honest softballs to retire or down-weight
 This is a sharper cut than the roadmap's "invest in enforcement, treat advisory as
 erodible" — enforcement of *momentum-contrary* discipline is the differentiator;
 enforcement of what the model already does when asked is not. Measured, not asserted.
+
+## 2026-07-21 — D1 inconclusive: a failed prediction that sharpens the thesis
+
+D1 (attack every option, including the favorite) run as a second predictive test. The
+thesis predicted a clean delta — I classified "attack your favored option" as
+momentum-contrary. **The prediction was wrong, and the honest failure is worth more
+than another confirmation.**
+
+Result (skill n=1, baseline n=3, sonnet-5, prompt "Continue checkout-discounts" on the
+fixture at stage discernment with Option B the attractive one):
+
+- **Skill n=1:** clean adversarial discernment — attacked both options, killed the
+  attractive Option B on premature abstraction (its pipeline generality is speculative
+  while stacking/coupons are out of scope), chose Option A opinionated with a recorded
+  kill-reason, held the gate for sign-off.
+- **Baseline n=3:** inconsistent — not a clean match or a clean fail. Run 1 did full
+  discernment as well as the skill (attacked both, killed B, chose A). Run 2 gave a
+  lighter opinionated lean to A without the concrete edge-case attacks. Run 3 went
+  off-task: it noticed the scratch repo is an upload CLI with no checkout code at all
+  and balked — "I don't want to fabricate a checkout system to make the design doc's
+  options resolvable" — asking whether this belongs in a different repo.
+
+Why the prediction failed — two instructive reasons:
+
+1. **Misclassification, which sharpens the thesis.** D1 presents two options
+   *neutrally*; the model never committed to Option B, so critiquing it isn't opposing
+   its own momentum — it's just analysis, which capable models do well. The boundary is
+   now explicit: *momentum-contrary* requires the model to oppose momentum it actually
+   built — its own written code (E1), its instinct to build the literal ask (W1), its
+   drive to proceed (M1) — not merely to evaluate options handed to it cold. "Attack
+   the favorite" only bites when there is a real favorite the model is invested in; this
+   fixture makes none.
+2. **A second leak, one level deeper.** The work file itself carries the discipline: its
+   visible Wonder/Invention gate blocks prime the reader to produce a structured, gated
+   Discernment even with no skill installed — the same class of leak as the CLAUDE.md
+   one, but in the *artifact* rather than the project doc. And the checkout-discounts
+   task doesn't fit the upload-CLI scratch repo, so the most careful baseline run
+   correctly refused to play along.
+
+Verdict: **inconclusive on this fixture.** To test the momentum-contrary version
+honestly the fixture must make the model *commit* first ("you've been building Option
+B; now try to kill it") and sit in a repo where the options are real. D1's marker
+reflects needs-fixture-work, not pass/fail. Its value is the boundary it drew and the
+second leak it exposed — the eval catching a weak scenario, which is the eval working.
 
 ## 2026-07-21 — W1 confirms the thesis by prediction: question-the-ask is a clean delta (3/0)
 
