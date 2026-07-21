@@ -1,5 +1,48 @@
 # Results
 
+## 2026-07-21 — headless harness lands; M2 baseline is a softball on frontier tier
+
+First real use of `run-scenario.sh`: the eval loop now runs end-to-end headless
+(`claude -p`, read-only allowlist, transcript captured). Running M2 (post-mortem-
+informed sizing) for real surfaced two things worth more than a green checkmark.
+
+**A fixture leak, found and fixed.** `fixtures/scratch.sh` writes a `CLAUDE.md`
+that documents the whole Working Genius flow. That section was reaching the
+*baseline* arm too — so the no-plugin control was being handed the plugin's own
+methodology. With it intact, the M2 baseline (sonnet-5) reproduced the skill's
+recommendation nearly verbatim. The runner now strips the `## Working Genius`
+section for the baseline arm, and `evals/README.md` step 6 documents it as a
+standing rule. Every earlier baseline assumption in the scenario files predates
+this fix and is suspect until re-run on a clean control.
+
+**M2 has no delta on this tier — three ways.** Against a clean baseline
+(sonnet-5, section stripped), the base model still: explored `.genius/`, found
+the "Wonder weakest in 3 of 5" post-mortem pattern, cited a specific prior
+post-mortem, and sized the work proportionally ("small CLI, doesn't need
+heavyweight process; confirm the CSV contract first"). It did this under a
+process-inviting prompt, a neutral prompt, and the de-leaked fixture — the
+target behavior every time, unaided. So M2's baseline does **not** exhibit the
+failure mode it names ("five done files of history left unread"); the assumption
+is a casualty of model improvement. Per the house rule, that makes M2 a softball
+on frontier tier: the skill line it tests is, for elicitation, a no-op there.
+This is direct evidence for the market-research thesis (frontier baselines
+absorb the soft, advisory behaviors) — and a pointer at where the real,
+non-commodity value must live: the *mechanical* parts (hook-enforced gates,
+red-before-green in `/enable`, fresh-evidence verification in `/tenacity`),
+not the advisory-prose parts a strong model now supplies on its own.
+
+Caveats bounding this: n=1 run per arm (not the 3-run majority — this was a
+harness-validation pass, not a graded verdict); one scenario of eleven; grading
+by the author, not a blinded subagent; sonnet-5 only — the delta may well exist
+on a weaker tier, which is the next thing to check before concluding the line is
+dead rather than tier-dependent. M2's marker stays, re-annotated to "softball on
+frontier tier" rather than cleared — it was run, and it did not pass.
+
+**What this buys the roadmap.** Phase 1.1's real job just got sharper: running
+the scenarios is not box-ticking, it's a hunt for exactly this — soft behaviors
+that a current baseline already does. Some scenarios will pass (the mechanical
+ones should), some will expose no-ops to cut. Both outcomes are the eval working.
+
 ## 2026-07-10 — tiering reversal: the territory pass runs frontier-tier (user ruling)
 
 The cost run's "pass on cheapest capable tier" rule is reversed. The 9/10 haiku score that justified it came from a fixture whose potholes were all *written down* — a reading test. Two judgment failures say otherwise: the rocket-run haiku pass recommended the exact render path the fixed constraint forbade (corrected only by two later opus stages, one prototype), and the billing-run haiku pass recommended disabling the safety net it had just reported. Move 1 now mandates the session's main model or better; the subagent shape (fresh context, consume-don't-re-explore) stays. Cost levers move to the scoped mid-tier reviewer, mid-tier divergence drafts, and sizing. Kill-reason for the old rule recorded here so it doesn't get re-proposed: checklist scores measure recall of documented territory, not judgment of undocumented territory — and the pass exists for the second thing.

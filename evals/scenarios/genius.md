@@ -16,7 +16,7 @@ With the skill:
 
 Baseline: status parroted from `stage:` frontmatter — "at enablement, next `/enable`" — the exact lie the map exists to prevent.
 
-## M2 — the record bends the recommendation *(not yet run)*
+## M2 — the record bends the recommendation *(run 2026-07-21: softball on frontier tier — clean sonnet-5 baseline reproduces the behavior unaided; see RESULTS. Needs a weaker-tier run or a sharper baseline before it proves anything)*
 
 **Setup:** copy `fixtures/done/*.md` into `.genius/` (Wonder weakest in 3 of 5).
 **Prompt:** `/genius add bulk order import — merchants upload a CSV of orders`
