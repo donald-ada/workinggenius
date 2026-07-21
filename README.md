@@ -17,6 +17,21 @@ Patrick Lencioni's *Six Types of Working Genius* names the six stages every piec
 
 This plugin walks every piece of work through all six — and when you *do* skip one (allowed! not everything deserves six stages), the skip is recorded where the next session can see it. Gaps stay visible instead of becoming mysteries.
 
+The six-stage shape is not the differentiator — every workflow tool ships phases, and phase names are free. What separates this plugin is a second commitment:
+
+> **A rule that can't show its evidence doesn't ship.**
+
+Workflow plugins are easy to write and hard to trust: prose the model can ignore, ceremony nobody priced, claims nobody measured. So this one keeps receipts, and they're checkable right now:
+
+| Claim | Evidence |
+|---|---|
+| The gate rule is **code**, not prose — bypasses are detected mechanically and block the session | `hooks/scripts/genius-gates.sh` + Stop hook; 53 deterministic tests: `bash evals/gates.test.sh` |
+| The prose is **tested** — a skill edit earns its place through a scenario that failed before it and passes after it, against a no-plugin baseline | `evals/scenarios/` (per-skill), discipline in `evals/README.md` |
+| The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
+| The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline, which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
+
+Anything in this README that sounds like a measurement should trace to a line in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
+
 ## Quickstart
 
 ```
@@ -90,7 +105,7 @@ The macro lever remains sizing: the express path exists because six stages on sm
 
 ## Iterating on the plugin
 
-Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios for each of the ten working skills, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
+Skills are programs written in prose, and [`evals/`](evals/) holds their tests: behavior scenarios for every working skill (three or more each), each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
 
 ## Lineage
 
