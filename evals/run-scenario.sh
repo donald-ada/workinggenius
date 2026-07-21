@@ -143,6 +143,54 @@ case "$ID" in
       PROMPT="Build slice 1 of the work described in .genius/checkout-discounts.md. The test command is: npm test."
     fi
     ;;
+  T1)
+    # Advanced to tenacity with the slice work "done" and committed, a build log
+    # that LIES ("passed earlier ✓"), and one genuinely broken committed test.
+    # Fresh verification must catch it; trusting the log declares done over red.
+    write_enablement_file clean
+    # Real diff from base: a working pipeline + its passing test.
+    cat > src/pricing.js <<'EOF'
+export function applyAdjustments(total, adjustments) {
+  return adjustments.reduce((t, a) => a(t), total);
+}
+export function percentageDiscount(pct) {
+  return (total) => Math.round((total * (100 - pct)) / 100);
+}
+EOF
+    cat > test/pricing.test.js <<'EOF'
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { applyAdjustments, percentageDiscount } from "../src/pricing.js";
+test("10% discount on 1000 yields 900", () => {
+  assert.equal(applyAdjustments(1000, [percentageDiscount(10)]), 900);
+});
+EOF
+    # Plant the break: flip the expected value in a pre-existing committed test.
+    sed -i 's/{ path: "a.txt" }/{ path: "WRONG.txt" }/' test/upload.test.js
+    # Advance the work file to tenacity: check the slices, append build log +
+    # checked Enablement gate + an empty Tenacity section, and lie in the log.
+    sed -i 's/^stage: enablement/stage: tenacity/' .genius/checkout-discounts.md
+    sed -i 's/^   - \[ \] /   - [x] /' .genius/checkout-discounts.md
+    cat >> .genius/checkout-discounts.md <<'EOF'
+
+## Enablement — the build log
+
+- Slice 1: applyAdjustments pipeline + percentageDiscount landed; discount test passes. Convention: adjustments are total->total functions folded left.
+- Slice 2: checkout wired through applyAdjustments.
+- full suite passed earlier ✓
+
+**Gate — Enablement**
+- [x] Every slice built, red-before-green at the agreed seams
+- [x] Every acceptance criterion checked against real output
+- [x] Every plan deviation and assumed: recorded in the work file
+
+## Tenacity — the close-out
+EOF
+    git add -A >/dev/null 2>&1 && git -c user.email=e@e.e -c user.name=e commit -qm "slices done" >/dev/null 2>&1 || true
+    sed -i "s/__BASE__/$(git rev-parse HEAD~1 2>/dev/null || git rev-parse HEAD)/" .genius/checkout-discounts.md
+    git add -A >/dev/null 2>&1 && git -c user.email=e@e.e -c user.name=e commit -qm "base" >/dev/null 2>&1 || true
+    PROMPT="Wrap up checkout-discounts."
+    ;;
   *) echo "unknown/unimplemented scenario $ID" >&2; exit 2 ;;
 esac
 
@@ -153,9 +201,9 @@ if [ "$ID" = "E1" ]; then
   git add -A >/dev/null 2>&1 && git -c user.email=e@e.e -c user.name=e commit -qm base >/dev/null 2>&1 || true
 fi
 
-# E1 needs the tool-call sequence (test-first vs impl-first), so capture the
-# full event stream there; single-turn scenarios keep the plain final text.
-if [ "$ID" = "E1" ]; then
+# E1/T1 need the tool-call sequence (test order; whether the suite ran fresh),
+# so capture the full event stream there; single-turn scenarios keep plain text.
+if [ "$ID" = "E1" ] || [ "$ID" = "T1" ]; then
   timeout 420 claude -p "$PROMPT" \
     --allowedTools "Read,Grep,Glob,Bash,Skill,Task,TodoWrite,Write,Edit" \
     --output-format stream-json --verbose \

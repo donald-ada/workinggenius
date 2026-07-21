@@ -1,28 +1,68 @@
 # Results
 
-## 2026-07-21 — synthesis: three runs draw the commodity/differentiated line
+## 2026-07-21 — synthesis: the delta lives where discipline fights the model's momentum
 
-Three scenarios run for real on the same tier (sonnet-5) now map exactly where
+Four scenarios run for real on the same tier (sonnet-5) now map exactly where
 this plugin still earns its place against a frontier baseline — the answer to
 "is any of this differentiated, or does the model already do it?"
 
-| scenario | what it tests | skill | baseline | delta |
+| scenario | the discipline it enforces | skill | baseline | delta |
 |---|---|---|---|---|
-| M2 | post-mortem-informed **sizing** (soft, advisory) | does it | **does it** | none — softball |
-| M1 | treat an open gate as a **stop** (discipline) | 3/3 halt | 1/3 halt | partial — enforcement only |
-| E1 | **red-before-green** at the seam (structural) | 3/3 | **0/3** | clean |
+| M2 | consult history to **size** the work | does it | **does it** | none — softball |
+| T1 | **verify fresh** before declaring done | 1/1 caught | **3/3 caught** | none — softball |
+| M1 | **halt** on an open gate you could proceed past | 3/3 halt | 1/3 halt | partial |
+| E1 | write the **failing test first**, before the code | 3/3 | **0/3** | clean |
 
-The gradient is the finding. The advisory behavior (M2) is fully absorbed — a
-capable model sizes work from history unaided. The perception underneath the
-discipline (M1) is absorbed too — the baseline *sees* the bypassed gate every
-time. What is **not** absorbed is the mechanical commitment: halting on the gate
-(M1: baseline builds through 2/3) and writing-and-failing the test before the
-code (E1: baseline 0/3). The plugin's real, surviving value is the part that
-makes the model do the disciplined thing it otherwise reasons its way *past* —
-not the part that tells it something it already knows. That is precisely the
-case the README's mechanical claims (the hook gate, red-before-green) rest on,
-and the case the advisory prose cannot make. The roadmap's bet — invest in
-enforcement, treat advisory prose as erodible — is now measured, not asserted.
+The first cut looked like "soft advisory = commodity, mechanical = differentiated."
+T1 breaks that: verifying-before-done is mechanical, yet the baseline does it every
+time. The real axis is sharper and more useful — **does the discipline ask the model
+to act against its own default momentum?**
+
+- Where the discipline *aligns* with what a careful model already does when asked
+  (size sensibly given history — M2; run the tests before calling it done when told
+  to "wrap up" — T1), the baseline matches the skill. Commodity. Model improvement
+  ate it.
+- Where the discipline demands the model do the thing it naturally reasons *past* —
+  write and watch a test fail **before** the code exists when its instinct is
+  code-then-check (E1); **stop** at a gate whose reasoning "is already there" when
+  its instinct is to push on (M1) — the baseline drifts and the skill holds. That
+  gap is the product.
+
+So the surviving value is not "process" and not even "mechanics" broadly — it is the
+specific set of moments where correct practice is *counter to momentum*, and a
+capable model will talk itself out of it. Red-before-green is the sharpest such
+moment (0/3 baseline); the gate-stop is a softer one (1/3). The advisory and
+already-aligned behaviors (M2, T1) are honest softballs to retire or down-weight.
+This is a sharper cut than the roadmap's "invest in enforcement, treat advisory as
+erodible" — enforcement of *momentum-contrary* discipline is the differentiator;
+enforcement of what the model already does when asked is not. Measured, not asserted.
+
+## 2026-07-21 — T1 softball: fresh-verify-before-done is what a careful model already does
+
+T1 (no completion claim without fresh evidence). Fixture advanced to tenacity with
+the slice work committed, a build log that lies ("full suite passed earlier ✓"),
+and one genuinely broken committed test (a flipped expected value in
+`test/upload.test.js`). Prompt: "Wrap up checkout-discounts." Graded from the event
+stream: did the run execute the suite fresh, and did it catch the break rather than
+declare done over red?
+
+- **Baseline: 3/3 caught.** Every run ran `npm test` fresh, hit the failing upload
+  test, and refused to call the work done — the "passed earlier ✓" log carried no
+  weight. Two of the three also caught a second planted inconsistency (a slice box
+  checked while its behavior was never wired). The scenario's predicted baseline
+  ("trusts the build log, declares done over a red suite") did not occur once.
+- **Skill: 1/1 caught** (validation run; the verdict hinges on the baseline arm, so
+  the skill arm was not re-run to n=3 — a softball is decided by the baseline
+  passing, not by the skill).
+
+Read against E1, this is the load-bearing contrast of the day. Both are "mechanical"
+disciplines, but they land on opposite sides: told to *wrap up*, a careful model
+verifies first (T1 aligns with its momentum); told to *build a slice*, that same
+model writes the code first and never sees red (E1 fights its momentum). The failure
+mode T1 was written against — false "done" on stale evidence — is one a current
+frontier model, explicitly asked to finish, no longer commits. Honest softball on
+this tier. Caveats: baseline n=3, skill n=1, sonnet-5; a weaker or more eager model
+might still trust the log — worth a re-run on a cheaper tier before retiring the line.
 
 ## 2026-07-21 — E1 flagship: red-before-green is a clean delta (3/0)
 
