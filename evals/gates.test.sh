@@ -393,6 +393,27 @@ cd "$P10"
 out=$("$GATES" status)
 check "walkup: root sees root"              grep -q '^rootwork' <<<"$out"
 
+# --- Fixture 11: gate enforcement level resolution --------------------------
+# Default is warn (the once-per-distinct-state Stop behavior). `Gate
+# enforcement: block` pinned in the ## Working Genius section of
+# CLAUDE.md/AGENTS.md hardens the Stop hook to re-block on every stop
+# attempt. Unrecognized values resolve to warn — the same posture as no
+# setting, and documented in the setup skill, not silent invention.
+P11="$TMP/p11"; mkdir -p "$P11/.genius"; cd "$P11"
+sed 's/^work: clean/work: hardened/; s/^stage: discernment/stage: enablement/' \
+  "$TMP/p1/.genius/clean.md" > .genius/hardened.md   # bypassed
+check "enforce: default is warn"        [ "$("$GATES" enforcement)" = "warn" ]
+printf '## Working Genius\n\nGate enforcement: block\n' > CLAUDE.md
+check "enforce: CLAUDE.md pins block"   [ "$("$GATES" enforcement)" = "block" ]
+printf '## Working Genius\n\nGate enforcement: `warn`\n' > CLAUDE.md
+check "enforce: backticked value read"  [ "$("$GATES" enforcement)" = "warn" ]
+rm CLAUDE.md
+printf '## Working Genius\n\nGate enforcement: Block\n' > AGENTS.md
+check "enforce: AGENTS.md, any case"    [ "$("$GATES" enforcement)" = "block" ]
+printf '## Working Genius\n\nGate enforcement: blokc\n' > AGENTS.md
+check "enforce: unrecognized stays warn" [ "$("$GATES" enforcement)" = "warn" ]
+printf '## Working Genius\n\nGate enforcement: block\n' > AGENTS.md
+
 # --- Stop hook -------------------------------------------------------------
 cd "$P2"  # the bypassed project
 rm -f "${TMPDIR:-/tmp}"/wg-stop-gate-wgtest-*
@@ -422,7 +443,25 @@ check "stop: clean project passes"  [ "$rc" -eq 0 ]
 printf '{"session_id":"wgtest-%s","cwd":"%s"}' "$$" "$P1" | "$STOP" 2>/dev/null
 printf '{"session_id":"wgtest-%s","cwd":"%s"}' "$$" "$P2" | "$STOP" 2>/dev/null; rc=$?
 check "stop: clean run resets the gate" [ "$rc" -eq 2 ]
-rm -f "${TMPDIR:-/tmp}"/wg-stop-gate-wgtest-* "${TMPDIR:-/tmp}"/wg-stop-gate-wgclean-* "${TMPDIR:-/tmp}"/wg-stop-gate-other-*
+
+# Block mode (Fixture 11's project): the SAME bypass state re-blocks on every
+# stop attempt — the once-per-distinct-state marker is warn-mode only. The
+# stop_hook_active guard still wins: that is the harness's anti-loop contract,
+# so block mode means "every fresh stop attempt", not an unbreakable loop.
+cd "$P11"
+printf '{"session_id":"wgblock-%s","cwd":"%s"}' "$$" "$P11" | "$STOP" 2>/dev/null; rc1=$?
+printf '{"session_id":"wgblock-%s","cwd":"%s"}' "$$" "$P11" | "$STOP" 2>/dev/null; rc2=$?
+check "stop/block: same state blocks twice" [ "$rc1$rc2" = "22" ]
+err=$(printf '{"session_id":"wgblock-%s","cwd":"%s"}' "$$" "$P11" | "$STOP" 2>&1 >/dev/null)
+check "stop/block: stderr names the level"  grep -q 'enforcement: block' <<<"$err"
+printf '{"session_id":"wgblock-%s","cwd":"%s","stop_hook_active": true}' "$$" "$P11" | "$STOP" 2>/dev/null; rc=$?
+check "stop/block: honors stop_hook_active" [ "$rc" -eq 0 ]
+# Repairing the bypass releases block mode — no false positive on clean state.
+sed 's/^work: clean/work: hardened/' "$TMP/p1/.genius/clean.md" > .genius/hardened.md
+printf '{"session_id":"wgblock-%s","cwd":"%s"}' "$$" "$P11" | "$STOP" 2>/dev/null; rc=$?
+check "stop/block: clean state passes"      [ "$rc" -eq 0 ]
+
+rm -f "${TMPDIR:-/tmp}"/wg-stop-gate-wgtest-* "${TMPDIR:-/tmp}"/wg-stop-gate-wgclean-* "${TMPDIR:-/tmp}"/wg-stop-gate-other-* "${TMPDIR:-/tmp}"/wg-stop-gate-wgblock-*
 
 echo
 echo "passed: $pass, failed: $failed"

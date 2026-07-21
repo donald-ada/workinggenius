@@ -2,10 +2,17 @@
 # Stop hook for the workinggenius plugin.
 # The gate rule, enforced: a session may not end while tracked work sits past
 # an earlier gate that is neither fully checked nor skipped — the unrecorded
-# bypass that /genius calls the loudest smell. Blocks once per DISTINCT bypass
-# state: the marker stores a fingerprint of the check report, so a repaired
-# bypass followed by a new, different one blocks again, while re-stopping on
-# the same already-reported state passes. A clean check clears the marker.
+# bypass that /genius calls the loudest smell.
+#
+# Two enforcement levels (genius-gates.sh enforcement; pinned per repo via a
+# `Gate enforcement:` line in the ## Working Genius section):
+#   warn (default) — blocks once per DISTINCT bypass state: the marker stores
+#     a fingerprint of the check report, so a repaired bypass followed by a
+#     new, different one blocks again, while re-stopping on the same
+#     already-reported state passes. A clean check clears the marker.
+#   block — every stop attempt re-blocks while any bypass exists; no marker.
+#     The stop_hook_active guard still wins (the harness's anti-loop
+#     contract), so "block" means every fresh stop attempt, not a hard loop.
 set -uo pipefail
 
 input=$(cat 2>/dev/null || true)
@@ -42,6 +49,16 @@ marker=""
 if [ "$rc" -eq 0 ] || [ -z "$report" ]; then
   [ -n "$marker" ] && rm -f "$marker" 2>/dev/null
   exit 0
+fi
+
+level=$("$script_dir/genius-gates.sh" enforcement 2>/dev/null) || level="warn"
+if [ "$level" = "block" ]; then
+  {
+    echo "Working Genius gate check failed (enforcement: block):"
+    echo "$report"
+    echo "This repo pins Gate enforcement: block — every stop attempt re-blocks until the bypass is repaired. Repair now — one of: check the open gate items against reality (only if they are truly satisfied); record '> ⚠ Skipped — <reason>' in the bypassed stage's section; or move 'stage:' back to the unfinished stage. The workinggenius:genius-file skill has the rules. If the repair is genuinely the user's call, tell them exactly which gate items are open and stop after that."
+  } >&2
+  exit 2
 fi
 
 state=$(printf '%s' "$report" | cksum | tr -d ' \t')
