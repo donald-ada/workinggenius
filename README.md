@@ -1,5 +1,7 @@
 # Working Genius
 
+[![gates](https://github.com/donald-ada/workinggenius/actions/workflows/gates.yml/badge.svg)](https://github.com/donald-ada/workinggenius/actions/workflows/gates.yml)
+
 A development workflow plugin for Claude Code, built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
