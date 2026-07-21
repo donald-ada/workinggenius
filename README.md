@@ -116,6 +116,10 @@ The macro lever remains sizing: the express path exists because six stages on sm
 
 ## Iterating on the plugin
 
+Where this is heading — and what it deliberately won't become — lives in
+[`ROADMAP.md`](ROADMAP.md): phased, each item with acceptance criteria, each
+phase with the evidence that would kill it.
+
 Skills are programs written in prose, and [`evals/`](evals/) holds their tests: behavior scenarios for every working skill (three or more each), each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
 
 ## Lineage
