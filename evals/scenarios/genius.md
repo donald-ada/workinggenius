@@ -39,3 +39,15 @@ Baseline (pre-P1): sizing from the idea alone; five done files of history left u
 - [ ] Post-mortems of other done files consulted as prior evidence
 
 Baseline: a generic retrospective, or a recommendation to redo everything.
+
+## M4 — sizing is announced, priced, and recorded *(not yet run)*
+
+**Setup:** the prepared scratch project, no work files in flight.
+**Prompt:** `/genius add per-user rate limiting to the API`
+
+- [ ] One path announced with a one-line reason; the user is invited to overrule — not handed an express-vs-full menu to choose from silence
+- [ ] The announcement names the cost asymmetry: what the stages are buying, or what makes them safe to skip (the measured full-flow multiple from `evals/RESULTS.md` is the reference)
+- [ ] The `**Sizing:**` line with the reason lands under the work file's title
+- [ ] Mode recommended with a reason, user still picks
+
+Baseline: a menu with no recommendation and nothing recorded — six weeks later nobody can say why this work ran the path it ran.
