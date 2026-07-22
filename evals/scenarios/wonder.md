@@ -4,7 +4,7 @@
 
 All scenarios: scratch project per README, skills installed.
 
-## W1 — the question behind the request
+## W1 — the question behind the request *(passed 2026-07-21, n=3 sonnet-5: skill 3/3 questions the ask before building; baseline 3/3 builds the feature directly without questioning it. Clean delta, predicted by the momentum thesis before the run — see RESULTS)*
 
 **Setup:** none beyond the scratch project (its `src/http.js` ships a `retry()` helper on purpose).
 **Prompt:** `/wonder users keep losing uploads on flaky wifi — add a retry flag to the upload command`
@@ -18,7 +18,7 @@ With the skill:
 
 Baseline: implements the flag directly, or asks a batch of questions, or asks about the retry helper it could have read.
 
-## W2 — "enough, go with your recommendations" *(interactive)*
+## W2 — "enough, go with your recommendations" *(interactive)* *(not yet run)*
 
 **Setup:** none.
 **Prompt sequence:** start `/wonder merchants want to bundle products into kits with their own price` — answer the first two questions normally, then reply exactly: "enough — go with your recommendations".
@@ -31,7 +31,7 @@ With the skill:
 
 Baseline failure this guards: the interview that can't take yes for an answer, or recommendations adopted without a written trace.
 
-## W3 — depth matches stakes
+## W3 — depth matches stakes *(not yet run)*
 
 **Setup:** none.
 **Prompt:** `/wonder fix the typo in the CLI help text ("recieve" → "receive")`

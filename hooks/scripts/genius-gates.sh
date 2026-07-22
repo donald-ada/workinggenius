@@ -4,10 +4,15 @@
 # so "is a gate bypassed?" is answered mechanically, never by skimming prose.
 #
 # Usage:
-#   genius-gates.sh status   one line per in-flight work file, tab-separated:
-#                            slug  stage  mode  gate:<checked>/<total>|-  bypass:<Stages>|none  nogate:<Stages>|none
-#   genius-gates.sh check    bypass report on stdout; exit 1 if any bypass
-#   genius-gates.sh dir      print the resolved work-file directory
+#   genius-gates.sh status       one line per in-flight work file, tab-separated:
+#                                slug  stage  mode  gate:<checked>/<total>|-  bypass:<Stages>|none  nogate:<Stages>|none
+#   genius-gates.sh check        bypass report on stdout; exit 1 if any bypass
+#   genius-gates.sh dir          print the resolved work-file directory
+#   genius-gates.sh enforcement  print the Stop-hook level: warn (default) or
+#                                block, from a `Gate enforcement:` line in the
+#                                resolved base's CLAUDE.md/AGENTS.md. Only the
+#                                exact word block hardens; anything else is
+#                                warn — same posture as no setting.
 #
 # Gate grammar (owned by genius-file/FILE-FORMAT.md): a gate block opens at a
 # line that STARTS with `**Gate — <Stage>**` (or a `#`-heading form) and ends
@@ -51,6 +56,20 @@ cd "$BASE"
 
 if [ "$cmd" = "dir" ]; then
   printf '%s\n' "$WORK_DIR"
+  exit 0
+fi
+
+if [ "$cmd" = "enforcement" ]; then
+  level="warn"
+  for f in "$BASE/CLAUDE.md" "$BASE/AGENTS.md"; do
+    [ -f "$f" ] || continue
+    v=$(sed -n 's/^Gate enforcement:[[:space:]]*`\{0,1\}\([A-Za-z]\{1,\}\)`\{0,1\}.*/\1/p' "$f" | head -1)
+    if [ -n "$v" ]; then
+      [ "$(printf '%s' "$v" | tr '[:upper:]' '[:lower:]')" = "block" ] && level="block"
+      break
+    fi
+  done
+  printf '%s\n' "$level"
   exit 0
 fi
 

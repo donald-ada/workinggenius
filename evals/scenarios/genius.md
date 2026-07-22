@@ -4,7 +4,7 @@
 
 User-invoked only, so no trigger rows; these are behavior scenarios.
 
-## M1 — the unrecorded bypass outranks everything
+## M1 — the unrecorded bypass outranks everything *(passed 2026-07-21, blind-graded, n=3 sonnet-5: skill 3/3 repairs-before-build; baseline notices the gate but builds through 2/3 — see RESULTS)*
 
 **Setup:** fixture at `stage: enablement`, with Galvanizing filled and gated as in `enable.md`'s setup — but add the template's Discernment gate block with two boxes left unchecked and no skip line: someone rushed past it. (The shipped fixture has no Discernment gate at all; without adding one, the parser reports it as `nogate:` — suspicious but non-blocking — and the scenario grades the wrong thing.)
 **Prompt:** `/genius`
@@ -16,7 +16,7 @@ With the skill:
 
 Baseline: status parroted from `stage:` frontmatter — "at enablement, next `/enable`" — the exact lie the map exists to prevent.
 
-## M2 — the record bends the recommendation
+## M2 — the record bends the recommendation *(run 2026-07-21: softball on frontier tier — clean sonnet-5 baseline reproduces the behavior unaided; see RESULTS. Needs a weaker-tier run or a sharper baseline before it proves anything)*
 
 **Setup:** copy `fixtures/done/*.md` into `.genius/` (Wonder weakest in 3 of 5).
 **Prompt:** `/genius add bulk order import — merchants upload a CSV of orders`
@@ -28,7 +28,7 @@ Baseline: status parroted from `stage:` frontmatter — "at enablement, next `/e
 
 Baseline (pre-P1): sizing from the idea alone; five done files of history left unread.
 
-## M3 — diagnosis names the most upstream gap
+## M3 — diagnosis names the most upstream gap *(not yet run)*
 
 **Setup:** fixture marked done, but its Wonder section shows the express path was taken ("small work — single obvious approach") on what became a multi-slice feature; Enablement's build log notes two plan deviations.
 **Prompt:** `/genius checkout-discounts — we shipped it and merchants say it's not what they asked for`
@@ -39,3 +39,15 @@ Baseline (pre-P1): sizing from the idea alone; five done files of history left u
 - [ ] Post-mortems of other done files consulted as prior evidence
 
 Baseline: a generic retrospective, or a recommendation to redo everything.
+
+## M4 — sizing is announced, priced, and recorded *(not yet run)*
+
+**Setup:** the prepared scratch project, no work files in flight.
+**Prompt:** `/genius add per-user rate limiting to the API`
+
+- [ ] One path announced with a one-line reason; the user is invited to overrule — not handed an express-vs-full menu to choose from silence
+- [ ] The announcement names the cost asymmetry: what the stages are buying, or what makes them safe to skip (the measured full-flow multiple from `evals/RESULTS.md` is the reference)
+- [ ] The `**Sizing:**` line with the reason lands under the work file's title
+- [ ] Mode recommended with a reason, user still picks
+
+Baseline: a menu with no recommendation and nothing recorded — six weeks later nobody can say why this work ran the path it ran.

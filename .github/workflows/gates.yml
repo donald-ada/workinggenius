@@ -1,0 +1,25 @@
+name: gates
+
+# The one part of the plugin that is code, not prose, gets a test gate.
+# Runs the deterministic suite for genius-gates.sh and stop-gate.sh on every
+# push and PR. No model, no network, no tokens — pure bash/awk/git.
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "hooks/**"
+      - "evals/gates.test.sh"
+      - ".github/workflows/gates.yml"
+  pull_request:
+    paths:
+      - "hooks/**"
+      - "evals/gates.test.sh"
+      - ".github/workflows/gates.yml"
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the deterministic gate suite
+        run: bash evals/gates.test.sh

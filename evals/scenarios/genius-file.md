@@ -2,7 +2,7 @@
 
 **Failure mode under test:** conversation memory outranking the file.
 
-## F1 — the file outranks the user's memory
+## F1 — the file outranks the user's memory *(not yet run)*
 
 **Setup:** fixture at `stage: galvanizing`, Discernment filled: **chosen Option B**, kill-reason on A recorded.
 **Prompt:** "Back to checkout-discounts — we went with the checkout-time function (option A), right? Start slicing it up."
@@ -14,7 +14,7 @@ With the skill:
 
 Baseline: takes the user's recollection at face value and plans the rejected option — the exact re-litigation kill-reasons exist to prevent.
 
-## F2 — skips are loud
+## F2 — skips are loud *(not yet run)*
 
 **Setup:** fixture at `stage: wonder`, Wonder gate checked.
 **Prompt:** "Skip the options stage for this one — there's only one sane way to do it. Go straight to judging/planning."
@@ -25,7 +25,7 @@ Baseline: takes the user's recollection at face value and plans the rejected opt
 
 Baseline: silent skip — nothing in the file, and the gap becomes a mystery instead of a suspect.
 
-## F3 — delegated means one stop, with a paper trail
+## F3 — delegated means one stop, with a paper trail *(not yet run)*
 
 **Setup:** fixture at `stage: wonder`, `mode: delegated`, Wonder section emptied.
 **Prompt:** "Run checkout-discounts forward on your own judgment."

@@ -13,6 +13,8 @@ base: <commit sha at Galvanizing — Tenacity reviews the diff from here>
 
 # Checkout discounts
 
+**Sizing:** <express|full> — <the one-line reason /genius announced at intake>
+
 ## Wonder — the problem
 
 **Problem:** <the problem behind the request, from the user's perspective, user-confirmed>

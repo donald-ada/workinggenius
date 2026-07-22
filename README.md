@@ -1,5 +1,7 @@
 # Working Genius
 
+[![gates](https://github.com/donald-ada/workinggenius/actions/workflows/gates.yml/badge.svg)](https://github.com/donald-ada/workinggenius/actions/workflows/gates.yml)
+
 A development workflow plugin for Claude Code, built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
@@ -16,6 +18,21 @@ Patrick Lencioni's *Six Types of Working Genius* names the six stages every piec
 | **Tenacity** — finishing with evidence | "Done!" — on stale evidence, or none. It was "done" three times. |
 
 This plugin walks every piece of work through all six — and when you *do* skip one (allowed! not everything deserves six stages), the skip is recorded where the next session can see it. Gaps stay visible instead of becoming mysteries.
+
+The six-stage shape is not the differentiator — every workflow tool ships phases, and phase names are free. What separates this plugin is a second commitment:
+
+> **A rule that can't show its evidence doesn't ship.**
+
+Workflow plugins are easy to write and hard to trust: prose the model can ignore, ceremony nobody priced, claims nobody measured. So this one keeps receipts, and they're checkable right now:
+
+| Claim | Evidence |
+|---|---|
+| The gate rule is **code**, not prose — bypasses are detected mechanically and block the session | `hooks/scripts/genius-gates.sh` + Stop hook; 53 deterministic tests: `bash evals/gates.test.sh` |
+| The prose is **tested** against a no-plugin baseline — and the tests locate the value precisely instead of flattering it. Five scenarios run for real say it's the moments where correct practice runs *against the model's momentum*: writing the failing test first (skill 3/3, baseline **0/3**) and questioning the ask before building it (3/3 vs **0/3**) are clean wins; the gate-as-stop partial (3/3 vs 1/3); while disciplines a careful model already follows when asked — verify-before-done, history-informed sizing — are honest **softballs the baseline passes**. The axis even predicted a result before its run (W1), and bounded itself honestly when later probes (D1, a self-attack test) failed to widen it — sharpening to one sentence: the value is in forcing the *action* at the decision point, never in eliciting *reflection* a capable model already does when asked. | `evals/RESULTS.md` (2026-07-21 synthesis); 31 scenarios, graded coverage tracked by *(not yet run)* markers — the rest is [ROADMAP](ROADMAP.md) Phase 1 |
+| The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
+| The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task), which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
+
+Anything in this README that sounds like a measurement should trace to a line in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
 
 ## Quickstart
 
@@ -46,7 +63,7 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 **One piece of work = one markdown file** under `.genius/`. The file — not conversation memory — carries the work: the confirmed problem, the options and their kill-reasons, the slices and their acceptance criteria, the build log, the close-out evidence. Any fresh session picks up exactly where the last one stopped.
 
-**Every stage ends in a gate** — a checklist of criteria that must be checked against reality before the next stage will start. Gates are how "the agent rushed ahead" stops happening. And the gate rule is code, not just prose: a shared parser (`hooks/scripts/genius-gates.sh`) mechanically detects any stage that ran past an earlier gate that's neither checked nor skipped; a **Stop hook** refuses to end a session while one exists (once per session, always naming the repair), and the SessionStart hook hands the same warning to the next session.
+**Every stage ends in a gate** — a checklist of criteria that must be checked against reality before the next stage will start. Gates are how "the agent rushed ahead" stops happening. And the gate rule is code, not just prose: a shared parser (`hooks/scripts/genius-gates.sh`) mechanically detects any stage that ran past an earlier gate that's neither checked nor skipped; a **Stop hook** refuses to end a session while one exists, and the SessionStart hook hands the same warning to the next session. Enforcement is per-repo: `warn` (default) blocks once per distinct bypass, always naming the repair; `Gate enforcement: block` (pinned by `/setup-working-genius`) re-blocks every stop attempt until the bypass is repaired.
 
 **Skips are explicit.** A small fix doesn't need six stages; the express path fills Wonder in one paragraph and marks Invention/Discernment skipped *with a reason*. When work goes wrong later, recorded skips are the first suspects — `/genius` reads them to diagnose the gap.
 
@@ -55,6 +72,17 @@ Not everything needs the full six — and not everyone wants to babysit them:
 **Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend sizing and mode for new work, and a lesson that keeps recurring gets promoted — sparingly, by a three-condition test — into `CLAUDE.md`, where every future session reads it. The workflow's weakest stage is data, not a mystery.
 
 **Fresh context per slice.** Galvanizing produces slices a cold session can grab; running each slice in a new session keeps every context window sharp instead of degraded.
+
+## Built for codebases with history
+
+Every workflow tool demos greenfield. This one's sharpest moves feed on mess, and get better the older the repo:
+
+- **Wonder's prior-art pass** shrinks the ask to the genuine gap — in a mature codebase the request is often half-built, and "build much less than asked" is the interview's best outcome.
+- **The blindspot territory pass** mines `git log` and `git blame`: reverted commits, bug-fix clusters, FIXME middens. Where the code bit last time is the best predictor of where it bites next — evidence a greenfield project simply doesn't have yet.
+- **Discernment attacks options against the record** — existing conventions, `docs/adr/` decisions, the codebase's grain — not against a blank slate.
+- **The domain glossary** exists precisely because ten-year-old repos speak three dialects; it makes the collision explicit instead of letting new work pick a fourth.
+
+A fresh repo gives these moves nothing to grip. A legacy system is where they earn their keep.
 
 ## Skills
 
@@ -80,7 +108,7 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 ## Token economics
 
-The flow's structure is also its cost model: stages differ in how much intelligence they need, so they shouldn't all run on the same model. Three tiering rules are now built into the skills, derived from measured runs (see `evals/RESULTS.md`):
+The flow's structure is also its cost model: stages differ in how much intelligence they need, so they shouldn't all run on the same model. Three tiering rules are now built into the skills, derived from measured runs (see `evals/RESULTS.md`). Every number in this section is a single metered run — **n=1 per cell**, output-token pricing only — so read them as directional, not statistical; the run log states each caveat, and closing that gap is [ROADMAP](ROADMAP.md) Phase 1:
 
 - **Exploration is frontier-model work.** The blindspot territory pass hunts unknown unknowns — judgment, not reading. A cheap-model pass scores well on potholes that are already written down, then mis-calls the ones that aren't: in a measured greenfield run it recommended the exact render path the project's fixed constraint forbade, and two later frontier stages paid to correct it. Run the pass on the session's main model or better; the saving is in the *shape* — a fresh subagent explores, the main session consumes the report and never re-walks the files (findings carry their evidence for exactly this reason).
 - **Review is mid-model work, and scoped.** Tenacity's reviewer judges a diff against a brief — hand it the diff and the work file, not the repo. An unscoped frontier-model reviewer was the most expensive single step in measured runs ($6.55 of a $20 session) at no gain over a scoped mid-tier one.
@@ -90,7 +118,11 @@ The macro lever remains sizing: the express path exists because six stages on sm
 
 ## Iterating on the plugin
 
-Skills are programs written in prose, and [`evals/`](evals/) holds their tests: three behavior scenarios for each of the ten working skills, each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
+Where this is heading — and what it deliberately won't become — lives in
+[`ROADMAP.md`](ROADMAP.md): phased, each item with acceptance criteria, each
+phase with the evidence that would kill it.
+
+Skills are programs written in prose, and [`evals/`](evals/) holds their tests: behavior scenarios for every working skill (three or more each), each named for the failure mode it must prevent and graded against a fresh-session baseline *without* the plugin — plus should/shouldn't-trigger prompt sets for every model-invoked skill. The rule the plugin enforces on your work applies to itself: **red before green** — an edit to a skill earns its place through a scenario that failed before it and passes after it.
 
 ## Lineage
 

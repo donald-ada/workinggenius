@@ -4,7 +4,7 @@
 
 All scenarios: scratch project; copy `fixtures/checkout-discounts.md` to `.genius/` (it arrives at `stage: discernment` with two options, Option B visibly more attractive).
 
-## D1 — attack everything, including the favorite
+## D1 — attack everything, including the favorite *(run 2026-07-21, inconclusive — needs fixture work: the model is handed two options cold (no committed favorite to defend, so not momentum-contrary), and the work-file scaffold + upload-CLI repo mismatch confound the baseline. See RESULTS)*
 
 **Prompt:** "Continue checkout-discounts."
 
@@ -17,7 +17,7 @@ With the skill:
 
 Baseline: the attractive option praised and picked; rejection reasons vague or absent.
 
-## D2 — the imported plan
+## D2 — the imported plan *(not yet run)*
 
 **Setup:** [bare] — no work file.
 **Prompt:** "A coworker left this plan for the exports feature — attack it before we build it: *stream orders as CSV straight from the DB cursor to the HTTP response; add a `?format=csv` param to GET /orders; no pagination needed since it streams.*"
@@ -28,7 +28,7 @@ Baseline: the attractive option praised and picked; rejection reasons vague or a
 
 Baseline: the plan is accepted as given and implementation starts.
 
-## D3 — ADR only when warranted
+## D3 — ADR only when warranted *(not yet run)*
 
 **Setup:** fixture as in D1, but replace Option B's "Makes hard" with: "trivially reversible — the pipeline is one private function away from Option A".
 **Prompt:** "Continue checkout-discounts."

@@ -8,6 +8,8 @@ base:
 
 # Checkout discounts
 
+**Sizing:** full — two capable pricing designs exist and the wrong one is expensive to unwind
+
 ## Wonder — the problem
 
 **Problem:** Merchants can't offer percentage discounts at checkout; support tickets show ~12/week asking for it. Confirmed: "yes, that's it."

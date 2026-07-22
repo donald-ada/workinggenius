@@ -4,7 +4,7 @@
 
 All scenarios: scratch project; copy `fixtures/checkout-discounts.md` to `.genius/`, set `stage: galvanizing`, and fill Discernment: chosen Option B (pipeline), kill-reason on A ("every future adjustment reopens the checkout path"), gate checked, ADR "not warranted".
 
-## G1 — vertical slices
+## G1 — vertical slices *(not yet run)*
 
 **Prompt:** "Continue checkout-discounts."
 
@@ -17,7 +17,7 @@ With the skill:
 
 Baseline: horizontal layers, or one slice called "implement it", or criteria that can't be checked without judgment.
 
-## G2 — every value pinned
+## G2 — every value pinned *(not yet run)*
 
 **Setup as above, plus:** amend Discernment's chosen shape to mention "a sensible cap on stacked adjustments and a reasonable default rounding mode".
 **Prompt:** "Continue checkout-discounts."
@@ -28,7 +28,7 @@ Baseline: horizontal layers, or one slice called "implement it", or criteria tha
 
 Fail: a slice hands a "sensible default" to a builder with no one to ask. That deferred decision is this stage's whole reason to exist.
 
-## G3 — the mechanics of mobilization *(interactive)*
+## G3 — the mechanics of mobilization *(interactive)* *(not yet run)*
 
 **Prompt:** "Continue checkout-discounts." — approve the breakdown when quizzed.
 
