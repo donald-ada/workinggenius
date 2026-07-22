@@ -1,5 +1,74 @@
 # Results
 
+## 2026-07-22 — W6 narrative-first, red-to-green: the interview opens with a correctable story
+
+**The change (from the no-AI developer-practice study):** real requirement reviews
+open with the walkthrough — questions are reactions to a complete story. The
+interview now plays the walkthrough back: before Round 1, a short step-wise story
+of what the finished thing will do, grounded in the repo, offered for correction
+("which step is wrong?"), with Round 1's questions anchored to the story's
+uncertain steps. Correcting a story is cheaper for the user than answering from
+zero — the UX lever this whole redesign is aimed at.
+
+**Red (pre-edit), n=1:** good bounded round (5 themed questions, recommendations,
+shortcut) but no correctable story — a terse code-state note, then free-floating
+questions; the user assembles the picture themselves.
+
+**Green (post-edit), n=3 sonnet-5: 3/3.** Every run opens with a step-wise story
+and an explicit correction invitation, then a bounded anchored round of 5. Run 1's
+story even embedded an observable acceptance shape ("kill it at 40%, rerun, watch
+it resume near 40%"). **Run 2 spontaneously dispatched the perspective panel**
+(its own judgment call on full-sized work), curated it, then told the story — the
+full HAT-probe design (panel feeds, interviewer curates, story anchors) worked
+end-to-end headless on the first live occasion. Caveats: n as stated, sonnet-5,
+opening round only; the panel fired in 1 of 3 green runs (judgment-gated as
+designed — the other two judged the round already clear, which is the gate
+working, not a miss).
+
+
+
+## 2026-07-22 — HAT probe: registered prediction falsified — role-isolated scouts beat the single context on breadth
+
+**The question:** does a panel of role-isolated subagent "hats" (QA / ops / security /
+end-user advocate, each a fresh context reading the work file + repo) surface question
+*categories* that a single context — prompted to cover the same perspectives — misses?
+**Registered prediction (momentum thesis): softball**, question generation being
+reflection-on-request. **The prediction was wrong.**
+
+Method: resumable-uploads fixture (fits the scratch repo — no fixture-fit noise);
+arm B = one run with the wonder skill, told to generate the candidate list covering
+user/engineering/QA/ops/security; arm A = four separate role runs, outputs merged,
+role labels stripped; blinded judge compared coverage, instructed that length ≠
+quality and redundancy counts against.
+
+Verdict (blinded): **"A adds over B: substantial. B adds over A: marginal."**
+- The panel surfaced whole categories the single context missed entirely:
+  server-side security & authorization (session/principal binding, IDOR, path
+  traversal, partial-upload ACLs), abuse & resource exhaustion (quotas, GC/TTL
+  windows, thundering herd, cost amplification), and rollout/protocol compat.
+- The measured costs are equally real: the panel ran ~52 questions with **30–35%
+  near-duplicate redundancy** plus noise (repo-answerable and engineering-internal
+  questions), at ~4× token cost — and it **missed the single most gating question
+  in either set** ("does the server already support a resumable protocol?"), which
+  came from the interviewer arm: role-players think inside the role; premise and
+  scope calibration live with the interviewer.
+
+**Boundary this draws on the momentum thesis:** "eliciting reflection = commodity"
+holds for a *single* context — but decorrelated generation across isolated contexts
+escapes that saturation. Perspective diversity is a structural effect, not a
+prompting effect (the single context was *told* to wear all the hats and still
+missed categories). This turns Invention's parallel-divergence design from belief
+into measurement.
+
+**Design consequence (implemented in wonder):** the panel feeds, the interviewer
+curates — hats are a stakes-gated round-preparation move for full-sized work; the
+main loop dedups hard (a third of the raw output is duplicate), keeps its own
+premise/scope questions first, and skips the panel when the work or the round
+wouldn't repay four subagents. Caveats: n=1 per arm, one task, one blinded judge,
+sonnet-5; redundancy/noise estimates are the judge's, not counted mechanically.
+
+
+
 ## 2026-07-22 — interview redesigned to rounds, red-to-green (user ruling)
 
 **The ruling:** the interview moves from one-question-per-message to **rounds** —

@@ -147,6 +147,28 @@ case "$ID" in
       < /dev/null > "$OUT" 2>&1 || echo "[harness: claude exited $?]" >> "$OUT"
     echo "$SCRATCH"; exit 0
     ;;
+  W6)
+    # Narrative-first: opening = guessed story offered for correction, round
+    # anchored to its uncertain points. Repo-fitting fixture (resumable
+    # uploads) keeps fixture-fit noise out of the signal.
+    mkdir -p .genius
+    cat > .genius/resumable-uploads.md <<'EOF'
+---
+work: resumable-uploads
+stage: wonder
+mode: guided
+created: 2026-07-22
+base:
+---
+
+# Resumable uploads
+
+**Sizing:** full — big uploads over flaky connections fail and restart from zero; several capable shapes exist (chunking, resume state, integrity checking)
+
+## Wonder — the problem
+EOF
+    PROMPT="Continue resumable-uploads."
+    ;;
   W5)
     # Round-model interview: same fixture as W4 but guided. Red = the drip
     # (exactly one question); green = an opening ROUND of 2-5 independent

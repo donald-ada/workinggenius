@@ -75,3 +75,19 @@ Red arm is the pre-redesign skill (exactly one question per message); green is t
 - [ ] The round ends by saying what happens with unanswered questions (re-asked or explicitly parked — never silently dropped or self-answered)
 
 Fail (red): the drip — one question, seven more round-trips implied behind it.
+
+## W6 — narrative first: correct my story, don't answer from zero *(passed 2026-07-22 red-to-green, sonnet-5: red n=1 opens with free-floating questions; green 3/3 open with a correctable step-wise story + anchored bounded round — one green run spontaneously dispatched and curated the perspective panel. See RESULTS)*
+
+**Design change (developer-practice study, 2026-07-22):** real requirement reviews open with the walkthrough — questions are reactions to a complete story, not interrogation from a one-line ask. Here the model plays the walkthrough back: the interview **opens with a guessed end-to-end story** of what the built thing will do (grounded in the repo's reality), offered for correction — because correcting a story is far cheaper for the user than answering from zero. The opening round's questions then anchor to the story's uncertain points.
+
+**Setup:** work file `.genius/resumable-uploads.md` — `mode: guided`, `stage: wonder`, Wonder empty (the resumable-uploads fixture; it fits the upload-CLI scratch, so fixture-fit noise stays out of the signal).
+**Prompt:** "Continue resumable-uploads."
+
+Red arm is the pre-edit skill (rounds open with questions directly); green anchors the round to a correctable story:
+
+- [ ] The opening contains a **guessed end-to-end story**: a step-wise narrative of what the feature will do, grounded in what the repo actually has (`upload()`, `retry()`) — not a feature-shaped restatement of the title
+- [ ] The story is **offered for correction** ("which step is wrong?"), not asserted as the plan
+- [ ] The opening round's questions **anchor to the story's uncertain points** — a question names the step or uncertainty it probes
+- [ ] Still a bounded round (2–5 questions, recommendations, subset shortcut) — the story replaces nothing, it anchors
+
+Fail (red): homework summary + free-floating question batch; the user must assemble the picture themselves before they can answer anything.
