@@ -9,8 +9,8 @@ All scenarios: scratch project per README, skills installed.
 **Setup:** none beyond the scratch project (its `src/http.js` ships a `retry()` helper on purpose).
 **Prompt:** `/wonder users keep losing uploads on flaky wifi — add a retry flag to the upload command`
 
-With the skill:
-- [ ] Asks one question per message — never a batch
+With the skill *(the first item was "one question per message — never a batch" until the 2026-07-22 round redesign; the 2026-07-21 run graded that old rule)*:
+- [ ] Asks in bounded rounds — 2–5 numbered independent questions per message, neither a drip of singles nor an unbounded wall
 - [ ] Every question carries a recommended answer
 - [ ] Never asks whether retry logic exists — finds `src/http.js` itself and records it as prior art, shrinking the problem
 - [ ] Surfaces the question behind the request: what failure the user is seeing, and whether the flag matters if uploads stop failing
@@ -42,3 +42,68 @@ This scenario tests the skill against its *own* overreach — the baseline is th
 - [ ] Does not manufacture success criteria or a scope no-list for a typo
 
 Fail: a typo gets the interview a rearchitecture deserves. Ceremony that doesn't scale is this plugin's own named enemy.
+
+## W4 — no mode swallows the interview *(passed 2026-07-22 red-to-green, n=3 sonnet-5 per arm: pre-edit 2/3 self-interviewed — one ran to done with zero human answers; post-edit 3/3 hold the interview open. See RESULTS)*
+
+**Failure mode (user ruling, 2026-07-22):** in delegated/auto mode the flow answers its *own* interview questions with `assumed:` lines and sails past Wonder — a self-interview. The interview extracts what only the user owns; a model interviewing itself is circular, and auto mode erasing the interview erases the plugin's measured best behavior (W1). The interview is a **mode invariant**: modes govern checkpoints *after* the confirmed problem, never the dialogue that confirms it.
+
+**Setup:** work file `.genius/kit-bundles.md` — frontmatter `mode: auto`, `stage: wonder`, title only, Wonder section empty.
+**Prompt:** "Continue kit-bundles."
+
+This scenario tests the skill against its own overreach (like W3): the red arm is the *current* skill text, the pass is the edited skill holding the interview open:
+
+- [ ] The run **interviews**: its reply to the user is an interview round (question(s) with recommended answers) — not a completed Wonder section
+- [ ] Zero `assumed:` lines written into the Wonder section by the run itself (the user's own "enough — go with your recommendations" remains the only shortcut, and no user said it)
+- [ ] `stage:` still `wonder` when the turn ends; the gate's "confirmed by the user" box unchecked
+- [ ] Mode is respected *after* its jurisdiction begins: the reply may note that once the problem is confirmed, auto runs hands-off to done
+
+Red (pre-edit): Wonder self-filled with `assumed:` lines, gate checked "(via assumed: — auto)", stage advanced — the interview swallowed exactly as genius-file's old mode semantics instructed.
+
+## W5 — the interview asks in rounds, not drips *(passed 2026-07-22 red-to-green, sonnet-5: pre-edit drip (1 question); post-edit 3/3 open with a bounded round — 5, 4, 3 numbered questions, recommendations and subset-shortcut present. Multi-round ledger not yet exercised. See RESULTS)*
+
+**Design change (user ruling, 2026-07-22):** the interview moves from one-question-per-message to **rounds** — each round a batch of independent questions answered together, the answers seeding the next round's deeper questions. The one-at-a-time drip cost 8–12 round-trips per interview; the round model costs 2–3. The old rule's rationale (half-answers hide misbuilds) is kept by three guards, graded below.
+
+**Setup:** work file `.genius/kit-bundles.md` — `mode: guided`, `stage: wonder`, Wonder empty (same fixture as W4, guided).
+**Prompt:** "Continue kit-bundles."
+
+Red arm is the pre-redesign skill (exactly one question per message); green is the round model:
+
+- [ ] The opening round is a **batch**: 2–5 questions in one message, numbered, grouped sensibly — not a single question, not an unbounded wall
+- [ ] Every question in the round carries a recommended answer, and the round states the shortcut ("answer any subset; 'all recommendations' works")
+- [ ] Only **independent** questions share the round — nothing in the batch depends on another batch-member's answer (a dependent question is named as coming next round, or absent)
+- [ ] Homework still done first: nothing in the round is answerable from the repo itself
+- [ ] The round ends by saying what happens with unanswered questions (re-asked or explicitly parked — never silently dropped or self-answered)
+
+Fail (red): the drip — one question, seven more round-trips implied behind it.
+
+## W6 — narrative first: correct my story, don't answer from zero *(passed 2026-07-22 red-to-green, sonnet-5: red n=1 opens with free-floating questions; green 3/3 open with a correctable step-wise story + anchored bounded round — one green run spontaneously dispatched and curated the perspective panel. See RESULTS)*
+
+**Design change (developer-practice study, 2026-07-22):** real requirement reviews open with the walkthrough — questions are reactions to a complete story, not interrogation from a one-line ask. Here the model plays the walkthrough back: the interview **opens with a guessed end-to-end story** of what the built thing will do (grounded in the repo's reality), offered for correction — because correcting a story is far cheaper for the user than answering from zero. The opening round's questions then anchor to the story's uncertain points.
+
+**Setup:** work file `.genius/resumable-uploads.md` — `mode: guided`, `stage: wonder`, Wonder empty (the resumable-uploads fixture; it fits the upload-CLI scratch, so fixture-fit noise stays out of the signal).
+**Prompt:** "Continue resumable-uploads."
+
+Red arm is the pre-edit skill (rounds open with questions directly); green anchors the round to a correctable story:
+
+- [ ] The opening contains a **guessed end-to-end story**: a step-wise narrative of what the feature will do, grounded in what the repo actually has (`upload()`, `retry()`) — not a feature-shaped restatement of the title
+- [ ] The story is **offered for correction** ("which step is wrong?"), not asserted as the plan
+- [ ] The opening round's questions **anchor to the story's uncertain points** — a question names the step or uncertainty it probes
+- [ ] Still a bounded round (2–5 questions, recommendations, subset shortcut) — the story replaces nothing, it anchors
+
+Fail (red): homework summary + free-floating question batch; the user must assemble the picture themselves before they can answer anything.
+
+## W7 — questions carry price tags; priorities come from forced trade-offs *(pricing passed 2026-07-22 red-to-green, sonnet-5: red 0/3 cost-neutral, green 3/3 price the fork from design reality. Forced-trade-off item unexercised — this fixture's opening round has no competing desirables; see RESULTS)*
+
+**Design change (developer-practice study, 2026-07-22):** real requirement discussion is a trade, not an extraction — the developer sends cost information back ("supporting offline doubles the work — how often does that happen?") and priorities get revealed under forced choice ("if only one ships this week, which?"), not by asking "what's important." The interview should do both.
+
+**Setup:** the resumable-uploads fixture (as W6).
+**Prompt:** "Continue resumable-uploads."
+
+Red arm is the pre-edit skill; green prices and trades:
+
+- [ ] At least one question whose answer forks the cost carries its **price** — a stated cost consequence in the question itself ("X roughly doubles the scope — is the scenario common enough to pay it?"), not a neutral A-or-B
+- [ ] Where multiple desirables compete, at least one **forced trade-off** appears ("if only one lands first, which?") instead of an importance rating
+- [ ] Prices are honest: derived from the repo/design reality the run just read, not invented percentages
+- [ ] Round discipline intact (bounded, recommendations, shortcut, story anchoring)
+
+Fail (red): all questions cost-neutral; the user picks options with no price visible, and priorities are asked as abstract importance.

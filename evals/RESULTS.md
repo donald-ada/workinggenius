@@ -1,5 +1,204 @@
 # Results
 
+## 2026-07-22 — E2E persona UX test: the redesigned interview halves the path to a confirmed contract
+
+**The measurement the whole interview redesign answers to** — usability defined as
+user experience, not skill prose. Method: a product-owner persona with a **hidden
+truth** (unattended nightly CI uploads ~2GB artifacts; must resume across process
+re-invocations; silent corruption worse than failure; cross-machine resume
+explicitly not needed) converses with the interviewer over real multi-turn
+sessions; the persona confirms ("yes, that's it") only when the interviewer's
+restatement captures all four elements. Two arms, same fixture, same persona
+brief: **new** (story-first + rounds + pricing, current text) vs **old** (the
+pre-redesign drip, `git show 3de4347:skills/wonder/SKILL.md`). Cap 6 interviewer
+turns.
+
+| arm | turns to confirmed contract | confirmed | persona typing (chars) |
+|---|---|---|---|
+| new | **3** | **yes** | **1,010** |
+| old | 6 (cap) | **no** — still on "Question 5", restatement ≥2 turns away | 1,652 |
+
+The confirmed restatement (new, turn 3) hit all four hidden-truth elements —
+including the nuances (fingerprint mismatch → clean re-upload, not corrupt merge;
+verify-fail deletes resume state). The final work file carries the full paper
+trail: `assumed:` ledger, user corrections overriding earlier assumptions, and an
+out-of-scope list with why-parking-is-safe.
+
+**Honest bounds:** the old arm's *content* was converging on the same facts by
+turn 6 — a frontier model is competent either way; the delta is where the
+redesign aimed: **round-trips halved (3 vs ≥8 projected) and user typing down
+~40% to a *confirmed* contract vs an unconfirmed one**. n=1 per arm, one
+persona, sonnet-5 both sides, persona confirmation partially mechanical (exact
+phrase matching); the persona's brief was written by the same author as the
+skill — an independent persona would strengthen this.
+
+
+
+## 2026-07-22 — W7 price tags, red-to-green: cost forks now priced inside the question
+
+**The change:** the interview is a trade, not an extraction — when an answer forks
+the scope, the question states the price ("persisted resume state roughly doubles
+the design — state file, integrity on load, cleanup story"), and competing
+desirables get a forced choice, not an importance rating.
+
+**Red:** the three W6 green transcripts (same skill text, pre-pricing) grepped and
+read — 0/3 contain any cost consequence in a question; all options offered
+cost-neutral. **Green (post-edit), n=3 sonnet-5: 3/3 price the fork** — two runs
+state an explicit "roughly doubles" with the named cost components, one states
+"materially bigger design (state store, idempotency keys, crash recovery)"; all
+three prices derive from the repo/design reality the run just read, none invented.
+
+**Honest gap:** the forced-trade-off half went 0/3 — its trigger condition
+(competing desirables in the opening round) never arose in this fixture, so the
+line is written but unexercised, same status as the multi-round ledger. A fixture
+whose Round 1 genuinely competes (two features, one slot) would exercise it;
+until then no claim. Caveats: red reuses W6 transcripts (same text, valid), green
+n=3, sonnet-5, opening round only.
+
+
+
+## 2026-07-22 — W6 narrative-first, red-to-green: the interview opens with a correctable story
+
+**The change (from the no-AI developer-practice study):** real requirement reviews
+open with the walkthrough — questions are reactions to a complete story. The
+interview now plays the walkthrough back: before Round 1, a short step-wise story
+of what the finished thing will do, grounded in the repo, offered for correction
+("which step is wrong?"), with Round 1's questions anchored to the story's
+uncertain steps. Correcting a story is cheaper for the user than answering from
+zero — the UX lever this whole redesign is aimed at.
+
+**Red (pre-edit), n=1:** good bounded round (5 themed questions, recommendations,
+shortcut) but no correctable story — a terse code-state note, then free-floating
+questions; the user assembles the picture themselves.
+
+**Green (post-edit), n=3 sonnet-5: 3/3.** Every run opens with a step-wise story
+and an explicit correction invitation, then a bounded anchored round of 5. Run 1's
+story even embedded an observable acceptance shape ("kill it at 40%, rerun, watch
+it resume near 40%"). **Run 2 spontaneously dispatched the perspective panel**
+(its own judgment call on full-sized work), curated it, then told the story — the
+full HAT-probe design (panel feeds, interviewer curates, story anchors) worked
+end-to-end headless on the first live occasion. Caveats: n as stated, sonnet-5,
+opening round only; the panel fired in 1 of 3 green runs (judgment-gated as
+designed — the other two judged the round already clear, which is the gate
+working, not a miss).
+
+
+
+## 2026-07-22 — HAT probe: registered prediction falsified — role-isolated scouts beat the single context on breadth
+
+**The question:** does a panel of role-isolated subagent "hats" (QA / ops / security /
+end-user advocate, each a fresh context reading the work file + repo) surface question
+*categories* that a single context — prompted to cover the same perspectives — misses?
+**Registered prediction (momentum thesis): softball**, question generation being
+reflection-on-request. **The prediction was wrong.**
+
+Method: resumable-uploads fixture (fits the scratch repo — no fixture-fit noise);
+arm B = one run with the wonder skill, told to generate the candidate list covering
+user/engineering/QA/ops/security; arm A = four separate role runs, outputs merged,
+role labels stripped; blinded judge compared coverage, instructed that length ≠
+quality and redundancy counts against.
+
+Verdict (blinded): **"A adds over B: substantial. B adds over A: marginal."**
+- The panel surfaced whole categories the single context missed entirely:
+  server-side security & authorization (session/principal binding, IDOR, path
+  traversal, partial-upload ACLs), abuse & resource exhaustion (quotas, GC/TTL
+  windows, thundering herd, cost amplification), and rollout/protocol compat.
+- The measured costs are equally real: the panel ran ~52 questions with **30–35%
+  near-duplicate redundancy** plus noise (repo-answerable and engineering-internal
+  questions), at ~4× token cost — and it **missed the single most gating question
+  in either set** ("does the server already support a resumable protocol?"), which
+  came from the interviewer arm: role-players think inside the role; premise and
+  scope calibration live with the interviewer.
+
+**Boundary this draws on the momentum thesis:** "eliciting reflection = commodity"
+holds for a *single* context — but decorrelated generation across isolated contexts
+escapes that saturation. Perspective diversity is a structural effect, not a
+prompting effect (the single context was *told* to wear all the hats and still
+missed categories). This turns Invention's parallel-divergence design from belief
+into measurement.
+
+**Design consequence (implemented in wonder):** the panel feeds, the interviewer
+curates — hats are a stakes-gated round-preparation move for full-sized work; the
+main loop dedups hard (a third of the raw output is duplicate), keeps its own
+premise/scope questions first, and skips the panel when the work or the round
+wouldn't repay four subagents. Caveats: n=1 per arm, one task, one blinded judge,
+sonnet-5; redundancy/noise estimates are the judge's, not counted mechanically.
+
+
+
+## 2026-07-22 — interview redesigned to rounds, red-to-green (user ruling)
+
+**The ruling:** the interview moves from one-question-per-message to **rounds** —
+each round one message carrying 2–5 numbered independent questions the user
+answers together, the answers seeding the next, deeper round. The drip's cost was
+real (8–12 round-trips per interview); the old rule's rationale (half-answers
+hide misbuilds) is kept by three guards now written into the skill: only
+independent questions share a round (dependent ones wait, named), every round
+states the answer-any-subset / "all your recommendations" shortcut, and a
+question ledger re-asks or explicitly parks skipped questions — never silently
+drops or self-answers them (the mode invariant owns that line, unchanged).
+
+**Red (pre-edit), W5, n=1 sonnet-5:** the drip, exactly as the old rule
+instructed — one question ("Question 1"), the rest of the branch tree queued
+behind it as future round-trips.
+
+**Green (post-edit), n=3 sonnet-5: 3/3 open with a bounded round.** 5, 4, and 3
+numbered questions respectively — each question carrying a recommended answer,
+each round stating the subset/all-recommendations shortcut, one run explicitly
+titling "Round 1" and naming what the next round covers (success criteria, scope
+edges, constraints). Homework-before-asking held in all three (each opened by
+reporting what the repo settled). No run exceeded 5 questions — the wall didn't
+appear.
+
+Consistency sweep with the redesign: W1's checklist item "one question per
+message — never a batch" (graded 2026-07-21 under the old rule) updated to the
+round discipline, annotated so the old run's grading context stays legible; W4's
+reply criterion re-worded to "an interview round" (its invariant — interviews
+rather than self-answers — is untouched). Caveats: red n=1 (the old rule's
+single-question behavior was already documented across W4's green runs), green
+n=3, sonnet-5 only, opening round only — the multi-round ledger behavior
+(re-ask/park skipped questions) is written but not yet exercised end-to-end.
+
+
+
+## 2026-07-22 — user ruling encoded red-to-green: no mode swallows the interview
+
+**The ruling:** the Wonder interview is live human dialogue in *every* mode —
+delegated/auto govern checkpoints after the confirmed problem, never the dialogue
+that confirms it. A model answering its own interview questions is circular
+(confirms nothing), and auto swallowing the interview erases the plugin's measured
+best behavior (W1's question-the-ask). Ruled by the user 2026-07-22.
+
+**Red (pre-edit), W4, n=3 sonnet-5:** the feared behavior is real and majority.
+On a `mode: auto` work file at `stage: wonder` ("Continue kit-bundles."), 2 of 3
+runs self-interviewed exactly as the old genius-file mode text instructed — one
+wrote 4 `assumed:` lines and advanced to discernment; one wrote 5, ran the entire
+flow unattended, and closed the work `stage: done` **without a single human
+answer**. (1 of 3 interviewed anyway — the cross-skill inference sometimes wins,
+which is why it was a real gap: behavior depended on which skill's text won.)
+
+**The edit:** the mode invariant now lives in all three places the model reads —
+genius-file's Modes section (jurisdiction begins after Wonder's gate; an
+unreachable user means the work *waits* at Wonder; Wonder's "confirmed by the
+user" is never satisfiable by a self-written `assumed:`), Wonder's interview
+rules (first rule, where the decision actually happens), and /genius + README's
+mode descriptions. The user's own "enough — go with your recommendations"
+remains the one shortcut — a human speaking, mid-dialogue. F3 rewritten to
+match (it *expected* the interview self-answered; that expectation now belongs
+to the invariant's red arm, and F3 tests delegated from Invention on).
+
+**Green (post-edit), W4, n=3 sonnet-5: 3/3 hold the interview open.** Zero
+`assumed:` lines written, `stage:` stays wonder, every run ends with one
+interview question carrying a recommended answer. (All three also flagged the
+fixture-fit oddity — kit-bundles in an upload-CLI scratch — as a question rather
+than building through it, consistent with W1's measured behavior.)
+
+Caveats: n=3 per arm, sonnet-5 only, single-turn probe (the full multi-turn
+interview wasn't exercised); graded by the author from transcript + work-file
+state (objective signals: assumed-count, stage, reply-ends-in-question).
+
+
+
 ## 2026-07-21 — synthesis: the delta lives where discipline fights the model's momentum
 
 Four scenarios run for real on the same tier (sonnet-5) now map exactly where

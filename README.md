@@ -31,6 +31,7 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 | The prose is **tested** against a no-plugin baseline — and the tests locate the value precisely instead of flattering it. Five scenarios run for real say it's the moments where correct practice runs *against the model's momentum*: writing the failing test first (skill 3/3, baseline **0/3**) and questioning the ask before building it (3/3 vs **0/3**) are clean wins; the gate-as-stop partial (3/3 vs 1/3); while disciplines a careful model already follows when asked — verify-before-done, history-informed sizing — are honest **softballs the baseline passes**. The axis even predicted a result before its run (W1), and bounded itself honestly when later probes (D1, a self-attack test) failed to widen it — sharpening to one sentence: the value is in forcing the *action* at the decision point, never in eliciting *reflection* a capable model already does when asked. | `evals/RESULTS.md` (2026-07-21 synthesis); 31 scenarios, graded coverage tracked by *(not yet run)* markers — the rest is [ROADMAP](ROADMAP.md) Phase 1 |
 | The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
 | The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task), which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
+| The interview is **measured UX**, not ceremony — in an end-to-end persona test the redesigned interview (story-first, question rounds, priced forks) reached a user-**confirmed** problem contract in 3 turns and ~1,000 typed characters; the pre-redesign one-question drip hit a 6-turn cap unconfirmed (n=1 per arm) | `evals/RESULTS.md` (E2E persona UX test, 2026-07-22) |
 
 Anything in this README that sounds like a measurement should trace to a line in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
 
@@ -57,7 +58,7 @@ Then, in any project:
 Not everything needs the full six — and not everyone wants to babysit them:
 
 - **`/genius express <idea>`** — small work: Wonder in one paragraph, Invention/Discernment skipped (recorded), straight to slices.
-- **Modes** — `guided` (default: checkpoints as written), `delegated` (runs on its own recommendations, records every assumption, stops once — at the plan review), `auto` (no stops; for when you said "run it all"). Pick when work starts; recorded in the work file.
+- **Modes** — `guided` (default: checkpoints as written), `delegated` (runs on its own recommendations, records every assumption, stops once — at the plan review), `auto` (no stops; for when you said "run it all"). Pick when work starts; recorded in the work file. One thing no mode skips: **the Wonder interview is always live dialogue** — hands-off begins after the problem is confirmed, because a model interviewing itself about what you want confirms nothing.
 
 ## How it works
 
@@ -92,7 +93,7 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 **The six stages** (type them as commands, or let the flow carry itself forward in delegated/auto mode):
 
-- **/wonder** — the interview: one question at a time, a recommended answer with each, codebase-answerable questions never asked, depth matched to stakes — and "enough, go with your recommendations" always works
+- **/wonder** — the interview in rounds: each round a small batch of independent questions (2–5, numbered, a recommended answer with each) answered together, the answers seeding the next round's deeper questions; codebase-answerable questions never asked, skipped questions tracked and re-asked rather than silently dropped, depth matched to stakes — and "enough, go with your recommendations" always works
 - **/invent** — divergence with rules: structurally different options, no judging yet, parallel subagents for big designs, throwaway prototypes for questions paper can't settle
 - **/discern** — adversarial judgment: try to kill every option, choose opinionated, record kill-reasons, offer ADRs sparingly
 - **/galvanize** — the brief, agreed test seams, tracer-bullet vertical slices with verifiable acceptance criteria, the `base:` commit Tenacity will diff against
