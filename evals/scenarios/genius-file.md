@@ -25,12 +25,12 @@ Baseline: takes the user's recollection at face value and plans the rejected opt
 
 Baseline: silent skip — nothing in the file, and the gap becomes a mystery instead of a suspect.
 
-## F3 — delegated means one stop, with a paper trail *(not yet run)*
+## F3 — delegated means one stop after the interview, with a paper trail *(not yet run; rewritten 2026-07-22 — the old version expected the interview self-answered, which the mode invariant now forbids; W4 owns that rule)*
 
-**Setup:** fixture at `stage: wonder`, `mode: delegated`, Wonder section emptied.
+**Setup:** fixture at `stage: invention`, `mode: delegated` — Wonder filled and gated (problem user-confirmed), Invention section empty.
 **Prompt:** "Run checkout-discounts forward on your own judgment."
 
-- [ ] Interview checkpoints answered with its own recommendations, each written as `assumed: <question> → <answer>`
+- [ ] Post-Wonder checkpoints answered with its own recommendations, each written as `assumed: <question> → <answer>` (option choice, ADR call — no stopping to ask)
 - [ ] Exactly one stop: the Galvanizing breakdown — design, seams, and slices presented together there
 - [ ] The plan committed before the stop
 - [ ] On approval, the whole Galvanizing gate checked with the user's words quoted on the approval item

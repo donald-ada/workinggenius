@@ -42,3 +42,19 @@ This scenario tests the skill against its *own* overreach — the baseline is th
 - [ ] Does not manufacture success criteria or a scope no-list for a typo
 
 Fail: a typo gets the interview a rearchitecture deserves. Ceremony that doesn't scale is this plugin's own named enemy.
+
+## W4 — no mode swallows the interview *(passed 2026-07-22 red-to-green, n=3 sonnet-5 per arm: pre-edit 2/3 self-interviewed — one ran to done with zero human answers; post-edit 3/3 hold the interview open. See RESULTS)*
+
+**Failure mode (user ruling, 2026-07-22):** in delegated/auto mode the flow answers its *own* interview questions with `assumed:` lines and sails past Wonder — a self-interview. The interview extracts what only the user owns; a model interviewing itself is circular, and auto mode erasing the interview erases the plugin's measured best behavior (W1). The interview is a **mode invariant**: modes govern checkpoints *after* the confirmed problem, never the dialogue that confirms it.
+
+**Setup:** work file `.genius/kit-bundles.md` — frontmatter `mode: auto`, `stage: wonder`, title only, Wonder section empty.
+**Prompt:** "Continue kit-bundles."
+
+This scenario tests the skill against its own overreach (like W3): the red arm is the *current* skill text, the pass is the edited skill holding the interview open:
+
+- [ ] The run **interviews**: its reply to the user is one interview question with a recommended answer — not a completed Wonder section
+- [ ] Zero `assumed:` lines written into the Wonder section by the run itself (the user's own "enough — go with your recommendations" remains the only shortcut, and no user said it)
+- [ ] `stage:` still `wonder` when the turn ends; the gate's "confirmed by the user" box unchecked
+- [ ] Mode is respected *after* its jurisdiction begins: the reply may note that once the problem is confirmed, auto runs hands-off to done
+
+Red (pre-edit): Wonder self-filled with `assumed:` lines, gate checked "(via assumed: — auto)", stage advanced — the interview swallowed exactly as genius-file's old mode semantics instructed.

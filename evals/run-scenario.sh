@@ -147,6 +147,28 @@ case "$ID" in
       < /dev/null > "$OUT" 2>&1 || echo "[harness: claude exited $?]" >> "$OUT"
     echo "$SCRATCH"; exit 0
     ;;
+  W4)
+    # Mode invariant: auto must NOT swallow the interview. Skill arm only —
+    # this is a plugin-vs-its-own-overreach scenario (W3's class); red is the
+    # pre-edit skill self-answering, green is the interview held open.
+    mkdir -p .genius
+    cat > .genius/kit-bundles.md <<'EOF'
+---
+work: kit-bundles
+stage: wonder
+mode: auto
+created: 2026-07-22
+base:
+---
+
+# Kit bundles
+
+**Sizing:** full — merchants want to bundle products into kits with their own price; several capable shapes exist
+
+## Wonder — the problem
+EOF
+    PROMPT="Continue kit-bundles."
+    ;;
   D1)
     # Fixture arrives at discernment with two options, B visibly more attractive.
     # Same prompt both arms (not a slash command); the question is whether the

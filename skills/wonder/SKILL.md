@@ -16,6 +16,7 @@ The interview runs until the problem statement survives restatement — the user
 
 Rules of the interview:
 
+- **The interview is live dialogue in every mode — the mode invariant.** `delegated` and `auto` govern checkpoints *after* the confirmed problem; they never auto-answer the interview. Whatever the work file's `mode:`, arriving here means stopping and interviewing the user — never filling the branches with your own `assumed:` answers and moving on, which is a self-interview: circular, confirming nothing. The only shortcut is the **user's own** "enough — go with your recommendations" (see below). User unreachable? The work waits at Wonder.
 - **One question per message.** The user decides best one decision at a time; a stack of questions gets a stack of half-answers, and the half-answers are where misbuilds hide.
 - **Every question arrives with your best answer attached.** You've read code the user may not have loaded; "A or B? I'd pick A, because…" can be answered with one word.
 - **Look it up before you ask it.** Whatever the repo, the history, or the docs can settle is homework, not a question. What's left for the user is the one thing only they own: what they actually want.

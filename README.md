@@ -57,7 +57,7 @@ Then, in any project:
 Not everything needs the full six — and not everyone wants to babysit them:
 
 - **`/genius express <idea>`** — small work: Wonder in one paragraph, Invention/Discernment skipped (recorded), straight to slices.
-- **Modes** — `guided` (default: checkpoints as written), `delegated` (runs on its own recommendations, records every assumption, stops once — at the plan review), `auto` (no stops; for when you said "run it all"). Pick when work starts; recorded in the work file.
+- **Modes** — `guided` (default: checkpoints as written), `delegated` (runs on its own recommendations, records every assumption, stops once — at the plan review), `auto` (no stops; for when you said "run it all"). Pick when work starts; recorded in the work file. One thing no mode skips: **the Wonder interview is always live dialogue** — hands-off begins after the problem is confirmed, because a model interviewing itself about what you want confirms nothing.
 
 ## How it works
 

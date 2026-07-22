@@ -1,5 +1,43 @@
 # Results
 
+## 2026-07-22 — user ruling encoded red-to-green: no mode swallows the interview
+
+**The ruling:** the Wonder interview is live human dialogue in *every* mode —
+delegated/auto govern checkpoints after the confirmed problem, never the dialogue
+that confirms it. A model answering its own interview questions is circular
+(confirms nothing), and auto swallowing the interview erases the plugin's measured
+best behavior (W1's question-the-ask). Ruled by the user 2026-07-22.
+
+**Red (pre-edit), W4, n=3 sonnet-5:** the feared behavior is real and majority.
+On a `mode: auto` work file at `stage: wonder` ("Continue kit-bundles."), 2 of 3
+runs self-interviewed exactly as the old genius-file mode text instructed — one
+wrote 4 `assumed:` lines and advanced to discernment; one wrote 5, ran the entire
+flow unattended, and closed the work `stage: done` **without a single human
+answer**. (1 of 3 interviewed anyway — the cross-skill inference sometimes wins,
+which is why it was a real gap: behavior depended on which skill's text won.)
+
+**The edit:** the mode invariant now lives in all three places the model reads —
+genius-file's Modes section (jurisdiction begins after Wonder's gate; an
+unreachable user means the work *waits* at Wonder; Wonder's "confirmed by the
+user" is never satisfiable by a self-written `assumed:`), Wonder's interview
+rules (first rule, where the decision actually happens), and /genius + README's
+mode descriptions. The user's own "enough — go with your recommendations"
+remains the one shortcut — a human speaking, mid-dialogue. F3 rewritten to
+match (it *expected* the interview self-answered; that expectation now belongs
+to the invariant's red arm, and F3 tests delegated from Invention on).
+
+**Green (post-edit), W4, n=3 sonnet-5: 3/3 hold the interview open.** Zero
+`assumed:` lines written, `stage:` stays wonder, every run ends with one
+interview question carrying a recommended answer. (All three also flagged the
+fixture-fit oddity — kit-bundles in an upload-CLI scratch — as a question rather
+than building through it, consistent with W1's measured behavior.)
+
+Caveats: n=3 per arm, sonnet-5 only, single-turn probe (the full multi-turn
+interview wasn't exercised); graded by the author from transcript + work-file
+state (objective signals: assumed-count, stage, reply-ends-in-question).
+
+
+
 ## 2026-07-21 — synthesis: the delta lives where discipline fights the model's momentum
 
 Four scenarios run for real on the same tier (sonnet-5) now map exactly where
