@@ -92,7 +92,7 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 **The six stages** (type them as commands, or let the flow carry itself forward in delegated/auto mode):
 
-- **/wonder** — the interview: one question at a time, a recommended answer with each, codebase-answerable questions never asked, depth matched to stakes — and "enough, go with your recommendations" always works
+- **/wonder** — the interview in rounds: each round a small batch of independent questions (2–5, numbered, a recommended answer with each) answered together, the answers seeding the next round's deeper questions; codebase-answerable questions never asked, skipped questions tracked and re-asked rather than silently dropped, depth matched to stakes — and "enough, go with your recommendations" always works
 - **/invent** — divergence with rules: structurally different options, no judging yet, parallel subagents for big designs, throwaway prototypes for questions paper can't settle
 - **/discern** — adversarial judgment: try to kill every option, choose opinionated, record kill-reasons, offer ADRs sparingly
 - **/galvanize** — the brief, agreed test seams, tracer-bullet vertical slices with verifiable acceptance criteria, the `base:` commit Tenacity will diff against

@@ -1,5 +1,40 @@
 # Results
 
+## 2026-07-22 — interview redesigned to rounds, red-to-green (user ruling)
+
+**The ruling:** the interview moves from one-question-per-message to **rounds** —
+each round one message carrying 2–5 numbered independent questions the user
+answers together, the answers seeding the next, deeper round. The drip's cost was
+real (8–12 round-trips per interview); the old rule's rationale (half-answers
+hide misbuilds) is kept by three guards now written into the skill: only
+independent questions share a round (dependent ones wait, named), every round
+states the answer-any-subset / "all your recommendations" shortcut, and a
+question ledger re-asks or explicitly parks skipped questions — never silently
+drops or self-answers them (the mode invariant owns that line, unchanged).
+
+**Red (pre-edit), W5, n=1 sonnet-5:** the drip, exactly as the old rule
+instructed — one question ("Question 1"), the rest of the branch tree queued
+behind it as future round-trips.
+
+**Green (post-edit), n=3 sonnet-5: 3/3 open with a bounded round.** 5, 4, and 3
+numbered questions respectively — each question carrying a recommended answer,
+each round stating the subset/all-recommendations shortcut, one run explicitly
+titling "Round 1" and naming what the next round covers (success criteria, scope
+edges, constraints). Homework-before-asking held in all three (each opened by
+reporting what the repo settled). No run exceeded 5 questions — the wall didn't
+appear.
+
+Consistency sweep with the redesign: W1's checklist item "one question per
+message — never a batch" (graded 2026-07-21 under the old rule) updated to the
+round discipline, annotated so the old run's grading context stays legible; W4's
+reply criterion re-worded to "an interview round" (its invariant — interviews
+rather than self-answers — is untouched). Caveats: red n=1 (the old rule's
+single-question behavior was already documented across W4's green runs), green
+n=3, sonnet-5 only, opening round only — the multi-round ledger behavior
+(re-ask/park skipped questions) is written but not yet exercised end-to-end.
+
+
+
 ## 2026-07-22 — user ruling encoded red-to-green: no mode swallows the interview
 
 **The ruling:** the Wonder interview is live human dialogue in *every* mode —
