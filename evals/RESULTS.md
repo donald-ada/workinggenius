@@ -1,5 +1,28 @@
 # Results
 
+## 2026-07-22 — W7 price tags, red-to-green: cost forks now priced inside the question
+
+**The change:** the interview is a trade, not an extraction — when an answer forks
+the scope, the question states the price ("persisted resume state roughly doubles
+the design — state file, integrity on load, cleanup story"), and competing
+desirables get a forced choice, not an importance rating.
+
+**Red:** the three W6 green transcripts (same skill text, pre-pricing) grepped and
+read — 0/3 contain any cost consequence in a question; all options offered
+cost-neutral. **Green (post-edit), n=3 sonnet-5: 3/3 price the fork** — two runs
+state an explicit "roughly doubles" with the named cost components, one states
+"materially bigger design (state store, idempotency keys, crash recovery)"; all
+three prices derive from the repo/design reality the run just read, none invented.
+
+**Honest gap:** the forced-trade-off half went 0/3 — its trigger condition
+(competing desirables in the opening round) never arose in this fixture, so the
+line is written but unexercised, same status as the multi-round ledger. A fixture
+whose Round 1 genuinely competes (two features, one slot) would exercise it;
+until then no claim. Caveats: red reuses W6 transcripts (same text, valid), green
+n=3, sonnet-5, opening round only.
+
+
+
 ## 2026-07-22 — W6 narrative-first, red-to-green: the interview opens with a correctable story
 
 **The change (from the no-AI developer-practice study):** real requirement reviews

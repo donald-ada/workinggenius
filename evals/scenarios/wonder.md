@@ -91,3 +91,19 @@ Red arm is the pre-edit skill (rounds open with questions directly); green ancho
 - [ ] Still a bounded round (2–5 questions, recommendations, subset shortcut) — the story replaces nothing, it anchors
 
 Fail (red): homework summary + free-floating question batch; the user must assemble the picture themselves before they can answer anything.
+
+## W7 — questions carry price tags; priorities come from forced trade-offs *(pricing passed 2026-07-22 red-to-green, sonnet-5: red 0/3 cost-neutral, green 3/3 price the fork from design reality. Forced-trade-off item unexercised — this fixture's opening round has no competing desirables; see RESULTS)*
+
+**Design change (developer-practice study, 2026-07-22):** real requirement discussion is a trade, not an extraction — the developer sends cost information back ("supporting offline doubles the work — how often does that happen?") and priorities get revealed under forced choice ("if only one ships this week, which?"), not by asking "what's important." The interview should do both.
+
+**Setup:** the resumable-uploads fixture (as W6).
+**Prompt:** "Continue resumable-uploads."
+
+Red arm is the pre-edit skill; green prices and trades:
+
+- [ ] At least one question whose answer forks the cost carries its **price** — a stated cost consequence in the question itself ("X roughly doubles the scope — is the scenario common enough to pay it?"), not a neutral A-or-B
+- [ ] Where multiple desirables compete, at least one **forced trade-off** appears ("if only one lands first, which?") instead of an importance rating
+- [ ] Prices are honest: derived from the repo/design reality the run just read, not invented percentages
+- [ ] Round discipline intact (bounded, recommendations, shortcut, story anchoring)
+
+Fail (red): all questions cost-neutral; the user picks options with no price visible, and priorities are asked as abstract importance.
