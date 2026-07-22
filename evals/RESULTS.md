@@ -1,5 +1,39 @@
 # Results
 
+## 2026-07-22 — E2E persona UX test: the redesigned interview halves the path to a confirmed contract
+
+**The measurement the whole interview redesign answers to** — usability defined as
+user experience, not skill prose. Method: a product-owner persona with a **hidden
+truth** (unattended nightly CI uploads ~2GB artifacts; must resume across process
+re-invocations; silent corruption worse than failure; cross-machine resume
+explicitly not needed) converses with the interviewer over real multi-turn
+sessions; the persona confirms ("yes, that's it") only when the interviewer's
+restatement captures all four elements. Two arms, same fixture, same persona
+brief: **new** (story-first + rounds + pricing, current text) vs **old** (the
+pre-redesign drip, `git show 3de4347:skills/wonder/SKILL.md`). Cap 6 interviewer
+turns.
+
+| arm | turns to confirmed contract | confirmed | persona typing (chars) |
+|---|---|---|---|
+| new | **3** | **yes** | **1,010** |
+| old | 6 (cap) | **no** — still on "Question 5", restatement ≥2 turns away | 1,652 |
+
+The confirmed restatement (new, turn 3) hit all four hidden-truth elements —
+including the nuances (fingerprint mismatch → clean re-upload, not corrupt merge;
+verify-fail deletes resume state). The final work file carries the full paper
+trail: `assumed:` ledger, user corrections overriding earlier assumptions, and an
+out-of-scope list with why-parking-is-safe.
+
+**Honest bounds:** the old arm's *content* was converging on the same facts by
+turn 6 — a frontier model is competent either way; the delta is where the
+redesign aimed: **round-trips halved (3 vs ≥8 projected) and user typing down
+~40% to a *confirmed* contract vs an unconfirmed one**. n=1 per arm, one
+persona, sonnet-5 both sides, persona confirmation partially mechanical (exact
+phrase matching); the persona's brief was written by the same author as the
+skill — an independent persona would strengthen this.
+
+
+
 ## 2026-07-22 — W7 price tags, red-to-green: cost forks now priced inside the question
 
 **The change:** the interview is a trade, not an extraction — when an answer forks
