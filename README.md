@@ -2,7 +2,7 @@
 
 [![gates](https://github.com/donald-ada/workinggenius/actions/workflows/gates.yml/badge.svg)](https://github.com/donald-ada/workinggenius/actions/workflows/gates.yml)
 
-A development workflow plugin for Claude Code, built on one observation:
+A development workflow for coding agents, built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -45,7 +45,7 @@ Then, in any project:
 
 ```
 /genius add per-user rate limiting        # start a piece of work
-/wonder                                   # get interviewed until the problem is sharp
+/wonder                                   # correct its story, answer question rounds, confirm the problem
 /invent                                   # put 2–4 structurally different options on the table
 /discern                                  # attack the options, choose one, record the kill-reasons
 /galvanize                                # slice into fresh-session-ready vertical slices
@@ -93,7 +93,7 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 **The six stages** (type them as commands, or let the flow carry itself forward in delegated/auto mode):
 
-- **/wonder** — the interview in rounds: each round a small batch of independent questions (2–5, numbered, a recommended answer with each) answered together, the answers seeding the next round's deeper questions; codebase-answerable questions never asked, skipped questions tracked and re-asked rather than silently dropped, depth matched to stakes — and "enough, go with your recommendations" always works
+- **/wonder** — the interview that opens with a correctable story ("here's what I'd build — which step is wrong?") and proceeds in rounds: each round a small batch of independent questions (2–5, numbered, a recommended answer with each, cost forks priced inside the question) answered together, the answers seeding the next round's deeper questions; codebase-answerable questions never asked, skipped questions tracked and re-asked rather than silently dropped, a perspective panel (QA/ops/security/user, fresh subagents) feeding the rounds on full-sized work, depth matched to stakes — the interview stays live dialogue in every mode, and "enough, go with your recommendations" always works
 - **/invent** — divergence with rules: structurally different options, no judging yet, parallel subagents for big designs, throwaway prototypes for questions paper can't settle
 - **/discern** — adversarial judgment: try to kill every option, choose opinionated, record kill-reasons, offer ADRs sparingly
 - **/galvanize** — the brief, agreed test seams, tracer-bullet vertical slices with verifiable acceptance criteria, the `base:` commit Tenacity will diff against
