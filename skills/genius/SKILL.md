@@ -22,49 +22,16 @@ Every piece of work travels through six geniuses, in three pairs:
 | **Implementation** | Enablement — build with tight loops | `/enable` | flying blind until a big-bang reveal |
 | | Tenacity — finish with evidence | `/tenacity` | "done" that isn't |
 
-State lives in `.genius/<slug>.md` (the `genius-file` skill owns the format). Each stage ends in a gate; the next stage checks it. Skips are allowed but always recorded — that's how gaps stay visible.
-
-Underneath the flow run two cross-cutting layers. The `domain-glossary` skill keeps `CONTEXT.md`, the project's shared language — `/wonder` and `/discern` drive it actively; every other stage just speaks it. Unlike work files, it's project-level: it compounds across all work. The `blindspot` skill hunts the unknowns the stages can't reach — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with built work. `/wonder`, `/discern`, and `/tenacity` drive it; `/blindspot <area>` calls it directly.
+State lives in `.genius/<slug>.md` (the `genius-file` skill owns the discipline). Each stage ends when its one threshold is honestly true; skips are allowed and always recorded. Two layers run underneath: the `domain-glossary` skill keeps the project's shared language in `CONTEXT.md`, and the `blindspot` skill hunts the unknowns the stages can't reach.
 
 ## What to do when invoked
 
-**No argument** → report status. Start mechanical: run `${CLAUDE_PLUGIN_ROOT}/hooks/scripts/genius-gates.sh status` — one line per in-flight file: slug, stage, mode, current-gate progress, bypassed gates, gateless sections. Trust its arithmetic over your own skim; read a file's current section body only where the report needs substance (the unchecked items' wording, a skip's reason) — don't load whole files just for status. (Script not on disk — skills installed without the plugin? Do the same scan by hand: each non-done file's `stage:`, its `**Gate — <Stage>**` checkboxes, and skip markers.) Done files get one summary line — and their `**Post-mortem:**` lines get read **as a set** (grep the lines, not the files; only lines naming a genius vote — placeholders and `abandoned —` lines don't): when the same genius comes up weakest in two or more of the recent ones, report the pattern with the calibration it implies ("Wonder weakest in 3 of the last 5 — interview deeper before offering express"). Once is a data point; twice is a calibration. For each in-flight item show: slug, current stage, unchecked gate items, recorded skips, and the exact next command — and if the stage sits **ahead of** an earlier gate that's neither checked nor skipped, the next command is repairing that gate, not the stage command. Flag anything untouched for roughly two weeks or more as stale and offer to resume or abandon it. If nothing is in flight, show the flow table and how to start.
+**No argument** → status, from the work files: each in-flight work's stage, what's unfinished, recorded skips, and the exact next command; flag work untouched for weeks as stale and offer to resume or abandon. Read done files' `**Post-mortem:**` lines as a set — a genius repeatedly weakest is calibration, not coincidence, and it should bend your sizing and mode recommendations. Nothing in flight? Show the flow and how to start.
 
-**An idea or request** → start work. Sizing is a decision you announce with its reason, not a menu you present: pick the path, say why in one line, and start moving — the user overrules with a sentence, and the overrule becomes the recorded sizing.
+**An idea** → size it and start, announcing the call with its reason (the user overrules with a sentence): **express** — single obvious approach, fits one session, no new concept: Wonder in a paragraph, straight to slices; **full flow** — anything else. Ceremony is priced (a measured full six-stage run cost 11× its no-plugin baseline, n=1 — `evals/RESULTS.md`), so say what the stages are buying or what makes them safe to skip, and record the call as the `**Sizing:**` line. Settle the mode (guided / delegated / auto — the `genius-file` skill owns the semantics; every mode keeps the Wonder interview live).
 
-- **Express** — single obvious approach, one seam, fits one session, no new concept. Wonder in one paragraph, Invention/Discernment skipped with reason, straight to `/galvanize`. (`/genius express <idea>` forces this path.)
-- **Full flow** — any of express's four tests fails. Run the `genius-file` skill to create the work file, then hand to `/wonder`.
+**A work slug** → deep status on that one: where it stands, anything smelly, the next command.
 
-Announce the cost with the call. The full flow is insurance priced in tokens — a measured six-stage run cost 11× its no-plugin baseline (n=1, `evals/RESULTS.md`) — so the announcement names what the stages are buying ("two capable designs exist and the wrong one is expensive to unwind") or what makes them safe to skip ("one seam, no new concept"). Write the call and its reason as the `**Sizing:**` line under the work file's title (the `genius-file` skill owns the format): the close-out judges sizing calls against outcomes, and an unrecorded call can't be judged. "Just do it" on full-flow-shaped work buys delegated mode, not express — trimming checkpoints is a mode choice; skipping judgment on work that needs it is how plausible-but-wrong ships.
+## When work feels wrong
 
-For the full flow, also settle the mode — recommend one with a reason and let the user pick: `mode: guided` (checkpoints as written), `delegated` (after the interview, run on your recommendations with one stop at the Galvanizing breakdown), or `auto` (after the interview, no stops; the user explicitly asked for hands-off). Every mode keeps the Wonder interview live — modes govern what happens after the confirmed problem, never the dialogue that confirms it. Modes live in the work file; the `genius-file` skill owns their semantics.
-
-Both calls — sizing and mode — get bent by the record: check recent post-mortems (and any `Lessons:` in the `## Working Genius` section) before recommending. A genius that keeps coming up weakest argues for the path that exercises it — repeated weak Wonder → slower to offer express; repeated weak Tenacity → recommend guided over auto. Say when the record changed your recommendation; that's the post-mortems earning their keep.
-
-**A work slug** → deep status on that one: read its file, summarize where it stands, flag anything smelly (see below), and name the next command.
-
-## Diagnosing genius gaps
-
-When work feels wrong, the skipped or rushed genius is the usual cause. Read the work file and match the symptom:
-
-- "We built it and the user doesn't want it" → Wonder was skipped or soft (was the problem statement really confirmed?)
-- "The design fights the codebase everywhere" → Invention never explored options that follow the grain, or Discernment never attacked the winner
-- "We keep re-litigating the same decision" → Discernment's kill-reasons weren't recorded
-- "Sessions keep stalling, nobody knows what's next" → Galvanizing's slices aren't independently grabbable
-- "Huge diff, no tests, works on my machine" → Enablement drifted from the seams
-- "It was 'done' three times" → Tenacity's gate was claimed without fresh evidence
-
-Three rules of the diagnosis:
-
-- **Compound causes are normal.** Name every gap the file shows, then recommend repairing the **most upstream** one first — downstream stages inherit its fix. Never prescribe re-running the whole flow.
-- **The loudest smell is an unrecorded bypass** — a stage that ran while an earlier gate sits unchecked with no skip line. Recorded skips are honest suspects; unrecorded bypasses are usually the culprit. (And repeated false "done" is the three-failed-fixes rule wearing different clothes: stop re-fixing, question the setup.)
-- **Evidence isn't only in the file.** When a claim begs verification ("exported fine on my machine"), look at the repo: does the code exist, does anything test it? And the done files' post-mortems are prior evidence: a suspected gap that matches a repeated weakest-genius is close to confirmed.
-
-## Entering mid-flow
-
-Not everything starts at Wonder:
-
-- **A design already agreed in conversation** → start at `/galvanize`; backfill Wonder and Discernment sections from the conversation, marked as backfilled.
-- **A bug with an obvious fix** → express path (see the `genius-file` skill).
-- **A bug that resists diagnosis** → that's Wonder for bugs: question the symptom until you have a tight reproduction — no fix before a root cause. After three failed fixes, stop fixing and question the architecture; the fourth attempt is where thrashing starts.
-- **Someone else's plan handed to you** → `/discern` it first; imported plans deserve an attack before they deserve slices. Record the plan as an imported option (Invention skipped, reason recorded). The attack will surface questions the plan never answered — those are Wonder's questions: settle them with a targeted mini-interview (or `assumed:` lines), write them into a Wonder section marked backfilled, and check its gate before slicing. Imported plans import unexamined problems.
+The skipped or rushed genius is the usual cause — match the symptom: built the wrong thing → Wonder; the design fights the codebase → Invention or Discernment; the same decision keeps getting re-litigated → kill-reasons never recorded; sessions stall with nobody sure what's next → slices not grabbable; huge untested diff → Enablement; "done" three times → Tenacity. Repair the most upstream gap first — downstream inherits its fix. And not everything starts at Wonder: an agreed design starts at `/galvanize` (earlier sections backfilled, marked so); an imported plan gets `/discern`'s attack before it gets slices; a bug that resists diagnosis gets Wonder-for-bugs — a tight reproduction before any fix, and after three failed fixes stop fixing and question the setup.
