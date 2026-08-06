@@ -5,61 +5,16 @@ description: Read and update Working Genius work files. Use when a stage skill n
 
 # The Work File
 
-One piece of work = one markdown file under `.genius/`. The file is the contract: it carries the work across sessions, so no stage depends on conversation memory. Full template in [FILE-FORMAT.md](FILE-FORMAT.md).
+One piece of work = one markdown file under `.genius/` (a `## Working Genius` section in `CLAUDE.md`/`AGENTS.md` may pin a different directory). A loose sketch of the shape lives in [FILE-FORMAT.md](FILE-FORMAT.md).
 
-## Where files live
+The concept: **the file, not conversation memory, carries the work** — the confirmed problem, the options and their kill-reasons, the slices, the evidence, the post-mortem. Any fresh session picks up exactly where the last one stopped.
 
-Default `.genius/<slug>.md` at the repo root. A `## Working Genius` section in `CLAUDE.md` or `AGENTS.md` may override the directory — check there first. Create the directory lazily, on the first work file.
+What that takes:
 
-## Read discipline
+- **Read before acting; write the moment a decision lands.** The file outranks whatever you remember about the work. `stage:` names where the work currently is.
+- **Skips are explicit.** Any stage may be skipped, never silently: `> ⚠ Skipped — <reason>` in its section. When work goes wrong later, recorded skips are the first suspects.
+- **Assumptions are visible.** A decision made without the user is an `assumed: <question> → <answer>` line, surfaced at next contact — an honest assumption beats a hollow confirmation.
+- **Modes** (`mode:` frontmatter): `guided` — checkpoints as written; `delegated` / `auto` — after the confirmed problem, run on your own recommendations, recording each as `assumed:` (delegated stops once, at the plan; auto doesn't stop). One invariant no mode overrides: **the Wonder interview is live dialogue with the user** — a model answering its own interview confirms nothing; hands-off begins after the problem is confirmed.
+- **Small work rides the express path**: Wonder in a paragraph, Invention/Discernment skipped with reason, straight to slices. First-class, not a violation.
 
-- **Read before acting.** Any skill or session touching a tracked piece of work reads its file first — the file outranks whatever you remember about the work.
-- The `stage:` frontmatter names the stage the work is **currently in** (not the last one finished): `wonder | invention | discernment | galvanizing | enablement | tenacity | done`.
-
-## Write discipline
-
-- **Write at the moment a decision lands**, not in a batch at the end. A gate that passed but wasn't written down did not pass.
-- Each stage owns one section of the file and ends it with its **gate** — a checklist of completion criteria. Check items off only when they are true; never pre-check. A conditional item whose condition never arose gets checked with an inline `(n/a — reason)` — honesty needs an idiom, or it hesitates.
-- Keep entries behavioral: interfaces, contracts, acceptance criteria. No *code* paths or line numbers — they go stale before the next session. Pointers to durable artifacts (an ADR, a spec doc, a docs page or tested snippet) are fine; that's what they're for.
-
-## Modes
-
-`mode:` in the frontmatter sets how much the flow leans on the user (default `guided`).
-
-**One invariant stands above every mode: the Wonder interview is live dialogue, always.** The interview extracts what only the user owns — what they actually want — and a model answering its own interview questions is circular: it confirms nothing, however many `assumed:` lines it writes. No mode auto-answers the interview. In delegated or auto, work arriving at Wonder still stops and interviews the user; the only shortcut through it is the **user's own** "enough — go with your recommendations" (a human speaking, mid-dialogue), or the express path chosen at sizing (where the user is present by definition). A mode's jurisdiction begins **after** Wonder's gate is confirmed.
-
-- **`guided`** — every stage's user checkpoints run as written. The default; right when the user is present and the work is theirs to shape.
-- **`delegated`** — after Wonder's confirmed gate: wherever a stage would ask the user, adopt your recommended answer and record it in that section as `assumed: <question> → <answer>`. Stop exactly once more: at Galvanizing's breakdown approval — this one stop **subsumes** every checkpoint Galvanizing names (seam agreement included); present design, seams, and slices together there rather than logging theater `assumed:` lines for things visible at the same stop. Commit the plan before stopping. When the user approves at the stop, the approving session checks the **entire** Galvanizing gate right then — approval satisfies those boxes, and leaving them unchecked makes every later builder relitigate the gate. Quote the approval on the gate item (`"two slices, right size" — user`): an approval without attributed words is indistinguishable from the flow approving itself, and a reviewer will rightly ask who ratified a scope change. Then build through to done.
-- **`auto`** — as `delegated`, but even the Galvanizing checkpoint becomes a recorded assumption. Only enter this mode when the user explicitly asked for hands-off ("run it all, don't stop me") — and hands-off starts *after* the interview: the confirmed problem is what auto runs unattended on.
-
-Assumptions are gate-satisfying **outside the interview**: a post-Wonder "user confirmed" gate item may be checked in delegated/auto mode when the corresponding `assumed:` line exists — annotate the checkbox `(via assumed: — delegated)` so the page reads honestly. Wonder's "confirmed by the user in their own words" is never satisfiable by an `assumed:` the flow wrote itself — only by the user's words, or by the user's explicit "go with your recommendations" recorded as such. Assumptions are also the first thing a returning user should review — surface them.
-
-`assumed:` is not mode-exclusive: in **any** mode, a question that arises past Wonder when the user isn't reachable gets the same treatment — adopt your recommended answer, record `assumed: <question> → <answer>` in the current stage's section, surface it at next contact. The one place this never applies is the interview itself: an unreachable user there means the work **waits at Wonder** — an interview with nobody in it is not an interview.
-
-## The gate rule
-
-A stage skill may not begin until the previous stage's gate is fully checked **or** an explicit skip is recorded. When you hit an unchecked gate, stop and offer the user two options: run the missing stage, or skip it.
-
-The rule is also enforced mechanically. `${CLAUDE_PLUGIN_ROOT}/hooks/scripts/genius-gates.sh check` scans every in-flight file for a stage sitting past an earlier gate that is neither fully checked nor skipped, and a Stop hook runs the same check before a session ends — one loud, repairable refusal per distinct bypass. If it blocks you, the honest ways out are the same as ever: check the open items against reality (only if they truly hold), record the skip with its reason, or move `stage:` back. (Script not on disk — skills installed without the plugin? Apply the same check by hand before starting a stage.) The hook enforces the letter of the rule; the honesty of each checked box is still yours.
-
-## The skip protocol
-
-Skipping a genius is allowed — silently skipping is not. To skip, record in the skipped stage's section:
-
-```markdown
-> ⚠ Skipped — <one-line reason, e.g. "trivial change, options are obvious">
-```
-
-Skips are visible on purpose: when work goes wrong later, the recorded skips are the first suspects (`/genius` reads them to diagnose genius gaps).
-
-## Small work
-
-Not everything deserves six stages. If the user asks to track something genuinely small (a fix, a tweak), create the file with Wonder filled in one paragraph — gate included and checked against it; small isn't exempt from honesty — mark Invention and Discernment skipped with reason "small work — single obvious approach", and set `stage: galvanizing`. Record `base:` as the current commit — no separate plan commit needed; the work file rides in the slice commit. The express path is a first-class citizen, not a violation.
-
-## Done
-
-When Tenacity's gate is fully checked, set `stage: done` and add a one-line post-mortem: which genius was weakest this run. Done files stay in place as decision history.
-
-Post-mortems have readers — that's what makes them worth writing honestly. Tenacity owns the writing discipline (against the record, repeat weaknesses name their adjustment); `/genius` owns the reading (as a set, to calibrate sizing and mode). Write each one as if the next run will act on it, because it will.
-
-Abandoning work is also a way to be done: set `stage: done` with post-mortem `abandoned — <reason>`. An honest abandonment beats a zombie file nagging every session.
+Done files stay in place — they're decision history, and their post-mortem lines calibrate the next run's sizing. Abandoning honestly (`stage: done`, post-mortem `abandoned — <reason>`) beats a zombie file.

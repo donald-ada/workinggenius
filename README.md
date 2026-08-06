@@ -27,7 +27,7 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 
 | Claim | Evidence |
 |---|---|
-| The gate rule is **code**, not prose — bypasses are detected mechanically and block the session | `hooks/scripts/genius-gates.sh` + Stop hook; 53 deterministic tests: `bash evals/gates.test.sh` |
+| The gate rule **was** code, not prose — bypasses detected mechanically. *Retired to concept level 2026-08-06: each stage now names its threshold and the model is trusted with it (see `evals/RESULTS.md` for the ruling and what it trades away)* | parser + Stop hook remain in `hooks/`, tests still green: `bash evals/gates.test.sh` |
 | The prose is **tested** against a no-plugin baseline — and the tests locate the value precisely instead of flattering it. Five scenarios run for real say it's the moments where correct practice runs *against the model's momentum*: writing the failing test first (skill 3/3, baseline **0/3**) and questioning the ask before building it (3/3 vs **0/3**) are clean wins; the gate-as-stop partial (3/3 vs 1/3); while disciplines a careful model already follows when asked — verify-before-done, history-informed sizing — are honest **softballs the baseline passes**. The axis even predicted a result before its run (W1), and bounded itself honestly when later probes (D1, a self-attack test) failed to widen it — sharpening to one sentence: the value is in forcing the *action* at the decision point, never in eliciting *reflection* a capable model already does when asked. | `evals/RESULTS.md` (2026-07-21 synthesis); 31 scenarios, graded coverage tracked by *(not yet run)* markers — the rest is [ROADMAP](ROADMAP.md) Phase 1 |
 | The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
 | The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task), which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
@@ -45,7 +45,7 @@ Then, in any project:
 
 ```
 /genius add per-user rate limiting        # start a piece of work
-/wonder                                   # correct its story, answer question rounds, confirm the problem
+/wonder                                   # correct its story, answer its questions, confirm the problem
 /invent                                   # put 2–4 structurally different options on the table
 /discern                                  # attack the options, choose one, record the kill-reasons
 /galvanize                                # slice into fresh-session-ready vertical slices
@@ -64,7 +64,7 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 **One piece of work = one markdown file** under `.genius/`. The file — not conversation memory — carries the work: the confirmed problem, the options and their kill-reasons, the slices and their acceptance criteria, the build log, the close-out evidence. Any fresh session picks up exactly where the last one stopped.
 
-**Every stage ends in a gate** — a checklist of criteria that must be checked against reality before the next stage will start. Gates are how "the agent rushed ahead" stops happening. And the gate rule is code, not just prose: a shared parser (`hooks/scripts/genius-gates.sh`) mechanically detects any stage that ran past an earlier gate that's neither checked nor skipped; a **Stop hook** refuses to end a session while one exists, and the SessionStart hook hands the same warning to the next session. Enforcement is per-repo: `warn` (default) blocks once per distinct bypass, always naming the repair; `Gate enforcement: block` (pinned by `/setup-working-genius`) re-blocks every stop attempt until the bypass is repaired.
+**Every stage ends at a threshold, not a checklist.** Each skill names the one thing that must be honestly true before the next stage starts — the problem confirmed, a real choice made, slices grabbable cold, evidence fresh — and trusts the model's judgment on how to get there. The detailed gate grammar and its Stop-hook enforcement were retired to concept level in the 2026-08 redesign (rationale and trade-offs recorded in `evals/RESULTS.md`): as model capability rises, constraints written for yesterday's models increasingly bind judgment rather than protect it. The parser, hooks, and their 53 deterministic tests remain in `hooks/` — still green, still able to read pre-redesign work files.
 
 **Skips are explicit.** A small fix doesn't need six stages; the express path fills Wonder in one paragraph and marks Invention/Discernment skipped *with a reason*. When work goes wrong later, recorded skips are the first suspects — `/genius` reads them to diagnose the gap.
 
@@ -93,18 +93,18 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 **The six stages** (type them as commands, or let the flow carry itself forward in delegated/auto mode):
 
-- **/wonder** — the interview that opens with a correctable story ("here's what I'd build — which step is wrong?") and proceeds in rounds: each round a small batch of independent questions (2–5, numbered, a recommended answer with each, cost forks priced inside the question) answered together, the answers seeding the next round's deeper questions; codebase-answerable questions never asked, skipped questions tracked and re-asked rather than silently dropped, a perspective panel (fresh subagents, cast picked per territory — QA/ops/security/user the stock four) feeding the rounds on full-sized work, depth matched to stakes — the interview stays live dialogue in every mode, and "enough, go with your recommendations" always works
-- **/invent** — divergence with rules: structurally different options, no judging yet, parallel subagents for big designs, throwaway prototypes for questions paper can't settle
-- **/discern** — adversarial judgment: try to kill every option, choose opinionated, record kill-reasons, offer ADRs sparingly
-- **/galvanize** — the brief, agreed test seams, tracer-bullet vertical slices with verifiable acceptance criteria, the `base:` commit Tenacity will diff against — and, where the repo pins issue tracking, the approved slices published as one issue each before building starts
-- **/enable** — red-before-green at the agreed seams, one slice at a time, each slice committed as it closes, plan deviations surfaced instead of improvised. Given just the work slug it coordinates: one fresh subagent per slice, verified on return — no new session needed
-- **/tenacity** — no completion claim without fresh evidence: line-by-line verification, one context-isolated reviewer returning both axes (spec + standards), cleanup, commit, and a post-mortem written against the previous ones — recurring lessons promoted (sparingly) to `CLAUDE.md`
+- **/wonder** — the live interview that turns a raw idea into a user-confirmed problem: homework before questions, recommendations attached, prices on cost forks, "don't build this" a win — and live dialogue in every mode
+- **/invent** — genuinely different options on the table before anyone falls in love; no judging yet; throwaway prototypes for questions paper can't settle
+- **/discern** — try to kill every option, including the favorite; choose opinionated; record the kill-reasons so rejections stay rejected
+- **/galvanize** — the decision converted into slices a fresh session can grab cold, the `base:` commit recorded — and slices published as one issue each where the repo pins issue tracking
+- **/enable** — one slice per fresh context, tests leading the code, reality voting every few minutes, deviations recorded instead of improvised
+- **/tenacity** — "done" as a claim about fresh evidence: everything re-run and read, a context-isolated reviewer, cleanup, commit, a post-mortem the next run reads
 
 **Support:**
 
-- **/blindspot** — the unknowns layer, built on one truth: the map (your prompt, the work file, the glossary) is not the territory (the codebase and its real constraints), and the gap between them is where work fails. Three moves at the three moments the gap is widest: a read-only **territory pass** before unfamiliar work (the questions you didn't know to ask, what "good" looks like here, the potholes, a sharper ask), **teach-before-judging** when the user is confirming a choice they can't evaluate, and a **pre-acceptance quiz** that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
+- **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
 - **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (one issue per slice, opened at Galvanizing, closed as slices close)
-- **genius-file** (model-invoked) — the work-file discipline: format, read/write rules, the gate rule, the skip protocol, modes, the express path
+- **genius-file** (model-invoked) — the work-file discipline: the file carries the work, skips and assumptions always recorded, modes, the express path
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/discern`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
 ## Token economics

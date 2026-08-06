@@ -1,5 +1,29 @@
 # Results
 
+## 2026-08-06 — user ruling: concept-first redesign — detailed constraints and gate checklists retired
+
+Every skill is rewritten to concept level: each keeps its purpose, its failure
+mode, and the one threshold that must be honestly true before the next stage
+starts; procedural steps, rule lists, and the gate checkbox blocks are removed.
+Rationale (user): model capability keeps rising — constraints written for
+yesterday's models increasingly bind tomorrow's judgment rather than protect
+it. The mechanical layer (`hooks/`, the shared parser, its 53 deterministic
+tests) stays in the repo and stays green, but the default flow no longer
+writes gate blocks, so there is nothing for it to enforce — files without
+gates report `nogate`, surfaced-not-blocking, by the parser's own design.
+
+What this trades away, on the record: the 2026-07-21 synthesis located this
+plugin's measured value precisely at momentum-contrary *action points* —
+red-before-green (E1, 0/3 baseline), question-the-ask (W1, 0/3), the gate
+stop (M1, 1/3). Those survive as single concept lines in the rewritten
+skills; whether a concept line holds behavior the way a checklist plus a
+Stop hook did is now the open measurement question, and the honest way to
+find out is the same as ever: run the scenarios against the new prose. The
+scenario inventory written against the detailed prose (interview rounds,
+gate wording, floor items, G4/B4/D4/T4/W8 from earlier in this redesign) is
+historical until re-derived against the concept-first skills — treat every
+*(not yet run)* marker accordingly.
+
 ## 2026-07-22 — E2E persona UX test: the redesigned interview halves the path to a confirmed contract
 
 **The measurement the whole interview redesign answers to** — usability defined as
