@@ -7,10 +7,11 @@ mode, and the one threshold that must be honestly true before the next stage
 starts; procedural steps, rule lists, and the gate checkbox blocks are removed.
 Rationale (user): model capability keeps rising — constraints written for
 yesterday's models increasingly bind tomorrow's judgment rather than protect
-it. The mechanical layer (`hooks/`, the shared parser, its 53 deterministic
-tests) stays in the repo and stays green, but the default flow no longer
-writes gate blocks, so there is nothing for it to enforce — files without
-gates report `nogate`, surfaced-not-blocking, by the parser's own design.
+it. The mechanical layer went with it — a follow-up ruling in the same session
+removed `hooks/` (parser, SessionStart injection, Stop gate), the 53-test
+suite, and the CI workflow entirely; the plugin is prose-only now. The
+history up to `925accf` is the receipt for what the layer was: it lived
+green to its last commit.
 
 What this trades away, on the record: the 2026-07-21 synthesis located this
 plugin's measured value precisely at momentum-contrary *action points* —

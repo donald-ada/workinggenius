@@ -1,5 +1,13 @@
 # Roadmap
 
+> **Status note (2026-08-06):** the concept-first redesign (see
+> `evals/RESULTS.md`) retired the detailed skill prose, the gate checklists,
+> and the entire mechanical layer (`hooks/`, the parser, the 53-test suite,
+> CI). Phases below that build on that layer — Phase 1.3's CI, Phase 3's gate
+> engine — and scenario inventories written against the old prose no longer
+> match the repo. This document awaits its own re-derivation against the
+> concept-first bet; until then read it as the pre-redesign plan it was.
+
 The plan for making this plugin worth choosing in a market of 200k-star workflow
 frameworks — derived from a July 2026 competitive analysis of the high-star field
 (superpowers, ECC, spec-kit, BMAD, gstack, tdd-guard, et al.), the documented

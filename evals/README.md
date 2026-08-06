@@ -9,14 +9,13 @@ This is also what keeps the plugin's voice its own: lines survive because they c
 - `triggers.md` — should-trigger / should-not-trigger prompt sets for every model-invoked skill; the near-misses are the valuable rows
 - `scenarios/<skill>.md` — behavior scenarios for each of the ten working skills, three or more per skill (the setup wizard has none yet — an honest gap, not an oversight), each named for the failure mode it tests, each with a graded checklist; scenarios authored but not yet run are marked *(not yet run)* until a RESULTS.md row exists
 - `fixtures/` — `scratch.sh` builds the scratch project the scenarios run in; canonical work files (`checkout-discounts.md`, `done/`) the setups reference
-- `gates.test.sh` — deterministic suite for the gate parser and Stop hook, the one part of the plugin that is code rather than prose; no model involved, run it directly: `bash evals/gates.test.sh`
 - `run-scenario.sh` — headless runner (prototype): builds a scratch, sets up one scenario, runs its prompt through `claude -p`, saves the transcript. Implements scenarios one at a time as they're run for real. Grading stays separate (blind subagent / human)
 - `RESULTS.md` — the run log, newest entry first; every measured claim in a skill or the README should trace to an entry here
 
 ## Running a scenario
 
 1. Build a scratch project: `bash fixtures/scratch.sh /tmp/wg-eval && cd /tmp/wg-eval`
-2. Install the skills: `mkdir -p .claude/skills && cp -r <plugin-repo>/skills/* .claude/skills/`. This exercises the skills, not the hooks — and `${CLAUDE_PLUGIN_ROOT}` is unset in this mode, so the mechanical scan `/genius` and `genius-file` reach for isn't on disk; the skills' hand-scan fallback is what runs (and is what those scenarios grade). To exercise the script path and the SessionStart/Stop hooks, install the plugin for real instead.
+2. Install the skills: `mkdir -p .claude/skills && cp -r <plugin-repo>/skills/* .claude/skills/`. The plugin is prose-only since the 2026-08-06 concept-first redesign — installing the skills is installing the plugin.
 3. Apply the scenario's **Setup** (copy fixture work files, adjust `stage:`, make the described commits).
 4. Run the **Prompt** in a **fresh session** — never the session you edited skills in; leftover authoring context masks exactly the gaps you're hunting. Headless works for single-turn scenarios: `claude -p "<prompt>"` from inside the scratch project. Scenarios marked *(interactive)* need a live session.
 5. Grade every checklist item against the transcript — binary, no partial credit.

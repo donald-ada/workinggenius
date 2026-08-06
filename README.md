@@ -1,7 +1,5 @@
 # Working Genius
 
-[![gates](https://github.com/donald-ada/workinggenius/actions/workflows/gates.yml/badge.svg)](https://github.com/donald-ada/workinggenius/actions/workflows/gates.yml)
-
 A development workflow for coding agents, built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
@@ -27,7 +25,7 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 
 | Claim | Evidence |
 |---|---|
-| The gate rule **was** code, not prose — bypasses detected mechanically. *Retired to concept level 2026-08-06: each stage now names its threshold and the model is trusted with it (see `evals/RESULTS.md` for the ruling and what it trades away)* | parser + Stop hook remain in `hooks/`, tests still green: `bash evals/gates.test.sh` |
+| The gate rule **was** code, not prose — bypasses detected mechanically. *Retired 2026-08-06, mechanical layer removed with it: each stage now names its threshold and the model is trusted with it (see `evals/RESULTS.md` for the ruling and what it trades away)* | the parser, hooks, and their 53 tests lived until `925accf` — the history is the receipt |
 | The prose is **tested** against a no-plugin baseline — and the tests locate the value precisely instead of flattering it. Five scenarios run for real say it's the moments where correct practice runs *against the model's momentum*: writing the failing test first (skill 3/3, baseline **0/3**) and questioning the ask before building it (3/3 vs **0/3**) are clean wins; the gate-as-stop partial (3/3 vs 1/3); while disciplines a careful model already follows when asked — verify-before-done, history-informed sizing — are honest **softballs the baseline passes**. The axis even predicted a result before its run (W1), and bounded itself honestly when later probes (D1, a self-attack test) failed to widen it — sharpening to one sentence: the value is in forcing the *action* at the decision point, never in eliciting *reflection* a capable model already does when asked. | `evals/RESULTS.md` (2026-07-21 synthesis); 31 scenarios, graded coverage tracked by *(not yet run)* markers — the rest is [ROADMAP](ROADMAP.md) Phase 1 |
 | The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
 | The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task), which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
@@ -64,11 +62,11 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 **One piece of work = one markdown file** under `.genius/`. The file — not conversation memory — carries the work: the confirmed problem, the options and their kill-reasons, the slices and their acceptance criteria, the build log, the close-out evidence. Any fresh session picks up exactly where the last one stopped.
 
-**Every stage ends at a threshold, not a checklist.** Each skill names the one thing that must be honestly true before the next stage starts — the problem confirmed, a real choice made, slices grabbable cold, evidence fresh — and trusts the model's judgment on how to get there. The detailed gate grammar and its Stop-hook enforcement were retired to concept level in the 2026-08 redesign (rationale and trade-offs recorded in `evals/RESULTS.md`): as model capability rises, constraints written for yesterday's models increasingly bind judgment rather than protect it. The parser, hooks, and their 53 deterministic tests remain in `hooks/` — still green, still able to read pre-redesign work files.
+**Every stage ends at a threshold, not a checklist.** Each skill names the one thing that must be honestly true before the next stage starts — the problem confirmed, a real choice made, slices grabbable cold, evidence fresh — and trusts the model's judgment on how to get there. The detailed gate grammar, its Stop-hook enforcement, and the whole mechanical layer (`hooks/`, the parser, its 53 deterministic tests) were retired in the 2026-08 redesign — rationale and trade-offs recorded in `evals/RESULTS.md`: as model capability rises, constraints written for yesterday's models increasingly bind judgment rather than protect it. Pre-redesign work files with gate checklists still read fine — they're records, and records don't expire.
 
 **Skips are explicit.** A small fix doesn't need six stages; the express path fills Wonder in one paragraph and marks Invention/Discernment skipped *with a reason*. When work goes wrong later, recorded skips are the first suspects — `/genius` reads them to diagnose the gap.
 
-**A SessionStart hook** injects a two-line map plus your in-flight work into every session, so both you and the model always know what's mid-flight and what's next.
+**`/genius` is the map** — run it any time for where every piece of work stands and what runs next; any session resuming tracked work reads its work file first (the `genius-file` skill's one discipline).
 
 **Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend sizing and mode for new work, and a lesson that keeps recurring gets promoted — sparingly, by a three-condition test — into `CLAUDE.md`, where every future session reads it. The workflow's weakest stage is data, not a mystery.
 
