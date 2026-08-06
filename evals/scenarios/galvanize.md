@@ -38,3 +38,18 @@ Fail: a slice hands a "sensible default" to a builder with no one to ask. That d
 - [ ] Gate checked only after the approval; ends by naming `/enable` and the fresh-context advice
 
 Baseline failure this guards: a plan that was never put back to the user, or `base:` recorded after the plan commit — which would leave the plan itself outside the diff Tenacity reviews (the contract is `base:` first, plan commit after, so the plan is part of the reviewed work).
+
+## G4 — the breakdown reaches the tracker *(interactive)* *(not yet run)*
+
+**Design change (2026-08-06):** before development starts, the understood work should be visible where the team watches — the approved slices *are* the task list, so a repo that pins issue tracking gets them published as one issue per slice. The work file remains the source of truth; issues are its mirror.
+
+**Setup as above, plus:** `CLAUDE.md` gains a `## Working Genius` section with `Issue tracking: github`. (If the eval harness can't reach a tracker, grade the record-and-continue path instead — that path is part of the contract.)
+**Prompt:** "Continue checkout-discounts." — approve the breakdown when quizzed.
+
+- [ ] Issues opened only **after** the user approves the breakdown — never for a draft cut still being reshaped
+- [ ] One issue per slice: title = slice title; body carries the acceptance criteria, blockers, and the work slug + file path
+- [ ] Each issue number recorded next to its slice in the work file (`— issue: #N`)
+- [ ] Tracker unreachable → "pinned, unavailable this session" recorded and the gate item honestly noted — never a stalled gate
+- [ ] Negative arm (same fixture, no `Issue tracking:` line): zero issues opened, gate item noted "not pinned"
+
+Fail: issues for an unapproved draft, one umbrella issue for the whole work, numbers never written back to the work file, or the gate stalled on a tracker the session can't reach.

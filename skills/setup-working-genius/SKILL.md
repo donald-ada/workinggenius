@@ -26,6 +26,8 @@ Run it as a conversation, not a script: look first, propose what you found, and 
 
 **C — Gate enforcement.** How hard should the Stop hook hold the gate rule when a stage ran past an unchecked, unskipped gate? `warn` (default): blocks ending the session once per distinct bypass state — the repair message lands, then the user can still stop. `block`: every stop attempt re-blocks until the bypass is repaired or recorded as skipped. Recommend `warn` for solo exploratory repos and `block` where the work files are shared history other sessions build on. Only `block` needs writing — `warn` is what no line means.
 
+**D — Issue tracking.** Default off — the work file already carries the state, and a solo repo rarely needs a mirror. Pin `Issue tracking: github` when people watch progress through the tracker: Galvanizing then opens one issue per approved slice (before any building starts), Enablement closes each as its slice closes, Tenacity sweeps for orphans at close-out. The work file stays the source of truth — issues are its published mirror, never a second place to plan. Only on needs writing — off is what no line means.
+
 ### 3. Write
 
 Pick the file: `CLAUDE.md` if it exists, else `AGENTS.md` if it exists; if neither, ask which to create — never create one when the other already exists. If a `## Working Genius` section already exists, update it in place — don't append a duplicate, and preserve any `Lessons:` list Tenacity has grown there (it's project memory, not setup output).
@@ -35,6 +37,7 @@ Pick the file: `CLAUDE.md` if it exists, else `AGENTS.md` if it exists; if neith
 
 Work files: `.genius/` (committed). Flow: /wonder → /invent → /discern → /galvanize → /enable → /tenacity; type /genius for status.
 Gate enforcement: block
+Issue tracking: github
 
 Verify commands:
 - typecheck: `<command>`

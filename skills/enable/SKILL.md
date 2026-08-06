@@ -52,6 +52,7 @@ The plan being **silent** is the same case in miniature: a value, contract, or o
 - Check off the slice's acceptance criteria **only against real command output**.
 - Append to the build log: what landed, **every convention you introduced** (injection mechanisms, error orderings, body shapes, test-setup idioms — the things the next session would otherwise reverse-engineer from code), and **known untested edges**. The next session reads this instead of your mind.
 - **Commit the slice, work-file update included** (message: what behavior landed). A slice that only exists in the working tree dies with the session; Tenacity reviews and can still reshape history, but every closed slice deserves to survive a crash.
+- The slice carries an `issue: #N`? Close it as part of closing the slice — `closes #N` in the commit message where pushes do that, else close it directly with a one-liner pointing at the commit. A slice reshaped or dropped mid-build (plan-meets-reality) updates the work file first, then its issue: closed with the reason, a replacement opened only if the revised plan has one.
 
 More unblocked slices → as coordinator, dispatch the next; as builder, report done and name the next slice. All slices built → check the Enablement gate below in the work file, set `stage: tenacity`, and tell the user: next is `/tenacity`.
 

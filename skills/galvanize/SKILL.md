@@ -39,7 +39,15 @@ Two licensed exceptions to the vertical rule: **non-code slices** (docs, changel
 
 Show the numbered slices with blockers and acceptance criteria, then have the user pressure-test the cut itself: which slice would they demo first? does any slice hide two behaviors — or do two slices share one? is any blocker real, or just ordering out of habit? Reshape until they approve; approval of a breakdown they never pushed on is approval of nothing.
 
-### 5. Set up the sessions
+### 5. Publish the slices as issues — when the repo asks for it
+
+If the repo pins issue tracking (an `Issue tracking:` line in the `## Working Genius` section of `CLAUDE.md`/`AGENTS.md`) — or the user asks for it on this work — the approved breakdown gets published: **one issue per slice**, opened only after the user approves the breakdown. An issue for a slice the user may still reshape is churn, not tracking.
+
+- Title: the slice title. Body: the slice's acceptance criteria, its blockers, and the work slug + work file path — enough for a reader in the tracker to see what this slice is and where the full plan lives.
+- Record each number next to its slice in the work file (`— issue: #N`). The work file remains the source of truth: issues mirror the approved plan for whoever watches the tracker; a plan change is recorded in the work file first and reaches the issue when the slice closes or is invalidated (Enablement owns both).
+- Use whatever the session has (gh CLI, GitHub tooling). Nothing available, or no tracker to reach? Record "issue tracking pinned, unavailable this session" in the plan and continue — the gate never blocks on a tracker.
+
+### 6. Set up the sessions
 
 Record the sha of HEAD **as it stands now** in the frontmatter as `base:`, write the approved slices into the work file, and commit — one commit, no self-reference (the plan commit itself lands after `base:`, which is correct: the plan is part of the work Tenacity reviews). In delegated mode, commit the plan *before* stopping for review; if the review changes it, amend and recommit. Then advise the user on context hygiene:
 
@@ -53,5 +61,6 @@ Record the sha of HEAD **as it stands now** in the frontmatter as `base:`, write
 - [ ] Every slice is a vertical cut, demoable on its own
 - [ ] Every slice has independently verifiable acceptance criteria
 - [ ] User approved the breakdown
+- [ ] Slice issues opened, numbers recorded — or issue tracking not pinned / unavailable (noted)
 
 Set `stage: enablement` and tell the user: next is `/enable` (per slice, fresh session for each).

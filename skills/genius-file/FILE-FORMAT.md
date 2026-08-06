@@ -74,6 +74,7 @@ Wounds: <filled in by Discernment's attack — one line per wound>
 - [ ] Every slice is a vertical cut, demoable on its own
 - [ ] Every slice has independently verifiable acceptance criteria
 - [ ] User approved the breakdown
+- [ ] Slice issues opened, numbers recorded — or issue tracking not pinned / unavailable (noted)
 
 ## Enablement — the build log
 
@@ -104,3 +105,4 @@ Wounds: <filled in by Discernment's attack — one line per wound>
 - The stage skills own the gate wording; this template mirrors them. If they ever disagree, the skill wins.
 - A skipped stage keeps its heading with only the `> ⚠ Skipped — reason` line.
 - Gates are append-only during a run: never delete a criterion because it's inconvenient; renegotiate it with the user and record the change.
+- When the repo pins issue tracking, each slice line carries its published issue (`— issue: #N`) once Galvanizing opens them; the work file stays the source of truth — issues mirror it, never the reverse.
