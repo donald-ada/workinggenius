@@ -7,10 +7,11 @@ This is also what keeps the plugin's voice its own: lines survive because they c
 ## Layout
 
 - `triggers.md` — should-trigger / should-not-trigger prompt sets for every model-invoked skill; the near-misses are the valuable rows
-- `scenarios/<skill>.md` — behavior scenarios for each of the ten working skills, three or more per skill (the setup wizard has none yet — an honest gap, not an oversight), each named for the failure mode it tests, each with a graded checklist; scenarios authored but not yet run are marked *(not yet run)* until a RESULTS.md row exists
-- `fixtures/` — `scratch.sh` builds the scratch project the scenarios run in; canonical work files (`checkout-discounts.md`, `done/`) the setups reference
-- `run-scenario.sh` — headless runner (prototype): builds a scratch, sets up one scenario, runs its prompt through `claude -p`, saves the transcript. Implements scenarios one at a time as they're run for real. Grading stays separate (blind subagent / human)
+- `fixtures/` — `scratch.sh` builds the scratch project scenarios run in; canonical work files (`checkout-discounts.md`, `done/`) for setups to reference
+- `run-scenario.sh` — headless runner (prototype): builds a scratch, sets up one scenario, runs its prompt through `claude -p`, saves the transcript. Grading stays separate (blind subagent / human)
 - `RESULTS.md` — the run log, newest entry first; every measured claim in a skill or the README should trace to an entry here
+
+There is no standing scenario inventory: the pre-redesign one (ten files, thirty-plus scenarios, written against the detailed prose) was deleted with that prose — git history keeps both. A scenario is now written fresh, from the concept skills, at the moment a claim needs evidence: named for the failure mode it tests, graded by checklist, marked *(not yet run)* until its RESULTS row exists.
 
 ## Running a scenario
 
@@ -22,7 +23,7 @@ This is also what keeps the plugin's voice its own: lines survive because they c
 6. **Baseline**: repeat in a scratch project *without* step 2 — **and strip the `## Working Genius` section from the fixture's `CLAUDE.md`**. That section documents the whole flow (Wonder → … → Tenacity); leaving it in teaches the baseline the plugin's own methodology and silently turns every scenario into a softball (measured: an M2 baseline with the section intact reproduced the skill's post-mortem-informed sizing verbatim). For slash-command prompts, the baseline uses the same ask in plain English, with **no** added invitation to reflect on process — that flatters the baseline too. `run-scenario.sh` does both automatically. The scenario passes only when the with-skill run clears the checklist **and** the clean baseline exhibits the failure mode the scenario names. A baseline that behaves fine anyway is a softball — sharpen the scenario until the difference shows, or accept that the skill line it tests is a no-op on this model tier.
 7. **Three runs per scenario, majority rules.** Prose skills are nondeterministic; one run proves nothing in either direction.
 
-A few scenarios test the plugin against its *own* overreach (ceremony where none is due — see `wonder.md` W3). There the baseline is the skill applied at fixed depth, and the pass is the skill scaling down.
+Some scenarios test the plugin against its *own* overreach (ceremony where none is due). There the baseline is the skill applied at fixed depth, and the pass is the skill scaling down.
 
 ## Trigger evals
 
@@ -40,6 +41,6 @@ Honest grading only: a checklist item you didn't verify against the transcript i
 
 ## When to run what
 
-- **Editing one skill** → its scenario file plus its trigger rows, before and after the edit. Red first: confirm the current skill fails the new scenario before trusting that your edit is what fixes it.
+- **Editing one skill** → write the scenario that shows the edit's claim, plus the skill's trigger rows, before and after the edit. Red first: confirm the current skill fails the new scenario before trusting that your edit is what fixes it.
 - **Adding a scenario** → confirm the baseline failure first; a scenario born green tests nothing.
 - **Full sweep** → rarely — before a release. Headless runs cost real tokens; that's why scenarios stay small and per-skill.

@@ -21,9 +21,10 @@ skills; whether a concept line holds behavior the way a checklist plus a
 Stop hook did is now the open measurement question, and the honest way to
 find out is the same as ever: run the scenarios against the new prose. The
 scenario inventory written against the detailed prose (interview rounds,
-gate wording, floor items, G4/B4/D4/T4/W8 from earlier in this redesign) is
-historical until re-derived against the concept-first skills — treat every
-*(not yet run)* marker accordingly.
+gate wording, floor items, G4/B4/D4/T4/W8 from earlier in this redesign)
+was deleted outright in a further follow-up — git history keeps it;
+scenarios are re-derived fresh from the concept skills as claims need
+evidence, sharpest historical deltas first (ROADMAP Phase 1).
 
 ## 2026-07-22 — E2E persona UX test: the redesigned interview halves the path to a confirmed contract
 
