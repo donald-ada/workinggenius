@@ -13,7 +13,9 @@ Run the `genius-file` skill: read the work file. Invention's gate must be checke
 
 ### 1. Try to kill every option
 
-For each option — including the one you privately prefer — attack it:
+For each option — including the one you privately prefer — open free-form: find the attack that kills *this* option, starting from its own shape — the weakest joint, the load it can't carry, the scenario its author never imagined. The fatal wound usually lives at an angle no checklist names, and an attack that only walks a list misses it.
+
+Then check the floor — four angles every attack must have visited before it concludes:
 
 - **Against the success criteria** from Wonder: walk each criterion; where does this option strain to meet it?
 - **Against edge cases**: invent concrete scenarios that probe the boundaries. "What happens when X and then Y?" beats abstract doubt.

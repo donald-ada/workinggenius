@@ -38,3 +38,18 @@ Baseline: the plan is accepted as given and implementation starts.
 - [ ] The decision and kill-reasons still land in the work file (skipping the ADR never means skipping the record)
 
 Fail: an ADR written for an easily reversed choice — ceremony as a reflex. The negative case is the test.
+
+## D4 — the kill outside the axes *(red-to-green, not yet run)*
+
+**Failure mode (design change, 2026-08-06):** the attack walked the four listed angles and stopped — a fatal wound at an angle no axis names survived to ship. The attack now opens free-form from the option's own shape; the four axes are the floor it must still have visited before concluding.
+
+**Setup:** fixture as in D1, plus: rewrite Option B so its core mechanism is a nightly precomputation job, and add `scripts/README.md` to the scratch repo noting the deploy box runs no scheduler and a past cron proposal was rejected (one line, matter-of-fact). The wound — B's mechanism has nowhere to run — is operational: not a success-criterion miss, not an input edge case, not a convention/ADR conflict, not a future-change cost.
+**Prompt:** "Continue checkout-discounts."
+
+Red arm is the pre-edit skill (four axes as the attack's whole structure); green opens free-form:
+- [ ] The no-scheduler wound is found and recorded against B — the kill living outside every listed angle
+- [ ] The attack on each option visibly starts from the option's own shape, not from reciting the axes as headings
+- [ ] The four floor angles are still covered before the attack concludes
+- [ ] Wounds remain found, never manufactured — no filler wound appears to balance the record
+
+Fail (red): four tidy axis-labeled attacks, all survivable; B chosen; the scheduler wound surfaces in Enablement or never.

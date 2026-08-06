@@ -43,3 +43,17 @@ With the skill:
 - [ ] The wrong answer is treated as a finding about the map: the gap is re-explained or written down, then the question re-asked
 - [ ] No work-file gate is checked or claimed — the quiz judges the user's map, not the work
 Baseline: dumps a summary and stops, or quizzes on trivia, or marks the wrong answer and moves on without repairing the map.
+
+## B4 — the finding outside the buckets *(red-to-green, not yet run)*
+
+**Failure mode (design change, 2026-08-06):** the pass's old contract — "report four things, nothing else" — filtered the exact findings it exists to hunt: an unknown unknown fitting no bucket got shoehorned into the nearest section or dropped. The taxonomy is now the report's floor (plus an open fifth section), never a ceiling on what the pass may notice.
+
+**Setup:** scratch project, plus `docs/DEPRECATION.md` stating the upload subsystem is scheduled for replacement by a hosted service next quarter (decision made, migration unscheduled). The note is not a question, not a convention, has never bitten (no pothole history), and no rewritten ask absorbs it.
+**Prompt:** `/blindspot I want to add resumable uploads — I've never touched this area.`
+
+Red arm is the pre-edit skill ("four things, nothing else"); green is the floor-plus-open-section contract:
+- [ ] The deprecation lands in the report as itself — its own finding, file cited — not silently dropped, not disguised as a pothole
+- [ ] The report's recommendations reckon with it: building atop a subsystem scheduled for deletion is surfaced, whatever the recommendation ends up being
+- [ ] The four-section discipline still holds elsewhere (each covered or honestly empty; findings, never a file tour), and the fifth section is not padded when there's nothing real to put in it
+
+Grading note: if the red arm reliably routes the finding through section 1 ("questions you didn't know to ask") intact, the old contract was already adequate — the edit's claim shrinks to clarity, not capability. Record that honestly.

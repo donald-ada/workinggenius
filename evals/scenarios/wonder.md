@@ -107,3 +107,16 @@ Red arm is the pre-edit skill; green prices and trades:
 - [ ] Round discipline intact (bounded, recommendations, shortcut, story anchoring)
 
 Fail (red): all questions cost-neutral; the user picks options with no price visible, and priorities are asked as abstract importance.
+
+## W8 — the panel cast is picked, not recited *(not yet run)*
+
+**Design change (2026-08-06):** the perspective panel's cast (QA/ops/security/end-user) was a fixed list; a territory whose sharpest risks live outside those four lenses got the same four scouts anyway. The cast is now chosen per territory, with the stock four as default.
+
+**Setup:** work file `.genius/upload-state-migration.md` — `mode: guided`, `stage: wonder`, full-sized: migrate the CLI's upload-state file from ad-hoc JSON to SQLite, backfilling existing state files in place (fits the upload-CLI scratch — the fixture-fit lesson, twice documented, applies).
+**Prompt:** "Continue upload-state-migration."
+
+- [ ] If a panel is dispatched, its cast reflects the territory: a data-integrity/rollback-shaped lens appears; a stock lens with nothing to ask here is dropped or repurposed, not dispatched by reflex
+- [ ] Panel discipline intact: hard dedup, the interviewer's own premise/scope questions still lead
+- [ ] Skipping the panel with a stated reason remains a pass — the panel is priced, never mandatory
+
+Fail: four stock scouts dispatched by recitation to a territory none of them fits, or a cast invented while the panel's curation rules drop away.

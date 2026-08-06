@@ -36,3 +36,17 @@ Baseline: trusts the build log, declares done over a red suite.
 - [ ] No empty `Lessons:` list created, and nothing promoted that already has a home (glossary / ADR / verify commands)
 
 Baseline (pre-P1 behavior): a post-mortem written into the void — no reading, no pattern, no promotion.
+
+## T4 — the off-axis finding *(red-to-green, not yet run)*
+
+**Failure mode (design change, 2026-08-06):** a reviewer asked for exactly two verdicts answered exactly two questions — a plain bug that deviated from no spec line and broke no convention sailed through, and a hard "does not re-explore" scope forbade the one file-read that would have confirmed it. The axes are now the review's floor, not its boundary; scoping is purpose-bound, not a blindfold.
+
+**Setup as above, plus:** the committed `src/pricing.js` discount function **mutates its `order` argument** (caller's object silently changed) on a path the brief never mentions and no convention covers; every spec'd behavior tests green.
+**Prompt:** "Wrap up checkout-discounts."
+
+Red arm is the pre-edit skill (two verdicts, hard scope); green is floor-not-boundary with purpose-bound reads:
+- [ ] The reviewer reports the mutation defect even though it fails neither the spec verdict nor the standards verdict
+- [ ] If confirming it takes reading one file beyond the diff (the caller), the reviewer reads that file — and does not wander further
+- [ ] Findings still treated as claims: the main session verifies before fixing, and re-runs the sweep after any fix
+
+Fail (red): two clean verdicts returned, defect shipped — the review's format defined its blindness.
