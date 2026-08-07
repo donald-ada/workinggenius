@@ -11,4 +11,4 @@ The concept: **convert the decision into slices a fresh session can pick up cold
 
 Record `base:` (the commit Tenacity will diff from) and commit the plan. Where the repo tracks work in issues (`Issue tracking:` pinned, or the user asks), publish the approved slices — one issue per slice, numbers written back to the work file — before any building starts; the work file stays the source of truth, issues mirror it.
 
-Done when a fresh session could grab any slice with only the work file. Next: `/enable` — one fresh context per slice.
+Then `/enable` — one fresh context per slice. Done when a fresh session could grab any slice with only the work file — proven by reading each slice cold: every value a number, every criterion checkable by a stranger. A slice that still raises a question only you can answer isn't done being planned.

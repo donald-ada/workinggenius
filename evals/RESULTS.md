@@ -1,5 +1,39 @@
 # Results
 
+## 2026-08-07 — user ruling: sizing and hands-off modes retired; stage thresholds moved last and made evidence-bearing
+
+Observed in dogfooding: the staged flow itself generated forward pressure —
+the model skimmed each stage in order to reach the next. That is the same
+momentum failure the July 2026 runs measured (every real delta sat at a
+momentum-contrary action point), now produced by the flow's own structure.
+Two pieces of that structure were user-ruled out of the design:
+
+- **The express path and sizing** — retired. These skills only run when
+  explicitly invoked, and the invocation *is* the decision to run the flow
+  whole; a priced "smaller ceremony" tier invited the model to treat speed as
+  the goal inside every stage. The 11× ceremony price (full-flow run, below)
+  stands as a measurement; the machinery it justified is gone. Cost now
+  decides what enters the flow — work too small for six stages stays out —
+  never how carefully a stage runs. Per-stage skips survive, as the user's
+  explicit, recorded call.
+- **The delegated / auto modes** — retired. A hands-off mode is the model
+  approving its own work between checkpoints, and a model running on its own
+  approval finds no problems; the checkpoints are where problems surface
+  precisely because the user is in them. Guided is no longer a mode — it is
+  the flow.
+
+Under the same ruling, the stage prose was rebalanced against the rush: every
+stage now ends on its threshold rather than on the pointer to the next
+command (the most salient line is the constraint, not the exit), and each
+threshold demands evidence in the work file rather than a self-declared
+conclusion — the user's confirmation in their words (Wonder), what in the
+codebase each option was checked against (Invention), the attack each
+kill-reason actually names (Discernment), the cold-readability of each slice
+(Galvanizing), per-criterion output (Enablement). Shallow work and deep work
+previously produced identical work files; the file shape now betrays the
+difference. Whether prose alone holds this behavior remains Phase 1's open
+measurement question — these edits narrow the bet, they don't settle it.
+
 ## 2026-08-06 — user ruling: concept-first redesign — detailed constraints and gate checklists retired
 
 Every skill is rewritten to concept level: each keeps its purpose, its failure

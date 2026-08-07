@@ -11,4 +11,4 @@ The concept: **every option earns its survival under attack — including your f
 
 Record why the winner won and one line per rejected option on what killed it — an unrecorded kill-reason gets re-proposed in six weeks. A decision that would leave a future reader asking "why on earth?" may deserve an ADR; most don't. If every option dies, that's a finding, not a failure: back to `/invent` with the wounds as constraints, or back to `/wonder` if the wounds indict the problem itself.
 
-Done when one option is chosen with reasons and every rejection carries its kill-reason. Next: `/galvanize`.
+Then `/galvanize`. Done when one option is chosen with reasons and every rejection carries its kill-reason — written as the attack actually tried and what it broke, not as a verdict. The file carries the fight, not just the winner; a kill-reason that names no attack is an opinion.

@@ -33,7 +33,7 @@ evidence, not defended.
 ## Phase 2 — Dogfood
 
 Use the flow on this repo's own work, issue tracking on. Post-mortems
-accumulate and calibrate sizing; a concept line that never visibly changes
+accumulate and calibrate the runs after them; a concept line that never visibly changes
 behavior in real use is decoration — cut it. Deletion stays a feature.
 
 ## Phase 3 — The brownfield demo
@@ -48,7 +48,9 @@ happened, claims shrunk to what the session showed.
 
 - No number ships ahead of its `RESULTS.md` row.
 - Single-maintainer honesty: prose-only, no state a fork can't carry.
-- No new stages; the pressure stays toward less, via sizing.
+- No new stages; the pressure toward less lives at the door — work too small
+  for the flow stays out of it, rather than running it shallow (the express
+  path and hands-off modes were retired 2026-08-07, `evals/RESULTS.md`).
 - The mechanical layer returns only if Phase 1's evidence demands it — and
   then narrowly, as the smallest constraint that restores the failing
   behavior, never the old layer whole.
