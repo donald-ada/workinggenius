@@ -14,6 +14,6 @@ What that takes:
 - **Read before acting; write the moment a decision lands.** The file outranks whatever you remember about the work. `stage:` names where the work currently is.
 - **Skips are explicit.** Any stage may be skipped, never silently: `> ⚠ Skipped — <reason>` in its section. When work goes wrong later, recorded skips are the first suspects.
 - **Assumptions are visible.** A decision made without the user is an `assumed: <question> → <answer>` line, surfaced at next contact — an honest assumption beats a hollow confirmation.
-- **Checkpoints are live.** The flow has no hands-off mode: each checkpoint is a real exchange with the user, and the Wonder interview above all — a model answering its own interview confirms nothing, and a model approving its own plan finds nothing.
+- **Checkpoints are live.** Each checkpoint is a real exchange with the user, the Wonder interview above all — a model answering its own interview confirms nothing, and a model approving its own plan finds nothing.
 
 Done files stay in place — they're decision history, and their post-mortem lines calibrate the next run. Abandoning honestly (`stage: done`, post-mortem `abandoned — <reason>`) beats a zombie file.

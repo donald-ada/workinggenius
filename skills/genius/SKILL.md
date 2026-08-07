@@ -28,7 +28,7 @@ State lives in `.genius/<slug>.md` (the `genius-file` skill owns the discipline)
 
 **No argument** → status, from the work files: each in-flight work's stage, what's unfinished, recorded skips, and the exact next command; flag work untouched for weeks as stale and offer to resume or abandon. Read done files' `**Post-mortem:**` lines as a set — a genius repeatedly weakest is calibration, not coincidence: say so when routing new work, so that stage gets deliberate weight. Nothing in flight? Show the flow and how to start.
 
-**An idea** → start it: create the work file (`genius-file` skill) and open the Wonder interview. There is no sizing call and no hands-off mode. Dropping a stage is the user's sentence to say, recorded as a skip with its reason — never a package you propose. And stages trade; depth doesn't: a stage worth running is worth running at full depth, because a skimmed stage pays the ceremony and buys nothing. Reaching the next command is not progress — meeting this one's threshold is.
+**An idea** → start it: create the work file (`genius-file` skill) and open the Wonder interview. Dropping a stage is the user's sentence to say, recorded as a skip with its reason — never a package you propose. And stages trade; depth doesn't: a stage worth running is worth running at full depth, because a skimmed stage pays the ceremony and buys nothing. Reaching the next command is not progress — meeting this one's threshold is.
 
 **A work slug** → deep status on that one: where it stands, anything smelly, the next command.
 
