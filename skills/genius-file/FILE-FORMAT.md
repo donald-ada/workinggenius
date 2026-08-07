@@ -8,14 +8,11 @@ The file is a record for a cold reader, not a form. The sections below name what
 ---
 work: checkout-discounts
 stage: discernment   # wonder | invention | discernment | galvanizing | enablement | tenacity | done
-mode: guided         # guided | delegated | auto — see the genius-file skill
 created: 2026-07-03
 base: <commit sha at Galvanizing — Tenacity diffs from here>
 ---
 
 # Checkout discounts
-
-**Sizing:** <express|full> — <one-line reason>
 
 ## Wonder — the problem
 The problem behind the request (user-confirmed), what already exists, what
@@ -45,4 +42,4 @@ been weakest before, also the adjustment>
 
 - A skipped stage keeps its heading with only a `> ⚠ Skipped — <reason>` line.
 - Keep entries behavioral — interfaces, contracts, criteria; no code paths or line numbers, they go stale before the next session reads them.
-- Files from the pre-concept format may carry `**Gate — <Stage>**` checklists; read them as the record they are.
+- Files from earlier formats may carry `**Gate — <Stage>**` checklists, `mode:` frontmatter, or a `**Sizing:**` line; read them as the record they are.

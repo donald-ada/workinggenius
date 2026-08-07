@@ -12,4 +12,4 @@ The concept: **build one slice at a time, in a fresh context, with reality votin
 
 Coordinating multiple slices? Hand each builder the work file path, verify each returned slice against real output yourself, and stay awake until they're done — a builder's word is not evidence. When the plan meets reality and loses, surface the problem and record the change — never silently improvise; a decision made without the user is an `assumed:` line, flagged for review. Close each slice with a build-log entry the next session can stand on and a commit (closing its issue, if it carries one).
 
-Done when every slice is built and every criterion checked against output that actually ran. Next: `/tenacity`.
+Then `/tenacity`. Done when every slice is built and every criterion checked against output that actually ran — the build log naming, per criterion, what ran and what it showed. A criterion checked in your head has not been checked.

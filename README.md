@@ -28,7 +28,7 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 | The gate rule **was** code, not prose — bypasses detected mechanically. *Retired 2026-08-06, mechanical layer removed with it: each stage now names its threshold and the model is trusted with it (see `evals/RESULTS.md` for the ruling and what it trades away)* | the parser, hooks, and their 53 tests lived until `925accf` — the history is the receipt |
 | The prose is **tested** against a no-plugin baseline — and the tests locate the value precisely instead of flattering it. Five scenarios run for real say it's the moments where correct practice runs *against the model's momentum*: writing the failing test first (skill 3/3, baseline **0/3**) and questioning the ask before building it (3/3 vs **0/3**) are clean wins; the gate-as-stop partial (3/3 vs 1/3); while disciplines a careful model already follows when asked — verify-before-done, history-informed sizing — are honest **softballs the baseline passes**. The axis even predicted a result before its run (W1), and bounded itself honestly when later probes (D1, a self-attack test) failed to widen it — sharpening to one sentence: the value is in forcing the *action* at the decision point, never in eliciting *reflection* a capable model already does when asked. | `evals/RESULTS.md` (2026-07-21 synthesis) — measurements of the pre-redesign prose; that scenario inventory was deleted with the prose it graded, and re-deriving the sharpest scenarios against the concept-first skills is [ROADMAP](ROADMAP.md) Phase 1 |
 | The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
-| The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task), which is why sizing is a recorded, priced decision and the express path exists | `evals/RESULTS.md` (full-flow run); sizing rules in `/genius` |
+| The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task). *The sizing machinery that number once justified (the express path, hands-off modes) was retired 2026-08-07 by user ruling: the flow only runs when explicitly invoked, and the invocation commits to the whole flow — cost decides what enters the flow, never how carefully a stage runs* | `evals/RESULTS.md` (full-flow run; 2026-08-07 ruling) |
 | The interview is **measured UX**, not ceremony — in an end-to-end persona test the redesigned interview (story-first, question rounds, priced forks) reached a user-**confirmed** problem contract in 3 turns and ~1,000 typed characters; the pre-redesign one-question drip hit a 6-turn cap unconfirmed (n=1 per arm) | `evals/RESULTS.md` (E2E persona UX test, 2026-07-22) |
 
 Anything in this README that sounds like a measurement should trace to a line in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
@@ -53,10 +53,7 @@ Then, in any project:
 
 `/genius` at any time shows where every piece of work stands and what to run next. Optional: `/setup-working-genius` pins your verify commands per repo.
 
-Not everything needs the full six — and not everyone wants to babysit them:
-
-- **`/genius express <idea>`** — small work: Wonder in one paragraph, Invention/Discernment skipped (recorded), straight to slices.
-- **Modes** — `guided` (default: checkpoints as written), `delegated` (runs on its own recommendations, records every assumption, stops once — at the plan review), `auto` (no stops; for when you said "run it all"). Pick when work starts; recorded in the work file. One thing no mode skips: **the Wonder interview is always live dialogue** — hands-off begins after the problem is confirmed, because a model interviewing itself about what you want confirms nothing.
+The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange. There is no express tier and no hands-off mode — invoking the flow commits to the whole flow, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages doesn't get a discount; it stays out of the flow. Dropping an individual stage remains your call to make — recorded as a skip, with its reason.
 
 ## How it works
 
@@ -64,11 +61,11 @@ Not everything needs the full six — and not everyone wants to babysit them:
 
 **Every stage ends at a threshold, not a checklist.** Each skill names the one thing that must be honestly true before the next stage starts — the problem confirmed, a real choice made, slices grabbable cold, evidence fresh — and trusts the model's judgment on how to get there. The detailed gate grammar, its Stop-hook enforcement, and the whole mechanical layer (`hooks/`, the parser, its 53 deterministic tests) were retired in the 2026-08 redesign — rationale and trade-offs recorded in `evals/RESULTS.md`: as model capability rises, constraints written for yesterday's models increasingly bind judgment rather than protect it. Pre-redesign work files with gate checklists still read fine — they're records, and records don't expire.
 
-**Skips are explicit.** A small fix doesn't need six stages; the express path fills Wonder in one paragraph and marks Invention/Discernment skipped *with a reason*. When work goes wrong later, recorded skips are the first suspects — `/genius` reads them to diagnose the gap.
+**Skips are explicit.** Not every piece of work deserves all six stages — but dropping one is the user's call, recorded *with a reason*, never silent and never bundled. When work goes wrong later, recorded skips are the first suspects — `/genius` reads them to diagnose the gap.
 
 **`/genius` is the map** — run it any time for where every piece of work stands and what runs next; any session resuming tracked work reads its work file first (the `genius-file` skill's one discipline).
 
-**Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend sizing and mode for new work, and a lesson that keeps recurring gets promoted — sparingly, by a three-condition test — into `CLAUDE.md`, where every future session reads it. The workflow's weakest stage is data, not a mystery.
+**Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend where new work gets extra care, and a lesson that keeps recurring gets promoted — sparingly, by a three-condition test — into `CLAUDE.md`, where every future session reads it. The workflow's weakest stage is data, not a mystery.
 
 **Fresh context per slice.** Galvanizing produces slices a cold session can grab; running each slice in a new session keeps every context window sharp instead of degraded.
 
@@ -87,11 +84,11 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 **The map** (user-invoked only — the flow never hijacks work you didn't put in it):
 
-- **/genius** — status of all work, sizing (express vs full flow), mode choice, genius-gap diagnosis, post-mortem patterns across finished work, mid-flow entry points
+- **/genius** — status of all work, genius-gap diagnosis, post-mortem patterns across finished work, mid-flow entry points
 
-**The six stages** (type them as commands, or let the flow carry itself forward in delegated/auto mode):
+**The six stages** (each a command you type — the flow never advances itself):
 
-- **/wonder** — the live interview that turns a raw idea into a user-confirmed problem: homework before questions, recommendations attached, prices on cost forks, "don't build this" a win — and live dialogue in every mode
+- **/wonder** — the live interview that turns a raw idea into a user-confirmed problem: homework before questions, recommendations attached, prices on cost forks, "don't build this" a win
 - **/invent** — genuinely different options on the table before anyone falls in love; no judging yet; throwaway prototypes for questions paper can't settle
 - **/discern** — try to kill every option, including the favorite; choose opinionated; record the kill-reasons so rejections stay rejected
 - **/galvanize** — the decision converted into slices a fresh session can grab cold, the `base:` commit recorded — and slices published as one issue each where the repo pins issue tracking
@@ -102,7 +99,7 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 - **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
 - **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (one issue per slice, opened at Galvanizing, closed as slices close)
-- **genius-file** (model-invoked) — the work-file discipline: the file carries the work, skips and assumptions always recorded, modes, the express path
+- **genius-file** (model-invoked) — the work-file discipline: the file carries the work, skips and assumptions always recorded, checkpoints always live
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/discern`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
 ## Token economics
@@ -113,7 +110,7 @@ The flow's structure is also its cost model: stages differ in how much intellige
 - **Review is mid-model work, and scoped.** Tenacity's reviewer judges a diff against a brief — hand it the diff and the work file, not the repo. An unscoped frontier-model reviewer was the most expensive single step in measured runs ($6.55 of a $20 session) at no gain over a scoped mid-tier one.
 - **Building is where the frontier model earns its rate; divergence is not building.** Invention's parallel option drafts are sketches for Discernment to attack — mid-tier models draft them fine, because Discernment's attack is where quality gets enforced, and *that* runs on the main model.
 
-The macro lever remains sizing: the express path exists because six stages on small work is the most expensive mistake available. The cost levers are the scoped mid-tier reviewer, mid-tier divergence drafts, no-re-exploration handoffs, and sizing — not the pass. An earlier revision tiered the pass down to the cheapest model on the strength of a checklist score; a full-flow run showed the cheap pass mis-calling the load-bearing constraint, and the guidance was reversed (see `evals/RESULTS.md`). Quality of the pass is upstream of every stage that follows it; pay for it.
+The macro lever is the door, not a discount: six stages on trivial work is the most expensive mistake available, and the answer is to keep that work out of the flow — not to run the flow shallowly, which pays the ceremony and buys nothing. The cost levers are the scoped mid-tier reviewer, mid-tier divergence drafts, and no-re-exploration handoffs — never the pass, and never depth. An earlier revision tiered the pass down to the cheapest model on the strength of a checklist score; a full-flow run showed the cheap pass mis-calling the load-bearing constraint, and the guidance was reversed (see `evals/RESULTS.md`). Quality of the pass is upstream of every stage that follows it; pay for it.
 
 ## Iterating on the plugin
 
