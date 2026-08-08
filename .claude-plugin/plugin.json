@@ -1,7 +1,7 @@
 {
   "name": "workinggenius",
-  "version": "0.7.0",
-  "description": "A development workflow that walks every piece of work through the six Working Geniuses — Wonder, Invention, Discernment, Galvanizing, Enablement, Tenacity — every stage a live checkpoint, every skip recorded.",
+  "version": "0.8.0",
+  "description": "A development workflow that walks every piece of work through the six Working Geniuses — Wonder, Invention, Discernment, Galvanizing, Enablement, Tenacity — every stage a command the user types, every checkpoint a live exchange.",
   "author": {
     "name": "zhangxiaolong",
     "email": "long001027@gmail.com"

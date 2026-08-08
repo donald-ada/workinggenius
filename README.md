@@ -15,7 +15,7 @@ Patrick Lencioni's *Six Types of Working Genius* names the six stages every piec
 | **Enablement** — building with feedback | A huge diff, no tests, revealed big-bang at the end. |
 | **Tenacity** — finishing with evidence | "Done!" — on stale evidence, or none. It was "done" three times. |
 
-This plugin walks every piece of work through all six — and when you *do* skip one (allowed! not everything deserves six stages), the skip is recorded where the next session can see it. Gaps stay visible instead of becoming mysteries.
+This plugin walks every piece of work through all six — and every stage is a command you type, so one you don't type simply doesn't run: the work file shows what ran and what didn't. Gaps stay visible instead of becoming mysteries.
 
 The six-stage shape is not the differentiator — every workflow tool ships phases, and phase names are free. What separates this plugin is a second commitment:
 
@@ -57,8 +57,9 @@ Then, in any project:
 ```
 /genius add per-user rate limiting        # start a piece of work
 /wonder                                   # correct its story, answer its questions, confirm the problem
-/invent                                   # put 2–4 structurally different options on the table
-/discern                                  # attack the options, choose one, record the kill-reasons
+/architect                                # (greenfield) build-or-adopt first, then one committed design
+/invent                                   # genuinely diverge — alternatives exist to be beaten
+/discern                                  # attack every path, commit to one, record the kills
 /galvanize                                # slice into fresh-session-ready vertical slices
 /enable                                   # build one slice, red-before-green, tight loops
 /tenacity                                 # verify everything fresh, review, clean up, commit
@@ -66,7 +67,7 @@ Then, in any project:
 
 `/genius` at any time shows where every piece of work stands and what to run next. Optional: `/setup-working-genius` pins your verify commands per repo.
 
-The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange — invoking the flow commits to the whole flow, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages stays out of the flow entirely. Dropping an individual stage is your call to make — recorded as a skip, with its reason.
+The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange — and invoking the flow commits to its depth: every stage that runs, runs live and in full, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages stays out of the flow entirely. Dropping an individual stage is your call to make — you just don't type it; the file's missing section is the record.
 
 ## How it works
 
@@ -74,7 +75,7 @@ The flow is deliberately manual: every stage is a command you type, every checkp
 
 **Every stage ends at a threshold, not a checklist.** Each skill names the one thing that must be honestly true before the next stage starts — the problem confirmed, a real choice made, slices grabbable cold, evidence fresh — and trusts the model's judgment on how to get there. That bet — concepts over constraints, as model capability rises — and what it trades away are on the record in `evals/RESULTS.md`; measuring it is [ROADMAP](ROADMAP.md) Phase 1. Work files from earlier formats still read fine — they're records, and records don't expire.
 
-**Skips are explicit.** Not every piece of work deserves all six stages — but dropping one is the user's call, recorded *with a reason*, never silent and never bundled. When work goes wrong later, recorded skips are the first suspects — `/genius` reads them to diagnose the gap.
+**Absence is the record.** Not every piece of work deserves all six stages — dropping one is your call, made by not typing it, never a package the model proposes. The file shows which sections exist and which don't; when work goes wrong later, the missing stage is the first suspect — `/genius` reads the gaps to diagnose.
 
 **`/genius` is the map** — run it any time for where every piece of work stands and what runs next; any session resuming tracked work reads its work file first (the `genius-file` skill's one discipline).
 
@@ -91,7 +92,7 @@ Every workflow tool demos greenfield. This one's sharpest moves feed on mess, an
 - **Discernment attacks options against the record** — existing conventions, `docs/adr/` decisions, the codebase's grain — not against a blank slate.
 - **The domain glossary** exists precisely because ten-year-old repos speak three dialects; it makes the collision explicit instead of letting new work pick a fourth.
 
-A fresh repo gives these moves nothing to grip. A legacy system is where they earn their keep.
+A fresh repo gives these moves nothing to grip — so greenfield flips the direction, not the principle: when there's no history to mine, `/architect` studies the field's instead, and the systems that already solved your problem become the territory.
 
 ## Skills
 
@@ -102,18 +103,19 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 **The six stages** (each a command you type — the flow never advances itself):
 
 - **/wonder** — the live interview that turns a raw idea into a user-confirmed problem: homework before questions, recommendations attached, prices on cost forks, "don't build this" a win
-- **/invent** — genuinely different options on the table before anyone falls in love; no judging yet; throwaway prototypes for questions paper can't settle
-- **/discern** — try to kill every option, including the favorite; choose opinionated; record the kill-reasons so rejections stay rejected
+- **/invent** — genuine divergence before commitment: structurally different paths, each grounded in the repo — the discipline against anchoring, not a menu for the user; throwaway prototypes for questions paper can't settle
+- **/discern** — try to kill every path, including the favorite; commit to one and present the commitment — consequences to confirm, kills on the record — a menu only where the fork is the user's world to decide
 - **/galvanize** — the decision converted into slices a fresh session can grab cold, the `base:` commit recorded — and, where the repo pins issue tracking, the breakdown published as one parent issue per work with a sub-issue per slice, all under one shared label
 - **/enable** — one slice per fresh context, tests leading the code, reality voting every few minutes, deviations recorded instead of improvised
 - **/tenacity** — "done" as a claim about fresh evidence: everything re-run and read, a context-isolated reviewer, cleanup, commit, a post-mortem the next run reads
 
 **Support:**
 
+- **/architect** — the architecture fork asked honestly: adopt an existing system, or build — and if build, **one committed architecture** designed from the model's own understanding of your problem, not a menu of reference-flavored options. The field stress-tests it (diverging from a consensus needs a reason; forks your world decides come to you, priced), and you confirm consequences, not diagrams. A command you type, usable standalone — inside the flow, Wonder and Invention recommend it where it fits and never run it for you; after your confirmation, the next command is yours to choose
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises and speaks the glossary's language — shorter and clearer, not shorter and blunter. A second `/waitwhat` on the same topic sends a term to the glossary: the repair loop feeds project memory
 - **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
 - **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes)
-- **genius-file** (model-invoked) — the work-file discipline: the file carries the work, skips and assumptions always recorded, checkpoints always live
+- **genius-file** (model-invoked) — the work-file discipline: the file carries the work, absence is the record, assumptions visible, checkpoints always live
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder`, `/discern`, and `/waitwhat`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
 ## Token economics

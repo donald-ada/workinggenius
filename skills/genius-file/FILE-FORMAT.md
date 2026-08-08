@@ -41,6 +41,7 @@ The fresh evidence, findings and their resolution.
 been weakest before, also the adjustment>
 ```
 
-- A skipped stage keeps its heading with only a `> ⚠ Skipped — <reason>` line.
+- A stage that never ran simply has no section — absence is the record.
+- Work that ran `/architect` carries the study and the confirmed design as their own section, same rules: behavioral, facts sourced, decisions with their reasons.
 - Keep entries behavioral — interfaces, contracts, criteria; no code paths or line numbers, they go stale before the next session reads them.
-- Files from earlier formats may carry `**Gate — <Stage>**` checklists, `mode:` frontmatter, or a `**Sizing:**` line; read them as the record they are.
+- Files from earlier formats may carry `**Gate — <Stage>**` checklists, `mode:` frontmatter, a `**Sizing:**` line, or `> ⚠ Skipped` markers; read them as the record they are.
