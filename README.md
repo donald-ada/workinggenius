@@ -91,7 +91,7 @@ Every workflow tool demos greenfield. This one's sharpest moves feed on mess, an
 - **Discernment attacks options against the record** — existing conventions, `docs/adr/` decisions, the codebase's grain — not against a blank slate.
 - **The domain glossary** exists precisely because ten-year-old repos speak three dialects; it makes the collision explicit instead of letting new work pick a fourth.
 
-A fresh repo gives these moves nothing to grip. A legacy system is where they earn their keep.
+A fresh repo gives these moves nothing to grip — so greenfield flips the direction, not the principle: when there's no history to mine, `/architect` studies the field's instead, and the systems that already solved your problem become the territory.
 
 ## Skills
 
@@ -110,6 +110,7 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 **Support:**
 
+- **/architect** — greenfield's territory pass points outward: study the real systems that already solved this (every claim sourced), let their divergences interrogate the user, and design an architecture that is yours — every load-bearing decision decided, not defaulted, professional default as the floor. Feeds `/invent` and `/discern`; callable directly on any system-shaping choice
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises and speaks the glossary's language — shorter and clearer, not shorter and blunter. A second `/waitwhat` on the same topic sends a term to the glossary: the repair loop feeds project memory
 - **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
 - **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes)

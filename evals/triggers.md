@@ -76,6 +76,17 @@ Should NOT trigger:
 - [bare] "Summarize the README."
 - [tracked] "What does CONTEXT.md say 'adjustment' means?" — glossary lookup, not work-file discipline.
 
+## architect
+
+Should trigger:
+- [bare] "I want to build a LAN file-sharing system from scratch — design the architecture properly, not just something that works. Look at how existing systems do it."
+- [tracked, stage: invention] "This subsystem is brand new — nothing in this repo does anything like it. What should the design learn from how others built this?"
+
+Should NOT trigger:
+- [tracked, stage: invention] "Continue checkout-discounts." — a feature in an existing codebase; the repo's own grain is the ground, and reading it is Invention's normal homework.
+- [bare] "Which is better in general, Postgres or MySQL?" — a fact question with no work attached; nothing is being designed.
+- [bare] "Add a retry flag to the upload command." — a contained change inside existing grain; no architecture at stake.
+
 ## blindspot
 
 Should trigger:
