@@ -149,6 +149,7 @@ The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://w
 - Eric Evans' [Domain-Driven Design](https://www.domainlanguage.com/ddd/) — the *ubiquitous language*, kept in `CONTEXT.md` by `domain-glossary`, and the instinct that the domain shapes the design, not the stack
 - Samantha Warren's [Style Tiles](https://styletil.es/) and the [W3C Design Tokens](https://tr.designtokens.org/format/) format — taste settled by looking, and the recorded language as tokens: the contract that makes generated UI look like *this* product (`/designer`, `DESIGN.md`)
 - [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) (MIT) — the template catalog `/designer`'s 13 shipped bases are vendored from, chosen to span the aesthetic spectrum; the other 54 stay upstream, one pull away
+- Anthropic's [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) skill — the *signature* (spend the boldness in one place) and words-as-design-material (`/designer`'s voice axis)
 
 All of them are worth studying in full.
 
