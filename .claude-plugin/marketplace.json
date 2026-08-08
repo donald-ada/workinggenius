@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "workinggenius",
-      "description": "A development workflow that walks every piece of work through the six Working Geniuses — Wonder, Invention, Discernment, Galvanizing, Enablement, Tenacity — every stage a live checkpoint, every skip recorded.",
+      "description": "A development workflow that walks every piece of work through the six Working Geniuses — Wonder, Invention, Discernment, Galvanizing, Enablement, Tenacity — every stage a command the user types, every checkpoint a live exchange.",
       "source": "./",
       "author": {
         "name": "zhangxiaolong",

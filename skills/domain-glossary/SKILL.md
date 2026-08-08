@@ -31,7 +31,7 @@ Rules of the file:
 - **Published API names outrank opinion.** A misleading name that's public API (a decade-old keyword argument) can't be renamed — define it *against* its general meaning instead ("not actually a cryptographic salt; the name is API, the definition rules"). The glossary's job there is disambiguation, not renaming.
 - **Tight definitions.** One or two sentences; define what it *is*.
 - **Project concepts only.** General programming concepts (retries, timeouts, error types) don't belong, however often the project uses them.
-- **No implementation details.** `CONTEXT.md` is not a spec, a scratchpad, or a decision log — decisions go in the work file or an ADR.
+- **No implementation details.** `CONTEXT.md` is not a spec, a scratchpad, or a decision log — decisions go in the project's decision records (a work file, an ADR), not here.
 - **Create lazily.** No `CONTEXT.md`? Create it when the first term is resolved, not before.
 - **Don't hijack.** If `CONTEXT.md` already exists with non-glossary content, leave that content alone: append the `## Language` section to it and keep the discipline scoped to that section.
 

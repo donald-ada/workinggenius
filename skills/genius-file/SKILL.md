@@ -12,7 +12,7 @@ The concept: **the file, not conversation memory, carries the work** — the con
 What that takes:
 
 - **Read before acting; write the moment a decision lands.** The file outranks whatever you remember about the work. `stage:` names where the work currently is.
-- **Skips are explicit.** Any stage may be skipped, never silently: `> ⚠ Skipped — <reason>` in its section. When work goes wrong later, recorded skips are the first suspects.
+- **Absence is the record.** Every stage is a command the user types; one they didn't type simply has no section — the file shows what ran and what didn't, and when work goes wrong later, the missing section is the first suspect. No skip bookkeeping: not typing a stage *is* the decision.
 - **Assumptions are visible.** A decision made without the user is an `assumed: <question> → <answer>` line, surfaced at next contact — an honest assumption beats a hollow confirmation.
 - **Checkpoints are live.** Each checkpoint is a real exchange with the user, the Wonder interview above all — a model answering its own interview confirms nothing, and a model approving its own plan finds nothing.
 

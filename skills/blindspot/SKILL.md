@@ -6,7 +6,7 @@ argument-hint: "the task or area to scan for unknowns"
 
 # Blindspot
 
-The map — your prompt, the work file, the glossary — is not the territory: the codebase, its history, its real constraints. The gap between them is the unknowns, and an unknown left unfound doesn't stay unfound: the diff review finds it, or production does.
+The map — your prompt, your plan, your glossary — is not the territory: the codebase, its history, its real constraints. The gap between them is the unknowns, and an unknown left unfound doesn't stay unfound: the diff review finds it, or production does.
 
 The concept: **go look, at the three moments the gap is widest.**
 
@@ -14,4 +14,4 @@ The concept: **go look, at the three moments the gap is widest.**
 - **At a choice the user can't evaluate** — "whichever you think" is a judgment gap, not agreement. Teach just enough of the actual difference to hold an opinion, then re-present the choice; if they still can't call it, an honest `assumed:` beats a hollow confirmation.
 - **Before acceptance** — nothing verifies the user's *map* of what got built. Summarize what changed at the behavior level, then quiz the consequences they'll live with. A wrong answer is a finding about the explanation, not the user: repair the map, ask again — so they accept knowing what they accepted.
 
-This skill feeds the stages; it never replaces one. Its findings route to where they live: questions to the interview, terms to the glossary, potholes to Discernment's attack.
+Standalone or inside a larger flow, the moves are the same. Findings route to whoever is shaping the work: questions into the conversation defining it, terms into the project's glossary where it keeps one, hazards to whoever judges the design.
