@@ -81,9 +81,11 @@ Should NOT trigger:
 Should trigger:
 - [bare] "I want to build a LAN file-sharing system from scratch — design the architecture properly, not just something that works. Look at how existing systems do it."
 - [tracked, stage: invention] "This subsystem is brand new — nothing in this repo does anything like it. What should the design learn from how others built this?"
+- [tracked, stage: wonder] mid-interview, the user replies: "Hold on — before we settle that, I want the architecture designed properly, the way the good existing systems do it."
 
 Should NOT trigger:
 - [tracked, stage: invention] "Continue checkout-discounts." — a feature in an existing codebase; the repo's own grain is the ground, and reading it is Invention's normal homework.
+- [tracked, stage: wonder] the user answers an interview question about rough shape ("probably a local web server, keep it simple") and moves on — an answered fork is an answer to record, not a mandate to dispatch research the user didn't ask for.
 - [bare] "Which is better in general, Postgres or MySQL?" — a fact question with no work attached; nothing is being designed.
 - [bare] "Add a retry flag to the upload command." — a contained change inside existing grain; no architecture at stake.
 
