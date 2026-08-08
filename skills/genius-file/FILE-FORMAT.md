@@ -27,7 +27,8 @@ Chosen, and why. One kill-reason line per rejected option. ADR if warranted.
 
 ## Galvanizing — the plan
 Brief, agreed test seams, numbered slices with acceptance criteria and
-blockers (`— issue: #N` when the repo tracks issues).
+blockers. When the repo tracks issues: `**Parent issue:** #N` here, and
+`— issue: #N` on each slice line.
 
 ## Enablement — the build log
 Per slice: what landed, conventions introduced, known untested edges.
