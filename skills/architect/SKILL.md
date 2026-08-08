@@ -16,4 +16,4 @@ The concept: **study the field, interrogate the user with it, then design someth
 
 Write the study and the decisions into the work file: the references and their trade-offs become Invention's ground, the divergence answers become Discernment's attack material, and any fork that moves cost goes through the interview's pricing discipline. Like blindspot, this skill feeds the stages and never replaces one — no stage advances here.
 
-Callable directly (`/architect <system>`), or invoked when Invention enters ground the repo can't teach — a new system, a new subsystem, a foundational choice with no grain to follow — or when Wonder's interview surfaces an architecture fork the user wants to pursue properly instead of answering off the cuff.
+One study per work: a study already in the work file is consumed, not redone — arriving here a second time (Wonder handed off a fork, then Invention enters the same ground) means reading the record, and researching only what it genuinely doesn't cover.
