@@ -1,6 +1,6 @@
 # Trigger evals
 
-Should-trigger / should-not-trigger prompt sets for every model-invoked skill. Run each prompt headless in the prepared scratch project (see README) and check whether the skill loaded. The near-misses are the rows that matter: prompts *adjacent* to the trigger that must not fire. `/genius`, `/setup-working-genius`, `/waitwhat`, and `/architect` are user-invoked only — no rows here; typing them is the test.
+Should-trigger / should-not-trigger prompt sets for every model-invoked skill. Run each prompt headless in the prepared scratch project (see README) and check whether the skill loaded. The near-misses are the rows that matter: prompts *adjacent* to the trigger that must not fire. `/genius`, `/setup-working-genius`, `/waitwhat`, `/architect`, and `/designer` are user-invoked only — no rows here; typing them is the test.
 
 Setup shorthand: **[tracked]** = a checkout-discounts work file authored at `.genius/checkout-discounts.md` in the current FILE-FORMAT (two options recorded), with `stage:` set as the row needs. **[bare]** = no `.genius/` directory.
 

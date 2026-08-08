@@ -58,6 +58,7 @@ Then, in any project:
 /genius add per-user rate limiting        # start a piece of work
 /wonder                                   # correct its story, answer its questions, confirm the problem
 /architect                                # (greenfield) build-or-adopt first, then one committed design
+/designer                                 # (UI work) settle the look before the pixels
 /invent                                   # genuinely diverge — alternatives exist to be beaten
 /discern                                  # attack every path, commit to one, record the kills
 /galvanize                                # slice into fresh-session-ready vertical slices
@@ -112,6 +113,7 @@ A fresh repo gives these moves nothing to grip — so greenfield flips the direc
 **Support:**
 
 - **/architect** — the architecture fork asked honestly: adopt an existing system, or build — and if build, **one committed architecture** designed from the model's own understanding of your problem, not a menu of reference-flavored options. The field stress-tests it (diverging from a consensus needs a reason; forks your world decides come to you, priced), and you confirm consequences, not diagrams. A command you type, usable standalone — inside the flow, Wonder and Invention recommend it where it fits and never run it for you; after your confirmation, the next command is yours to choose
+- **/designer** — the style conversation building momentum never starts: name the base (an existing surface, one of **13 shipped template bases** — minimal to neobrutalism to neon — or nothing) and the delta you want; deltas settled by *looking* (throwaway style tiles, references hunted only when needed and priced), one committed language in `DESIGN.md` that every later screen speaks. A command you type; one language per product
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises and speaks the glossary's language — shorter and clearer, not shorter and blunter. A second `/waitwhat` on the same topic sends a term to the glossary: the repair loop feeds project memory
 - **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
 - **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes)
@@ -137,13 +139,19 @@ Skills are programs written in prose, and [`evals/`](evals/) holds the method fo
 
 ## Lineage
 
-The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://www.workinggenius.com/)*, applied to agentic development. The skill design borrows deliberately from two excellent projects:
+The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://www.workinggenius.com/)*, applied to agentic development. The skill design borrows deliberately, and says so:
 
-- [mattpocock/skills](https://github.com/mattpocock/skills) — small composable skills, user- vs model-invocation, the router pattern, grilling, vertical slices, gates as checkable completion criteria — and [`/wait-what`](https://www.aihero.dev/skills-wait-what), the reader-triggered re-explain `/waitwhat` adapts (name the listener's state, not the output shape; the glossary tie-in is ours)
-- [obra/superpowers](https://github.com/obra/superpowers) — the SessionStart injection, evidence-before-claims verification, workflow-as-discipline
-- Thariq Shihipar's [A Field Guide to Fable: Finding Your Unknowns](https://x.com/trq212/article/2073100352921215386) — the map/territory framing, the four kinds of unknowns, the blindspot pass, teach-before-judging, and the pre-acceptance quiz (`/blindspot`)
+- [mattpocock/skills](https://github.com/mattpocock/skills) — small composable skills, user- vs model-invocation, grilling, vertical slices — and [`/wait-what`](https://www.aihero.dev/skills-wait-what), the reader-triggered re-explain `/waitwhat` adapts (name the listener's state, not the output shape; the glossary tie-in is ours)
+- [obra/superpowers](https://github.com/obra/superpowers) — evidence-before-claims verification, workflow-as-discipline
+- Thariq Shihipar's [A Field Guide to Fable: Finding Your Unknowns](https://x.com/trq212/article/2073100352921215386) — the map/territory framing, the blindspot pass, teach-before-judging, and the pre-acceptance quiz (`/blindspot`)
+- Simon Wardley's [Wardley Mapping](https://learnwardleymapping.com/) — build-or-adopt as the first fork, and the delta as the design's spine: build only what differentiates, adopt the commodity (`/architect`)
+- Barry O'Reilly's [Residuality Theory](https://leanpub.com/residuality) — the design earns its shape under stress: attack it from every direction, and what survives is the architecture (`/architect`'s field attack; `/discern`'s survivor)
+- Eric Evans' [Domain-Driven Design](https://www.domainlanguage.com/ddd/) — the *ubiquitous language*, kept in `CONTEXT.md` by `domain-glossary`, and the instinct that the domain shapes the design, not the stack
+- Samantha Warren's [Style Tiles](https://styletil.es/) and the [W3C Design Tokens](https://tr.designtokens.org/format/) format — taste settled by looking, and the recorded language as tokens: the contract that makes generated UI look like *this* product (`/designer`, `DESIGN.md`)
+- [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) (MIT) — the template catalog `/designer`'s 13 shipped bases are vendored from, chosen to span the aesthetic spectrum; the other 54 stay upstream, one pull away
+- Anthropic's [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) skill — the *signature* (spend the boldness in one place) and words-as-design-material (`/designer`'s voice axis)
 
-All three are worth studying in full.
+All of them are worth studying in full.
 
 ## License
 
