@@ -25,11 +25,10 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 
 | Claim | Evidence |
 |---|---|
-| The gate rule **was** code, not prose — bypasses detected mechanically. *Retired 2026-08-06, mechanical layer removed with it: each stage now names its threshold and the model is trusted with it (see `evals/RESULTS.md` for the ruling and what it trades away)* | the parser, hooks, and their 53 tests lived until `925accf` — the history is the receipt |
-| The prose is **tested** against a no-plugin baseline — and the tests locate the value precisely instead of flattering it. Five scenarios run for real say it's the moments where correct practice runs *against the model's momentum*: writing the failing test first (skill 3/3, baseline **0/3**) and questioning the ask before building it (3/3 vs **0/3**) are clean wins; the gate-as-stop partial (3/3 vs 1/3); while disciplines a careful model already follows when asked — verify-before-done, history-informed sizing — are honest **softballs the baseline passes**. The axis even predicted a result before its run (W1), and bounded itself honestly when later probes (D1, a self-attack test) failed to widen it — sharpening to one sentence: the value is in forcing the *action* at the decision point, never in eliciting *reflection* a capable model already does when asked. | `evals/RESULTS.md` (2026-07-21 synthesis) — measurements of the pre-redesign prose; that scenario inventory was deleted with the prose it graded, and re-deriving the sharpest scenarios against the concept-first skills is [ROADMAP](ROADMAP.md) Phase 1 |
-| The cost guidance is **measured**, not vibes — model-tiering rules trace to instrumented runs | `evals/RESULTS.md`, including the tiering rule we *reversed* when a full-flow run refuted it, kill-reason recorded |
-| The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task). *The sizing machinery that number once justified (the express path, hands-off modes) was retired 2026-08-07 by user ruling: the flow only runs when explicitly invoked, and the invocation commits to the whole flow — cost decides what enters the flow, never how carefully a stage runs* | `evals/RESULTS.md` (full-flow run; 2026-08-07 ruling) |
-| The interview is **measured UX**, not ceremony — in an end-to-end persona test the redesigned interview (story-first, question rounds, priced forks) reached a user-**confirmed** problem contract in 3 turns and ~1,000 typed characters; the pre-redesign one-question drip hit a 6-turn cap unconfirmed (n=1 per arm) | `evals/RESULTS.md` (E2E persona UX test, 2026-07-22) |
+| The value was **located by measurement**, not assumed: with-skill vs no-plugin baseline runs found the delta only where correct practice runs *against the model's momentum* — the failing test written first (3/3 vs baseline **0/3**), the ask questioned before building (3/3 vs **0/3**) — while disciplines a careful model already follows when asked graded as honest softballs. The sentence that survived: the value is in forcing the *action* at the decision point, never in eliciting *reflection*. | `evals/RESULTS.md` (2026-07-21 synthesis); re-measuring against today's concept skills is [ROADMAP](ROADMAP.md) Phase 1 |
+| The cost guidance is **measured**, not vibes — model-tiering advice traces to instrumented runs, including a rule we *reversed* when a full-flow run refuted it, kill-reason recorded | `evals/RESULTS.md` |
+| The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task), which is why work too small for the flow stays out of it entirely rather than getting a discount | `evals/RESULTS.md` (full-flow run) |
+| The interview's shape is **measured UX** — story-first, priced questions: a persona test reached a user-**confirmed** problem contract in 3 turns and ~1,000 typed characters where question-drip interviewing hit a 6-turn cap unconfirmed (n=1 per arm) | `evals/RESULTS.md` (E2E persona UX test, 2026-07-22) |
 
 Anything in this README that sounds like a measurement should trace to a line in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
 
@@ -67,13 +66,13 @@ Then, in any project:
 
 `/genius` at any time shows where every piece of work stands and what to run next. Optional: `/setup-working-genius` pins your verify commands per repo.
 
-The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange. There is no express tier and no hands-off mode — invoking the flow commits to the whole flow, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages doesn't get a discount; it stays out of the flow. Dropping an individual stage remains your call to make — recorded as a skip, with its reason.
+The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange — invoking the flow commits to the whole flow, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages stays out of the flow entirely. Dropping an individual stage is your call to make — recorded as a skip, with its reason.
 
 ## How it works
 
 **One piece of work = one markdown file** under `.genius/`. The file — not conversation memory — carries the work: the confirmed problem, the options and their kill-reasons, the slices and their acceptance criteria, the build log, the close-out evidence. Any fresh session picks up exactly where the last one stopped.
 
-**Every stage ends at a threshold, not a checklist.** Each skill names the one thing that must be honestly true before the next stage starts — the problem confirmed, a real choice made, slices grabbable cold, evidence fresh — and trusts the model's judgment on how to get there. The detailed gate grammar, its Stop-hook enforcement, and the whole mechanical layer (`hooks/`, the parser, its 53 deterministic tests) were retired in the 2026-08 redesign — rationale and trade-offs recorded in `evals/RESULTS.md`: as model capability rises, constraints written for yesterday's models increasingly bind judgment rather than protect it. Pre-redesign work files with gate checklists still read fine — they're records, and records don't expire.
+**Every stage ends at a threshold, not a checklist.** Each skill names the one thing that must be honestly true before the next stage starts — the problem confirmed, a real choice made, slices grabbable cold, evidence fresh — and trusts the model's judgment on how to get there. That bet — concepts over constraints, as model capability rises — and what it trades away are on the record in `evals/RESULTS.md`; measuring it is [ROADMAP](ROADMAP.md) Phase 1. Work files from earlier formats still read fine — they're records, and records don't expire.
 
 **Skips are explicit.** Not every piece of work deserves all six stages — but dropping one is the user's call, recorded *with a reason*, never silent and never bundled. When work goes wrong later, recorded skips are the first suspects — `/genius` reads them to diagnose the gap.
 
@@ -113,26 +112,26 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises and speaks the glossary's language — shorter and clearer, not shorter and blunter. A second `/waitwhat` on the same topic sends a term to the glossary: the repair loop feeds project memory
 - **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
-- **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (one issue per slice, opened at Galvanizing, closed as slices close)
+- **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes)
 - **genius-file** (model-invoked) — the work-file discipline: the file carries the work, skips and assumptions always recorded, checkpoints always live
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder`, `/discern`, and `/waitwhat`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
 ## Token economics
 
-The flow's structure is also its cost model: stages differ in how much intelligence they need, so they shouldn't all run on the same model. Three tiering rules are now built into the skills, derived from measured runs (see `evals/RESULTS.md`). Every number in this section is a single metered run — **n=1 per cell**, output-token pricing only — so read them as directional, not statistical; the run log states each caveat, and closing that gap is [ROADMAP](ROADMAP.md) Phase 1:
+Stages differ in how much intelligence they need, and the guidance here is measured, not vibes — every number a single metered run (**n=1**, output-token pricing; `evals/RESULTS.md` states each caveat):
 
-- **Exploration is frontier-model work.** The blindspot territory pass hunts unknown unknowns — judgment, not reading. A cheap-model pass scores well on potholes that are already written down, then mis-calls the ones that aren't: in a measured greenfield run it recommended the exact render path the project's fixed constraint forbade, and two later frontier stages paid to correct it. Run the pass on the session's main model or better; the saving is in the *shape* — a fresh subagent explores, the main session consumes the report and never re-walks the files (findings carry their evidence for exactly this reason).
-- **Review is mid-model work, and scoped.** Tenacity's reviewer judges a diff against a brief — hand it the diff and the work file, not the repo. An unscoped frontier-model reviewer was the most expensive single step in measured runs ($6.55 of a $20 session) at no gain over a scoped mid-tier one.
-- **Building is where the frontier model earns its rate; divergence is not building.** Invention's parallel option drafts are sketches for Discernment to attack — mid-tier models draft them fine, because Discernment's attack is where quality gets enforced, and *that* runs on the main model.
+- **Exploration is frontier-model work** — the one tiering rule a skill encodes: the blindspot pass runs on the session's main model or better, because hunting unknown unknowns is judgment, not reading. A cheap-model pass collects the potholes already written down, then mis-calls the ones that aren't — measured, and the opposite guidance was reversed with its kill-reason recorded. The saving is in the *shape*: a fresh subagent explores, the main session consumes the report and never re-walks the files.
+- **Review reads fine on a mid-tier model, scoped** — hand the reviewer the diff and the work file, not the repo. An unscoped frontier-model reviewer was the most expensive single step in measured runs ($6.55 of a $20 session) at no gain over a scoped mid-tier one.
+- **Building is where the frontier model earns its rate; divergence is not building** — option sketches draft fine on a mid-tier model, because Discernment's attack is where quality gets enforced, and *that* runs on the main model.
 
-The macro lever is the door, not a discount: six stages on trivial work is the most expensive mistake available, and the answer is to keep that work out of the flow — not to run the flow shallowly, which pays the ceremony and buys nothing. The cost levers are the scoped mid-tier reviewer, mid-tier divergence drafts, and no-re-exploration handoffs — never the pass, and never depth. An earlier revision tiered the pass down to the cheapest model on the strength of a checklist score; a full-flow run showed the cheap pass mis-calling the load-bearing constraint, and the guidance was reversed (see `evals/RESULTS.md`). Quality of the pass is upstream of every stage that follows it; pay for it.
+The macro lever is the door: six stages on trivial work is the most expensive mistake available, and the answer is to keep that work out of the flow — not to run the flow shallowly, which pays the ceremony and buys nothing.
 
 ## Iterating on the plugin
 
 Where this is heading — and the evidence that would kill it — lives in
 [`ROADMAP.md`](ROADMAP.md), re-derived around the concept-first bet.
 
-Skills are programs written in prose, and [`evals/`](evals/) holds the method for testing them: scenario against no-plugin baseline, three runs, majority, results logged. There is no standing scenario inventory anymore — the pre-redesign one was deleted with the detailed prose it graded (git history keeps both); a scenario is written fresh, from the concept skills, at the moment a claim needs evidence. The standing rule survives the redesign: a measured claim traces to a `RESULTS.md` row, or it doesn't ship.
+Skills are programs written in prose, and [`evals/`](evals/) holds the method for testing them: scenario against no-plugin baseline, three runs, majority, results logged. A scenario is written fresh, from the concept skills, at the moment a claim needs evidence. The standing rule: a measured claim traces to a `RESULTS.md` row, or it doesn't ship.
 
 ## Lineage
 
@@ -142,7 +141,7 @@ The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://w
 - [obra/superpowers](https://github.com/obra/superpowers) — the SessionStart injection, evidence-before-claims verification, workflow-as-discipline
 - Thariq Shihipar's [A Field Guide to Fable: Finding Your Unknowns](https://x.com/trq212/article/2073100352921215386) — the map/territory framing, the four kinds of unknowns, the blindspot pass, teach-before-judging, and the pre-acceptance quiz (`/blindspot`)
 
-Both are worth studying in full.
+All three are worth studying in full.
 
 ## License
 
