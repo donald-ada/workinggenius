@@ -57,6 +57,7 @@ Then, in any project:
 ```
 /genius add per-user rate limiting        # start a piece of work
 /wonder                                   # correct its story, answer its questions, confirm the problem
+/architect                                # (greenfield) build-or-adopt first, then one committed design
 /invent                                   # genuinely diverge — alternatives exist to be beaten
 /discern                                  # attack every path, commit to one, record the kills
 /galvanize                                # slice into fresh-session-ready vertical slices
@@ -66,7 +67,7 @@ Then, in any project:
 
 `/genius` at any time shows where every piece of work stands and what to run next. Optional: `/setup-working-genius` pins your verify commands per repo.
 
-The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange — invoking the flow commits to the whole flow, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages stays out of the flow entirely. Dropping an individual stage is your call to make — you just don't type it; the file's missing section is the record.
+The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange — and invoking the flow commits to its depth: every stage that runs, runs live and in full, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages stays out of the flow entirely. Dropping an individual stage is your call to make — you just don't type it; the file's missing section is the record.
 
 ## How it works
 
