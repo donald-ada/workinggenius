@@ -1,6 +1,7 @@
 ---
 name: architect
-description: Design an architecture that is genuinely yours — study the real systems that already solved this problem, let their divergences interrogate the user, and decide every load-bearing choice instead of defaulting it. Use when work is greenfield or architecture-shaping — a new system, a new subsystem, a foundational choice — where the repo has no grain to read and the territory that matters is the ecosystem.
+description: Design an architecture that is genuinely yours — study the real systems that already solved this problem, let their divergences interrogate the user, and decide every load-bearing choice instead of defaulting it. A command the user types — typically between Wonder and Invention, on greenfield or architecture-shaping work.
+disable-model-invocation: true
 argument-hint: "the system or subsystem to architect"
 ---
 
@@ -14,6 +15,6 @@ The concept: **study the field, interrogate the user with it, then design someth
 - **The references generate the interrogation.** Where two real systems chose differently, real builders disagreed — that fork is a question only the user can settle, asked the interview's way: live dialogue, recommendation attached, price stated ("Syncthing carries sync state on every node — resilience, at the cost of state everywhere; LocalSend keeps nothing — simplicity, and no story when a transfer dies halfway. Which failure hurts more here?"). Where the field agrees, don't ask — inherit the consensus and record it as such.
 - **Design ours, not theirs.** Synthesize from the user's answers and the confirmed problem — never by copying the most impressive reference. Every load-bearing decision in the result traces to a user's answer, a field consensus, or a stated bet; a borrowed decision is named with its origin so Discernment can attack the borrowing ("that pattern earns its keep at Syncthing's scale — does it at ours?"). Professional default is the floor: the result should read like a system a senior engineer expects to still be maintaining in three years — the user can buy down from that, never has to buy up to it.
 
-Write the study and the decisions into the work file: the references and their trade-offs become Invention's ground, the divergence answers become Discernment's attack material, and any fork that moves cost goes through the interview's pricing discipline. Like blindspot, this skill feeds the stages and never replaces one — no stage advances here.
+Write the study and the decisions into the work file: the references and their trade-offs become Invention's ground, the divergence answers become Discernment's attack material, and any fork that moves cost goes through the interview's pricing discipline. Like blindspot, this skill feeds the stages and never replaces one — no stage advances here. And like the stages, it runs when the user types it: Wonder and Invention name `/architect` at the moments it fits and never run it uninvited.
 
 One study per work: a study already in the work file is consumed, not redone — arriving here a second time (Wonder handed off a fork, then Invention enters the same ground) means reading the record, and researching only what it genuinely doesn't cover.

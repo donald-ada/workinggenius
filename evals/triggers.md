@@ -1,6 +1,6 @@
 # Trigger evals
 
-Should-trigger / should-not-trigger prompt sets for every model-invoked skill. Run each prompt headless in the prepared scratch project (see README) and check whether the skill loaded. The near-misses are the rows that matter: prompts *adjacent* to the trigger that must not fire. `/genius`, `/setup-working-genius`, and `/waitwhat` are user-invoked only — no rows here; typing them is the test.
+Should-trigger / should-not-trigger prompt sets for every model-invoked skill. Run each prompt headless in the prepared scratch project (see README) and check whether the skill loaded. The near-misses are the rows that matter: prompts *adjacent* to the trigger that must not fire. `/genius`, `/setup-working-genius`, `/waitwhat`, and `/architect` are user-invoked only — no rows here; typing them is the test.
 
 Setup shorthand: **[tracked]** = a checkout-discounts work file authored at `.genius/checkout-discounts.md` in the current FILE-FORMAT (two options recorded), with `stage:` set as the row needs. **[bare]** = no `.genius/` directory.
 
@@ -75,19 +75,6 @@ Should trigger:
 Should NOT trigger:
 - [bare] "Summarize the README."
 - [tracked] "What does CONTEXT.md say 'adjustment' means?" — glossary lookup, not work-file discipline.
-
-## architect
-
-Should trigger:
-- [bare] "I want to build a LAN file-sharing system from scratch — design the architecture properly, not just something that works. Look at how existing systems do it."
-- [tracked, stage: invention] "This subsystem is brand new — nothing in this repo does anything like it. What should the design learn from how others built this?"
-- [tracked, stage: wonder] mid-interview, the user replies: "Hold on — before we settle that, I want the architecture designed properly, the way the good existing systems do it."
-
-Should NOT trigger:
-- [tracked, stage: invention] "Continue checkout-discounts." — a feature in an existing codebase; the repo's own grain is the ground, and reading it is Invention's normal homework.
-- [tracked, stage: wonder] the user answers an interview question about rough shape ("probably a local web server, keep it simple") and moves on — an answered fork is an answer to record, not a mandate to dispatch research the user didn't ask for.
-- [bare] "Which is better in general, Postgres or MySQL?" — a fact question with no work attached; nothing is being designed.
-- [bare] "Add a retry flag to the upload command." — a contained change inside existing grain; no architecture at stake.
 
 ## blindspot
 
