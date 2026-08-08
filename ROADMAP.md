@@ -1,14 +1,11 @@
 # Roadmap
 
-The pre-redesign roadmap — five phases built around the gate engine, the eval
-inventory, and the receipts pitch — lived until `275ed4f`; git history keeps
-it. This one is re-derived against the bet the 2026-08-06 concept-first
-redesign placed (`evals/RESULTS.md`):
+Derived from the bet this plugin makes (`evals/RESULTS.md`, 2026-08-06):
 
 > **The bet:** a strong model handed the concept — each stage's purpose, its
-> failure mode, one threshold — does what the detailed prose and mechanical
-> enforcement used to make it do, without the ceremony or the token weight.
-> Model capability keeps rising; constraints depreciate, concepts hold.
+> failure mode, one threshold — holds the discipline on its own, without
+> ceremony or token weight. Model capability keeps rising; constraints
+> depreciate, concepts hold.
 
 ## Phase 1 — Measure the bet
 
@@ -38,8 +35,7 @@ behavior in real use is decoration — cut it. Deletion stays a feature.
 
 ## Phase 3 — The brownfield demo
 
-The unclaimed opening survives the redesign: one reproducible session on a
-real, old repo — the territory pass with commit evidence, Wonder shrinking
+The unclaimed opening: one reproducible session on a real, old repo — the territory pass with commit evidence, Wonder shrinking
 the ask against prior art, Discernment attacking against the record. The
 concepts either feed on the mess or they don't; publish what actually
 happened, claims shrunk to what the session showed.
@@ -47,10 +43,10 @@ happened, claims shrunk to what the session showed.
 ## Standing constraints
 
 - No number ships ahead of its `RESULTS.md` row.
-- Single-maintainer honesty: prose-only, no state a fork can't carry.
+- Single-maintainer honesty: skills are prose; no runtime, no server
+  components, no state a fork can't carry.
 - No new stages; the pressure toward less lives at the door — work too small
-  for the flow stays out of it, rather than running it shallow (the express
-  path and hands-off modes were retired 2026-08-07, `evals/RESULTS.md`).
-- The mechanical layer returns only if Phase 1's evidence demands it — and
-  then narrowly, as the smallest constraint that restores the failing
-  behavior, never the old layer whole.
+  for the flow stays out of it, rather than running it shallow.
+- Enforcement enters only if Phase 1's evidence demands it — and then
+  narrowly, as the smallest constraint that restores the failing behavior,
+  never a whole layer.

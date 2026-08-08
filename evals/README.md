@@ -7,8 +7,7 @@ This is also what keeps the plugin's voice its own: lines survive because they c
 ## Layout
 
 - `triggers.md` — should-trigger / should-not-trigger prompt sets for every model-invoked skill; the near-misses are the valuable rows
-- `fixtures/` — `scratch.sh` builds the scratch project scenarios run in; canonical work files (`checkout-discounts.md`, `done/`) for setups to reference
-- `run-scenario.sh` — headless runner (prototype): builds a scratch, sets up one scenario, runs its prompt through `claude -p`, saves the transcript. Grading stays separate (blind subagent / human)
+- `fixtures/` — `scratch.sh` builds the scratch project scenarios run in; a scenario's work-file fixtures are authored with the scenario, in the current FILE-FORMAT
 - `RESULTS.md` — the run log, newest entry first; every measured claim in a skill or the README should trace to an entry here
 
 There is no standing scenario inventory: the pre-redesign one (ten files, thirty-plus scenarios, written against the detailed prose) was deleted with that prose — git history keeps both. A scenario is now written fresh, from the concept skills, at the moment a claim needs evidence: named for the failure mode it tests, graded by checklist, marked *(not yet run)* until its RESULTS row exists.
@@ -17,10 +16,10 @@ There is no standing scenario inventory: the pre-redesign one (ten files, thirty
 
 1. Build a scratch project: `bash fixtures/scratch.sh /tmp/wg-eval && cd /tmp/wg-eval`
 2. Install the skills: `mkdir -p .claude/skills && cp -r <plugin-repo>/skills/* .claude/skills/`. The plugin is prose-only since the 2026-08-06 concept-first redesign — installing the skills is installing the plugin.
-3. Apply the scenario's **Setup** (copy fixture work files, adjust `stage:`, make the described commits).
+3. Apply the scenario's **Setup** (write its fixture work files in the current FILE-FORMAT, set `stage:`, make the described commits).
 4. Run the **Prompt** in a **fresh session** — never the session you edited skills in; leftover authoring context masks exactly the gaps you're hunting. Headless works for single-turn scenarios: `claude -p "<prompt>"` from inside the scratch project. Scenarios marked *(interactive)* need a live session.
 5. Grade every checklist item against the transcript — binary, no partial credit.
-6. **Baseline**: repeat in a scratch project *without* step 2 — **and strip the `## Working Genius` section from the fixture's `CLAUDE.md`**. That section documents the whole flow (Wonder → … → Tenacity); leaving it in teaches the baseline the plugin's own methodology and silently turns every scenario into a softball (measured: an M2 baseline with the section intact reproduced the skill's post-mortem-informed sizing verbatim). For slash-command prompts, the baseline uses the same ask in plain English, with **no** added invitation to reflect on process — that flatters the baseline too. `run-scenario.sh` does both automatically. The scenario passes only when the with-skill run clears the checklist **and** the clean baseline exhibits the failure mode the scenario names. A baseline that behaves fine anyway is a softball — sharpen the scenario until the difference shows, or accept that the skill line it tests is a no-op on this model tier.
+6. **Baseline**: repeat in a scratch project *without* step 2 — **and strip the `## Working Genius` section from the fixture's `CLAUDE.md`**. That section documents the whole flow (Wonder → … → Tenacity); leaving it in teaches the baseline the plugin's own methodology and silently turns every scenario into a softball (measured: an M2 baseline with the section intact reproduced the skill's post-mortem-informed sizing verbatim). For slash-command prompts, the baseline uses the same ask in plain English, with **no** added invitation to reflect on process — that flatters the baseline too. The scenario passes only when the with-skill run clears the checklist **and** the clean baseline exhibits the failure mode the scenario names. A baseline that behaves fine anyway is a softball — sharpen the scenario until the difference shows, or accept that the skill line it tests is a no-op on this model tier.
 7. **Three runs per scenario, majority rules.** Prose skills are nondeterministic; one run proves nothing in either direction.
 
 Some scenarios test the plugin against its *own* overreach (ceremony where none is due). There the baseline is the skill applied at fixed depth, and the pass is the skill scaling down.
