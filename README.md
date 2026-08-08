@@ -36,19 +36,19 @@ Anything in this README that sounds like a measurement should trace to a line in
 
 The skills use the open [Agent Skills](https://agentskills.io) standard (SKILL.md — originally developed by Anthropic, adopted by 40+ agents; the [client showcase](https://agentskills.io/clients) links each tool's setup docs).
 
-**Any Agent Skills client** — copy the skills into wherever your tool discovers them:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 13 skills:
 
 ```
-curl -fsSL https://raw.githubusercontent.com/donald-ada/workinggenius/main/install.sh | sh -s -- <your-skills-dir>
+npx skills add donald-ada/workinggenius
 ```
 
-(defaults to `.claude/skills`; from a clone, `./install.sh <dir>` does the same)
-
-**Claude Code** — one line, no clone:
+**Claude Code** — one line, no install:
 
 ```
 /plugin marketplace add donald-ada/workinggenius
 ```
+
+No npm? `curl -fsSL https://raw.githubusercontent.com/donald-ada/workinggenius/main/install.sh | sh -s -- <your-skills-dir>` copies the skills anywhere (defaults to `.claude/skills`).
 
 The whole thing is prose — no hooks, no runtime, nothing platform-specific to port. Two frontmatter fields (`disable-model-invocation`, `argument-hint`) are Claude Code extensions other clients ignore per the standard; the only degradation is graceful — user-invoked-only skills may become model-discoverable elsewhere. Slash commands are the Claude Code spelling: in other clients, ask for a skill by name ("run the wonder skill on this idea").
 
