@@ -5,7 +5,7 @@ description: Maintain the project's shared vocabulary in CONTEXT.md — challeng
 
 # Domain Glossary
 
-One shared language between the user, the agent, and the code, living in `CONTEXT.md` at the repo root — a glossary and nothing else. The payoff compounds across work: a term sharpened during one piece of work serves every later one — shorter conversations, consistent naming in code and tests, fewer tokens spent decoding jargon.
+One shared language between the user, the agent, and the code — what Domain-Driven Design calls the *ubiquitous language* — living in `CONTEXT.md` at the repo root: a glossary and nothing else. The payoff compounds across work: a term sharpened during one piece of work serves every later one — shorter conversations, consistent naming in code and tests, fewer tokens spent decoding jargon.
 
 ## Format
 

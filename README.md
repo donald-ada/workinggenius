@@ -137,13 +137,16 @@ Skills are programs written in prose, and [`evals/`](evals/) holds the method fo
 
 ## Lineage
 
-The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://www.workinggenius.com/)*, applied to agentic development. The skill design borrows deliberately from two excellent projects:
+The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://www.workinggenius.com/)*, applied to agentic development. The skill design borrows deliberately, and says so:
 
 - [mattpocock/skills](https://github.com/mattpocock/skills) — small composable skills, user- vs model-invocation, the router pattern, grilling, vertical slices, gates as checkable completion criteria — and [`/wait-what`](https://www.aihero.dev/skills-wait-what), the reader-triggered re-explain `/waitwhat` adapts (name the listener's state, not the output shape; the glossary tie-in is ours)
 - [obra/superpowers](https://github.com/obra/superpowers) — the SessionStart injection, evidence-before-claims verification, workflow-as-discipline
 - Thariq Shihipar's [A Field Guide to Fable: Finding Your Unknowns](https://x.com/trq212/article/2073100352921215386) — the map/territory framing, the four kinds of unknowns, the blindspot pass, teach-before-judging, and the pre-acceptance quiz (`/blindspot`)
+- Simon Wardley's [Wardley Mapping](https://learnwardleymapping.com/) — build-or-adopt as the first fork, and the delta as the design's spine: build only what differentiates, adopt the commodity (`/architect`)
+- Barry O'Reilly's [Residuality Theory](https://leanpub.com/residuality) — the design earns its shape under stress: attack it from every direction, and what survives is the architecture (`/architect`'s field attack; `/discern`'s survivor)
+- Eric Evans' [Domain-Driven Design](https://www.domainlanguage.com/ddd/) — the *ubiquitous language*, kept in `CONTEXT.md` by `domain-glossary`, and the instinct that the domain shapes the design, not the stack
 
-All three are worth studying in full.
+All of them are worth studying in full.
 
 ## License
 
