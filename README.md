@@ -1,6 +1,6 @@
 # Working Genius
 
-A development workflow for coding agents, built on one observation:
+A development workflow for coding agents — packaged as standard [Agent Skills](https://agentskills.io), so it runs in Claude Code, Cursor, ChatGPT/Codex, Gemini CLI, GitHub Copilot, and any other client that speaks SKILL.md. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -33,11 +33,25 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 
 Anything in this README that sounds like a measurement should trace to a line in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
 
-## Quickstart
+## Install
+
+The skills use the open [Agent Skills](https://agentskills.io) standard (SKILL.md — originally developed by Anthropic, adopted by 40+ agents; the [client showcase](https://agentskills.io/clients) links each tool's setup docs).
+
+**Any Agent Skills client** — copy the skills into wherever your tool discovers them:
+
+```
+curl -fsSL https://raw.githubusercontent.com/donald-ada/workinggenius/main/install.sh | sh -s -- <your-skills-dir>
+```
+
+(defaults to `.claude/skills`; from a clone, `./install.sh <dir>` does the same)
+
+**Claude Code** — one line, no clone:
 
 ```
 /plugin marketplace add donald-ada/workinggenius
 ```
+
+The whole thing is prose — no hooks, no runtime, nothing platform-specific to port. Two frontmatter fields (`disable-model-invocation`, `argument-hint`) are Claude Code extensions other clients ignore per the standard; the only degradation is graceful — user-invoked-only skills may become model-discoverable elsewhere. Slash commands are the Claude Code spelling: in other clients, ask for a skill by name ("run the wonder skill on this idea").
 
 Then, in any project:
 
