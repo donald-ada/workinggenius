@@ -14,7 +14,7 @@ Run it as a conversation, not a script: look first (existing `CLAUDE.md`/`AGENTS
 
 **B — Verify commands.** Propose the discovered typecheck / test / lint commands; the user corrects them. These are what Enablement runs each cycle and Tenacity runs fresh at close-out.
 
-**C — Issue tracking.** Default off — the work file already carries the state. Pin `Issue tracking: github` when people watch progress through the tracker: Galvanizing then opens one issue per approved slice before building starts, Enablement closes each as its slice closes, Tenacity sweeps for orphans. The work file stays the source of truth — issues are its published mirror, never a second place to plan. Only on needs writing.
+**C — Issue tracking.** Default off — the work file already carries the state. Pin `Issue tracking: github` when people watch progress through the tracker: Galvanizing then publishes each approved breakdown as one parent issue with a slice issue under it per slice, all wearing one shared `working-genius` label (one-click filter; the parent does the per-work grouping, so labels don't sprawl). Enablement closes slice issues as slices close, Tenacity sweeps orphans and closes the parent last — its open state is the work's live status. The work file stays the source of truth — issues are its published mirror, never a second place to plan. Only on needs writing.
 
 Write the result into a `## Working Genius` section — `CLAUDE.md` if it exists, else `AGENTS.md`; if neither, ask which to create. Update an existing section in place, preserving any `Lessons:` list Tenacity has grown there.
 

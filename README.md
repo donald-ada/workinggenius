@@ -91,7 +91,7 @@ A fresh repo gives these moves nothing to grip. A legacy system is where they ea
 - **/wonder** — the live interview that turns a raw idea into a user-confirmed problem: homework before questions, recommendations attached, prices on cost forks, "don't build this" a win
 - **/invent** — genuinely different options on the table before anyone falls in love; no judging yet; throwaway prototypes for questions paper can't settle
 - **/discern** — try to kill every option, including the favorite; choose opinionated; record the kill-reasons so rejections stay rejected
-- **/galvanize** — the decision converted into slices a fresh session can grab cold, the `base:` commit recorded — and slices published as one issue each where the repo pins issue tracking
+- **/galvanize** — the decision converted into slices a fresh session can grab cold, the `base:` commit recorded — and, where the repo pins issue tracking, the breakdown published as one parent issue per work with a sub-issue per slice, all under one shared label
 - **/enable** — one slice per fresh context, tests leading the code, reality voting every few minutes, deviations recorded instead of improvised
 - **/tenacity** — "done" as a claim about fresh evidence: everything re-run and read, a context-isolated reviewer, cleanup, commit, a post-mortem the next run reads
 
