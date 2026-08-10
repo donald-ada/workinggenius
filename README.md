@@ -66,7 +66,7 @@ Then, in any project:
 /tenacity                                 # verify everything fresh, review, clean up, commit
 ```
 
-`/genius` at any time shows where every piece of work stands and what to run next. Optional: `/setup-working-genius` pins your verify commands per repo.
+`/genius` at any time shows where every piece of work stands and what to run next. Run `/setup-working-genius` once per repo: it pins the work-file directory, verify commands, and issue tracking — and writes the pointer (into `AGENTS.md`, imported by `CLAUDE.md`, so every agent reads it) that tells each future session this project works this way. Without it, a fresh session doesn't know `.genius/` exists until you type `/genius`.
 
 The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange — and invoking the flow commits to its depth: every stage that runs, runs live and in full, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages stays out of the flow entirely. Dropping an individual stage is your call to make — you just don't type it; the file's missing section is the record.
 
@@ -116,7 +116,7 @@ A fresh repo gives these moves nothing to grip — so greenfield flips the direc
 - **/designer** — the style conversation building momentum never starts: name the base (an existing surface, one of **13 shipped template bases** — minimal to neobrutalism to neon — or nothing) and the delta you want; deltas settled by *looking* (throwaway style tiles, references hunted only when needed and priced), one committed language in `DESIGN.md` that every later screen speaks. A command you type; one language per product
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises and speaks the glossary's language — shorter and clearer, not shorter and blunter. A second `/waitwhat` on the same topic sends a term to the glossary: the repair loop feeds project memory
 - **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
-- **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes)
+- **/setup-working-genius** — per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes) — plus the cross-agent pointer that makes every later session start knowing this project runs the flow
 - **genius-file** (model-invoked) — the work-file discipline: the file carries the work, absence is the record, assumptions visible, checkpoints always live
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder`, `/discern`, and `/waitwhat`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
