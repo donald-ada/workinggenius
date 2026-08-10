@@ -36,7 +36,7 @@ Anything in this README that sounds like a measurement should trace to a line in
 
 The skills use the open [Agent Skills](https://agentskills.io) standard (SKILL.md — originally developed by Anthropic, adopted by 40+ agents; the [client showcase](https://agentskills.io/clients) links each tool's setup docs).
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 13 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 14 skills:
 
 ```
 npx skills add donald-ada/workinggenius
