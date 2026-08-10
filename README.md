@@ -36,7 +36,7 @@ Anything in this README that sounds like a measurement should trace to a line in
 
 The skills use the open [Agent Skills](https://agentskills.io) standard (SKILL.md — originally developed by Anthropic, adopted by 40+ agents; the [client showcase](https://agentskills.io/clients) links each tool's setup docs).
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 13 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 14 skills:
 
 ```
 npx skills add donald-ada/workinggenius
@@ -136,22 +136,6 @@ Where this is heading — and the evidence that would kill it — lives in
 [`ROADMAP.md`](ROADMAP.md), re-derived around the concept-first bet.
 
 Skills are programs written in prose, and [`evals/`](evals/) holds the method for testing them: scenario against no-plugin baseline, three runs, majority, results logged. A scenario is written fresh, from the concept skills, at the moment a claim needs evidence. The standing rule: a measured claim traces to a `RESULTS.md` row, or it doesn't ship.
-
-## Lineage
-
-The stage model is Patrick Lencioni's *[The 6 Types of Working Genius](https://www.workinggenius.com/)*, applied to agentic development. The skill design borrows deliberately, and says so:
-
-- [mattpocock/skills](https://github.com/mattpocock/skills) — small composable skills, user- vs model-invocation, grilling, vertical slices — and [`/wait-what`](https://www.aihero.dev/skills-wait-what), the reader-triggered re-explain `/waitwhat` adapts (name the listener's state, not the output shape; the glossary tie-in is ours)
-- [obra/superpowers](https://github.com/obra/superpowers) — evidence-before-claims verification, workflow-as-discipline
-- Thariq Shihipar's [A Field Guide to Fable: Finding Your Unknowns](https://x.com/trq212/article/2073100352921215386) — the map/territory framing, the blindspot pass, teach-before-judging, and the pre-acceptance quiz (`/blindspot`)
-- Simon Wardley's [Wardley Mapping](https://learnwardleymapping.com/) — build-or-adopt as the first fork, and the delta as the design's spine: build only what differentiates, adopt the commodity (`/architect`)
-- Barry O'Reilly's [Residuality Theory](https://leanpub.com/residuality) — the design earns its shape under stress: attack it from every direction, and what survives is the architecture (`/architect`'s field attack; `/discern`'s survivor)
-- Eric Evans' [Domain-Driven Design](https://www.domainlanguage.com/ddd/) — the *ubiquitous language*, kept in `CONTEXT.md` by `domain-glossary`, and the instinct that the domain shapes the design, not the stack
-- Samantha Warren's [Style Tiles](https://styletil.es/) and the [W3C Design Tokens](https://tr.designtokens.org/format/) format — taste settled by looking, and the recorded language as tokens: the contract that makes generated UI look like *this* product (`/designer`, `DESIGN.md`)
-- [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) (MIT) — the template catalog `/designer`'s 13 shipped bases are vendored from, chosen to span the aesthetic spectrum; the other 54 stay upstream, one pull away
-- Anthropic's [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) skill — the *signature* (spend the boldness in one place) and words-as-design-material (`/designer`'s voice axis)
-
-All of them are worth studying in full.
 
 ## License
 
