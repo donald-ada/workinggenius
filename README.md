@@ -48,7 +48,7 @@ npx skills add donald-ada/workinggenius
 /plugin marketplace add donald-ada/workinggenius
 ```
 
-No npm? `curl -fsSL https://raw.githubusercontent.com/donald-ada/workinggenius/main/install.sh | sh` installs into `.agents/skills` and mirrors into whichever agent directories your project already has — it never creates one for an agent you don't use. Pass explicit directories to override: `sh install.sh <dir> [<dir> ...]`.
+No npm? The skills are plain folders — clone the repo and copy `skills/*` into wherever your agent reads them (`.agents/skills` is the vendor-neutral location; see the [client showcase](https://agentskills.io/clients) for each tool's). Nothing to build, nothing to run.
 
 The whole thing is prose — no hooks, no runtime, nothing platform-specific to port. Two frontmatter fields (`disable-model-invocation`, `argument-hint`) are Claude Code extensions other clients ignore per the standard; the only degradation is graceful — user-invoked-only skills may become model-discoverable elsewhere. Slash commands are the Claude Code spelling: in other clients, ask for a skill by name ("run the wonder skill on this idea").
 
