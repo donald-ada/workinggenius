@@ -66,7 +66,7 @@ Then, in any project:
 /tenacity                                 # verify everything fresh, review, clean up, commit
 ```
 
-`/genius` at any time shows where every piece of work stands and what to run next. Optional: `/setup-working-genius` pins your verify commands per repo.
+`/genius` at any time shows where every piece of work stands and what to run next. Run `/setup-working-genius` once per repo: it pins the work-file directory, verify commands, and issue tracking — and writes the pointer (into `AGENTS.md`, imported by `CLAUDE.md`, so every agent reads it) that tells each future session this project works this way. Without it, a fresh session doesn't know `.genius/` exists until you type `/genius`.
 
 The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange — and invoking the flow commits to its depth: every stage that runs, runs live and in full, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages stays out of the flow entirely. Dropping an individual stage is your call to make — you just don't type it; the file's missing section is the record.
 
@@ -80,7 +80,7 @@ The flow is deliberately manual: every stage is a command you type, every checkp
 
 **`/genius` is the map** — run it any time for where every piece of work stands and what runs next; any session resuming tracked work reads its work file first (the `genius-file` skill's one discipline).
 
-**Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend where new work gets extra care, and a lesson that keeps recurring gets promoted — sparingly, by a three-condition test — into `CLAUDE.md`, where every future session reads it. The workflow's weakest stage is data, not a mystery.
+**Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend where new work gets extra care, and a lesson that keeps recurring gets promoted — sparingly — into the project's instruction file, where every future session reads it. The workflow's weakest stage is data, not a mystery.
 
 **Fresh context per slice.** Galvanizing produces slices a cold session can grab; running each slice in a new session keeps every context window sharp instead of degraded.
 
@@ -90,7 +90,7 @@ Every workflow tool demos greenfield. This one's sharpest moves feed on mess, an
 
 - **Wonder's prior-art pass** shrinks the ask to the genuine gap — in a mature codebase the request is often half-built, and "build much less than asked" is the interview's best outcome.
 - **The blindspot territory pass** mines `git log` and `git blame`: reverted commits, bug-fix clusters, FIXME middens. Where the code bit last time is the best predictor of where it bites next — evidence a greenfield project simply doesn't have yet.
-- **Discernment attacks options against the record** — existing conventions, `docs/adr/` decisions, the codebase's grain — not against a blank slate.
+- **Discernment attacks options against the record** — existing conventions, the decisions the project wrote down (`docs/adr/`, decision records, past work files), the codebase's grain — not against a blank slate. A design that contradicts one either dies of it or names what it overturns.
 - **The domain glossary** exists precisely because ten-year-old repos speak three dialects; it makes the collision explicit instead of letting new work pick a fourth.
 
 A fresh repo gives these moves nothing to grip — so greenfield flips the direction, not the principle: when there's no history to mine, `/architect` studies the field's instead, and the systems that already solved your problem become the territory.
@@ -116,7 +116,7 @@ A fresh repo gives these moves nothing to grip — so greenfield flips the direc
 - **/designer** — the style conversation building momentum never starts: name the base (an existing surface, one of **13 shipped template bases** — minimal to neobrutalism to neon — or nothing) and the delta you want; deltas settled by *looking* (throwaway style tiles, references hunted only when needed and priced), one committed language in `DESIGN.md` that every later screen speaks. A command you type; one language per product
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises and speaks the glossary's language — shorter and clearer, not shorter and blunter. A second `/waitwhat` on the same topic sends a term to the glossary: the repair loop feeds project memory
 - **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
-- **/setup-working-genius** — optional per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes)
+- **/setup-working-genius** — per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes) — plus the cross-agent pointer that makes every later session start knowing this project runs the flow
 - **genius-file** (model-invoked) — the work-file discipline: the file carries the work, absence is the record, assumptions visible, checkpoints always live
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder`, `/discern`, and `/waitwhat`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
 
