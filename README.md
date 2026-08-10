@@ -90,7 +90,7 @@ Every workflow tool demos greenfield. This one's sharpest moves feed on mess, an
 
 - **Wonder's prior-art pass** shrinks the ask to the genuine gap — in a mature codebase the request is often half-built, and "build much less than asked" is the interview's best outcome.
 - **The blindspot territory pass** mines `git log` and `git blame`: reverted commits, bug-fix clusters, FIXME middens. Where the code bit last time is the best predictor of where it bites next — evidence a greenfield project simply doesn't have yet.
-- **Discernment attacks options against the record** — existing conventions, `docs/adr/` decisions, the codebase's grain — not against a blank slate.
+- **Discernment attacks options against the record** — existing conventions, the decisions the project wrote down (`docs/adr/`, decision records, past work files), the codebase's grain — not against a blank slate. A design that contradicts one either dies of it or names what it overturns.
 - **The domain glossary** exists precisely because ten-year-old repos speak three dialects; it makes the collision explicit instead of letting new work pick a fourth.
 
 A fresh repo gives these moves nothing to grip — so greenfield flips the direction, not the principle: when there's no history to mine, `/architect` studies the field's instead, and the systems that already solved your problem become the territory.
