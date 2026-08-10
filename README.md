@@ -80,7 +80,7 @@ The flow is deliberately manual: every stage is a command you type, every checkp
 
 **`/genius` is the map** — run it any time for where every piece of work stands and what runs next; any session resuming tracked work reads its work file first (the `genius-file` skill's one discipline).
 
-**Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend where new work gets extra care, and a lesson that keeps recurring gets promoted — sparingly, by a three-condition test — into `CLAUDE.md`, where every future session reads it. The workflow's weakest stage is data, not a mystery.
+**Post-mortems compound.** Every close-out writes one line — which genius was weakest this run. That line has readers: `/tenacity` reads the earlier ones before writing (a repeat weakness must name its adjustment, not just the diagnosis), `/genius` reports the pattern across finished work and lets it bend where new work gets extra care, and a lesson that keeps recurring gets promoted — sparingly — into the project's instruction file, where every future session reads it. The workflow's weakest stage is data, not a mystery.
 
 **Fresh context per slice.** Galvanizing produces slices a cold session can grab; running each slice in a new session keeps every context window sharp instead of degraded.
 

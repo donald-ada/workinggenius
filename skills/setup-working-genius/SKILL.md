@@ -20,17 +20,19 @@ Three settings, and it stays three: configuration is for what a session must kno
 
 ## Where the pointer goes
 
-Agents don't share one instruction file: Claude Code reads `CLAUDE.md` and not `AGENTS.md`; most others read `AGENTS.md`. Writing to whichever already exists leaves the other half of the ecosystem blind, so write **both**: the section goes in `AGENTS.md`, and `CLAUDE.md` carries `@AGENTS.md` as its first line to import it (a symlink does the same job where the OS allows). One source of truth, every agent reading it. If either file already exists, update it in place — preserve everything already there, including any `Lessons:` list Tenacity has grown.
+Agents don't share one instruction file: Claude Code reads `CLAUDE.md` and not `AGENTS.md`; most others read `AGENTS.md`. Writing to whichever already exists leaves the other half of the ecosystem blind, so write **both**: the section goes in `AGENTS.md`, and `CLAUDE.md` carries `@AGENTS.md` as its first line to import it (a symlink does the same job where the OS allows). One source of truth, every agent reading it. Existing files are updated in place, everything already in them preserved — and a `## Working Genius` section already sitting in `CLAUDE.md` (from an earlier setup, or written by hand) **moves** to `AGENTS.md` whole, lessons included, leaving only the import behind: two copies of these settings is worse than none, because a model reading both picks between them arbitrarily.
 
 ```markdown
 ## Working Genius
 
-Before starting substantial work, check `.genius/` — a work file there carries the confirmed problem,
-the decisions and their kill-reasons, the slices, and the build log for work in flight. Run `/genius`
-for status and the next command; the flow is /wonder → /invent → /discern → /galvanize → /enable →
-/tenacity, and every stage is a command the user types.
-Project vocabulary lives in `CONTEXT.md`; the visual language in `DESIGN.md`. Read them before writing
-words or interfaces this project will keep.
+Work files: `.genius/` (committed)
+
+Before starting substantial work, check the work-file directory above — a file there carries the
+confirmed problem, the decisions and their kill-reasons, the slices, and the build log for work in
+flight. The user types `/genius` for status and the next command; the flow is /wonder → /invent →
+/discern → /galvanize → /enable → /tenacity, and every stage is a command they type.
+Where this project keeps them: project vocabulary in `CONTEXT.md`, visual language in `DESIGN.md` —
+read whichever exist before writing words or interfaces this project will keep.
 Issue tracking: github
 
 Verify commands:
