@@ -44,4 +44,5 @@ been weakest before, also the adjustment>
 - A stage that never ran simply has no section — absence is the record.
 - Work that ran `/architect` carries the study and the confirmed design as their own section, same rules: behavioral, facts sourced, decisions with their reasons.
 - Keep entries behavioral — interfaces, contracts, criteria; no code paths or line numbers, they go stale before the next session reads them.
+- Keep them short. One fact per sentence, the actor named, one term per concept. A section a cold reader must decode is a section that will be skimmed, and every close-out reads this file whole.
 - Files from earlier formats may carry `**Gate — <Stage>**` checklists, `mode:` frontmatter, a `**Sizing:**` line, or `> ⚠ Skipped` markers; read them as the record they are.
