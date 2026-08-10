@@ -20,7 +20,7 @@ Three settings, and it stays three: configuration is for what a session must kno
 
 ## Where the pointer goes
 
-Agents don't share one instruction file: Claude Code reads `CLAUDE.md` and not `AGENTS.md`; most others read `AGENTS.md`. Writing to whichever already exists leaves the other half of the ecosystem blind, so write **both**: the section goes in `AGENTS.md`, and `CLAUDE.md` carries `@AGENTS.md` as its first line to import it (a symlink does the same job where the OS allows). One source of truth, every agent reading it. Existing files are updated in place, everything already in them preserved — and a `## Working Genius` section already sitting in `CLAUDE.md` (from an earlier setup, or written by hand) **moves** to `AGENTS.md` whole, lessons included, leaving only the import behind: two copies of these settings is worse than none, because a model reading both picks between them arbitrarily.
+Agents don't share one instruction file: Claude Code reads `CLAUDE.md` and not `AGENTS.md`; most others read `AGENTS.md`. Writing to whichever already exists leaves the other half of the ecosystem blind, so write **both**: the section goes in `AGENTS.md`, and `CLAUDE.md` carries `@AGENTS.md` as its first line to import it (a symlink does the same job where the OS allows). One source of truth, every agent reading it. Update existing files in place and preserve everything already in them. **Move** any `## Working Genius` section already sitting in `CLAUDE.md` — from an earlier setup, or written by hand — whole into `AGENTS.md`, lessons included, leaving only the import behind. Two copies of these settings is worse than none: a model reading both picks between them arbitrarily.
 
 ```markdown
 ## Working Genius
