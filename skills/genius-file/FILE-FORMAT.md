@@ -24,28 +24,32 @@ One line per path — its shape, and what it honestly costs.
 Record: [every path in full](checkout-discounts/invention.md).
 
 ## Discernment — the decision
-Chosen, and why — including the attacks that reshaped it, which the builder
-needs. One kill-reason line per rejected path. ADR if warranted.
-Record: [the attacks, per path](checkout-discounts/discernment.md).
+Chosen, and why — with the whole fight the chosen path came through, attack by
+attack, the ones that landed and the ones it survived. A builder sizes the work
+from those. One kill-reason line per rejected path. ADR if warranted.
+Record: [the rejected paths' battlefields](checkout-discounts/discernment.md).
 
 ## Galvanizing — the plan
 Brief, agreed test seams, numbered slices with acceptance criteria and
-blockers. The slice list is the work's progress view:
+blockers, and the conventions the build introduces as it goes. The slice list
+is the work's progress view, each line linked to what that slice took:
 
-- [x] **Slice 1 — cart totals through the API** … — closed: `9cce2a8`
+- [x] **Slice 1 — cart totals through the API** … — closed: [slice 1](checkout-discounts/enablement.md#slice-1)
 - [ ] **Slice 2 — the discount rule editor** …
 
+Record: [the pressure test as it ran](checkout-discounts/galvanizing.md).
 When the repo tracks issues: `**Parent issue:** #N` here, `— issue: #N` on each
 slice line, and the parent's task list mirrors this list rather than replacing it.
 
 ## Enablement — what carries forward
 `assumed:` lines, and the edges left untested. Conventions and corrected pins
-are not logged here: they go into the plan above, where the next slice already
-looks. Each slice's evidence is in the commit that closed it.
+are not held here: they go into the plan above, where the next slice already
+looks. Record: [each slice's evidence](checkout-discounts/enablement.md),
+appended by the commit that closed it.
 
 ## Tenacity — the close-out
 Findings and their resolution, one line each.
-Record: [the evidence as it ran](checkout-discounts/close-out.md).
+Record: [the evidence as it ran](checkout-discounts/tenacity.md).
 
 **Post-mortem:** <one line — which genius was weakest this run; if it has
 been weakest before, also the adjustment>

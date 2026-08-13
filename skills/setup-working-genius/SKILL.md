@@ -29,8 +29,9 @@ Work files: `.genius/` (committed)
 
 Before starting substantial work, check the work-file directory above — a file there carries the
 confirmed problem, the decisions and their kill-reasons, the slices and where they stand, with each
-stage's own record in the folder beside it. The user types `/genius` for status and the next command; the flow is /wonder → /invent →
-/discern → /galvanize → /enable → /tenacity, and every stage is a command they type.
+stage's own record in the folder beside it. The user types `/genius` for status and the next command;
+the flow is /wonder → /invent → /discern → /galvanize → /enable → /tenacity, and every stage is a
+command they type.
 Where this project keeps them: project vocabulary in `CONTEXT.md`, visual language in `DESIGN.md` —
 read whichever exist before writing words or interfaces this project will keep.
 Issue tracking: github
