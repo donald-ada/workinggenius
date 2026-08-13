@@ -13,4 +13,4 @@ Then commit, and present the commitment — not a ballot. The user sees one chos
 
 Record why the winner won and one line per rejected path on what killed it — an unrecorded kill-reason gets re-proposed in six weeks. A decision that would leave a future reader asking "why on earth?" may deserve an ADR; most don't. If every path dies, that's a finding, not a failure: back to `/invent` with the wounds as constraints, or back to `/wonder` if the wounds indict the problem itself.
 
-Then `/galvanize`. Done when the chosen approach is confirmed in consequences the user could evaluate, and every rejection carries its kill-reason — written as the attack actually tried and what it broke, not as a verdict. The file carries the fight, not just the winner; a kill-reason that names no attack is an opinion.
+Then `/galvanize`. Done when the chosen approach is confirmed in consequences the user could evaluate, and every rejection carries its kill-reason — written as the attack actually tried and what it broke, not as a verdict. The record carries the fight, not just the winner; a kill-reason that names no attack is an opinion.

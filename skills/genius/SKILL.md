@@ -22,7 +22,7 @@ Every piece of work travels through six geniuses, in three pairs:
 | **Implementation** | Enablement — build with tight loops | `/enable` | flying blind until a big-bang reveal |
 | | Tenacity — finish with evidence | `/tenacity` | "done" that isn't |
 
-State lives in `.genius/<slug>.md` (the `genius-file` skill owns the discipline). Each stage ends when its one threshold is honestly true; each is a command the user types, and one they don't type simply doesn't run — its absent section is the record. Two layers run underneath: the `domain-glossary` skill keeps the project's shared language in `CONTEXT.md`, and the `blindspot` skill hunts the unknowns the stages can't reach.
+State lives in `.genius/<slug>.md`, with each stage's own record beside it (the `genius-file` skill owns the discipline). Each stage ends when its one threshold is honestly true; each is a command the user types, and one they don't type simply doesn't run — its absent section is the record. Two layers run underneath: the `domain-glossary` skill keeps the project's shared language in `CONTEXT.md`, and the `blindspot` skill hunts the unknowns the stages can't reach.
 
 ## What to do when invoked
 

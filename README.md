@@ -72,7 +72,7 @@ The flow is deliberately manual: every stage is a command you type, every checkp
 
 ## How it works
 
-**One piece of work = one markdown file** under `.genius/`. The file — not conversation memory — carries the work: the confirmed problem, the options and their kill-reasons, the slices and their acceptance criteria, the build log, the close-out evidence. Any fresh session picks up exactly where the last one stopped.
+**One piece of work = one work file** at `.genius/<slug>.md`, with each stage's own record beside it in `.genius/<slug>/`. The work file — not conversation memory — carries the conclusions: the confirmed problem, the options and their kill-reasons, the slices and where they stand. The process behind each — the interview as it ran, every path in full, the attacks per path, the close-out's evidence — is on record next door, linked from the section it backs. Any fresh session picks up exactly where the last one stopped, without reading a document that grows with the work.
 
 **Every stage ends at a threshold, not a checklist.** Each skill names the one thing that must be honestly true before the next stage starts — the problem confirmed, a real choice made, slices grabbable cold, evidence fresh — and trusts the model's judgment on how to get there. That bet — concepts over constraints, as model capability rises — and what it trades away are on the record in `evals/RESULTS.md`; measuring it is [ROADMAP](ROADMAP.md) Phase 1. Work files from earlier formats still read fine — they're records, and records don't expire.
 
