@@ -1,5 +1,11 @@
 # Results
 
+## 2026-08-14 — wonder's hijack row: red 3/3, green 0/3 after one description line
+
+The smell the glossary sweep flagged, confirmed and fixed the same day. "Add per-user rate limiting to the API" — the should-NOT row carrying the README promise (*the flow never hijacks work the user didn't put in it*) — fired `wonder` 3/3 on Sonnet: the description's "when starting the Working Genius flow on a new idea" matches any substantive feature ask. Anchoring the trigger on the user's ask — "when the user asks to start the flow — or to be questioned — on a new idea", with the negative said outright — turned the row 0/3, while the invitation-shaped should-trigger row kept firing 3/3 and the tracked pickup 1/1. The other two should-NOT rows were already clean pre-fix (status read → `genius-file` 2/3, none 1/3; code question → none 3/3).
+
+Caveats: one fixture, and its abbreviated pointer block predates setup's current one (no "every stage is a command they type" line) — which makes it the harsher arm: the fix held without that line's help.
+
 ## 2026-08-14 — glossary trigger rows under the collision format: the entry carries its own discipline
 
 First runs of `domain-glossary`'s trigger rows (Sonnet, same harness), after the format change that puts a fought term's collision and killed words inline in the entry. Pin-terms row and both near-misses graded clean (1/1 each; the pin-terms run proposed the split in the new *Killed* vocabulary and checkpointed before writing — create-lazily and live-checkpoint both held). The collision row split: skill loaded 1/3, but in both runs that completed, the collision was surfaced and held up to the user before anything got built — once via the skill, once via `wonder`, whose interview opened by quoting the entry's own recorded fight. (The third run hit the harness turn cap mid-exploration; no conclusion.)
