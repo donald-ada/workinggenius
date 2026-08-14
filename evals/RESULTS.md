@@ -1,5 +1,11 @@
 # Results
 
+## 2026-08-14 — glossary trigger rows under the collision format: the entry carries its own discipline
+
+First runs of `domain-glossary`'s trigger rows (Sonnet, same harness), after the format change that puts a fought term's collision and killed words inline in the entry. Pin-terms row and both near-misses graded clean (1/1 each; the pin-terms run proposed the split in the new *Killed* vocabulary and checkpointed before writing — create-lazily and live-checkpoint both held). The collision row split: skill loaded 1/3, but in both runs that completed, the collision was surfaced and held up to the user before anything got built — once via the skill, once via `wonder`, whose interview opened by quoting the entry's own recorded fight. (The third run hit the harness turn cap mid-exploration; no conclusion.)
+
+The finding worth keeping: **the collision-bearing entry does the challenging even when the skill never loads** — the format change moved part of the discipline out of the skill and into the artifact, and `wonder` driving glossary work is the composition the README already names. The row is annotated to grade the challenge, not the load path. Caveats: n=3 on one row, n=1 on the rest, one small fixture, and `wonder` firing on an untracked ask is a hijack-adjacent smell worth a dedicated scenario before trusting it either way.
+
 ## 2026-08-14 — trigger sweep after the native redesign: 12/12 on Sonnet
 
 Same harness as the entry below, rerun against the redesigned prose (decision-record as the decision index in `.genius/DECIDED.md`; diagnose as the six geniuses at minute scale) and the new index fixture. All twelve rows graded clean, one run each:

@@ -91,7 +91,7 @@ Should NOT trigger:
 ## domain-glossary
 
 Should trigger:
-- [CONTEXT.md defines *archive* = soft-hide, restorable] "Let's add a way for users to archive their account — gone for good." — collides with the glossary; the conflict must be challenged.
+- [CONTEXT.md defines *archive* = soft-hide, restorable] "Let's add a way for users to archive their account — gone for good." — collides with the glossary; the conflict must be challenged. May arrive via `wonder` when the ask reads as new work — the entry's inline collision does the challenging then (RESULTS 2026-08-14); a run where nothing challenges the collision is the failure.
 - [bare] "The team says 'account' meaning both the customer and the login — pin our terms down."
 
 Should NOT trigger:
