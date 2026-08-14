@@ -1,5 +1,9 @@
 # Results
 
+## 2026-08-14 — the collision row rerun against the shipped wonder fix: 1/3 → 3/3
+
+The owner's review caught what the rerun rule missed: the glossary collision row's recorded evidence predated this PR's own wonder fix, and its annotation blessed a via-`wonder` pass path that fix was designed to eliminate. Rerun (Sonnet, three runs, turn cap raised to 10): `domain-glossary` loaded 3/3 — once alongside `wonder` — and every run quoted the entry's recorded fight and held the collision up to the user before building anything. The hijack hadn't only been grabbing untracked work; it had been shadowing the skill this row tests. The row's via-wonder blessing is deleted; its numbers now trace to the shipped prose.
+
 ## 2026-08-14 — wonder's hijack row: red 3/3, green 0/3 after one description line
 
 The smell the glossary sweep flagged, confirmed and fixed the same day. "Add per-user rate limiting to the API" — the should-NOT row carrying the README promise (*the flow never hijacks work the user didn't put in it*) — fired `wonder` 3/3 on Sonnet: the description's "when starting the Working Genius flow on a new idea" matches any substantive feature ask. Anchoring the trigger on the user's ask — "when the user asks to start the Working Genius flow — or to be questioned — on a new idea", with the negative said outright — turned the row 0/3, while the invitation-shaped should-trigger row kept firing 3/3 and the tracked pickup 1/1. The other two should-NOT rows were already clean pre-fix (status read → `genius-file` 2/3, none 1/3; code question → none 3/3).
