@@ -1,42 +1,31 @@
 ---
 name: decision-record
-description: Keep the project's settled decisions as numbered records in docs/adr/ — record one only when it clears the bar, load them before judging a design that touches settled ground, supersede rather than rewrite. Use when a decision worth keeping beyond its work lands, when a design might contradict a recorded decision, or when another skill needs the decision-record discipline.
+description: Keep the index of the project's settled decisions in .genius/DECIDED.md — one line per decision, pointing at the fight that settled it, earned by one test: would a future stranger re-fight this? Use when such a decision lands, when a design might contradict a settled one, or when another skill needs the index discipline.
 ---
 
-# Decision Records
+# The Decision Index
 
-Work files are per-work memory; the glossary is project memory for language. This is project memory for **decisions**: the choices that outlive the work that made them, living in `docs/adr/` as numbered records — `0001-short-slug.md`, the next number found by scanning for the highest, the directory created lazily by the first decision that qualifies. A kill-reason in a done work file guards one piece of work against re-litigation; a decision record guards all future work — it is the ammunition `/discern` and `/architect` load before they judge, and the reason a killed idea stays killed instead of returning as a fresh proposal in six weeks. (The bar and the form follow [mattpocock/skills](https://github.com/mattpocock/skills)' ADR discipline.)
+A decision is never written twice. The flow already writes every decision at full strength — the kill-reasons, the survivor's fight, the user's confirmation — into the work file where it was made. What those records lack is a door: a fresh session judging a new design cannot trawl every done file for the one decision it is about to contradict. The door is `.genius/DECIDED.md`, beside the work files wherever the project pins them — one line per settled decision, each pointing at the fight that settled it. The verdict is the index line; the fight stays where it was written.
 
-## The bar
-
-Record a decision only when all three hold:
-
-1. **Hard to reverse** — changing it later costs something real.
-2. **Surprising without context** — a future reader would ask "why on earth?".
-3. **A real trade-off** — genuine alternatives existed and one won for reasons.
-
-Miss any one and the record is noise: an easily-reversed decision just gets reversed, an unsurprising one nobody looks up, a no-alternative one records "we did the obvious thing". Most decisions miss one, and stay in their work file — that is the discipline working. What tends to qualify: architectural shape, integration patterns, technology choices that carry lock-in, boundary no-s, deliberate deviations from the obvious path, constraints invisible in the code, and rejections that will otherwise be re-proposed.
-
-## The format
-
-One to three sentences — context, decision, why:
+## The line
 
 ```markdown
-# Orders are event-sourced
-
-We rebuild order state from events instead of storing it, because refund
-disputes need the full history and write volume is low. Rejected: mutable rows
-with an audit table — the trail drifted from the truth in v1.
+- **Raw SQL over any ORM** — schema drift burned v1; queries are few and
+  hand-debugged. [The fight](checkout-rework.md#discernment--the-decision)
 ```
 
-The value is that the decision and its why are on record, never that sections got filled. A record is **superseded, never rewritten** — a revisited decision adds `superseded by 0007` to the old record and writes a new one carrying the reason, because what the project used to believe is itself part of the record.
+Verdict in bold, the why in one line, the link to the record that holds the whole battle. A decision that landed outside the flow — no work file, no battlefield — carries its why in the line itself: there the line *is* the record, so give the why one honest sentence rather than a verdict alone.
+
+## The test
+
+An index line is earned by one question: **would a future stranger re-fight this?** — propose the killed thing again, redo the settled study, "fix" the deliberate deviation. It is the same re-litigation test the kill-reason already answers inside one piece of work, asked across all future work. Most decisions fail it — they bind only their own work, and their work file holds them fine. The ones that pass: architectural shape, boundary no-s, deliberate deviations from the obvious path, constraints invisible in the code, rejections that will be re-proposed by someone who wasn't there.
 
 ## The discipline
 
-- **Write at the moment of decision** — Discernment committing a path, Architect confirming a design, a build discovering a constraint the hard way. A record assembled later records the memory of the decision, not the decision.
-- **Read before contradicting.** A design that touches settled ground either dies of the record or names the decision it overturns and why — and then the supersession is written, not implied.
-- **A rejection can be a decision.** A "we won't do X, because" that clears the bar gets a record — that is what stops X from being proposed again by someone who wasn't there, including a future session of you.
+- **Written when the record is finished** — Tenacity's close-out asks the test of everything the work settled; a standalone `/architect` study writes its line when the design is confirmed. Never a second write-up: the line points, the record carries.
+- **Read before contradicting.** The index is the ammunition `/discern` and `/architect` load: a design that touches a settled decision either dies of the fight on record or names the decision it overturns and why.
+- **Overturning moves the line.** A new fight that beats a settled decision rewrites its line — new verdict, new link — and the old record stays exactly as written, because a record's worth is that it is what was written then. The index carries what the project believes now; the files carry how it came to believe it, including everything it used to.
 
 ## What this skill is not
 
-Not the work file: decisions scoped to one piece of work — its slices, its seams, its `assumed:` lines — live and die with it, and its kill-reasons stay with its battlefield. And not a diary: a decision that misses the bar is simply not recorded.
+Not a second place decisions get written — a line that restates the fight instead of pointing at it will drift from it. And not a diary: a decision that fails the stranger test gets no line, and that is the discipline working.

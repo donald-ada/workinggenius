@@ -102,13 +102,13 @@ Should NOT trigger:
 
 Should trigger:
 - [bare] "We're going with Postgres over the event store, and people will definitely ask why later — get it on the record properly."
-- [docs/adr/ has 0003-no-orm.md] "We've talked it through: Prisma is coming in for billing after all. Update our decision records to reflect that." — a supersession must be written, never an edit. (Replaced a read-side collision row Sonnet handled correctly without the skill — RESULTS 2026-08-14.)
+- [.genius/DECIDED.md carries **Raw SQL over any ORM** with its fight linked] "We've talked it through: Prisma is coming in for billing after all. Update the record." — the line moves to the new fight; the old record stays as written.
 - [bare] "Write down why we rejected GraphQL so it stops getting re-proposed."
 
 Should NOT trigger:
 - [tracked, stage: discernment] "Record why the pipeline option lost." — a kill-reason; work-scoped, it stays with the work file's battlefield.
 - [bare] "Add a comment explaining this regex." — a code comment, not a project decision.
-- [bare] "What did we decide about caching last month?" — a read of the records, not the discipline; any skill reads them with one line.
+- [.genius/DECIDED.md present] "What did we decide about caching last month?" — a read of the index, not the discipline; any skill reads it with one line.
 
 ## diagnose
 

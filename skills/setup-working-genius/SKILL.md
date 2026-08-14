@@ -16,7 +16,7 @@ Run it as a conversation, not a script: look first (existing `CLAUDE.md`/`AGENTS
 
 **C — Issue tracking.** Default off — the work file already carries the state. Pin `Issue tracking: github` when people watch progress through the tracker: Galvanizing then publishes each approved breakdown as one parent issue with a slice issue under it per slice, all wearing one shared `working-genius` label (one-click filter; the parent does the per-work grouping, so labels don't sprawl). Enablement closes slice issues as slices close, Tenacity sweeps orphans and closes the parent last — its open state is the work's live status. The work file stays the source of truth — issues are its published mirror, never a second place to plan. Only on needs writing.
 
-**D — Seed the project docs.** Work files are per-work memory; three homes are *project* memory, compounding across all future work — and setup is the one conversation guaranteed to happen before any of it, so the ground is prepared here rather than left to whichever session happens to notice. `docs/adr/` needs no seeding — its records are earned, created by the first decision that clears the `decision-record` skill's bar; the pointer alone prepares it. The other two:
+**D — Seed the project docs.** Work files are per-work memory; three homes are *project* memory, compounding across all future work — and setup is the one conversation guaranteed to happen before any of it, so the ground is prepared here rather than left to whichever session happens to notice. `.genius/DECIDED.md` needs no seeding — its lines are earned, written by the first decision a future stranger would re-fight (`decision-record` skill); the pointer alone prepares it. The other two:
 
 - **`CONTEXT.md` — the vocabulary.** Exploration already read the README and the code's load-bearing names; propose the handful of terms a stranger would need decoded — domain words, never general programming ones — and let the user confirm or sharpen each definition. Write the confirmed set in the `domain-glossary` skill's format. Confirmed terms only: an empty skeleton is premature documentation, and a `CONTEXT.md` that already exists gets its `## Language` section appended, everything else left alone (the glossary skill's don't-hijack rule). A user with no patience for this right now declines in a word — the pointer below still tells every session to grow the file as terms resolve.
 - **`DESIGN.md` — the visual language.** Never scaffolded here: it is the *output* of the `/designer` taste conversation, and a template written without that conversation is exactly the model-default aesthetic it exists to prevent. Ask one question — does this project have an interface someone will see? The answer decides whether the pointer carries the DESIGN.md line: read the file before building screens when it exists, route to `/designer` before pixels when it doesn't.
@@ -45,10 +45,10 @@ Project docs — read before writing, improve while working:
 - `DESIGN.md`: the committed visual language. Read it before building anything someone will see —
   screens speak it, and a screen that wants to break it is a conversation, not a drift. No file
   yet? `/designer` creates it, before pixels.
-- `docs/adr/`: the project's settled decisions, numbered. Read the ones touching your area before
-  designing against settled ground; a decision that clears the bar — hard to reverse, surprising
-  without context, a real trade-off — is recorded there the moment it lands (decision-record
-  skill), and superseded rather than rewritten.
+- `.genius/DECIDED.md`: the index of settled decisions — one line per decision, pointing at the
+  fight that settled it. Read it before designing against settled ground; a decision a future
+  stranger would re-fight earns its line at close-out (decision-record skill), and overturning
+  one moves its line to the new fight — the old record stays as written.
 
 Issue tracking: github
 
