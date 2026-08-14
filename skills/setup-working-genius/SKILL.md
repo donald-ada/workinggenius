@@ -1,6 +1,6 @@
 ---
 name: setup-working-genius
-description: Per-repo configuration — pin the work-file directory, verify commands, and issue tracking, and leave the pointer that tells every future session this project works this way.
+description: Per-repo configuration — pin the work-file directory, verify commands, and issue tracking, seed the project docs, and leave the pointer that tells every future session this project works this way.
 disable-model-invocation: true
 ---
 
@@ -8,15 +8,20 @@ disable-model-invocation: true
 
 The workflow runs on defaults (`.genius/` for work files, verify commands discovered per run, no issue mirror), so this skill is about the pointer as much as the settings: a fresh session in a fresh context knows none of it until an instruction file tells it. Run it once per repo — after that, every session starts already knowing.
 
-Run it as a conversation, not a script: look first (existing `CLAUDE.md`/`AGENTS.md`, any `.genius/` in flight, the project's task runner), propose what you found, let the user correct each choice.
+Run it as a conversation, not a script: look first (existing `CLAUDE.md`/`AGENTS.md`, any `.genius/` in flight, the project's task runner, a `CONTEXT.md` or `DESIGN.md` already alive), propose what you found, let the user correct each choice.
 
-**A — Work-file directory.** Default `.genius/` at the repo root. Commit or gitignore? Recommend committing — done files are decision history every session can read.
+**A — Work-file directory.** Default `.genius/` at the repo root. Commit or gitignore? Recommend committing — done files are decision history every session can read. Create the directory now (a `.gitkeep` when it would otherwise be empty): pinned and present beats pinned and promised.
 
 **B — Verify commands.** Propose the discovered typecheck / test / lint commands; the user corrects them. These are what Enablement runs each cycle and Tenacity runs fresh at close-out.
 
 **C — Issue tracking.** Default off — the work file already carries the state. Pin `Issue tracking: github` when people watch progress through the tracker: Galvanizing then publishes each approved breakdown as one parent issue with a slice issue under it per slice, all wearing one shared `working-genius` label (one-click filter; the parent does the per-work grouping, so labels don't sprawl). Enablement closes slice issues as slices close, Tenacity sweeps orphans and closes the parent last — its open state is the work's live status. The work file stays the source of truth — issues are its published mirror, never a second place to plan. Only on needs writing.
 
-Three settings, and it stays three: configuration is for what a session must know and cannot infer from the repo. Preferences — how deep to interview, which style you like, what tone to use — are things you say in plain words when they matter, not switches to accumulate here.
+**D — Seed the project docs.** Work files are per-work memory; two docs are *project* memory, compounding across all future work — and setup is the one conversation guaranteed to happen before any of it, so the ground is prepared here rather than left to whichever session happens to notice:
+
+- **`CONTEXT.md` — the vocabulary.** Exploration already read the README and the code's load-bearing names; propose the handful of terms a stranger would need decoded — domain words, never general programming ones — and let the user confirm or sharpen each definition. Write the confirmed set in the `domain-glossary` skill's format. Confirmed terms only: an empty skeleton is premature documentation, and a `CONTEXT.md` that already exists gets its `## Language` section appended, everything else left alone (the glossary skill's don't-hijack rule). A user with no patience for this right now declines in a word — the pointer below still tells every session to grow the file as terms resolve.
+- **`DESIGN.md` — the visual language.** Never scaffolded here: it is the *output* of the `/designer` taste conversation, and a template written without that conversation is exactly the model-default aesthetic it exists to prevent. Ask one question — does this project have an interface someone will see? The answer decides whether the pointer carries the DESIGN.md line: read the file before building screens when it exists, route to `/designer` before pixels when it doesn't.
+
+Three settings, and it stays three: configuration is for what a session must know and cannot infer from the repo. D adds no switch — it turns the files the pointer names into files that exist. Preferences — how deep to interview, which style you like, what tone to use — are things you say in plain words when they matter, not switches to accumulate here.
 
 ## Where the pointer goes
 
@@ -32,8 +37,15 @@ confirmed problem, the decisions and their kill-reasons, the slices and where th
 stage's own record in the folder beside it. The user types `/genius` for status and the next command;
 the flow is /wonder → /invent → /discern → /galvanize → /enable → /tenacity, and every stage is a
 command they type.
-Where this project keeps them: project vocabulary in `CONTEXT.md`, visual language in `DESIGN.md` —
-read whichever exist before writing words or interfaces this project will keep.
+
+Project docs — read before writing, improve while working:
+- `CONTEXT.md`: the project's vocabulary. Name things in its terms; the moment a conversation
+  resolves or collides a term, record it there inline (domain-glossary skill), never batched at
+  the end of the work.
+- `DESIGN.md`: the committed visual language. Read it before building anything someone will see —
+  screens speak it, and a screen that wants to break it is a conversation, not a drift. No file
+  yet? `/designer` creates it, before pixels.
+
 Issue tracking: github
 
 Verify commands:
@@ -41,6 +53,8 @@ Verify commands:
 - test: `<command>`
 - lint: `<command>`
 ```
+
+Tailor the docs list to what setup found: a project with no interface anyone sees drops the `DESIGN.md` line rather than carrying a dead instruction — the list names the docs this project actually keeps, each with its read-trigger and its write-trigger, because a doc nothing tells sessions to update is a doc that was current once.
 
 Write it as instructions, not description — "check `.genius/` before starting" is followed; "work files live in `.genius/`" is merely true. Instruction files are context, not enforcement: they make the right thing likely, never certain.
 
