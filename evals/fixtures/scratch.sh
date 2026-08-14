@@ -25,7 +25,7 @@ A small upload CLI used as an eval fixture.
 
 ## Working Genius
 
-Work files: `.genius/` (committed). Flow: /wonder → /invent → /discern → /galvanize → /enable → /tenacity; type /genius for status.
+Work files: `.genius/` (committed). A file there carries the work, with each stage's own record in the folder beside it. Flow: /wonder → /invent → /discern → /galvanize → /enable → /tenacity; type /genius for status.
 
 Verify commands:
 - test: `npm test`

@@ -20,7 +20,7 @@ exists, what success observably looks like, what's out of scope, parked
 questions. Record: [the interview as it ran](checkout-discounts/wonder.md).
 
 ## Invention — the options
-One line per path — its shape, and what it honestly costs.
+One line per path — its shape, what it makes easy, and what it honestly costs.
 Record: [every path in full](checkout-discounts/invention.md).
 
 ## Discernment — the decision
@@ -45,7 +45,8 @@ slice line, and the parent's task list mirrors this list rather than replacing i
 `assumed:` lines, and the edges left untested. Conventions and corrected pins
 are not held here: they go into the plan above, where the next slice already
 looks. Record: [each slice's evidence](checkout-discounts/enablement.md),
-appended by the commit that closed it.
+appended by the commit that closed it, each entry under its own `## Slice N`
+heading so the plan's links resolve.
 
 ## Tenacity — the close-out
 Findings and their resolution, one line each.
