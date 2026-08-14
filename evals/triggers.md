@@ -91,9 +91,33 @@ Should NOT trigger:
 ## domain-glossary
 
 Should trigger:
-- [CONTEXT.md defines *archive* = soft-hide, restorable] "Let's add a way for users to archive their account — gone for good." — collides with the glossary; the conflict must be challenged.
+- [CONTEXT.md defines *archive* = soft-hide, restorable] "Let's add a way for users to archive their account — gone for good." — collides with the glossary; the conflict must be challenged before anything gets built. (1/3 while the wonder hijack was live, 3/3 after its fix — the hijack had been shadowing this skill; RESULTS 2026-08-14.)
 - [bare] "The team says 'account' meaning both the customer and the login — pin our terms down."
 
 Should NOT trigger:
 - [CONTEXT.md present] "Use the glossary's vocabulary in these test names." — merely *reading* the glossary is any skill's one-liner, not this skill; its own "What this skill is not", as a test.
 - [bare] "What's the difference between authentication and authorization?" — general concepts don't belong in the glossary.
+
+## decision-record
+
+Should trigger:
+- [bare] "We're going with Postgres over the event store, and people will definitely ask why later — get it on the record properly."
+- [.genius/DECIDED.md carries **Raw SQL over any ORM** with its fight linked] "We've talked it through: Prisma is coming in for billing after all. Update the record." — the line moves to the new fight; the old record stays as written.
+- [bare] "Write down why we rejected GraphQL so it stops getting re-proposed."
+
+Should NOT trigger:
+- [tracked, stage: discernment] "Record why the pipeline option lost." — a kill-reason; work-scoped, it stays with the work file's battlefield.
+- [bare] "Add a comment explaining this regex." — a code comment, not a project decision.
+- [.genius/DECIDED.md present] "What did we decide about caching last month?" — a read of the index, not the discipline; any skill reads it with one line.
+
+## diagnose
+
+Should trigger:
+- [bare] "Checkout throws a 500 on roughly every third attempt — debug it."
+- [bare] "The test suite got 40% slower since last week. Figure out why."
+- [bare] "Users say the export sometimes comes out empty; works on my machine."
+
+Should NOT trigger:
+- [bare] "Explain what this stack trace means." — a read, not a diagnosis loop.
+- [bare] "Write a regression test for the bug we fixed yesterday." — the fix exists; nothing left to diagnose.
+- [tracked, stage: enablement, slices present] "Build slice 2 of checkout-discounts." — Enablement's own red-green loop, not a bug hunt.

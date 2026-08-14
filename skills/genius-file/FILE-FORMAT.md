@@ -26,7 +26,7 @@ Record: [every path in full](checkout-discounts/invention.md).
 ## Discernment — the decision
 Chosen, and why — with the whole fight the chosen path came through, attack by
 attack, the ones that landed and the ones it survived. A builder sizes the work
-from those. One kill-reason line per rejected path. ADR if warranted.
+from those. One kill-reason line per rejected path.
 Record: [the rejected paths' battlefields](checkout-discounts/discernment.md).
 
 ## Galvanizing — the plan
@@ -48,7 +48,8 @@ looks. Record: [each slice's evidence](checkout-discounts/enablement.md),
 appended by the commit that closed it.
 
 ## Tenacity — the close-out
-Findings and their resolution, one line each.
+Findings and their resolution, one line each; a `DECIDED.md` index line for
+anything settled here that a stranger would re-fight (`decision-record` skill).
 Record: [the evidence as it ran](checkout-discounts/tenacity.md).
 
 **Post-mortem:** <one line — which genius was weakest this run; if it has

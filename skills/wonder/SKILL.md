@@ -1,6 +1,6 @@
 ---
 name: wonder
-description: Question the work before doing it — the interview that turns a raw idea into a confirmed problem statement. Use when a tracked piece of work is at its wonder stage, or when starting the Working Genius flow on a new idea.
+description: Question the work before doing it — the interview that turns a raw idea into a confirmed problem statement. Use when a tracked piece of work is at its wonder stage, or when the user asks to start the Working Genius flow — or to be questioned — on a new idea. An ordinary request to build something is not an invitation to start the flow.
 argument-hint: "the idea or request to question"
 ---
 

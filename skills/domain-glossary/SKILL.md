@@ -16,22 +16,24 @@ One shared language between the user, the agent, and the code — what Domain-Dr
 
 ## Language
 
-**Order**:
+**customer**:
 {One or two sentences. What it IS, not what it does.}
-_Avoid_: purchase, transaction
+Killed: *client*, *buyer* — one concept, one word.
 
-**Customer**:
-A person or organization that places orders.
-_Avoid_: client, buyer, account
+**archive**:
+Soft-hide; the user can restore it. Settled against permanent deletion in the
+exports work — restorability is a support contract.
+Killed: *trash*, *delete* — each carried both meanings at once.
 ```
 
 Rules of the file:
 
-- **Be opinionated.** When several words name one concept, pick the best and list the rivals under `_Avoid_`.
+- **Be opinionated.** When several words name one concept, pick the best and name the losers as killed — with what killed them where there was a real fight, and a plain "one concept, one word" where there wasn't.
+- **A fought term keeps its fight.** A term that collided — two meanings, or a claim against the code — carries the collision in one line: what collided, which won, why. A resolution recorded without its collision gets re-litigated; that is as true of words as of designs. A term that never collided is just its definition.
 - **Published API names outrank opinion.** A misleading name that's public API (a decade-old keyword argument) can't be renamed — define it *against* its general meaning instead ("not actually a cryptographic salt; the name is API, the definition rules"). The glossary's job there is disambiguation, not renaming.
 - **Tight definitions.** One or two sentences; define what it *is*.
 - **Project concepts only.** General programming concepts (retries, timeouts, error types) don't belong, however often the project uses them.
-- **No implementation details.** `CONTEXT.md` is not a spec, a scratchpad, or a decision log — decisions go in the project's decision records (a work file, an ADR), not here.
+- **No implementation details.** `CONTEXT.md` is not a spec, a scratchpad, or a decision log — decisions live in their work file, indexed in `.genius/DECIDED.md` where a stranger would re-fight them, not here.
 - **Create lazily.** No `CONTEXT.md`? Create it when the first term is resolved, not before.
 - **Don't hijack.** If `CONTEXT.md` already exists with non-glossary content, leave that content alone: append the `## Language` section to it and keep the discipline scoped to that section.
 
