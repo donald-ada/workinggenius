@@ -10,7 +10,7 @@ This is also what keeps the plugin's voice its own: lines survive because they c
 - `fixtures/` — `scratch.sh` builds the scratch project scenarios run in; a scenario's work-file fixtures are authored with the scenario, in the current FILE-FORMAT
 - `RESULTS.md` — the run log, newest entry first; every measured claim in a skill or the README should trace to an entry here
 
-There is no standing scenario inventory: the pre-redesign one (ten files, thirty-plus scenarios, written against the detailed prose) was deleted with that prose — git history keeps both. A scenario is now written fresh, from the concept skills, at the moment a claim needs evidence: named for the failure mode it tests, graded by checklist, marked *(not yet run)* until its RESULTS row exists.
+There is no standing scenario inventory: the pre-redesign one (ten files, thirty-plus scenarios, written against the detailed prose) was deleted with that prose — git history keeps both. A scenario is now written fresh, from the concept skills, at the moment a claim needs evidence: named for the failure mode it tests, graded by checklist, marked *(not yet run)* until its RESULTS entry exists.
 
 ## Running a scenario
 
@@ -30,11 +30,7 @@ For model-invoked skills, discovery is half the behavior: a skill that never fir
 
 ## Recording
 
-Append one row per graded scenario to `RESULTS.md` (create the file on first use):
-
-```markdown
-| date | model | scenario | runs | with-skill | baseline-shows-failure | notes |
-```
+Append one dated entry to `RESULTS.md`, newest first: `## <date> — <one line: what the run showed>`, then the setup, the grades (a table where it helps), and the caveats as stated facts — run counts, fixture size, anything that bounds the claim. Every measured claim elsewhere traces to its entry here.
 
 Honest grading only: a checklist item you didn't verify against the transcript is unchecked.
 

@@ -30,7 +30,7 @@ Workflow plugins are easy to write and hard to trust: prose the model can ignore
 | The ceremony is **priced** — a measured full six-stage run cost 11× its no-plugin baseline (n=1, single task), which is why work too small for the flow stays out of it entirely rather than getting a discount | `evals/RESULTS.md` (full-flow run) |
 | The interview's shape is **measured UX** — story-first, priced questions: a persona test reached a user-**confirmed** problem contract in 3 turns and ~1,000 typed characters where question-drip interviewing hit a 6-turn cap unconfirmed (n=1 per arm) | `evals/RESULTS.md` (E2E persona UX test, 2026-07-22) |
 
-Anything in this README that sounds like a measurement should trace to a line in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
+Anything in this README that sounds like a measurement should trace to an entry in `evals/RESULTS.md`; if it doesn't, file an issue — that's a bug in the README.
 
 ## Install
 
@@ -137,7 +137,7 @@ The macro lever is the door: six stages on trivial work is the most expensive mi
 Where this is heading — and the evidence that would kill it — lives in
 [`ROADMAP.md`](ROADMAP.md), re-derived around the concept-first bet.
 
-Skills are programs written in prose, and [`evals/`](evals/) holds the method for testing them: scenario against no-plugin baseline, three runs, majority, results logged. A scenario is written fresh, from the concept skills, at the moment a claim needs evidence. The standing rule: a measured claim traces to a `RESULTS.md` row, or it doesn't ship.
+Skills are programs written in prose, and [`evals/`](evals/) holds the method for testing them: scenario against no-plugin baseline, three runs, majority, results logged. A scenario is written fresh, from the concept skills, at the moment a claim needs evidence. The standing rule: a measured claim traces to a `RESULTS.md` entry, or it doesn't ship.
 
 ## License
 

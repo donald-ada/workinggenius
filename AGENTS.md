@@ -17,7 +17,7 @@ The contribution discipline, in the imperative:
 - Red before green, for prose: a skill edit earns its place through a scenario
   that fails before it and passes after it — plus the skill's trigger rows in
   `evals/triggers.md`, rerun after any edit to its description.
-- No number ships ahead of its `evals/RESULTS.md` row.
+- No number ships ahead of its `evals/RESULTS.md` entry.
 - Deletion is a feature: a line no scenario can distinguish is decoration.
 - The voice is part of the design: sentences survive because they change
   behavior, not because they sound right.

@@ -42,7 +42,7 @@ happened, claims shrunk to what the session showed.
 
 ## Standing constraints
 
-- No number ships ahead of its `RESULTS.md` row.
+- No number ships ahead of its `RESULTS.md` entry.
 - Single-maintainer honesty: skills are prose; no runtime, no server
   components, no state a fork can't carry.
 - No new stages; the pressure toward less lives at the door — work too small
