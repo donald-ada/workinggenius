@@ -9,7 +9,7 @@ The work file is a record for a cold reader, not a form. The sections below name
 work: checkout-discounts
 stage: discernment   # wonder | invention | discernment | galvanizing | enablement | tenacity | done
 created: 2026-07-03
-base: <commit sha at Galvanizing — Tenacity diffs from here>
+base: <HEAD when Galvanizing wrote the plan — Tenacity diffs from here>
 ---
 
 # Checkout discounts
