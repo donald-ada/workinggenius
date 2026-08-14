@@ -102,7 +102,7 @@ Should NOT trigger:
 
 Should trigger:
 - [bare] "We're going with Postgres over the event store, and people will definitely ask why later — get it on the record properly."
-- [docs/adr/ has 0003-no-orm.md] "Let's pull in Prisma for the new billing tables." — touches settled ground; the record must be read and either survive or be superseded.
+- [docs/adr/ has 0003-no-orm.md] "We've talked it through: Prisma is coming in for billing after all. Update our decision records to reflect that." — a supersession must be written, never an edit. (Replaced a read-side collision row Sonnet handled correctly without the skill — RESULTS 2026-08-14.)
 - [bare] "Write down why we rejected GraphQL so it stops getting re-proposed."
 
 Should NOT trigger:

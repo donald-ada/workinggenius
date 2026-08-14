@@ -1,5 +1,15 @@
 # Results
 
+## 2026-08-14 — trigger sweep: decision-record and diagnose, headless on Sonnet
+
+First trigger runs for the two skills added from the [mattpocock/skills](https://github.com/mattpocock/skills) study — claude-sonnet-5, one headless run per row (`claude -p`, `--max-turns 6`) in the scratch fixture, skills installed per the harness README; the two new sections of `triggers.md` only.
+
+- **diagnose: 6/6.** All three should-trigger rows loaded the skill; none of the three near-misses did — and "Build slice 2 of checkout-discounts" routed to `enable` + `genius-file`, which is exactly the routing that row exists to protect.
+- **decision-record: 5/6 as written.** Both write-shaped should-trigger rows and all three should-nots graded clean ("Record why the pipeline option lost" loaded `discern`, not this skill — correct: work-scoped kill-reasons are Discernment's). The collision row failed: "[docs/adr/ has 0003-no-orm.md] Let's pull in Prisma for the new billing tables" never loaded the skill — 0/3 after two reruns.
+- **The failing row was a softball, not a skill bug.** In all three runs Sonnet found the record unprompted, quoted it, blocked the change, and offered supersession over editing — the read-side behavior the skill prescribes, produced without loading it. Per the harness rule (a row baseline behavior passes anyway tests a no-op), the row is replaced with the variant that demands the *write* discipline — "Prisma is coming in for billing after all; update our decision records" — which loaded the skill (1/1) and, with it loaded, asked for the why behind the reversal and whether the supersession is scoped to billing or full, before writing anything.
+
+Caveats: n=1 per row except the failed row (n=3) and its replacement (n=1); a single small fixture where `docs/adr/` surfaces from one `find` — whether the description's contradiction clause earns its keep in a repo too large for casual discovery is unmeasured, so that clause stands on the open question, not on this run.
+
 ## 2026-08-07 — user ruling: sizing and hands-off modes retired; stage thresholds moved last and made evidence-bearing
 
 Observed in dogfooding: the staged flow itself generated forward pressure —
