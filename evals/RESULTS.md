@@ -1,5 +1,40 @@
 # Results
 
+## 2026-08-14 — the collision row rerun against the shipped wonder fix: 1/3 → 3/3
+
+The owner's review caught what the rerun rule missed: the glossary collision row's recorded evidence predated this PR's own wonder fix, and its annotation blessed a via-`wonder` pass path that fix was designed to eliminate. Rerun (Sonnet, three runs, turn cap raised to 10): `domain-glossary` loaded 3/3 — once alongside `wonder` — and every run quoted the entry's recorded fight and held the collision up to the user before building anything. The hijack hadn't only been grabbing untracked work; it had been shadowing the skill this row tests. The row's via-wonder blessing is deleted; its numbers now trace to the shipped prose.
+
+## 2026-08-14 — wonder's hijack row: red 3/3, green 0/3 after one description line
+
+The smell the glossary sweep flagged, confirmed and fixed the same day. "Add per-user rate limiting to the API" — the should-NOT row carrying the README promise (*the flow never hijacks work the user didn't put in it*) — fired `wonder` 3/3 on Sonnet: the description's "when starting the Working Genius flow on a new idea" matches any substantive feature ask. Anchoring the trigger on the user's ask — "when the user asks to start the Working Genius flow — or to be questioned — on a new idea", with the negative said outright — turned the row 0/3, while the invitation-shaped should-trigger row kept firing 3/3 and the tracked pickup 1/1. The other two should-NOT rows were already clean pre-fix (status read → `genius-file` 2/3, none 1/3; code question → none 3/3).
+
+Caveats: one fixture, and its abbreviated pointer block predates setup's current one (no "every stage is a command they type" line) — which makes it the harsher arm: the fix held without that line's help.
+
+## 2026-08-14 — glossary trigger rows under the collision format: the entry carries its own discipline
+
+First runs of `domain-glossary`'s trigger rows (Sonnet, same harness), after the format change that puts a fought term's collision and killed words inline in the entry. Pin-terms row and both near-misses graded clean (1/1 each; the pin-terms run proposed the split in the new *Killed* vocabulary and checkpointed before writing — create-lazily and live-checkpoint both held). The collision row split: skill loaded 1/3, but in both runs that completed, the collision was surfaced and held up to the user before anything got built — once via the skill, once via `wonder`, whose interview opened by quoting the entry's own recorded fight. (The third run hit the harness turn cap mid-exploration; no conclusion.)
+
+The finding worth keeping: **the collision-bearing entry does the challenging even when the skill never loads** — the format change moved part of the discipline out of the skill and into the artifact, and `wonder` driving glossary work is the composition the README already names. The row is annotated to grade the challenge, not the load path. Caveats: n=3 on one row, n=1 on the rest, one small fixture, and `wonder` firing on an untracked ask is a hijack-adjacent smell worth a dedicated scenario before trusting it either way.
+
+## 2026-08-14 — trigger sweep after the native redesign: 12/12 on Sonnet
+
+Same harness as the entry below, rerun against the redesigned prose (decision-record as the decision index in `.genius/DECIDED.md`; diagnose as the six geniuses at minute scale) and the new index fixture. All twelve rows graded clean, one run each:
+
+- **decision-record 6/6** — including the row its predecessor failed as a softball, now write-shaped: "Prisma is coming in for billing after all; update the record" loaded the skill, and with it loaded, the behavior went past compliance: it read the fight the line points at, found Prisma killed there by name, and **refused to move the line without a new fight that beats the old kill-reason** — old record untouched, index untouched, the missing why asked for. The near-misses stayed clean ("Record why the pipeline option lost" → `discern`; the index read → no skill).
+- **diagnose 6/6** — all three should-trigger rows fired under the minute-scale framing; "Build slice 2" still routes to `enable`, the stack-trace explain and the post-fix regression-test asks still load nothing.
+
+Caveats: n=1 per row, single small fixture; the redesign and this sweep are same-day, so no evidence yet on whether the index discipline holds over a real accumulation of decisions — that's Phase 2's dogfooding to show.
+
+## 2026-08-14 — trigger sweep: decision-record and diagnose, headless on Sonnet
+
+First trigger runs for the two skills added from the [mattpocock/skills](https://github.com/mattpocock/skills) study — claude-sonnet-5, one headless run per row (`claude -p`, `--max-turns 6`) in the scratch fixture, skills installed per the harness README; the two new sections of `triggers.md` only.
+
+- **diagnose: 6/6.** All three should-trigger rows loaded the skill; none of the three near-misses did — and "Build slice 2 of checkout-discounts" routed to `enable` + `genius-file`, which is exactly the routing that row exists to protect.
+- **decision-record: 5/6 as written.** Both write-shaped should-trigger rows and all three should-nots graded clean ("Record why the pipeline option lost" loaded `discern`, not this skill — correct: work-scoped kill-reasons are Discernment's). The collision row failed: "[docs/adr/ has 0003-no-orm.md] Let's pull in Prisma for the new billing tables" never loaded the skill — 0/3 after two reruns.
+- **The failing row was a softball, not a skill bug.** In all three runs Sonnet found the record unprompted, quoted it, blocked the change, and offered supersession over editing — the read-side behavior the skill prescribes, produced without loading it. Per the harness rule (a row baseline behavior passes anyway tests a no-op), the row is replaced with the variant that demands the *write* discipline — "Prisma is coming in for billing after all; update our decision records" — which loaded the skill (1/1) and, with it loaded, asked for the why behind the reversal and whether the supersession is scoped to billing or full, before writing anything.
+
+Caveats: n=1 per row except the failed row (n=3) and its replacement (n=1); a single small fixture where `docs/adr/` surfaces from one `find` — whether the description's contradiction clause earns its keep in a repo too large for casual discovery is unmeasured, so that clause stands on the open question, not on this run.
+
 ## 2026-08-07 — user ruling: sizing and hands-off modes retired; stage thresholds moved last and made evidence-bearing
 
 Observed in dogfooding: the staged flow itself generated forward pressure —

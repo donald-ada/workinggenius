@@ -36,7 +36,7 @@ Anything in this README that sounds like a measurement should trace to a line in
 
 The skills use the open [Agent Skills](https://agentskills.io) standard (SKILL.md — originally developed by Anthropic, adopted by 40+ agents; the [client showcase](https://agentskills.io/clients) links each tool's setup docs).
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 14 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 16 skills:
 
 ```
 npx skills add donald-ada/workinggenius
@@ -66,7 +66,7 @@ Then, in any project:
 /tenacity                                 # verify everything fresh, review, clean up, commit
 ```
 
-`/genius` at any time shows where every piece of work stands and what to run next. Run `/setup-working-genius` once per repo: it pins the work-file directory, verify commands, and issue tracking — and writes the pointer (into `AGENTS.md`, imported by `CLAUDE.md`, so every agent reads it) that tells each future session this project works this way. Without it, a fresh session doesn't know `.genius/` exists until you type `/genius`.
+`/genius` at any time shows where every piece of work stands and what to run next. Run `/setup-working-genius` once per repo: it pins the work-file directory, verify commands, and issue tracking, seeds the project docs — and writes the pointer (into `AGENTS.md`, imported by `CLAUDE.md`, so every agent reads it) that tells each future session this project works this way, and to keep those docs current as it works. Without it, a fresh session doesn't know `.genius/` exists until you type `/genius`.
 
 The flow is deliberately manual: every stage is a command you type, every checkpoint a live exchange — and invoking the flow commits to its depth: every stage that runs, runs live and in full, because the checkpoints are where problems surface, and a model running on its own approval finds none of them. Work too small for six stages stays out of the flow entirely. Dropping an individual stage is your call to make — you just don't type it; the file's missing section is the record.
 
@@ -90,7 +90,7 @@ Every workflow tool demos greenfield. This one's sharpest moves feed on mess, an
 
 - **Wonder's prior-art pass** shrinks the ask to the genuine gap — in a mature codebase the request is often half-built, and "build much less than asked" is the interview's best outcome.
 - **The blindspot territory pass** mines `git log` and `git blame`: reverted commits, bug-fix clusters, FIXME middens. Where the code bit last time is the best predictor of where it bites next — evidence a greenfield project simply doesn't have yet.
-- **Discernment attacks options against the record** — existing conventions, the decisions the project wrote down (`docs/adr/`, decision records, past work files), the codebase's grain — not against a blank slate. A design that contradicts one either dies of it or names what it overturns.
+- **Discernment attacks options against the record** — existing conventions, the decision index (`.genius/DECIDED.md`) and the fights it points at, past work files, decision records that predate the plugin (`docs/adr/`, wherever the repo keeps them), the codebase's grain — not against a blank slate. A design that contradicts one either dies of it or names what it overturns.
 - **The domain glossary** exists precisely because ten-year-old repos speak three dialects; it makes the collision explicit instead of letting new work pick a fourth.
 
 A fresh repo gives these moves nothing to grip — so greenfield flips the direction, not the principle: when there's no history to mine, `/architect` studies the field's instead, and the systems that already solved your problem become the territory.
@@ -116,9 +116,11 @@ A fresh repo gives these moves nothing to grip — so greenfield flips the direc
 - **/designer** — the style conversation building momentum never starts: name the base (an existing surface, one of **13 shipped template bases** — minimal to neobrutalism to neon — or nothing) and the delta you want; deltas settled by *looking* (throwaway style tiles, references hunted only when needed and priced), one committed language in `DESIGN.md` that every later screen speaks. A command you type; one language per product
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises and speaks the glossary's language — shorter and clearer, not shorter and blunter. A second `/waitwhat` on the same topic sends a term to the glossary: the repair loop feeds project memory
 - **/blindspot** — the unknowns layer: the map is not the territory, so go look at the three moments the gap is widest — a read-only territory pass before unfamiliar work, judgment taught before a choice is extracted, a quiz that catches the user's map up with what actually changed. Driven by `/wonder`, `/discern`, and `/tenacity`; callable directly on any area
-- **/setup-working-genius** — per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes) — plus the cross-agent pointer that makes every later session start knowing this project runs the flow
+- **/setup-working-genius** — per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes) — plus seeding the project docs (`CONTEXT.md` started from terms the user confirms; the ground laid for `DESIGN.md`) and the cross-agent pointer that makes every later session start knowing this project runs the flow — and keep those docs current as it works
 - **genius-file** (model-invoked) — the work-file discipline: the file carries the work, absence is the record, assumptions visible, checkpoints always live
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/waitwhat`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
+- **decision-record** (model-invoked) — the decision index: decisions are never written twice. `.genius/DECIDED.md` holds one line per settled decision, pointing at the fight — the kill-reasons, the survivor's attacks — already on record in the work that settled it. A line is earned by one test (would a future stranger re-fight this?), loaded as ammunition by `/discern` and `/architect`, and overturning a decision moves its line to the new fight — the old record stays as written
+- **diagnose** (model-invoked) — debugging as the six geniuses at minute scale: a red reproduction confirms the bug before any theory (Wonder), hypotheses come plural and falsifiable with kill-reasons for the dead (Invention, Discernment), the fix goes red to green and the rerun is fresh (Enablement, Tenacity). Three failed fixes impeach the problem statement, not the patience
 
 ## Token economics
 
