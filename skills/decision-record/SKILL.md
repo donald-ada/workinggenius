@@ -1,6 +1,6 @@
 ---
 name: decision-record
-description: Keep the index of the project's settled decisions in .genius/DECIDED.md — one line per decision, pointing at the fight that settled it, earned by one test: would a future stranger re-fight this? Use when such a decision lands, when a design might contradict a settled one, or when another skill needs the index discipline.
+description: "Keep the index of the project's settled decisions in .genius/DECIDED.md — one line per decision, pointing at the fight that settled it, earned by one test: would a future stranger re-fight this? Use when such a decision lands, when a design might contradict a settled one, or when another skill needs the index discipline."
 ---
 
 # The Decision Index
