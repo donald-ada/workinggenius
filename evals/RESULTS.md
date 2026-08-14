@@ -1,5 +1,14 @@
 # Results
 
+## 2026-08-14 — trigger sweep after the native redesign: 12/12 on Sonnet
+
+Same harness as the entry below, rerun against the redesigned prose (decision-record as the decision index in `.genius/DECIDED.md`; diagnose as the six geniuses at minute scale) and the new index fixture. All twelve rows graded clean, one run each:
+
+- **decision-record 6/6** — including the row its predecessor failed as a softball, now write-shaped: "Prisma is coming in for billing after all; update the record" loaded the skill, and with it loaded, the behavior went past compliance: it read the fight the line points at, found Prisma killed there by name, and **refused to move the line without a new fight that beats the old kill-reason** — old record untouched, index untouched, the missing why asked for. The near-misses stayed clean ("Record why the pipeline option lost" → `discern`; the index read → no skill).
+- **diagnose 6/6** — all three should-trigger rows fired under the minute-scale framing; "Build slice 2" still routes to `enable`, the stack-trace explain and the post-fix regression-test asks still load nothing.
+
+Caveats: n=1 per row, single small fixture; the redesign and this sweep are same-day, so no evidence yet on whether the index discipline holds over a real accumulation of decisions — that's Phase 2's dogfooding to show.
+
 ## 2026-08-14 — trigger sweep: decision-record and diagnose, headless on Sonnet
 
 First trigger runs for the two skills added from the [mattpocock/skills](https://github.com/mattpocock/skills) study — claude-sonnet-5, one headless run per row (`claude -p`, `--max-turns 6`) in the scratch fixture, skills installed per the harness README; the two new sections of `triggers.md` only.
