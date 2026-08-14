@@ -97,3 +97,27 @@ Should trigger:
 Should NOT trigger:
 - [CONTEXT.md present] "Use the glossary's vocabulary in these test names." — merely *reading* the glossary is any skill's one-liner, not this skill; its own "What this skill is not", as a test.
 - [bare] "What's the difference between authentication and authorization?" — general concepts don't belong in the glossary.
+
+## decision-record
+
+Should trigger:
+- [bare] "We're going with Postgres over the event store, and people will definitely ask why later — get it on the record properly."
+- [docs/adr/ has 0003-no-orm.md] "Let's pull in Prisma for the new billing tables." — touches settled ground; the record must be read and either survive or be superseded.
+- [bare] "Write down why we rejected GraphQL so it stops getting re-proposed."
+
+Should NOT trigger:
+- [tracked, stage: discernment] "Record why the pipeline option lost." — a kill-reason; work-scoped, it stays with the work file's battlefield.
+- [bare] "Add a comment explaining this regex." — a code comment, not a project decision.
+- [bare] "What did we decide about caching last month?" — a read of the records, not the discipline; any skill reads them with one line.
+
+## diagnose
+
+Should trigger:
+- [bare] "Checkout throws a 500 on roughly every third attempt — debug it."
+- [bare] "The test suite got 40% slower since last week. Figure out why."
+- [bare] "Users say the export sometimes comes out empty; works on my machine."
+
+Should NOT trigger:
+- [bare] "Explain what this stack trace means." — a read, not a diagnosis loop.
+- [bare] "Write a regression test for the bug we fixed yesterday." — the fix exists; nothing left to diagnose.
+- [tracked, stage: enablement, slices present] "Build slice 2 of checkout-discounts." — Enablement's own red-green loop, not a bug hunt.

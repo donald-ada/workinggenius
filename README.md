@@ -36,7 +36,7 @@ Anything in this README that sounds like a measurement should trace to a line in
 
 The skills use the open [Agent Skills](https://agentskills.io) standard (SKILL.md — originally developed by Anthropic, adopted by 40+ agents; the [client showcase](https://agentskills.io/clients) links each tool's setup docs).
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 14 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent (Cursor, Codex, Copilot, Windsurf, Zed, and ~70 more) and installs all 16 skills:
 
 ```
 npx skills add donald-ada/workinggenius
@@ -119,6 +119,8 @@ A fresh repo gives these moves nothing to grip — so greenfield flips the direc
 - **/setup-working-genius** — per-repo pinning of the work-file directory, verify commands (which `/enable` and `/tenacity` then use), and issue tracking (a parent issue per work with a sub-issue per slice, one shared label; opened at Galvanizing, closed as the work closes) — plus seeding the project docs (`CONTEXT.md` started from terms the user confirms; the ground laid for `DESIGN.md`) and the cross-agent pointer that makes every later session start knowing this project runs the flow — and keep those docs current as it works
 - **genius-file** (model-invoked) — the work-file discipline: the file carries the work, absence is the record, assumptions visible, checkpoints always live
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge conflicting terms, sharpen fuzzy ones, record resolutions inline. Driven by `/wonder` and `/waitwhat`; spoken by every other stage. Work files are per-work memory; the glossary is project memory — it compounds across all work
+- **decision-record** (model-invoked) — project memory for decisions: numbered records in `docs/adr/`, written only past a three-part bar (hard to reverse, surprising without context, a real trade-off), superseded never rewritten. The ammunition `/discern` and `/architect` load before judging — what keeps a killed idea from returning as a fresh proposal. After [mattpocock/skills](https://github.com/mattpocock/skills)' ADR discipline
+- **diagnose** (model-invoked) — reproduction before theory on anything broken: a red-capable command before any hypothesis, ranked falsifiable hypotheses before any fix, the loop turned green as the proof. The same momentum-contrary discipline as red-before-green, pointed at bugs. After [mattpocock/skills](https://github.com/mattpocock/skills)' diagnosing-bugs
 
 ## Token economics
 
