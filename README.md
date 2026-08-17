@@ -19,7 +19,7 @@ This plugin walks every piece of work through all six — and every stage is a c
 
 ## Install
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 16 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 18 skills:
 
 ```
 npx skills add donald-ada/workinggenius
@@ -72,10 +72,12 @@ Then, in any project:
 - **/designer** — the style conversation building momentum never starts: 13 template bases, one committed language in `DESIGN.md`
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
+- **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
 - **/setup-working-genius** — per-repo pinning of directory, verify commands, and issue tracking, plus the cross-agent pointer
 - **genius-file** (model-invoked) — the work-file discipline: the file carries the work, absence is the record
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge collisions, record resolutions
 - **decision-record** (model-invoked) — the decision index: one line per settled decision in `.genius/DECIDED.md`, pointing at the fight that settled it
+- **errata** (model-invoked) — the correction discipline: what binds is rewritten, what records is appended to, and only evidence overturns either
 - **diagnose** (model-invoked) — debugging as the six geniuses at minute scale: red reproduction, plural hypotheses, fresh rerun
 
 ## License
