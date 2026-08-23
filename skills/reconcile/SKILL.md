@@ -23,9 +23,9 @@ Every line, against the repo — never against what you remember of it. With an 
 
 - **`.genius/DECIDED.md`** — does each decision's constraint still exist in the code, and does its link still reach the fight that settled it?
 - **`CONTEXT.md`** — does the code still call each term what the glossary says it calls it? A rename that never reached the glossary is the collision that skill exists to prevent, arriving late.
-- **In-flight work files** — the plan's contract: its seams, its pinned numbers, its conventions, and the `assumed:` lines nobody has come back to.
+- **In-flight snapshots** — the contract at its current version: its seams, its pinned numbers, its conventions, and the Open section's `assumed:` lines nobody has come back to. A snapshot over its ceiling, or carrying history that belongs in the log, is drift too — state that stopped being compacted stops being read.
 - **The `## Working Genius` section** — run the verify commands. A typecheck command that no longer exists is discovered here or at the worst moment of a close-out.
-- **The links** — every record linked from the section it backs, every done slice pointing at an entry that exists. A broken link is a record a cold session cannot find, which is the same as one that was never written.
+- **The links** — every log entry linked from the snapshot section it backs, every done slice pointing at an anchor that exists. A broken link is a record a cold session cannot find, which is the same as one that was never written.
 
 ## How it runs
 

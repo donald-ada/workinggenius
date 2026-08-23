@@ -15,8 +15,8 @@ The concept: **the layer that binds gets corrected; the layer that records gets 
 
 One question sorts any line into its layer: **would a cold session act differently because of this line?**
 
-- **Yes — it binds.** The plan's contract, its seams and pinned values, the slice list, the carry-forward the close-out consumes, `.genius/DECIDED.md`, `CONTEXT.md`, `DESIGN.md`, the `## Working Genius` section wherever the project keeps it. A wrong line here is an instruction, and it gets rewritten in place.
-- **No — it records.** Everything in `.genius/<slug>/`, and every file at `stage: done`. It is what was written then, which is its whole worth. Append the correction; never edit the line.
+- **Yes — it binds.** The snapshot — its contract with the seams and pinned values, its slice list, its Open section — `.genius/DECIDED.md`, `CONTEXT.md`, `DESIGN.md`, the `## Working Genius` section wherever the project keeps it. A wrong line here is an instruction, and it gets rewritten in place.
+- **No — it records.** Everything in the log (`<slug>.log.md`, or the `<slug>/` folder of an older-format work), and every file at `stage: done`. It is what was written then, which is its whole worth. Append the correction; never edit the line.
 
 The two are not alternatives. A fact that was wrong is usually in both, and both get handled — the binding copy rewritten, the record it came from annotated.
 
@@ -35,9 +35,11 @@ The two are not alternatives. A fact that was wrong is usually in both, and both
 
 ```markdown
 > **Superseded 2026-08-17** — the 200ms budget held until the batch endpoint
-> existed; slice 5 measured 340ms and the plan now pins 400ms. This number is
-> what was true before that endpoint.
+> existed; slice 5 measured 340ms and the contract now pins 400ms. This number
+> is what was true before that endpoint.
 ```
+
+Supersede is for a single fact or value. When what moved is the work's *shape* — criteria, scope, slices, seams — that is a requirement change, and it goes through a contract version bump (`genius-file` skill): the new version replaces the old whole, the old version's log entry is where this move's annotation then lands. Correcting a reshaped plan line by line builds exactly the scar tissue versioning exists to prevent.
 
 **Retire — it is neither wrong nor stale; it has no reader left.** An acceptance criterion whose slice was reshaped away, a convention for a seam that no longer exists. Remove it from the binding copy, and say in the record why it left.
 
@@ -57,7 +59,7 @@ The two are not alternatives. A fact that was wrong is usually in both, and both
 
 ## What this skill is not
 
-Not a cleanup pass. Nothing is compressed, summarised or tidied, because the losses are silent and permanent: a kill-reason shortened to a verdict has been destroyed, not maintained, and the work file will look better for it.
+Not a cleanup pass on the log. Nothing there is compressed, summarised or tidied, because the losses are silent and permanent: a kill-reason shortened to a verdict has been destroyed, not maintained, and the file will look better for it. The snapshot is different ground — its compaction at slice and stage closes is the `genius-file` skill's own discipline, lossless under its invariant: displacement into an anchored log entry is not deletion.
 
 Not a second home for corrections. No `ERRATA.md`, no corrections section, nothing a reader has to know to go and check — every correction lives in the two places the wrong line already lived.
 

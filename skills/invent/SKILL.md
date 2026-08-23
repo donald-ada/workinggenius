@@ -11,4 +11,4 @@ The concept: **explore for real before you commit — the alternatives exist to 
 
 Exploration serves genuine uncertainty, never ritual: a design the user already confirmed (an `/architect` study on record) left nothing to explore at that altitude — only the sub-decisions it left open.
 
-Then `/discern`. Done when the record carries real alternatives, each showing the ground it stands on — what it makes easy, what it honestly costs, what in the repo it was checked against — ready to be attacked, not to be chosen from.
+Then `/discern`. Done when the snapshot carries real alternatives, each showing the ground it stands on — what it makes easy, what it honestly costs, what in the repo it was checked against — ready to be attacked, not to be chosen from. (They are state while they wait for the attack; Discernment's close is what compacts them to kill-reason lines and moves the full paths to the log.)
