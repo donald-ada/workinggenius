@@ -19,7 +19,7 @@ This plugin walks every piece of work through all six — and every stage is a c
 
 ## Install
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 19 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 18 skills:
 
 ```
 npx skills add donald-ada/workinggenius
