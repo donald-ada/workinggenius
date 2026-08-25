@@ -70,7 +70,8 @@ landed and the ones the survivor walked out of.
 with (appended when v3 landed) what overturned it.
 
 ## slice-1
-2026-07-08 — per criterion, what ran and what it showed.
+2026-07-08 — per criterion, the command and its result, one line each:
+`cargo test config::profiles` → 14 passed; `loglens --profile nosuch` → exit 2, names the profile.
 
 ## reshape-s3
 2026-07-12 — S3 split into S3/S5; the discovery that forced it, and the
@@ -81,7 +82,7 @@ Keys are unique by construction — stages run once, contract versions and slice
 
 ## The invariant
 
-The snapshot is rewritten freely — compacted at every slice close, contract bump, and stage close — under one invariant: **nothing leaves the snapshot except into the log, already anchored, with a link left where its section points.** Hold that and rewriting loses nothing, ever: the snapshot stays regenerable from the log, and stays the only path anyone needs — every entry reachable from the section it backs, nothing found by convention or by guessing. The log is the file that is never compacted, summarized, or tidied.
+The snapshot is rewritten freely — compacted at every slice close, contract bump, and stage close — under one invariant: **nothing leaves the snapshot except into the log, already anchored, with a link left where its section points.** Hold that and rewriting loses nothing, ever: the snapshot stays regenerable from the log, and stays the only path anyone needs — every entry reachable from the section it backs, nothing found by convention or by guessing. The log is never compacted, summarized, or tidied while the work is in flight; at done, Tenacity distills it once (`/distill` catches up work that closed without it) — announced by a first line beginning `distilled` — down to what the repo cannot answer.
 
 ## Rules
 
