@@ -52,6 +52,9 @@ Project docs — read before writing, improve while working:
   fight that settled it. Read it before designing against settled ground; a decision a future
   stranger would re-fight earns its line at close-out (decision-record skill), and overturning
   one moves its line to the new fight — the old record stays as written.
+- `.genius/BACKLOG.md`: work discovered but not started — an edge worth testing, a refactor
+  worth doing, spotted mid-work. The moment one surfaces, give it one line here (genius-file
+  skill); `/genius` lights these up, so nothing worth doing depends on someone remembering it.
 
 Issue tracking: github
 
