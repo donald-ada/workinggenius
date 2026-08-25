@@ -14,7 +14,8 @@ work: checkout-discounts
 stage: enablement   # wonder | invention | discernment | galvanizing | enablement | tenacity | done
 created: 2026-07-03
 contract: v3
-base: <HEAD when Galvanizing wrote contract v1 — Tenacity diffs from here>
+base: <HEAD when Galvanizing wrote contract v1 — or, where it never ran, HEAD before
+      this work's changes began, pinned by Tenacity at close-out. Tenacity diffs from here>
 ---
 
 # Checkout discounts
