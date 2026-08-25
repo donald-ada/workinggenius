@@ -82,7 +82,7 @@ Keys are unique by construction — stages run once, contract versions and slice
 
 ## The invariant
 
-The snapshot is rewritten freely — compacted at every slice close, contract bump, and stage close — under one invariant: **nothing leaves the snapshot except into the log, already anchored, with a link left where its section points.** Hold that and rewriting loses nothing, ever: the snapshot stays regenerable from the log, and stays the only path anyone needs — every entry reachable from the section it backs, nothing found by convention or by guessing. The log is never compacted, summarized, or tidied while the work is in flight; at done, Tenacity distills it once — announced by a `distilled at close-out` first line — down to what the repo cannot answer.
+The snapshot is rewritten freely — compacted at every slice close, contract bump, and stage close — under one invariant: **nothing leaves the snapshot except into the log, already anchored, with a link left where its section points.** Hold that and rewriting loses nothing, ever: the snapshot stays regenerable from the log, and stays the only path anyone needs — every entry reachable from the section it backs, nothing found by convention or by guessing. The log is never compacted, summarized, or tidied while the work is in flight; at done, Tenacity distills it once (`/distill` catches up work that closed without it) — announced by a first line beginning `distilled` — down to what the repo cannot answer.
 
 ## Rules
 
