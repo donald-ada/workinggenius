@@ -32,10 +32,12 @@ Agents don't share one instruction file: Claude Code reads `CLAUDE.md` and not `
 
 Work files: `.genius/` (committed)
 
-Before starting substantial work, check the work-file directory above — a `<slug>.md` there is the
-work's current truth: the confirmed problem, the decision and its kill-reasons, the contract, the
-slices and where they stand, with its history in `<slug>.log.md` beside it. The user types
-`/genius` for status and the next command;
+Before starting substantial work, look for that work's own `<slug>.md` in the directory above — it
+is the work's current truth: the confirmed problem, the decision and its kill-reasons, the contract,
+the slices and where they stand, with its history in `<slug>.log.md` beside it, opened only if a
+question needs it. That one slug is everything a session needs to start or resume its own work —
+other slugs, in flight or done, stay closed, so the directory can hold any number without costing
+this session more. The user types `/genius` for status across all of them and the next command;
 the flow is /wonder → /invent → /discern → /galvanize → /enable → /tenacity, and every stage is a
 command they type.
 
