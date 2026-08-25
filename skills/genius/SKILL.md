@@ -26,7 +26,7 @@ State lives in `.genius/<slug>.md` — the bounded snapshot a cold session reads
 
 ## What to do when invoked
 
-**No argument** → status, from the work files: each in-flight work's stage, what's unfinished, which stages never ran, and the exact next command; flag work untouched for weeks as stale and offer to resume or abandon. Read done files' `**Post-mortem:**` lines as a set — a genius repeatedly weakest is calibration, not coincidence: say so when routing new work, so that stage gets deliberate weight. Nothing in flight? Show the flow and how to start.
+**No argument** → status, from the in-flight work files only: each one's stage, what's unfinished, which stages never ran, and the exact next command; flag work untouched for weeks as stale and offer to resume or abandon. For calibration, read `.genius/HISTORY.md` instead of opening every done snapshot to find its post-mortem — one line per finished work, appended by `/tenacity` at close-out: a genius repeatedly weakest there is calibration, not coincidence, so say so when routing new work and let that stage get deliberate weight. Nothing in flight and no history yet? Show the flow and how to start.
 
 **An idea** → start it: create the work file (`genius-file` skill) and open the Wonder interview. An idea that arrives as a tracker issue is read first, and the work file records which issue it answers. Dropping a stage is the user's call, made by not typing it — never a package you propose. And stages trade; depth doesn't: a stage worth running is worth running at full depth, because a skimmed stage pays the ceremony and buys nothing. Reaching the next command is not progress — meeting this one's threshold is.
 
