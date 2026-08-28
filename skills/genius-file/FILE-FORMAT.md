@@ -37,7 +37,7 @@ Two tie-breaks, because the branches are not exclusive and a snapshot can be rea
 
 Lines were the ceiling once and could not hold it: a line budget rewards not pressing return, and the same content costs the reader the same either way. Measured at 90 columns on one real Chinese work file, a 305-line snapshot displayed as 595 lines (1.95×) and a 17-line backlog as 82 (4.82×), where one entry ran to 842 columns on a single physical line. Characters cannot be reflowed away.
 
-100 physical lines stays as the familiar shorthand and as a smoke alarm — over it, ask the question — but it decides nothing. And the number is a ceiling, never a target: **the mechanism is the question, and the count is how you check the question was asked.** A snapshot under the ceiling that never had the question put to it is not compacted, it is small.
+100 physical lines stays as the familiar shorthand and as a smoke alarm — over it, ask the question — but it decides nothing. And the number is a ceiling, never a target: **the mechanism is the question, and the count is how you check the question was asked.** A snapshot under the ceiling that never had the question put to it is not compacted, it is small — and `/compact` is what puts the question to one that drifted.
 
 **The Slices roster does not count against the ceiling** — measure the snapshot without it. The roster
 is a fifth growth law: it grows by slice count like the contract, but unlike the contract it cannot move
@@ -88,10 +88,16 @@ One line: what binds, and where it lives.
 ## Slices
 The current cut only — a reshaped slice leaves no corpse here; the reshape is
 a log entry. **A closed slice is one line**: the mark, its name, its date, and
-two links — its evidence, and the text the collapse displaced (see the invariant).
+a link to every log entry that backs it — its evidence, the text the collapse
+displaced, its fresh-eyes review where that got its own entry, and any patch or
+later acceptance that did. That is a
+floor, not a cap: a slice whose work landed across three entries carries three
+links, because an entry the snapshot stops linking is an entry nobody can reach,
+which is the one thing the invariant promises never happens.
 What it built is in the diff; what it ran is in the log; what it left binding is
 in CONTRACT.md.
 - [x] **S1 — cart totals through the API** (2026-07-08) [evidence](checkout-discounts.log.md#slice-1) · [displaced](checkout-discounts.log.md#slice-1-displaced-2026-07-08)
+- [x] **S3 — rounding** (2026-07-11) [evidence](…#slice-3) · [displaced](…#slice-3-displaced-2026-07-11) · [review](…#slice-3-review) · [patch](…#slice-3-patch)
 - [ ] **S2 — the discount rule editor** … acceptance criteria a stranger could verify
 When the repo tracks issues: `**Parent issue:** #N` here, `— issue: #N` per line.
 
@@ -125,7 +131,7 @@ One block per convention a slice introduced, each naming where it came from.
 
 A block may name which slices it binds (`### The option table (S2 established; S6 reads it)`). That is documentation for whoever opens the file — **never a trigger for removing it.** What authors actually write in those titles is provenance, "who established this", not "who still needs it"; evicting on provenance throws away the newest rule in the file.
 
-Readers: `/enable` and `/tenacity` open it because they are about to build or verify against it, and `/discern` does when it is attacking a plan that already has one — on the ordinary path it runs before Galvanizing, so there is nothing to open. `/reconcile` and `/errata` reach into it too, but only when already pointed at a specific work — occasional, parameterised operations, not what starting a session costs. `/genius`'s status view, resuming a piece of work, and `/wonder` on a new one never open it; the snapshot's pointer is enough.
+Readers: `/enable` and `/tenacity` open it because they are about to build or verify against it, and `/discern` does when it is attacking a plan that already has one — on the ordinary path it runs before Galvanizing, so there is nothing to open. `/reconcile`, `/errata` and `/compact` reach into it too, but only when already pointed at a specific work — occasional, parameterised operations, not what starting a session costs. `/genius`'s status view, resuming a piece of work, and `/wonder` on a new one never open it; the snapshot's pointer is enough.
 
 ## The log
 
