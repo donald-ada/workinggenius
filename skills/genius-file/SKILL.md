@@ -1,6 +1,6 @@
 ---
 name: genius-file
-description: Read and update Working Genius work files — the bounded snapshot a cold session acts on and the append-only log behind it. Use when a stage skill needs the work-file discipline, when the user asks what work is in flight or where a piece of work left off, or before resuming any work tracked under .genius/.
+description: Read and update Working Genius work files — the work's folder holding the bounded snapshot a cold session acts on, the append-only log behind it, and the contract that binds the unbuilt slices. Use when a stage skill needs the work-file discipline, when the user asks what work is in flight or where a piece of work left off, or before resuming any work tracked under .genius/.
 ---
 
 # The Work File
