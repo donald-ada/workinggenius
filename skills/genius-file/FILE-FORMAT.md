@@ -39,7 +39,17 @@ Lines were the ceiling once and could not hold it: a line budget rewards not pre
 
 100 physical lines stays as the familiar shorthand and as a smoke alarm — over it, ask the question — but it decides nothing. And the number is a ceiling, never a target: **the mechanism is the question, and the count is how you check the question was asked.** A snapshot under the ceiling that never had the question put to it is not compacted, it is small.
 
-`CONTRACT.md` has no ceiling. Growing by slice count is what it is for.
+**The Slices roster does not count against the ceiling** — measure the snapshot without it. The roster
+is a fifth growth law: it grows by slice count like the contract, but unlike the contract it cannot move
+out, because it *is* the progress view a status check reads. The question cannot evict it either — a
+closed slice line is neither a constraint (which could leave) nor scope (which would stay for its own
+reason); it is the work's shape. So it gets the only honest treatment left: one line per slice, no
+exceptions, and no budget. A roster large enough to dominate the file is not a compaction failure —
+it is the signal that this is two pieces of work, and the fix is the cut, not the prose. (A migration
+planned as expand → migrate → contract may list its batches as a range on one line; the batches are one
+slice's shape, not thirty slices.)
+
+`CONTRACT.md` has no ceiling either. Growing by slice count is what it is for.
 
 ## The snapshot
 
@@ -78,9 +88,10 @@ One line: what binds, and where it lives.
 ## Slices
 The current cut only — a reshaped slice leaves no corpse here; the reshape is
 a log entry. **A closed slice is one line**: the mark, its name, its date, and
-the link to its evidence. What it built is in the diff; what it ran is in the
-log; what it left binding is in CONTRACT.md.
-- [x] **S1 — cart totals through the API** (2026-07-08) [evidence](checkout-discounts.log.md#slice-1)
+two links — its evidence, and the text the collapse displaced (see the invariant).
+What it built is in the diff; what it ran is in the log; what it left binding is
+in CONTRACT.md.
+- [x] **S1 — cart totals through the API** (2026-07-08) [evidence](checkout-discounts.log.md#slice-1) · [displaced](checkout-discounts.log.md#slice-1-displaced-2026-07-08)
 - [ ] **S2 — the discount rule editor** … acceptance criteria a stranger could verify
 When the repo tracks issues: `**Parent issue:** #N` here, `— issue: #N` per line.
 
@@ -92,11 +103,25 @@ answer; a consumed line moves to the log with what consumed it.
 repeat weakness names its adjustment>
 ```
 
-**Open follows a fourth law: it grows by how many times the user was met.** It cannot be compressed — a question still owed an answer is not redundancy — so it is drained rather than shortened, and the door opens at every slice close, not only at close-out: a consumed `assumed:` goes to the log with what consumed it, and an item that is work in its own right goes to `.genius/BACKLOG.md` as one line. An Open section that only ever grows is a door nobody opened.
+**Open follows a fourth law: it grows by how many times the user was met.** It cannot be compressed — a question still owed an answer is not redundancy — so it is drained rather than shortened, and the door opens at every slice close, not only at close-out: a consumed `assumed:` goes to the log with what consumed it, and an item that is work in its own right goes to the log verbatim first, with `.genius/BACKLOG.md` taking a one-line seed that points at that anchor. **`BACKLOG.md` is not a third exit from the snapshot** — the invariant names two, and a one-line seed is lossy by design. Routing through the log keeps the invariant true and leaves the seed something to point at, which is what makes it findable a month later. An Open section that only ever grows is a door nobody opened.
+
+Draining is the one place a line leaves without a link surviving in its own place, because the line itself is what goes: a consumed `assumed:` has no section left to point from. The link moves up one level — the Open section carries `[drained](<slug>.log.md#open-displaced-<date>)`, one entry accumulating every line the section has shed — and where Open empties completely, that link is what the section leaves behind.
 
 ## The contract
 
-`CONTRACT.md` is written by Galvanizing as contract v1 and not before — a work that never ran Galvanizing has no contract file, and absence is the record there as everywhere. It holds the brief, the agreed test seams, the pinned values, and the conventions the build has introduced — the full current version, whole, never a patch over the last one. A version bump replaces it whole and moves the old version to the log; the snapshot keeps only the one-line changelog and the pointer.
+`CONTRACT.md` is written by Galvanizing as contract v1 and not before — a work that never ran Galvanizing has no contract file, and absence is the record there as everywhere. It has **two layers, because they change by different rules**:
+
+```markdown
+## The plan (v3)
+The brief, the agreed test seams, the pinned values — the full current version,
+whole, never a patch over v2.
+
+## What the build established
+One block per convention a slice introduced, each naming where it came from.
+### The option table — S2 established, S6 reads it. [source](<slug>.log.md#slice-2)
+```
+
+**A version bump replaces the plan layer whole** and moves that old version to the log; the snapshot keeps the one-line changelog and the pointer. **The established layer survives the bump untouched.** It has to: those blocks are exactly what binds the slices not yet built, so sweeping them into the log with a superseded plan would delete live constraints — the log records, it does not bind. A block leaves the established layer only when the work reaches `stage: done`, by the same distillation everything else faces there.
 
 A block may name which slices it binds (`### The option table (S2 established; S6 reads it)`). That is documentation for whoever opens the file — **never a trigger for removing it.** What authors actually write in those titles is provenance, "who established this", not "who still needs it"; evicting on provenance throws away the newest rule in the file.
 
@@ -136,7 +161,7 @@ The snapshot is rewritten freely — compacted at every slice close, contract bu
 
 Before a closed slice's paragraph collapses to its line, one check the question does not make on its own: **does that paragraph hold a constraint `CONTRACT.md` does not already have?** If it does, it moves there first.
 
-Then the collapse itself is mechanical, never a judgement about whether the log "already covers it": **whatever the snapshot displaces is appended to the log verbatim, as a new entry keyed `<the section's anchor>-displaced-<date>`, and the section's line carries that second link beside its first.** The log is append-only, so displaced text lands at the end, not under the older anchor it belongs to; without the second link, the invariant's promise — every entry reachable from the section it backs — is broken by the very move meant to preserve it. Do not read the log to decide how much of the paragraph is redundant — that decision is made at the exact moment a close is trying to finish, which is where it goes wrong, and the paragraph is usually a summary written for the snapshot rather than a copy of anything. Measured on a real work file, the log carried every distinctive token of the later slices' paragraphs and only 57–78% of the first two slices', because early log entries are thinner than the summaries written above them. Appending costs the log some length, which is the law the log already grows by; guessing costs a fact nobody can recover. A collapse is a routing operation, never a delete.
+Then the collapse itself is mechanical, never a judgement about whether the log "already covers it": **whatever the snapshot displaces is appended to the log verbatim, as a new entry keyed `<the anchor that line already links>-displaced-<date>` — `slice-1-displaced-2026-07-08` for a slice line, and for a section with no anchor of its own (Open, Problem) the section's own name — and the displaced-from line carries that second link beside its first.** The log is append-only, so displaced text lands at the end, not under the older anchor it belongs to; without the second link, the invariant's promise — every entry reachable from the section it backs — is broken by the very move meant to preserve it. Do not read the log to decide how much of the paragraph is redundant — that decision is made at the exact moment a close is trying to finish, which is where it goes wrong, and the paragraph is usually a summary written for the snapshot rather than a copy of anything. Measured on a real work file, the log carried every distinctive token of the later slices' paragraphs and only 57–78% of the first two slices', because early log entries are thinner than the summaries written above them. Appending costs the log some length, which is the law the log already grows by; guessing costs a fact nobody can recover. A collapse is a routing operation, never a delete.
 
 The log is never compacted, summarized, or tidied while the work is in flight; at done, Tenacity distills it once (`/distill` catches up work that closed without it) — announced by a first line beginning `distilled` — down to what the repo cannot answer.
 
@@ -145,10 +170,11 @@ The log is never compacted, summarized, or tidied while the work is in flight; a
 - The snapshot's ceiling is 6000 characters, and the mechanism behind it is the question. Over the ceiling is not a style problem — it is a signal that the question went unasked, or that history is leaking into state.
 - The template is the shape at rest. Mid-flight, a stage's working material is state and sits in the snapshot — Invention's paths, an interview's open questions — until the stage that consumes it compacts it into its conclusion and moves the material to the log.
 - A stage that never ran has neither a section nor a log entry — absence is the record.
+- **The Slices roster stays in the snapshot at `stage: done`.** The question, read literally at close-out, answers "no" for every closed slice and would sweep the whole roster into the log; that reading is wrong. The roster is what the work *was*, the shape a later reader recognises it by, and `/reconcile` checks each done slice's anchor expecting to find it here. Nothing about being finished makes a work's shape stop being its shape.
 - **`next:` says the exact command, and it is rewritten by whatever close it survives.** `stage:` plus the slice list looks like it implies the next move, and it does not: a cold reader given a snapshot at `stage: enablement` with every slice marked done, and an Open section holding items still owed a ruling, has to guess between going to close-out, taking those items to the user first, and resuming a close-out that stopped halfway. Three different opening moves, one file, no answer in it. Writing the command costs a line and is the one thing a resuming session looks for first.
 - **Links are relative to the work's own folder.** The snapshot, the log, `CONTRACT.md` and the artifacts sit beside each other, so `CONTRACT.md` and `<slug>.log.md#anchor` resolve as siblings, and an artifact is `proto-a.html`, never `.genius/<slug>/proto-a.html`. A path written from the repository root inside a work file is a link that breaks the moment the folder moves — and two bases mixed in one file are worse than either, because a reader cannot tell which one a given link used.
 - A log entry is written by its stage as it runs, never assembled afterwards. Compaction displaces snapshot content at the moment of the action that displaces it — the slice close, the contract bump — never as a filing sweep someone must remember.
 - Keep entries behavioral — interfaces, contracts, criteria; no code paths or line numbers, they go stale before the next session reads them.
 - Short, never stripped. A line may hold two sentences, and the one-line records need them — a kill-reason names its attack *and* what it broke, a repeat weakness names its diagnosis *and* its adjustment. Quoted words go in as they were said. The ceiling never buys itself a shortened kill-reason; it buys itself a line that moved to where it belongs.
 - Work that ran `/architect` or `/designer` keeps the confirmed design as a snapshot section and its study as a log entry, same rules. The design's own artifact — a prototype, a mockup — lives in the work's folder, named by the section that points at it. The committed design language still lands in the project's own `DESIGN.md`.
-- **Older formats are recognised by their content, never by the folder.** A work is in an older format when its snapshot has no `<slug>.log.md` beside it — everything inline in one file (possibly with a narrated build log, `**Gate — <Stage>**` checklists, `mode:` frontmatter, a `**Sizing:**` line, or `> ⚠ Skipped` markers), or a `<slug>/` folder holding per-stage record files (`wonder.md`, `discernment.md`, …). The current format also uses a `<slug>/` folder, so its existence tells you nothing: read what is in it. Older formats **finish in the shape they started** — read the old shape as the record it is; a finished file is never converted at all, because a record rewritten later is no longer what was written then, and its worth is that it is what was written then. In-flight two-file work is the one thing `/migrate` may move into the folder layout, on the user's command.
+- **Older formats are recognised by their content, never by the folder.** A work is in an older format when its snapshot has no `<slug>.log.md` beside it — everything inline in one file (possibly with a narrated build log, `**Gate — <Stage>**` checklists, `mode:` frontmatter, a `**Sizing:**` line, or `> ⚠ Skipped` markers), or a `<slug>/` folder holding per-stage record files (`wonder.md`, `discernment.md`, …). The current format also uses a `<slug>/` folder, so its existence tells you nothing: read what is in it. **Two-file work — `<slug>.md` and `<slug>.log.md` flat in `.genius/` — is not an older format**: it is this format before the folder, it reads correctly as it stands, and `/migrate` is the one thing that may move it into a folder, on the user's command. Older formats **finish in the shape they started** — read the old shape as the record it is; a finished file is never converted at all, because a record rewritten later is no longer what was written then, and its worth is that it is what was written then.

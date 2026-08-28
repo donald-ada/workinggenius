@@ -32,14 +32,20 @@ Agents don't share one instruction file: Claude Code reads `CLAUDE.md` and not `
 
 Work files: `.genius/` (committed)
 
-Before starting substantial work, look for that work's own `<slug>.md` in the directory above — it
-is the work's current truth: the confirmed problem, the decision and its kill-reasons, the contract,
-the slices and where they stand, with its history in `<slug>.log.md` beside it, opened only if a
-question needs it. That one slug is everything a session needs to start or resume its own work —
-other slugs, in flight or done, stay closed, so the directory can hold any number without costing
-this session more. The user types `/genius` for status across all of them and the next command;
-the flow is /wonder → /invent → /discern → /galvanize → /enable → /tenacity, and every stage is a
-command they type.
+Before starting substantial work, find that work's snapshot — `<slug>.md` inside its own folder in the
+directory above, or, for work written before the folder layout, sitting directly in that directory.
+That snapshot is the work's current truth: the confirmed problem, the decision
+and its kill-reasons, which contract version binds, the slices and where they stand, and `next:` naming
+the exact command that moves it forward. Beside it in the same folder: `<slug>.log.md`, the history,
+opened only if a question needs it; `CONTRACT.md`, what binds the slices not yet built, opened when you
+are about to build, attack or verify against it; and that work's own artifacts. That one folder is
+everything a session needs to start or resume its own work — other slugs, in flight or done, stay
+closed, so the directory can hold any number without costing this session more. Anything you write into
+a work's folder — log anchors, `CONTRACT.md`, its artifacts — links relative to that folder, never from
+the repo root. The user types
+`/genius` for status across all of them and the next command; the flow is
+/wonder → /invent → /discern → /galvanize → /enable → /tenacity, and every stage is a command
+they type.
 
 Project docs — read before writing, improve while working:
 - `CONTEXT.md`: the project's vocabulary. Name things in its terms; the moment a conversation
@@ -55,6 +61,9 @@ Project docs — read before writing, improve while working:
 - `.genius/BACKLOG.md`: work discovered but not started — an edge worth testing, a refactor
   worth doing, spotted mid-work. The moment one surfaces, give it one line here (genius-file
   skill); `/genius` lights these up, so nothing worth doing depends on someone remembering it.
+- `.genius/HISTORY.md`: one line per finished work — what it was and which genius was weakest
+  that run. Written at close-out (tenacity skill), read there too, so a repeat weakness is
+  caught without reopening a single done work file.
 
 Issue tracking: github
 
