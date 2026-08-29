@@ -92,8 +92,7 @@ a link to every log entry that backs it — its evidence, the text the collapse
 displaced, its fresh-eyes review where that got its own entry, and any patch or
 later acceptance that did. That is a
 floor, not a cap: a slice whose work landed across three entries carries three
-links, because an entry the snapshot stops linking is an entry nobody can reach,
-which is the one thing the invariant promises never happens.
+links (the invariant below says why).
 What it built is in the diff; what it ran is in the log; what it left binding is
 in CONTRACT.md.
 - [x] **S1 — cart totals through the API** (2026-07-08) [evidence](checkout-discounts.log.md#slice-1) · [displaced](checkout-discounts.log.md#slice-1-displaced-2026-07-08)
@@ -159,7 +158,7 @@ with (appended when v3 landed) what overturned it.
 exchange where the user confirmed the change.
 ```
 
-Keys are unique by construction — stages run once, contract versions and slices are numbered; anything else takes a short descriptive key, date-suffixed on collision. **Keep keys to letters, digits and hyphens** — a heading that appends prose after the key (`## s4-board 配置状态牌四件`) is a different anchor from the key, so every link to it is already broken. An entry is corrected by appending below it (`errata` skill), never by editing it.
+Keys are unique by construction — stages run once, contract versions and slices are numbered; anything else takes a short descriptive key, date-suffixed on collision. **Keep keys to letters, digits and hyphens** — a heading that appends prose after the key (`## s4-board 配置状态牌四件`) is a different anchor from the key, so every link to it is already broken. **Where one already exists, the repair is the link, never the heading** — and every link to it, not the first one you saw: the heading records and the snapshot binds, so fixing the heading edits a record to spare a binding file an edit, which is the layering exactly backwards (`errata` skill). An entry is corrected by appending below it, never by editing it.
 
 ## The invariant
 
