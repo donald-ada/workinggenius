@@ -61,6 +61,12 @@ Project docs — read before writing, improve while working:
 - `.genius/BACKLOG.md`: work discovered but not started — an edge worth testing, a refactor
   worth doing, spotted mid-work. The moment one surfaces, give it one line here (genius-file
   skill); `/genius` lights these up, so nothing worth doing depends on someone remembering it.
+  Order is what to do next, top to bottom — stated in one place, since an order also
+  written into the lines drifts from the one the positions say. What leaves goes to
+  `.genius/BACKLOG.log.md`, which appears at the first thing that leaves and not before, so
+  nothing is deleted to make the file shorter. `/triage` asks whether a line still belongs,
+  reads as one line, or sits in the right place; `/reconcile` asks the two the repo can
+  answer — has the code satisfied it, do its links still resolve.
 - `.genius/HISTORY.md`: one line per finished work — what it was and which genius was weakest
   that run. Written at close-out (tenacity skill), read there too, so a repeat weakness is
   caught without reopening a single done work file.
