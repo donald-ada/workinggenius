@@ -9,6 +9,7 @@ Any change under `skills/` or `.claude-plugin/` that merges to `main` bumps `ver
 ## Conventions
 
 - Skills are prose, and the repo stays that way: no runtime, no scripts, no state a fork can't carry.
+- **A number that enters a record comes from the pinned measure, never from a command written on the spot.** Ad-hoc counting is for looking; `python3 -c "import sys;print(len(open(sys.argv[1],encoding='utf-8').read()))"` is for recording. Two pieces of work in a row made this their weakest genius — `wc -m` and `awk length()` counting bytes on Chinese files, a `grep -c '^-[^-]'` that could not match the lines it was counting, a slice-review check that verified a body existed without verifying it sat under the right key. Every one of them produced a number that read as evidence. The previous adjustment ("calibrate on a known-answer sample first") was an intention and did not survive contact; this one names the command instead. A rule that states a count names its instrument in the same sentence, for the same reason.
 - Every rule a skill states carries its why; a constraint that can't name its reason doesn't land.
 - Killed designs stay killed unless new evidence reopens them. Before proposing express paths, sizing calls, autonomy modes, gate checklists, or skip bookkeeping, read the git history — each was removed by a recorded ruling that names its kill-reason.
 - **One of those rulings was partly overturned, and this is the whole account of it.** `854261c` retired migration on three legs, and only the third fell:
