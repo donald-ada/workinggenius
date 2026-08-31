@@ -19,7 +19,7 @@ This plugin walks every piece of work through all six — and every stage is a c
 
 ## Install
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 22 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 23 skills:
 
 ```
 npx skills add donald-ada/workinggenius
@@ -55,7 +55,7 @@ Then, in any project:
 
 **The map** (user-invoked only — the flow never hijacks work you didn't put in it):
 
-- **/genius** — status of all work, genius-gap diagnosis, post-mortem patterns, mid-flow entry points
+- **/genius** — status of all work, the backlog of what the flow discovered and nobody started, genius-gap diagnosis, post-mortem patterns, mid-flow entry points
 
 **The six stages** (each a command you type — the flow never advances itself):
 
@@ -73,6 +73,7 @@ Then, in any project:
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
+- **/triage** — the backlog's own rules put to its lines: seeds that shouldn't still be there, pairs that are one discovery, seeds that outgrew a line, the order nobody stated — one at a time, your call
 - **/distill** — retroactive log distillation for done work that closed before the rule existed: what the repo now answers leaves, what it cannot stays
 - **/compact** — the compaction question put to a snapshot that drifted: what no longer constrains unfinished work is routed out, proposed before moved
 - **/migrate** — an in-flight two-file work moved into its folder: contract split out, slices collapsed, every link rebased; finished work is never converted
