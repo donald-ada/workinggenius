@@ -11,10 +11,10 @@ A decision is never written twice. The flow already writes every decision at ful
 
 ```markdown
 - **Raw SQL over any ORM** — schema drift burned v1; queries are few and
-  hand-debugged. [The fight](checkout-rework.log.md#discernment)
+  hand-debugged. [The fight](checkout-rework/checkout-rework.log.md#discernment)
 ```
 
-Verdict in bold, the why in one line, the link to the record that holds the whole battle. A decision that landed outside the flow — no work file, no battlefield — carries its why in the line itself: there the line *is* the record, so give the why one honest sentence rather than a verdict alone.
+Verdict in bold, the why in one line, the link to the record that holds the whole battle. The link is relative to `.genius/`, where `DECIDED.md` sits, and carries the named work's path as that work actually sits — the folder form above, or a bare `checkout-rework.log.md` where the work is still flat (the `genius-file` skill's format holds the rule). A decision that landed outside the flow — no work file, no battlefield — carries its why in the line itself: there the line *is* the record, so give the why one honest sentence rather than a verdict alone.
 
 ## The test
 

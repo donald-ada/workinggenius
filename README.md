@@ -19,7 +19,7 @@ This plugin walks every piece of work through all six — and every stage is a c
 
 ## Install
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 19 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 23 skills:
 
 ```
 npx skills add donald-ada/workinggenius
@@ -49,13 +49,13 @@ Then, in any project:
 
 `/genius` at any time shows where every piece of work stands and what to run next. Run `/setup-working-genius` once per repo: it pins the work-file directory, verify commands, and issue tracking, and writes the pointer that tells every future session this project works this way.
 
-**One piece of work = one work file** at `.genius/<slug>.md`, with each stage's own record beside it in `.genius/<slug>/`. The file — not conversation memory — carries the work: the confirmed problem, the options and their kill-reasons, the slices and where they stand. Any fresh session picks up exactly where the last one stopped. Not every piece of work deserves all six stages — dropping one is your call, made by not typing it; the file's missing section is the record.
+**One piece of work = one folder** at `.genius/<slug>/` — the snapshot (current truth, bounded by a character ceiling), the append-only log behind it, the contract that binds the unbuilt slices, and the work's own artifacts. The files — not conversation memory — carry the work: the confirmed problem, the options and their kill-reasons, the slices and where they stand. Any fresh session picks up exactly where the last one stopped. Not every piece of work deserves all six stages — dropping one is your call, made by not typing it; the snapshot's missing section is the record.
 
 ## Skills
 
 **The map** (user-invoked only — the flow never hijacks work you didn't put in it):
 
-- **/genius** — status of all work, genius-gap diagnosis, post-mortem patterns, mid-flow entry points
+- **/genius** — status of all work, the backlog of what the flow discovered and nobody started, genius-gap diagnosis, post-mortem patterns, mid-flow entry points
 
 **The six stages** (each a command you type — the flow never advances itself):
 
@@ -73,8 +73,13 @@ Then, in any project:
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
+- **/triage** — the backlog's own rules put to its lines: seeds that shouldn't still be there, pairs that are one discovery, seeds that outgrew a line, the order nobody stated — one at a time, your call
+- **/distill** — retroactive log distillation for done work that closed before the rule existed: what the repo now answers leaves, what it cannot stays
+- **/compact** — the compaction question put to a snapshot that drifted: what no longer constrains unfinished work is routed out, proposed before moved
+- **/migrate** — an in-flight two-file work moved into its folder: contract split out, slices collapsed, every link rebased; finished work is never converted
 - **/setup-working-genius** — per-repo pinning of directory, verify commands, and issue tracking, plus the cross-agent pointer
-- **genius-file** (model-invoked) — the work-file discipline: the file carries the work, absence is the record
+- **genius-file** (model-invoked) — the work-file discipline: the files carry the work, absence is the record
+- **record-prose** (model-invoked) — how every record under `.genius/` is written: for a cold reader and the owner both, reasoning load-bearing, evidence as data
 - **domain-glossary** (model-invoked) — the project's shared language in `CONTEXT.md`: challenge collisions, record resolutions
 - **decision-record** (model-invoked) — the decision index: one line per settled decision in `.genius/DECIDED.md`, pointing at the fight that settled it
 - **errata** (model-invoked) — the correction discipline: what binds is rewritten, what records is appended to, and only evidence overturns either
