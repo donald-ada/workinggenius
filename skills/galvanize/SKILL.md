@@ -13,7 +13,7 @@ Record `base:` and commit the plan as **contract v1** — its full text written 
 
 ## How it runs
 
-1. Read the Decision, and `CONTRACT.md` where one already exists (an imported plan that `/discern` attacked).
+1. Read the Decision, and `CONTRACT.md` where one already exists (an imported plan that `/discern` attacked). Where `/architect` ran, its walking skeleton is S1 and its contracts across boundaries are the first test seams; where `/designer` ran, `DESIGN.md`'s token roles bind every slice that shows a screen.
 2. Write the brief; agree the test seams with the user as contracts; cut the slices — each through every layer, demoable alone, its criteria carrying an instrument, every value a number, the order stated and `after:` written where a slice waits on less than everything above it.
 3. Pressure-test the cut with the user. The push and what it changed is this stage's log entry, under `## galvanizing`.
 4. Write `CONTRACT.md` as v1 — the plan layer: brief, seams, pinned values, one block per slice with its criteria — with `contract: v1` and `base:` in the snapshot's frontmatter, the roster in its Slices section, each line linking its criteria.

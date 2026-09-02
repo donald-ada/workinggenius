@@ -169,4 +169,4 @@ Compaction displaces at the moment of the action that displaces — the slice cl
 ## Also
 
 - Short, never stripped: the `record-prose` skill holds the sentence discipline. The ceiling never buys itself a shortened kill-reason — only a line that moved to where it belongs.
-- Work that ran `/architect` or `/designer` keeps the confirmed design as a snapshot section and its study as a log entry. The design's own artifact lives in the folder, named by the section that points at it; the committed language still lands in the project's `DESIGN.md`.
+- Work that ran `/architect` or `/designer` keeps the confirmed design as a snapshot section and its study as a log entry. The design's own artifact lives in the folder, named by the section that points at it; the committed language still lands in the project's `DESIGN.md`, and the committed architecture in its `ARCHITECTURE.md`.

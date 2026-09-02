@@ -20,6 +20,7 @@ Run it as a conversation, not a script: look first (existing `CLAUDE.md`/`AGENTS
 
 - **`CONTEXT.md` — the vocabulary.** Exploration already read the README and the code's load-bearing names; propose the handful of terms a stranger would need decoded — domain words, never general programming ones — and let the user confirm or sharpen each definition. Write the confirmed set in the `domain-glossary` skill's format. Confirmed terms only: an empty skeleton is premature documentation, and a `CONTEXT.md` that already exists gets its `## Language` section appended, everything else left alone (the glossary skill's don't-hijack rule). A user with no patience for this right now declines in a word — the pointer below still tells every session to grow the file as terms resolve.
 - **`DESIGN.md` — the visual language.** Never scaffolded here: it is the *output* of the `/designer` taste conversation, and a template written without that conversation is exactly the model-default aesthetic it exists to prevent. Ask one question — does this project have an interface someone will see? The answer decides whether the pointer carries the DESIGN.md line: read the file before building screens when it exists, route to `/designer` before pixels when it doesn't.
+- **`ARCHITECTURE.md` — the committed architecture.** The same rule: it is the *output* of `/architect`, never scaffolded. Where one exists, the pointer says to read it before designing anything that touches its boundaries; where the project is greenfield or a subsystem is about to be shaped, the pointer routes to `/architect` first.
 
 Three settings, and it stays three: configuration is for what a session must know and cannot infer from the repo. D adds no switch — it turns the files the pointer names into files that exist. Preferences — how deep to interview, which style you like, what tone to use — are things you say in plain words when they matter, not switches to accumulate here.
 
@@ -53,6 +54,10 @@ Project docs — read before writing, improve while working:
 - `DESIGN.md`: the committed visual language. Read it before building anything someone will see —
   screens speak it, and a screen that wants to break it is a conversation, not a drift. No file
   yet? `/designer` creates it, before pixels.
+- `ARCHITECTURE.md`: the committed architecture — boundaries, contracts, the ranked qualities and
+  what the design makes cheap and dear. Read it before designing anything that crosses a boundary;
+  a change that wants to cross one is a conversation, not a drift. Greenfield, or a subsystem
+  about to be shaped? `/architect` creates it, before the first slice.
 - `.genius/DECIDED.md`: the index of settled decisions — one line per decision, pointing at the
   fight that settled it. Read it before designing against settled ground; a decision a future
   stranger would re-fight earns its line at close-out (decision-record skill), and overturning
@@ -79,7 +84,7 @@ Verify commands:
 - lint: `<command>`
 ```
 
-Tailor the docs list to what setup found: a project with no interface anyone sees drops the `DESIGN.md` line rather than carrying a dead instruction — the list names the docs this project actually keeps, each with its read-trigger and its write-trigger, because a doc nothing tells sessions to update is a doc that was current once.
+Tailor the docs list to what setup found: a project with no interface anyone sees drops the `DESIGN.md` line, and one whose shape is settled and unremarkable drops the `ARCHITECTURE.md` line, rather than carrying a dead instruction — the list names the docs this project actually keeps, each with its read-trigger and its write-trigger, because a doc nothing tells sessions to update is a doc that was current once.
 
 Write it as instructions, not description — "check `.genius/` before starting" is followed; "work files live in `.genius/`" is merely true. Instruction files are context, not enforcement: they make the right thing likely, never certain.
 
