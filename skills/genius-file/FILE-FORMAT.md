@@ -96,9 +96,9 @@ links (the invariant below says why).
 What it built is in the diff; what it ran is in the log; what it left binding is
 in CONTRACT.md.
 - [x] **S1 — cart totals through the API** (2026-07-08) [evidence](checkout-discounts.log.md#slice-1) · [displaced](checkout-discounts.log.md#slice-1-displaced-2026-07-08)
-- [~] **S2 — the discount rule editor** — started 2026-07-12 [wip](checkout-discounts.log.md#slice-2-wip) … acceptance criteria a stranger could verify
-- [ ] **S3 — rounding** — after: S1 … acceptance criteria a stranger could verify
-- [ ] **S4 — the audit export** … acceptance criteria a stranger could verify
+- [~] **S2 — the discount rule editor** — started 2026-07-12 · [criteria](CONTRACT.md#s2) · [wip](checkout-discounts.log.md#slice-2-wip)
+- [ ] **S3 — rounding** — after: S1 · [criteria](CONTRACT.md#s3)
+- [ ] **S4 — the audit export** · [criteria](CONTRACT.md#s4)
 When the repo tracks issues: `**Parent issue:** #N` here, `— issue: #N` per line.
 
 ## Open
@@ -108,6 +108,8 @@ answer; a consumed line moves to the log with what consumed it.
 **Post-mortem:** <one line, at done — which genius was weakest this run; a
 repeat weakness names its adjustment>
 ```
+
+**An open slice is one line too, and its acceptance criteria are not on it.** They live in `CONTRACT.md`'s plan layer, under the slice's own heading, and the line points there. One home, because two drift: the builder reads the contract and the status view reads the snapshot, and criteria written in both come apart at the first version bump, which replaces the plan layer whole and leaves the roster to be re-edited by hand. Where a work has no `CONTRACT.md` — flat two-file work from before the folder layout — the criteria stay on the line, which is exactly what `/compact` reports and `/migrate` resolves.
 
 **The roster's order is the build order, top to bottom, and a slice waits on every slice above it unless its line says otherwise.** `after: S1` names the only slices it waits on; `after: none` waits on nothing. The default is the safe reading — a cold session that cannot tell whether S4 needs S3's seam builds S3 first — and the explicit form is what lets a coordinator run two slices at once (S3 above waits only on S1, so it may run beside S2). Absence of `after:` never means parallel. Galvanizing writes the marks when it cuts; a reshape rewrites them with the line.
 
@@ -148,7 +150,14 @@ Retire, like the snapshot's Open drain, is the case where the line itself is wha
 ```markdown
 ## The plan (v3)
 The brief, the agreed test seams, the pinned values — the full current version,
-whole, never a patch over v2.
+whole, never a patch over v2 — and one block per slice in the current cut,
+headed by the slice's key alone so the snapshot's line can link it:
+
+### S2
+**The discount rule editor** — after: S1.
+- Each acceptance criterion with the instrument that shows it:
+  `npm test -- editor` → the rule list renders from the batch endpoint
+- A criterion no instrument reaches names whose eyes decide instead
 
 ## What the build established
 One block per convention a slice introduced, each naming where it came from.

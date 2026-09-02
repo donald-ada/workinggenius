@@ -85,6 +85,14 @@ Then, in any project:
 - **errata** (model-invoked) — the correction discipline: what binds is rewritten, what records is appended to, and only evidence overturns either
 - **diagnose** (model-invoked) — debugging as the six geniuses at minute scale: red reproduction, plural hypotheses, fresh rerun
 
+## Contributing
+
+The skills are prose, and the repo stays that way: no runtime, no scripts, no state a fork can't carry. Every rule a skill states carries its why — a constraint that can't name its reason doesn't land. Any change under `skills/` or `.claude-plugin/` that merges to `main` bumps `version` in `.claude-plugin/plugin.json` in the same PR, because marketplace clients detect updates only through that number; if `skills/` gained or lost a skill, the count in the install line above moves with it.
+
+Killed designs stay killed unless measured evidence reopens them. Before proposing express paths, sizing calls, autonomy modes, gate checklists, or skip bookkeeping, read the git history — each was removed by a recorded ruling that names its kill-reason (`0cc21de`, `925accf`, `275ed4f`). Reopening costs what it cost `/migrate`: a counter-example somebody measured, named against the leg it actually breaks.
+
+A number that enters a record comes from the pinned measure, never from a command written on the spot: `python3 -c "import sys;print(len(open(sys.argv[1],encoding='utf-8').read()))" <file>`. `wc -m` and `awk length()` count bytes on Chinese files under most non-interactive locales, and two pieces of work in a row made that their weakest genius.
+
 ## License
 
 MIT
