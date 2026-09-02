@@ -96,8 +96,9 @@ links (the invariant below says why).
 What it built is in the diff; what it ran is in the log; what it left binding is
 in CONTRACT.md.
 - [x] **S1 — cart totals through the API** (2026-07-08) [evidence](checkout-discounts.log.md#slice-1) · [displaced](checkout-discounts.log.md#slice-1-displaced-2026-07-08)
-- [x] **S3 — rounding** (2026-07-11) [evidence](…#slice-3) · [displaced](…#slice-3-displaced-2026-07-11) · [review](…#slice-3-review) · [patch](…#slice-3-patch)
-- [ ] **S2 — the discount rule editor** … acceptance criteria a stranger could verify
+- [~] **S2 — the discount rule editor** — started 2026-07-12 [wip](checkout-discounts.log.md#slice-2-wip) … acceptance criteria a stranger could verify
+- [ ] **S3 — rounding** — after: S1 … acceptance criteria a stranger could verify
+- [ ] **S4 — the audit export** … acceptance criteria a stranger could verify
 When the repo tracks issues: `**Parent issue:** #N` here, `— issue: #N` per line.
 
 ## Open
@@ -107,6 +108,10 @@ answer; a consumed line moves to the log with what consumed it.
 **Post-mortem:** <one line, at done — which genius was weakest this run; a
 repeat weakness names its adjustment>
 ```
+
+**The roster's order is the build order, top to bottom, and a slice waits on every slice above it unless its line says otherwise.** `after: S1` names the only slices it waits on; `after: none` waits on nothing. The default is the safe reading — a cold session that cannot tell whether S4 needs S3's seam builds S3 first — and the explicit form is what lets a coordinator run two slices at once (S3 above waits only on S1, so it may run beside S2). Absence of `after:` never means parallel. Galvanizing writes the marks when it cuts; a reshape rewrites them with the line.
+
+**Three marks, not two.** `[ ]` is not started, `[x]` is closed, and `[~]` is in progress: a slice whose first red test has run and whose close has not. The in-progress line carries the date it started and a link to a log entry keyed `slice-N-wip` — what is red, what is green, what is still owed, appended to as the build moves. A slice is closed once, at its end, but a session dies whenever it dies, and a roster that says nothing started over half-built code sends the next session to rebuild what exists or to build on it blind. The close replaces the mark and keeps the link.
 
 **Open has a growth law of its own: it grows by how many times the user was met.** It cannot be compressed — a question still owed an answer is not redundancy — so it is drained rather than shortened, and the door opens at every slice close, not only at close-out: a consumed `assumed:` goes to the log with what consumed it, and an item that is work in its own right goes to the log verbatim first, with `.genius/BACKLOG.md` taking a one-line seed that points at that anchor. **`BACKLOG.md` is not a third exit from the snapshot** — the invariant names two, and a one-line seed is lossy by design. Routing through the log keeps the invariant true and leaves the seed something to point at, which is what makes it findable a month later. An Open section that only ever grows is a door nobody opened.
 
@@ -176,6 +181,10 @@ with (appended when v3 landed) what overturned it.
 ## slice-1
 2026-07-08 — per criterion, the command and its result, one line each:
 `cargo test config::profiles` → 14 passed; `loglens --profile nosuch` → exit 2, names the profile.
+
+## slice-2-wip
+2026-07-12 — started. red: editor renders rule list. green: —. owed: save, validation.
+2026-07-12 — green: renders. red: save round-trips. baseline: `npm test` had 2 failures before this slice (`export.test.ts`), holding at no new failures.
 
 ## reshape-s3
 2026-07-12 — S3 split into S3/S5; the discovery that forced it, and the
