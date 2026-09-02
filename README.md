@@ -1,6 +1,6 @@
 # Working Genius
 
-A development workflow for coding agents — packaged as standard [Agent Skills](https://agentskills.io) (SKILL.md), so it runs in Claude Code, Cursor, ChatGPT/Codex, Gemini CLI, GitHub Copilot, and any other client that speaks the format. Three subagents ship beside the skills — an inventor, a builder and a reviewer — as Claude Code plugin agents whose bodies double as briefs anywhere else. Built on one observation:
+A development workflow for coding agents — packaged as standard [Agent Skills](https://agentskills.io) (SKILL.md), so it runs in Claude Code, Cursor, ChatGPT/Codex, Gemini CLI, GitHub Copilot, and any other client that speaks the format. Three subagents ship inside the skills that spawn them — an inventor, a builder and a reviewer — as Claude Code plugin agents whose bodies double as briefs anywhere else. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 

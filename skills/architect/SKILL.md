@@ -82,7 +82,9 @@ The first slice: the thinnest end-to-end path, and how it proves the shape.
 What the design deliberately does not do, and what would have to change for it to.
 
 ## Open
-`assumed:` lines and forks still owed a ruling.
+Forks still owed a ruling. An `assumed:` line lives in the work's snapshot Open
+where a work file exists (it is drained there; a second home never is) and here
+only for a standalone study with no work file.
 ```
 
 The study itself — the field read, the stressors walked, the exchange where the user confirmed — is a log entry under `## architect` where the work has a work file (`genius-file` skill), and the snapshot keeps a section pointing at `ARCHITECTURE.md`. A confirmed design a future stranger would re-fight — a boundary no-, a deliberate deviation from the obvious stack — gets its line in `.genius/DECIDED.md` (`decision-record` skill), pointing at the fight; the rest stays with the architecture file. One architecture per system: a recorded `ARCHITECTURE.md` is consumed, not redone — later work designs inside its boundaries, a change that wants to cross one is a conversation, not a drift, and a subsystem gets its own file only when its qualities rank differently from the whole's.

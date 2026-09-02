@@ -9,6 +9,11 @@
   "homepage": "https://github.com/donald-ada/workinggenius",
   "repository": "https://github.com/donald-ada/workinggenius",
   "license": "MIT",
+  "agents": [
+    "./skills/invent/agents/inventor.md",
+    "./skills/enable/agents/builder.md",
+    "./skills/tenacity/agents/reviewer.md"
+  ],
   "keywords": [
     "workflow",
     "working-genius",
