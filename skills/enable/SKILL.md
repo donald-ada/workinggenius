@@ -10,6 +10,14 @@ The genius of doing the work the work needs. Its failure mode is flying blind: c
 
 The concept: **build one slice at a time, in a fresh context, with reality voting every few minutes.** Tests lead the code — write the failing test at the agreed seam and watch it fail before the implementation exists; this is the one discipline a capable model still talks itself out of (measured 0/3 baseline), so hold it even when momentum says skip it. Test behavior through public seams, not implementation. Some criteria can't be red-green — verify those against the real thing and record what you observed; the rule is feedback, not ceremony.
 
+## How it runs
+
+1. Decide your role from the invocation (below): builder, coordinator, fresh session per slice, or small work with no cut.
+2. Read the slice list and the `CONTRACT.md` it points at; run the verify commands once and record a dirty baseline.
+3. Mark the slice in progress at the first red test; red → green at the agreed seams; each criterion's evidence written as it runs.
+4. A discovery that changes the shape stops the slice: to the user in one exchange, or back to the coordinator where you are its builder.
+5. Fresh-eyes review from the brief; close in one commit; drain Open; then dispatch, or name, what the close unblocked.
+
 ## Who builds
 
 The invocation decides your role.

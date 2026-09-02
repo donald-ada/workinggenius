@@ -13,4 +13,12 @@ The concept: **don't generate the paths yourself — spawn a fresh, independent 
 
 Each inventor runs the brief in [agents/inventor.md](agents/inventor.md) — grounded in the codebase's own grain, honest about what its path makes easy and what it honestly costs, free to spike a throwaway prototype when paper can't settle a question and keep only the answer. What comes back is one path per inventor, written for the record, not for the user: nobody hands this table over as a menu — what the user eventually sees, after Discernment's attack, is one committed recommendation and what died on the way to it. Verify each returned path's claims against the repo yourself before trusting it — a subagent's report earns the same check any other one does.
 
+## How it runs
+
+1. Read the snapshot's Problem, `.genius/DECIDED.md`, `CONTEXT.md`, and any `/architect` study on record. No grain to read at all → stop and offer `/architect`.
+2. Choose the angles: the three this skill names, or the sub-decisions the study left open. More than one, never a fixed count.
+3. Spawn one inventor per angle, in parallel, each running [agents/inventor.md](agents/inventor.md) with the brackets filled — the confirmed problem and its angle, nothing of the conversation. Stay awake until every one returns; dispatch synchronously where you cannot be sure the harness wakes you.
+4. Verify each returned path's claims against the repo yourself.
+5. Record the paths in the snapshot as state waiting for the attack — shape, what it makes easy, what it costs, what it was checked against — and `next: /discern`.
+
 Then `/discern`. Done when the snapshot carries real alternatives, each showing the ground it stands on — what it makes easy, what it honestly costs, what in the repo it was checked against — ready to be attacked, not to be chosen from. (They are state while they wait for the attack; Discernment's close is what compacts them to kill-reason lines and moves the full paths to the log.)

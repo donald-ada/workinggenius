@@ -7,7 +7,7 @@ argument-hint: "optional: one seed's subject, to rule on that line alone"
 
 # Triage
 
-`.genius/BACKLOG.md` is read whole on every `/genius`, and grows by how many discoveries the flow made. The rules bounding it are written already — the seed's shape and its 300 characters (`record-prose`), where a line goes when it leaves ([FILE-FORMAT.md](../genius-file/FILE-FORMAT.md)) — each firing in its own moment, with nothing going back to check. `/reconcile` reaches the file from the repo's side. What no pass asks is what the flow's own records, and the user, say about these lines.
+`.genius/BACKLOG.md` is read whole on every `/genius`, and grows by how many discoveries the flow made. The rules bounding it are written already — the seed's shape and its 300 characters (`record-prose`), where a line goes when it leaves ([BACKLOG-FORMAT.md](../genius-file/BACKLOG-FORMAT.md)) — each firing in its own moment, with nothing going back to check. `/reconcile` reaches the file from the repo's side. What no pass asks is what the flow's own records, and the user, say about these lines.
 
 The concept: **the rules exist; this is the pass that enforces them, one line at a time, and the user rules on each.**
 
