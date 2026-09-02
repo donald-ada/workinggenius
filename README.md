@@ -19,7 +19,7 @@ This plugin walks every piece of work through all six — and every stage is a c
 
 ## Install
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 23 skills:
+**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 22 skills:
 
 ```
 npx skills add donald-ada/workinggenius
@@ -75,8 +75,7 @@ Then, in any project:
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
 - **/triage** — the backlog's own rules put to its lines: seeds that shouldn't still be there, pairs that are one discovery, seeds that outgrew a line, the order nobody stated — one at a time, your call
 - **/distill** — retroactive log distillation for done work that closed before the rule existed: what the repo now answers leaves, what it cannot stays
-- **/compact** — the compaction question put to a snapshot that drifted: what no longer constrains unfinished work is routed out, proposed before moved
-- **/migrate** — an in-flight two-file work moved into its folder: contract split out, slices collapsed, every link rebased; finished work is never converted
+- **/compact** — the compaction question put to a snapshot that drifted: what no longer constrains unfinished work is routed out, a file in some other shape brought to the format on the way, proposed before moved
 - **/setup-working-genius** — per-repo pinning of directory, verify commands, and issue tracking, plus the cross-agent pointer
 - **genius-file** (model-invoked) — the work-file discipline: the files carry the work, absence is the record
 - **record-prose** (model-invoked) — how every record under `.genius/` is written: for a cold reader and the owner both, reasoning load-bearing, evidence as data
@@ -89,7 +88,7 @@ Then, in any project:
 
 The skills are prose, and the repo stays that way: no runtime, no scripts, no state a fork can't carry. Every rule a skill states carries its why — a constraint that can't name its reason doesn't land. Any change under `skills/` or `.claude-plugin/` that merges to `main` bumps `version` in `.claude-plugin/plugin.json` in the same PR, because marketplace clients detect updates only through that number; if `skills/` gained or lost a skill, the count in the install line above moves with it.
 
-Killed designs stay killed unless measured evidence reopens them. Before proposing express paths, sizing calls, autonomy modes, gate checklists, or skip bookkeeping, read the git history — each was removed by a recorded ruling that names its kill-reason (`0cc21de`, `925accf`, `275ed4f`). Reopening costs what it cost `/migrate`: a counter-example somebody measured, named against the leg it actually breaks.
+Killed designs stay killed unless measured evidence reopens them. Before proposing express paths, sizing calls, autonomy modes, gate checklists, or skip bookkeeping, read the git history — each was removed by a recorded ruling that names its kill-reason (`0cc21de`, `925accf`, `275ed4f`). Reopening costs a counter-example somebody measured, named against the leg it actually breaks.
 
 A number that enters a record comes from the pinned measure, never from a command written on the spot: `python3 -c "import sys;print(len(open(sys.argv[1],encoding='utf-8').read()))" <file>`. `wc -m` and `awk length()` count bytes on Chinese files under most non-interactive locales, and two pieces of work in a row made that their weakest genius.
 

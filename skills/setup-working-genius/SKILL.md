@@ -33,8 +33,7 @@ Agents don't share one instruction file: Claude Code reads `CLAUDE.md` and not `
 Work files: `.genius/` (committed)
 
 Before starting substantial work, find that work's snapshot — `<slug>.md` inside its own folder in the
-directory above, or, for work written before the folder layout, sitting directly in that directory.
-That snapshot is the work's current truth: the confirmed problem, the decision
+directory above. That snapshot is the work's current truth: the confirmed problem, the decision
 and its kill-reasons, which contract version binds, the slices and where they stand, and `next:` naming
 the exact command that moves it forward. Beside it in the same folder: `<slug>.log.md`, the history,
 opened only if a question needs it; `CONTRACT.md`, what binds the slices not yet built, opened when you
