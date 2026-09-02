@@ -1,6 +1,6 @@
 # Working Genius
 
-A development workflow for coding agents — packaged as standard [Agent Skills](https://agentskills.io) (SKILL.md), so it runs in Claude Code, Cursor, ChatGPT/Codex, Gemini CLI, GitHub Copilot, and any other client that speaks the format. Built on one observation:
+A development workflow for coding agents — packaged as standard [Agent Skills](https://agentskills.io) (SKILL.md), so it runs in Claude Code, Cursor, ChatGPT/Codex, Gemini CLI, GitHub Copilot, and any other client that speaks the format. Three subagents ship inside the skills that spawn them — an inventor, a builder and a reviewer — as Claude Code plugin agents whose bodies double as briefs anywhere else. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -38,7 +38,7 @@ Then, in any project:
 ```
 /genius add per-user rate limiting        # start a piece of work
 /wonder                                   # correct its story, answer its questions, confirm the problem
-/architect                                # (greenfield) build-or-adopt first, then one committed design
+/architect                                # (greenfield) build-or-adopt first, then one committed architecture
 /designer                                 # (UI work) settle the look before the pixels
 /invent                                   # genuinely diverge — alternatives exist to be beaten
 /discern                                  # attack every path, commit to one, record the kills
@@ -68,8 +68,8 @@ Then, in any project:
 
 **Support:**
 
-- **/architect** — adopt an existing system or build — and if build, one committed architecture, confirmed in consequences
-- **/designer** — the style conversation building momentum never starts: 13 template bases, one committed language in `DESIGN.md`
+- **/architect** — adopt an existing system or build — and if build, one committed architecture in `ARCHITECTURE.md`: qualities ranked, boundaries by ownership, stressed against the field and the future, proven by a walking skeleton, confirmed in consequences
+- **/designer** — the style conversation building momentum never starts: audience first, 13 template bases, taste settled by looking at real states, accessibility computed as the floor, one committed language of tokens with roles in `DESIGN.md`
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it

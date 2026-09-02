@@ -45,6 +45,7 @@ While any conversation is shaping work:
 - **Sharpen fuzzy terms.** One word doing two jobs ("account" naming both the merchant and a staff member's login) → propose a precise canonical term for each job.
 - **Collide claims with the code.** The user says how something works; the code disagrees → surface the contradiction, don't paper over it.
 - **Update inline.** The moment a term resolves, write it into `CONTEXT.md` — not batched at the end. A resolution that isn't written down will be re-litigated.
+- **The flow's own names get one rendering in the project's language.** Where the project writes its records in a language other than English, *slice*, *snapshot*, *contract*, *seam*, *kill-reason*, *assumed*, *backlog* and the six stage names are terms like any other: rendered differently at each writing they become several words for one concept, which is the collision this file exists to prevent. Record each once, under `## Language`, the first time a record is written in that language — `setup-working-genius` offers it as part of seeding the file — and every record uses that rendering (the `record-prose` skill's rule).
 
 ## What this skill is not
 

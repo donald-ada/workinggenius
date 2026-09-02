@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-The Working Genius plugin itself: 22 Agent Skills under `skills/`, distributed through the Claude Code plugin marketplace (`.claude-plugin/`) and the skills CLI. The skills are prose. There is no runtime, no build, no test suite, and no scripts — a fork must be able to carry the whole thing as plain folders. Dogfood work files (`.genius/`) are gitignored and never shipped.
+The Working Genius plugin itself: 22 Agent Skills under `skills/` and three subagents under `agents/`, distributed through the Claude Code plugin marketplace (`.claude-plugin/`) and the skills CLI. The skills are prose. There is no runtime, no build, no test suite, and no scripts — a fork must be able to carry the whole thing as plain folders. Dogfood work files (`.genius/`) are gitignored and never shipped.
 
 ## Commands
 
@@ -14,7 +14,7 @@ There is nothing to build or run. Three checks matter when editing skills:
   ```
   python3 -c "import sys;print(len(open(sys.argv[1],encoding='utf-8').read()))" <file>
   ```
-- **Relative links between skill files must resolve** (`[agents/inventor.md](agents/inventor.md)`, `../tenacity/agents/reviewer.md`, `FILE-FORMAT.md`). A one-off check:
+- **Relative links between skill files must resolve** (`agents/inventor.md`, `../tenacity/agents/reviewer.md`, `FILE-FORMAT.md`, `../genius-file/BACKLOG-FORMAT.md`). A one-off check:
   ```
   python3 -c "import re,os,glob;print([(f,t) for f in glob.glob('skills/**/*.md',recursive=True) for t in re.findall(r'\]\(([^)#]+)(?:#[^)]*)?\)',open(f,encoding='utf-8').read()) if not t.startswith('http') and '<' not in t and t!='CONTRACT.md' and not t.endswith('.log.md') and not os.path.exists(os.path.join(os.path.dirname(f),t))])"
   ```
@@ -22,7 +22,7 @@ There is nothing to build or run. Three checks matter when editing skills:
 
 ## Architecture
 
-**One skill = one folder** `skills/<name>/SKILL.md`, frontmatter `name`, `description`, optional `argument-hint`. `disable-model-invocation: true` marks a command only the user types (`/genius`, `/architect`, `/designer`, `/compact`, `/distill`, `/reconcile`, `/triage`, `/waitwhat`, `/setup-working-genius`); the six stage skills and the discipline skills (`genius-file`, `record-prose`, `errata`, `decision-record`, `domain-glossary`, `blindspot`, `diagnose`) are model-invoked. Subagent briefs live beside the skill that spawns them — `invent/agents/inventor.md`, `enable/agents/builder.md`, `tenacity/agents/reviewer.md` (the last shared by `enable`'s slice review) — as fill-in-the-brackets text handed whole to the subagent.
+**One skill = one folder** `skills/<name>/SKILL.md`, frontmatter `name`, `description`, optional `argument-hint`. `disable-model-invocation: true` marks a command only the user types (`/genius`, `/architect`, `/designer`, `/compact`, `/distill`, `/reconcile`, `/triage`, `/waitwhat`, `/setup-working-genius`); the six stage skills and the discipline skills (`genius-file`, `record-prose`, `errata`, `decision-record`, `domain-glossary`, `blindspot`, `diagnose`) are model-invoked. **The three subagents** — `skills/invent/agents/inventor.md` (spawned by `/invent`, one per angle), `skills/enable/agents/builder.md` (by `/enable`'s coordinator, one per slice), `skills/tenacity/agents/reviewer.md` (by `/enable` at a slice close and `/tenacity` at close-out) — are Claude Code plugin agents, declared by path in `plugin.json`'s `agents` field: frontmatter `name` and `description`, and no `tools` list, because the agent inherits everything the session has and a list only names less (the reviewer's read-only discipline is a rule in its body, not a grant; `Bash` could write anyway). The body is the subagent's system prompt and carries the discipline, while the spawning skill's task message carries the parameters (the problem and angle, the slice and where to build, the diff and what it is judged against). They live inside the skill that spawns them, not in a top-level `agents/`, because `npx skills add` and a plain copy of `skills/*` carry only the skill folders — an agent outside them reaches Claude Code and nobody else, and the skill's "hand it that file's body as its brief" link dangles. On a client without agent definitions the body is handed over as the brief, so it is written to work either way. The skill names what the message must carry; the agent names what it hands back — one home each.
 
 **The flow** is six commands the user types in order — `/wonder → /invent → /discern → /galvanize → /enable → /tenacity` — with `/genius` as the map. The flow never advances itself and never hijacks a request that didn't enter it; a stage the user doesn't type has no section in the work file, and that absence is the record.
 
