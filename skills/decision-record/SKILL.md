@@ -18,12 +18,12 @@ Verdict in bold, the why in one line, the link to the record that holds the whol
 
 ## The test
 
-An index line is earned by one question: **would a future stranger re-fight this?** — propose the killed thing again, redo the settled study, "fix" the deliberate deviation. It is the same re-litigation test the kill-reason already answers inside one piece of work, asked across all future work. Most decisions fail it — they bind only their own work, and their work file holds them fine. The ones that pass: architectural shape, boundary no-s, deliberate deviations from the obvious path, constraints invisible in the code, rejections that will be re-proposed by someone who wasn't there.
+An index line is earned by one question: **would a future stranger re-fight this?** — propose the killed thing again, redo the settled study, "fix" the deliberate deviation. It is the same re-litigation test the kill-reason already answers inside one piece of work, asked across all future work. Most decisions fail it — they bind only their own work, and their work file holds them fine. The ones that pass: architectural shape, boundary no-s, deliberate deviations from the obvious path, constraints invisible in the code, rejections that will be re-proposed by someone who wasn't there. And a seam or convention a slice established that later work will build against: the contract's established layer is where close-out asks the test first, block by block, because each block already names its source for the line to carry, and a builder in the next work re-derives whatever no line lets it find.
 
 ## The discipline
 
 - **Written when the record is finished** — Tenacity's close-out asks the test of everything the work settled; a standalone `/architect` study writes its line when the design is confirmed. Never a second write-up: the line points, the record carries.
-- **Read before contradicting.** The index is the ammunition `/discern` and `/architect` load: a design that touches a settled decision either dies of the fight on record or names the decision it overturns and why.
+- **Read before contradicting, and before introducing.** The index is the ammunition `/discern` and `/architect` load: a design that touches a settled decision either dies of the fight on record or names the decision it overturns and why. It is also where an inventor or a builder looks before introducing a seam or a convention, and reuses the one it finds — the second home for one thing is the drift this index exists to prevent.
 - **Overturning moves the line.** A new fight that beats a settled decision rewrites its line — new verdict, new link — and the old record stays exactly as written, because a record's worth is that it is what was written then. The index carries what the project believes now; the files carry how it came to believe it, including everything it used to.
 
 ## What this skill is not

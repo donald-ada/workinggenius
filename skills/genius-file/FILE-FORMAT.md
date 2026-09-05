@@ -86,7 +86,7 @@ Active `assumed:` lines and edges left untested — only what is still owed an a
 
 The sections name what each stage owes the next session; the structure flexes to the work. Mid-flight, a stage's working material — Invention's paths, an interview's open questions — is state and sits here until the stage that consumes it compacts it into its conclusion. A stage that never ran has neither a section nor a log entry: absence is the record.
 
-**Slices hold the current cut only.** A reshaped slice leaves no corpse; the reshape is a log entry. Three marks: `[ ]` not started, `[x]` closed, `[~]` in progress — first red test run, close not yet — carrying its start date and a link to a `slice-N-wip` entry (red, green, still owed; appended to as the build moves), because a session dies whenever it dies and `[ ]` over half-built code sends the next one to rebuild what exists or build on it blind. **Every slice is one line.** An open one carries its name, its `after:`, its issue and a link to its criteria in `CONTRACT.md` — never the criteria themselves: the builder reads the contract and the status view reads the roster, and two copies come apart at the first bump. A closed one carries its date and a link to *every* log entry that backs it — evidence, displaced text, review, patch, wip — a floor, not a cap (the invariant says why). What it built is in the diff; what it ran is in the log; what it left binding is in `CONTRACT.md`. **Order is build order, top to bottom**: a slice waits on every slice above it unless `after:` names what it waits on (`after: none` waits on nothing). The default is the safe reading; the explicit form is what lets a coordinator run two slices at once. Absence never means parallel.
+**Slices hold the current cut only.** A reshaped slice leaves no corpse; the reshape is a log entry. Three marks: `[ ]` not started, `[x]` closed, `[~]` in progress — first red test run, close not yet — carrying its start date and a link to a `slice-N-wip` entry (red, green, still owed; appended to as the build moves), because a session dies whenever it dies and `[ ]` over half-built code sends the next one to rebuild what exists or build on it blind. **Every slice is one line.** An open one carries its name, its `after:`, its issue and a link to its criteria in `CONTRACT.md` — never the criteria themselves: the builder reads the contract and the status view reads the roster, and two copies come apart at the first bump. A closed one carries its date and a link to *every* log entry that backs it — evidence, displaced text, review, patch, wip — a floor, not a cap (the invariant says why). What it built is in the diff; what it ran is in the log; what it left binding is in `CONTRACT.md`. **Order is build order, top to bottom**: a slice waits on every slice above it unless `after:` names what it waits on (`after: none` waits on nothing). The default is the safe reading; the explicit form is what lets a coordinator run two slices at once. Absence never means parallel. An edge is more than an order: the seam it crosses has a test in the contract, and the waiting slice's close holds that test green (the contract, below).
 
 **Open grows by how many times the user was met**, so it is drained, never shortened, and the door opens at every slice close: a consumed `assumed:` goes to the log with what consumed it; an item that is work in its own right goes to the log verbatim, and `.genius/BACKLOG.md` takes a one-line seed pointing at that anchor — never straight to the backlog, because the invariant names two exits and a seed is lossy by design. A drained line leaves nothing to point from, so the section carries `[drained](<slug>.log.md#open-displaced-<date>)`, one per drain, never one overwritten by the next: the log is append-only, each drain is its own dated entry, and an overwritten link is text nobody can reach. Those links are what an emptied Open leaves behind.
 
@@ -98,20 +98,26 @@ Written by Galvanizing as contract v1 and not before — a work that never ran G
 
 ```markdown
 ## The plan (v3)
-The brief, the agreed test seams, the pinned values — the full current version,
-whole, never a patch over v2 — and one block per slice in the current cut,
-headed by the slice's key alone so the snapshot's line can link it:
+The brief, the pinned values, the agreed test seams — each naming the test
+that proves it: `S1 → S2, S3 — totals come out of the batch endpoint in cents:
+npm test -- api/totals` — the full current version, whole, never a patch over
+v2 — and one block per slice in the current cut, headed by the slice's key
+alone so the snapshot's line can link it:
 
 ### S2
 **The discount rule editor** — after: S1.
 - Each acceptance criterion with the instrument that shows it:
   `npm test -- editor` → the rule list renders from the batch endpoint
+- The seam test of every edge into this slice, held green in this slice's tree:
+  `npm test -- api/totals` → passes against S1 as it landed, no mock of it
 - A criterion no instrument reaches names whose eyes decide instead
 
 ## What the build established
 One block per convention a slice introduced, each naming where it came from.
 ### The option table — S2 established, S6 reads it. [source](<slug>.log.md#slice-2)
 ```
+
+**A seam names its test, and that test is a criterion at both ends of every `after:` edge that crosses it.** The slice that provides the seam turns the test green; each slice that waits on it holds the same test green in its own tree before it can close — so an edge in the roster carries evidence and not an assumption, a parallel builder's branch is verified on its way back by exactly the tests on its edges, and close-out's reviewer can spend its weight on the joints no seam test reaches. Both ends, because a builder tests what it built and the one reader who needs what the seam promised is the slice on the other side; one test both must pass is the seam's promise as an instrument, the same instrument at each end by construction. A seam no test can reach — a visual, a config — names whose eyes decide, like any criterion. And the seam's shape moves only by a version bump: a provider that reshapes its seam and its own test in one commit has broken every slice waiting on it with no line saying so.
 
 **A version bump replaces the plan layer whole**, the old version going to the log; the snapshot keeps the one-line changelog. **The established layer survives the bump untouched and is never drained** — not at a bump, not at done: its blocks are exactly what binds the slices not yet built, and the log records, it does not bind. At done the contract stays whole as the version the work was verified against; distillation touches the log alone. A block's title names who established it — provenance, never a trigger for removal: evicting on provenance throws away the newest rule in the file.
 
