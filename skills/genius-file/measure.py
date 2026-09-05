@@ -204,8 +204,7 @@ def cmd_links(only=None):
 
 def cmd_anchors(slug):
     """Every `##` key in the work's log, with what already links it, so a close can append
-    and link without reading the log whole (measured: a coordinator read one log whole
-    twenty-four times to find where to link, and carried every read to the end)."""
+    and link without reading the log whole."""
     d, _ = work_dir()
     if not slug:
         print('measure: anchors needs a slug')
