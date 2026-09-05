@@ -1,6 +1,6 @@
 # Working Genius
 
-A development workflow for coding agents — packaged as standard [Agent Skills](https://agentskills.io) (SKILL.md), so it runs in Claude Code, Cursor, ChatGPT/Codex, Gemini CLI, GitHub Copilot, and any other client that speaks the format. Three subagents ship inside the skills that spawn them — an inventor, a builder and a reviewer — as Claude Code plugin agents whose bodies double as briefs anywhere else. Built on one observation:
+A development workflow for Claude Code — 22 skills, three subagents (an inventor, a builder and a reviewer, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -19,21 +19,13 @@ This plugin walks every piece of work through all six — and every stage is a c
 
 ## Install
 
-**Any Agent Skills client** — the [skills CLI](https://skills.sh) auto-detects your agent and installs all 22 skills:
-
-```
-npx skills add donald-ada/workinggenius
-```
-
-**Claude Code** — one line, no install:
+In Claude Code:
 
 ```
 /plugin marketplace add donald-ada/workinggenius
 ```
 
-No npm? The skills are plain folders — clone the repo and copy `skills/*` into wherever your agent reads them. Nothing to build, nothing to run.
-
-On Claude Code the same folders carry three more things, ignored everywhere else: `/genius` and `/compact` count the work files before reading them, the three agents preload the discipline skills, and two prompt hooks judge the two failures the flow has measured — a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence.
+Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — three subagents, two prompt hooks that judge the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
 
 Then, in any project:
 

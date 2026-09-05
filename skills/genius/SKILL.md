@@ -27,7 +27,7 @@ State lives in `.genius/<slug>/<slug>.md` — the bounded snapshot a cold sessio
 
 ## What to do when invoked
 
-The counts first, taken as this command was invoked. On Claude Code the block below is replaced by the output of the format's instrument before you read it; where the command itself or a policy notice shows instead, run it — or the format's one-liner — before saying a number, because a number said without one is a guess:
+The counts first, taken as this command was invoked. On Claude Code the block below is replaced by the output of the format's instrument before you read it; where a policy notice shows instead (shell injection disabled for this session), run it — or the format's one-liner — before saying a number, because a number said without one is a guess:
 
 ```!
 python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py status
