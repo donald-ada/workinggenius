@@ -6,6 +6,7 @@ by hand.
     measure.py status            the /genius view: work dir, in-flight works, done, backlog, history
     measure.py snapshots         every snapshot's count, whole and roster excluded, against the ceiling
     measure.py links [<slug>]    both directions of the invariant: links that resolve, entries nothing links
+    measure.py anchors <slug>    a log's keys and what already links each — for a close that links without opening the log
     measure.py distill           done works and whether their logs carry the distilled line
     measure.py count <file>...   characters in each file
 
@@ -19,8 +20,12 @@ import datetime
 import glob
 import os
 import re
+import signal
 import subprocess
 import sys
+
+if hasattr(signal, 'SIGPIPE'):   # a reader that stops early (a pipe into head) is not a failure
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 CEILING = 6000          # FILE-FORMAT.md, "The measure": the snapshot's ceiling, roster excluded
 SEED_BOUND = 300        # BACKLOG-FORMAT.md: one seed, one physical line, at most this many characters
@@ -195,6 +200,42 @@ def cmd_links(only=None):
         print('links ok: nothing broken, nothing unlinked')
 
 
+# ---- anchors: link without opening the log ------------------------------------
+
+def cmd_anchors(slug):
+    """Every `##` key in the work's log, with what already links it, so a close can append
+    and link without reading the log whole (measured: a coordinator read one log whole
+    twenty-four times to find where to link, and carried every read to the end)."""
+    d, _ = work_dir()
+    if not slug:
+        print('measure: anchors needs a slug')
+        return
+    folder = os.path.join(d, slug)
+    snap, log, contract = (os.path.join(folder, slug + '.md'), os.path.join(folder, slug + '.log.md'),
+                           os.path.join(folder, 'CONTRACT.md'))
+    if not os.path.isfile(snap):
+        print(f'no snapshot at {snap}')
+        return
+    if not os.path.isfile(log):
+        print(f'{slug}: no log yet — the first entry creates it')
+        return
+    body = text(log)
+    keys = [(a, raw) for level, a, raw in headings(log) if level == 2]
+    linked = {}
+    for name, path in (('snapshot', snap), ('contract', contract)):
+        if os.path.isfile(path):
+            for t, a in links_in(path):
+                if t == slug + '.log.md' and a and name not in linked.setdefault(a, []):
+                    linked[a].append(name)
+    first = body.splitlines()[0].strip() if body.strip() else ''
+    print(f'{slug}: log {len(body)} chars, {len(keys)} entries' + (f', first line: {first}' if first.startswith('distilled') else ''))
+    for a, raw in keys:
+        flag = '' if re.fullmatch(r'[A-Za-z0-9-]+', raw) else ' ⚠ prose after key'
+        print(f'- ## {raw}{flag} — linked from: {", ".join(linked.get(a, [])) or "nothing"}')
+    if keys:
+        print(f'last entry: ## {keys[-1][1]}')
+
+
 # ---- distill: the scope rule as a scan ---------------------------------------
 
 def cmd_distill():
@@ -296,10 +337,12 @@ def main(argv):
             cmd_links(argv[2] if len(argv) > 2 else None)
         elif cmd == 'distill':
             cmd_distill()
+        elif cmd == 'anchors':
+            cmd_anchors(argv[2] if len(argv) > 2 else None)
         elif cmd == 'count':
             cmd_count(argv[2:])
         else:
-            print(f'measure: unknown command {cmd!r}; one of status, snapshots, links, distill, count')
+            print(f'measure: unknown command {cmd!r}; one of status, snapshots, links, anchors, distill, count')
     except Exception as e:  # never fail: see the docstring
         print(f'measure: could not measure ({type(e).__name__}: {e})')
     return 0
