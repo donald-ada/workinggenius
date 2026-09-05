@@ -2,6 +2,20 @@
 name: enable
 description: Build one slice at a time with red-before-green tests at the agreed seams, tight feedback loops, and fresh-eyes review at every slice close. Use when a tracked piece of work is at its enablement stage and a slice needs building — or when small work that never cut slices needs building against its confirmed problem.
 argument-hint: "a work slug to coordinate all slices, or 'slug, slice N' to build one"
+hooks:
+  Stop:
+    - hooks:
+        - type: prompt
+          timeout: 30
+          prompt: >-
+            The turn may end. It may not end only when all three hold at once: stop_hook_active is false; background_tasks holds no subagent or workflow entry, because a running one means the session is paused for it and will be woken; and the last assistant message announces a step the assistant itself would take next — dispatching a slice or a builder, spawning or waiting on a reviewer, running verification, closing a slice — and ends there, asking the user nothing and reporting no result of that step. A last message that asks the user something, waits on their decision, reports a close, a hand-back, a finding or an outcome, or does not concern tracked work, satisfies the condition. When it is not satisfied, the reason is: "Dispatching is doing: the step you announced is yours to take now, before the turn ends — or, if it needs the user, ask them."
+  SubagentStop:
+    - matcher: builder
+      hooks:
+        - type: prompt
+          timeout: 30
+          prompt: >-
+            The builder may finish. The condition is satisfied when stop_hook_active is true, or when its last message hands back evidence — per criterion, a command and what it showed — with what it established, the baseline, the edges left untested and any backlog lines; or a stop — a discovery, what it changes, a recommendation; or a blocker it cannot work around, named. It is not satisfied only when the message says the slice is done, built, implemented, passing or complete and carries no command-and-result line for its criteria; then the reason is: "Hand back evidence, not a claim: per criterion, the command and what it showed — or the stop, with what it changes and your recommendation."
 ---
 
 # Enablement

@@ -33,6 +33,8 @@ npx skills add donald-ada/workinggenius
 
 No npm? The skills are plain folders — clone the repo and copy `skills/*` into wherever your agent reads them. Nothing to build, nothing to run.
 
+On Claude Code the same folders carry three more things, ignored everywhere else: `/genius` and `/compact` count the work files before reading them, the three agents preload the discipline skills, and two prompt hooks judge the two failures the flow has measured — a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence.
+
 Then, in any project:
 
 ```

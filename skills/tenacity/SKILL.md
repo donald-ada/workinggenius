@@ -1,6 +1,13 @@
 ---
 name: tenacity
 description: Drive the work to actually-done — fresh verification of every claim, context-isolated diff review, cleanup, commit, post-mortem. Use when a tracked piece of work is ready to close out, whether it moved through slices or was built directly after Wonder without them.
+hooks:
+  Stop:
+    - hooks:
+        - type: prompt
+          timeout: 30
+          prompt: >-
+            The turn may end. It may not end only when all three hold at once: stop_hook_active is false; background_tasks holds no subagent or workflow entry, because a running one means the session is paused for it and will be woken; and the last assistant message announces a step the assistant itself would take next — dispatching a slice or a builder, spawning or waiting on a reviewer, running verification, closing a slice — and ends there, asking the user nothing and reporting no result of that step. A last message that asks the user something, waits on their decision, reports a close, a hand-back, a finding or an outcome, or does not concern tracked work, satisfies the condition. When it is not satisfied, the reason is: "Dispatching is doing: the step you announced is yours to take now, before the turn ends — or, if it needs the user, ask them."
 ---
 
 # Tenacity

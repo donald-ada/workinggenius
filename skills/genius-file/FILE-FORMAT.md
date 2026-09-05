@@ -36,6 +36,8 @@ The Slices list answers it, in the present — never a guess about who will read
 
 ⚠ `wc -m` counts *bytes* wherever the locale is unset or `C`, which is most non-interactive shells: on a compliant 4939-character CJK snapshot it reported 9596. Count with `LC_ALL=C.UTF-8 wc -m`, or `python3 -c "import sys;print(len(open(sys.argv[1],encoding='utf-8').read()))" <file>`.
 
+The format's instrument is [measure.py](measure.py) beside this file: `count <file>` is that one-liner, `snapshots` gives every snapshot whole and roster excluded against the ceiling, `status` is what `/genius` shows — and `/genius` and `/compact` run it before they read, so on Claude Code the numbers arrive counted. A client that cannot run it is why the one-liner stays written here.
+
 The number is a ceiling, never a target: **the mechanism is the question, and the count is how you check it was asked.** Under the ceiling without the question is not compacted, it is small — `/compact` puts the question to a snapshot that drifted. Over it is not a style problem: history is leaking into state, or the question went unasked. 100 physical lines stays a smoke alarm and decides nothing.
 
 **The Slices roster is measured out.** It grows by slice count, and it cannot move out because it *is* the progress view: a closed slice line is neither a constraint nor scope, it is the work's shape. One line per slice, no budget. A roster that dominates the file says this is two pieces of work, and the fix is the cut, not the prose. (An expand → migrate → contract plan lists its batches as a range on one line; they are one slice's shape.) `CONTRACT.md` has no ceiling: growing by slice count is what it is for.

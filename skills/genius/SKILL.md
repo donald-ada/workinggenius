@@ -3,6 +3,7 @@ name: genius
 description: The map of the Working Genius workflow — where each piece of work stands, what to run next, and where genius gaps are hiding.
 disable-model-invocation: true
 argument-hint: "optional: a work slug, or a new idea to start tracking"
+allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py *)
 ---
 
 # The Genius Map
@@ -26,7 +27,15 @@ State lives in `.genius/<slug>/<slug>.md` — the bounded snapshot a cold sessio
 
 ## What to do when invoked
 
-**No argument** → status, from the in-flight work files only: each one's stage, what's unfinished, which stages never ran, and the exact next command; flag work untouched for weeks as stale and offer to resume or abandon. For calibration, read `.genius/HISTORY.md` instead of opening every done snapshot to find its post-mortem — one line per finished work, appended by `/tenacity` at close-out: a genius repeatedly weakest there is calibration, not coincidence, so say so when routing new work and let that stage get deliberate weight. And light up the backlog: `.genius/BACKLOG.md`'s lines are work the flow already discovered and nobody started — show them every time, because an idea the user must remember to ask about is an idea the flow already lost once. Say how many have grown past a seed's character bound — the one signal countable without opening anything else, counted the way the format's measure section counts, since a byte count inflates it on any file written in a language that costs more than a byte per character — and name `/triage` as what puts the questions to these lines. Counting is all that happens here, and only what a count can honestly reach: judging whether a work already answered a seed means reading snapshots this view just declined to open, and it is a ruling besides. Nothing in flight, no history, no backlog? Show the flow and how to start.
+The counts first, taken as this command was invoked. On Claude Code the block below is replaced by the output of the format's instrument before you read it; where the command itself or a policy notice shows instead, run it — or the format's one-liner — before saying a number, because a number said without one is a guess:
+
+```!
+python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py status
+```
+
+Those are the counts, taken the way the format's measure section counts; what this command adds is the reading — which stage, what is unfinished, what went stale — never the arithmetic.
+
+**No argument** → status, from the in-flight work files only: each one's stage, what's unfinished, which stages never ran, and the exact next command; flag work untouched for weeks as stale and offer to resume or abandon. For calibration, read `.genius/HISTORY.md` instead of opening every done snapshot to find its post-mortem — one line per finished work, appended by `/tenacity` at close-out: a genius repeatedly weakest there is calibration, not coincidence, so say so when routing new work and let that stage get deliberate weight. And light up the backlog: `.genius/BACKLOG.md`'s lines are work the flow already discovered and nobody started — show them every time, because an idea the user must remember to ask about is an idea the flow already lost once. Say how many have grown past a seed's character bound — the one signal countable without opening anything else, already counted above the way the format's measure section counts, since a byte count inflates it on any file written in a language that costs more than a byte per character — and name `/triage` as what puts the questions to these lines. Counting is all that happens here, and only what a count can honestly reach: judging whether a work already answered a seed means reading snapshots this view just declined to open, and it is a ruling besides. Nothing in flight, no history, no backlog? Show the flow and how to start.
 
 **An idea** → start it: create the work file (`genius-file` skill) and open the Wonder interview. An idea that arrives as a tracker issue is read first, and the work file records which issue it answers; one taken from `.genius/BACKLOG.md` removes its line, the new work file its home now. Dropping a stage is the user's call, made by not typing it — never a package you propose. And stages trade; depth doesn't: a stage worth running is worth running at full depth, because a skimmed stage pays the ceremony and buys nothing. Reaching the next command is not progress — meeting this one's threshold is.
 
