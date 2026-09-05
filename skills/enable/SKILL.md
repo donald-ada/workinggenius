@@ -5,17 +5,15 @@ argument-hint: "a work slug to coordinate all slices, or 'slug, slice N' to buil
 hooks:
   Stop:
     - hooks:
-        - type: prompt
-          timeout: 30
-          prompt: >-
-            The turn may end. It may not end only when all three hold at once: stop_hook_active is false; background_tasks holds no subagent or workflow entry, because a running one means the session is paused for it and will be woken; and the last assistant message announces a step the assistant itself would take next — dispatching a slice or a builder, spawning or waiting on a reviewer, running verification, closing a slice — and ends there, asking the user nothing and reporting no result of that step. A last message that asks the user something, waits on their decision, reports a close, a hand-back, a finding or an outcome, or does not concern tracked work, satisfies the condition. When it is not satisfied, the reason is: "Dispatching is doing: the step you announced is yours to take now, before the turn ends — or, if it needs the user, ask them."
+        - type: command
+          command: python3 "${CLAUDE_PLUGIN_ROOT}/skills/genius-file/stop-judge.py"
+          timeout: 90
   SubagentStop:
     - matcher: builder
       hooks:
-        - type: prompt
-          timeout: 30
-          prompt: >-
-            The builder may finish. The condition is satisfied when stop_hook_active is true, or when its last message hands back evidence — per criterion, a command and what it showed — with what it established, the baseline, the edges left untested and any backlog lines; or a stop — a discovery, what it changes, a recommendation; or a blocker it cannot work around, named. It is not satisfied only when the message says the slice is done, built, implemented, passing or complete and carries no command-and-result line for its criteria; then the reason is: "Hand back evidence, not a claim: per criterion, the command and what it showed — or the stop, with what it changes and your recommendation."
+        - type: command
+          command: python3 "${CLAUDE_PLUGIN_ROOT}/skills/genius-file/stop-judge.py"
+          timeout: 90
 ---
 
 # Enablement
@@ -58,6 +56,8 @@ Then red → green, at the agreed seams, until the slice's criteria are covered:
 ## Closing a slice
 
 **Closing a slice is one commit with four effects** (`genius-file` skill): the code, the slice's log entry, the compacted snapshot, and the close of its issue if it carries one — **five where the slice left something binding, since `CONTRACT.md` is its own file**: a constraint that misses this commit is one the next slice builds without. The record updates as a side effect of an action you had to take anyway, never as bookkeeping someone must remember. (An issue closes via `closes #N` in the message where that commit lands on the default branch, and directly, pointing at the commit, where it won't; where `.genius/` is gitignored, the files are written at that same moment all the same.)
+
+**A criterion whose instrument is the user's eyes, and whose eyes have not looked, closes as an `owed:` line in Open** — `owed: S2 <criterion> → the user's eyes` — with the slice's log entry saying so; the slice still closes on the evidence it has, and the line waits in Open until they look (the `genius-file` format's Open rule). Checked in the builder's head instead, the roster's `[x]` is earlier than the fact, and the one reader who would catch it is the user who verifies at the end.
 
 **One close at a time, by whoever holds the snapshot.** Two builders closing in parallel rewrite the same snapshot and the same `CONTRACT.md` in two commits, and the second lands on a file the first already changed. So a parallel builder does not close: it returns its branch, its per-criterion evidence and what it established, and the coordinator closes each returned slice in turn. A solo builder closes its own.
 

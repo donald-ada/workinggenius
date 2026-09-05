@@ -25,7 +25,7 @@ In Claude Code:
 /plugin marketplace add donald-ada/workinggenius
 ```
 
-Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — three subagents, two prompt hooks that judge the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
+Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — three subagents, two judges registered when you type `/enable` or `/tenacity` and never by installation, blocking the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
 
 Then, in any project:
 

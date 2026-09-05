@@ -4,10 +4,9 @@ description: Drive the work to actually-done — fresh verification of every cla
 hooks:
   Stop:
     - hooks:
-        - type: prompt
-          timeout: 30
-          prompt: >-
-            The turn may end. It may not end only when all three hold at once: stop_hook_active is false; background_tasks holds no subagent or workflow entry, because a running one means the session is paused for it and will be woken; and the last assistant message announces a step the assistant itself would take next — dispatching a slice or a builder, spawning or waiting on a reviewer, running verification, closing a slice — and ends there, asking the user nothing and reporting no result of that step. A last message that asks the user something, waits on their decision, reports a close, a hand-back, a finding or an outcome, or does not concern tracked work, satisfies the condition. When it is not satisfied, the reason is: "Dispatching is doing: the step you announced is yours to take now, before the turn ends — or, if it needs the user, ask them."
+        - type: command
+          command: python3 "${CLAUDE_PLUGIN_ROOT}/skills/genius-file/stop-judge.py"
+          timeout: 90
 ---
 
 # Tenacity
@@ -18,14 +17,14 @@ The concept: **"done" is a claim about fresh evidence, and evidence expires with
 
 Where the slices recorded a dirty baseline — verify failures that predate this work — the fresh run is held to the same line, no new failures, and the baseline is named in this stage's evidence: a close-out that reads pre-existing red as this work's is as wrong as one that reads new red as pre-existing. Have the plugin's `reviewer` agent ([agents/reviewer.md](agents/reviewer.md)) judge the diff from `base:` against the brief — its task message naming the diff, what it is judged against, where the record lives, and which slices already carried their own review — spec, standards, and anything else worth blocking on, or against the Problem section's success criteria where no Contract was ever written. Don't tell it what not to flag, and treat its findings as claims to verify, not orders. Spawn it synchronously where you cannot be certain the harness wakes you when it finishes, and never end your turn while it runs — a review nobody reads did not run. Where slices were reviewed at their closes (`enable`), this reviewer's weight falls on what slice-sized eyes could not see — the joints between slices no seam test reaches, since an edge with one already carries its evidence in the slices' entries, and drift of the whole against the brief — not on re-litigating each slice. Where `base:` was never pinned (Galvanizing never ran), pin it now — the commit before this work's changes began — so the diff has a start and the record is complete for whoever reads it next.
 
-Walk the recorded `assumed:` lines — an assumption that contradicts the brief is a defect however green the tests. Whatever the fresh run disproves — a slice's recorded result, a pinned number, an `assumed:` that was wrong — is corrected rather than quietly dropped (`errata` skill): the binding copy rewritten, the record that carried the wrong line appended to with what overturned it and what made it wrong. Before the user accepts, name the `blindspot` skill's quiz and let them call it — a behaviour-level summary of what changed, then the consequences they will live with; built work nobody absorbed is next month's surprise.
+Walk the recorded `assumed:` and `owed:` lines — an assumption that contradicts the brief is a defect however green the tests, and an `owed:` line is a criterion nobody's eyes have checked: put it to the user now, before done is said, and drain it with what they saw. Whatever the fresh run disproves — a slice's recorded result, a pinned number, an `assumed:` that was wrong — is corrected rather than quietly dropped (`errata` skill): the binding copy rewritten, the record that carried the wrong line appended to with what overturned it and what made it wrong. Before the user accepts, name the `blindspot` skill's quiz and let them call it — a behaviour-level summary of what changed, then the consequences they will live with; built work nobody absorbed is next month's surprise.
 
 ## How it runs
 
 1. Re-read the snapshot, its `CONTRACT.md`, and the slices' evidence entries alone. Pin `base:` where Galvanizing never did.
 2. Run everything fresh — the suite, the checks, every criterion — and read the output. A recorded dirty baseline is held at no new failures and named in the evidence.
 3. Spawn the `reviewer` agent against the diff from `base:`, naming which slices were already reviewed; verify its findings; resolve what is real. Stay awake until it returns.
-4. Walk the `assumed:` lines; correct what the run disproved (`errata` skill). Name the `blindspot` quiz before the user accepts.
+4. Walk the `assumed:` and `owed:` lines — the latter put to the user's eyes now; correct what the run disproved (`errata` skill). Name the `blindspot` quiz before the user accepts.
 5. Close out, each move its own act (below): the log entry with the evidence whole, cleanup, the decision index, slice issues, the snapshot compacted with Open emptied, the commit, `stage: done`, the parent issue last.
 6. Distill the log, announced; then the post-mortem line, checked against and appended to `.genius/HISTORY.md`.
 
