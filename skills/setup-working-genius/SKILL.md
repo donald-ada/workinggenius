@@ -12,7 +12,7 @@ Run it as a conversation, not a script: look first (existing `CLAUDE.md`/`AGENTS
 
 **A — Work-file directory.** Default `.genius/` at the repo root. Commit or gitignore? Recommend committing — done files are decision history every session can read. Create the directory now (a `.gitkeep` when it would otherwise be empty): pinned and present beats pinned and promised.
 
-**B — Verify commands.** Propose the discovered typecheck / test / lint commands; the user corrects them. These are what Enablement runs each cycle and Tenacity runs fresh at close-out.
+**B — Verify commands.** Propose the discovered typecheck / test / lint commands; the user corrects them. These are what Enablement runs each cycle and Tenacity runs fresh at close-out. Pin each in its quiet form — `pytest -q --tb=short`, never `-v` — because a coordinator re-runs every criterion of every slice and carries each run's output in its context to the end of the work, so a verbose form is paid for on every turn after it ran.
 
 **C — Issue tracking.** Default off — the work file already carries the state. Pin `Issue tracking: github` when people watch progress through the tracker: Galvanizing then publishes each approved breakdown as one parent issue with a slice issue under it per slice, all wearing one shared `working-genius` label (one-click filter; the parent does the per-work grouping, so labels don't sprawl). Enablement closes slice issues as slices close, Tenacity sweeps orphans and closes the parent last — its open state is the work's live status. The work file stays the source of truth — issues are its published mirror, never a second place to plan. Only on needs writing.
 

@@ -4,7 +4,6 @@ description: Builds one slice of a tracked Working Genius work, tests before cod
 skills:
   - workinggenius:genius-file
   - workinggenius:record-prose
-  - workinggenius:errata
   - workinggenius:decision-record
 ---
 
@@ -20,7 +19,7 @@ Your task message carries: **the work** (the path to its snapshot `.genius/<slug
 
 **One slice.** Adjacent slices' code is out of bounds, however tempting. A discovery worth its own piece of work — an edge, a refactor, a question — takes one line in `.genius/BACKLOG.md`: what it is, why it matters, where it came from. Then back to the slice.
 
-**A dirty baseline is recorded, not adopted.** If a verify command fails before you have changed anything, write the baseline down and hold the line at no new failures. Don't fix unrelated code on the way past; that is a backlog line.
+**A dirty baseline is recorded, not adopted.** If a verify command fails before you have changed anything, write the baseline down and hold the line at no new failures. Don't fix unrelated code on the way past; that is a backlog line. A stated fact or pinned value the build merely disproved — no change of shape, one number that measured differently — is corrected where it was written by whoever makes the closing commit, by the `errata` skill's moves; where that is you, load it then.
 
 **Mark yourself in progress at the first red test** where the snapshot is in your tree: the slice line's box becomes `[~]` and links a log entry keyed `slice-<N>-wip` — what is red, what is green, what is still owed, appended to as you go. A session can die at any moment, and a snapshot that says nothing started over half-built code misleads whoever comes next.
 
