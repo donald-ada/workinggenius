@@ -5,7 +5,7 @@ description: Maintain the project's shared vocabulary in CONTEXT.md — challeng
 
 # Domain Glossary
 
-One shared language between the user, the agent, and the code — what Domain-Driven Design calls the *ubiquitous language* — living in `CONTEXT.md` at the repo root: a glossary and nothing else. The payoff compounds across work: a term sharpened during one piece of work serves every later one — shorter conversations, consistent naming in code and tests, fewer tokens spent decoding jargon.
+One shared language between the user, the agent and the code — Domain-Driven Design's *ubiquitous language* — living in `CONTEXT.md` at the repo root: a glossary and nothing else. A term sharpened during one piece of work serves every later one: shorter conversations, consistent naming in code and tests.
 
 ## Format
 
@@ -26,27 +26,20 @@ exports work — restorability is a support contract.
 Killed: *trash*, *delete* — each carried both meanings at once.
 ```
 
-Rules of the file:
-
-- **Be opinionated.** When several words name one concept, pick the best and name the losers as killed — with what killed them where there was a real fight, and a plain "one concept, one word" where there wasn't.
-- **A fought term keeps its fight.** A term that collided — two meanings, or a claim against the code — carries the collision in one line: what collided, which won, why. A resolution recorded without its collision gets re-litigated; that is as true of words as of designs. A term that never collided is just its definition.
-- **Published API names outrank opinion.** A misleading name that's public API (a decade-old keyword argument) can't be renamed — define it *against* its general meaning instead ("not actually a cryptographic salt; the name is API, the definition rules"). The glossary's job there is disambiguation, not renaming.
-- **Tight definitions.** One or two sentences; define what it *is*.
-- **Project concepts only.** General programming concepts (retries, timeouts, error types) don't belong, however often the project uses them.
-- **No implementation details.** `CONTEXT.md` is not a spec, a scratchpad, or a decision log — decisions live in their work file, indexed in `.genius/DECIDED.md` where a stranger would re-fight them, not here.
-- **Create lazily.** No `CONTEXT.md`? Create it when the first term is resolved, not before.
-- **Don't hijack.** If `CONTEXT.md` already exists with non-glossary content, leave that content alone: append the `## Language` section to it and keep the discipline scoped to that section.
+- **Be opinionated.** When several words name one concept, pick the best and name the losers as killed — with what killed them where there was a real fight.
+- **A fought term keeps its fight.** A term that collided carries the collision in one line: what collided, which won, why. A resolution recorded without its collision gets re-litigated.
+- **Published API names outrank opinion.** A misleading name that's public API can't be renamed — define it *against* its general meaning instead ("not actually a cryptographic salt; the name is API, the definition rules").
+- **Tight definitions**, one or two sentences, of what it *is*. **Project concepts only** — general programming concepts don't belong. **No implementation details**: not a spec, a scratchpad or a decision log — decisions live in their work file, indexed in `.genius/DECIDED.md`.
+- **Create lazily**, at the first resolved term. **Don't hijack**: an existing `CONTEXT.md` with other content keeps it; append the `## Language` section and stay scoped to it.
 
 ## The discipline
 
 While any conversation is shaping work:
 
 - **Collide words with the glossary.** The user's term conflicts with an entry → stop and hold the two meanings up side by side: "The glossary says an *archived* account is restorable, but you're describing permanent deletion — which do you mean?" No building on a word that means two things at once.
-- **Sharpen fuzzy terms.** One word doing two jobs ("account" naming both the merchant and a staff member's login) → propose a precise canonical term for each job.
-- **Collide claims with the code.** The user says how something works; the code disagrees → surface the contradiction, don't paper over it.
-- **Update inline.** The moment a term resolves, write it into `CONTEXT.md` — not batched at the end. A resolution that isn't written down will be re-litigated.
-- **The flow's own names get one rendering in the project's language.** Where the project writes its records in a language other than English, *slice*, *snapshot*, *contract*, *seam*, *kill-reason*, *assumed*, *backlog* and the six stage names are terms like any other: rendered differently at each writing they become several words for one concept, which is the collision this file exists to prevent. Record each once, under `## Language`, the first time a record is written in that language — `setup-working-genius` offers it as part of seeding the file — and every record uses that rendering (the `record-prose` skill's rule).
+- **Sharpen fuzzy terms.** One word doing two jobs → propose a precise canonical term for each.
+- **Collide claims with the code.** The user says how something works; the code disagrees → surface the contradiction.
+- **Update inline.** The moment a term resolves, write it — not batched at the end. A resolution that isn't written down will be re-litigated.
+- **The flow's own names get one rendering in the project's language.** Where records are written in a language other than English, *slice*, *snapshot*, *contract*, *seam*, *kill-reason*, *assumed*, *backlog* and the six stage names are terms like any other: rendered differently at each writing they become several words for one concept. Record each once under `## Language`, the first time a record is written in that language (`setup-working-genius` offers it), and every record uses that rendering (`record-prose` skill).
 
-## What this skill is not
-
-Merely *reading* `CONTEXT.md` to use its vocabulary is not this skill — any skill does that with one line. Invoke this skill only when the language itself is being built, challenged, or changed.
+Merely *reading* `CONTEXT.md` to use its vocabulary is not this skill. Invoke it only when the language itself is being built, challenged or changed.

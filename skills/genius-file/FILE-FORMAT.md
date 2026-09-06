@@ -13,7 +13,7 @@ One piece of work = one folder at `.genius/<slug>/`. Slug: short kebab-case, nam
 
 **Three files, three growth laws.** The snapshot follows *scope*, so a cold session reads it whole however many times the requirements moved. The log follows *time*, which costs nothing, because nobody reads a log whole. The contract follows *slice count*: a convention one slice introduced binds the slices not yet built, so it can be neither deleted nor kept in a file whose size must follow scope. Conflate any two and the file grows with every discovery until nobody reads it closely.
 
-This is the one format. A file in some other shape is read for what it holds and brought to this shape when it is next written to — a session that knows the format needs no rule for recognising what isn't it. The measurements behind the rules, and the one repair a session meets rarely, are in [FORMAT-EDGES.md](FORMAT-EDGES.md): read it before disagreeing with a rule, never as the price of a slice close.
+This is the one format. A file in some other shape is read for what it holds and brought to this shape when next written to. The measurements behind the rules, and the one repair a session meets rarely, are in [FORMAT-EDGES.md](FORMAT-EDGES.md): read it before disagreeing with a rule, never as the price of a slice close.
 
 ## The question
 
@@ -25,22 +25,15 @@ Compaction has a moment (every slice close, contract bump and stage close), an i
 - **Yes, and it follows scope** → it stays: the confirmed problem, the decision, the current cut, an Open item still owed an answer.
 - **Yes, but it arrived with a slice** → `CONTRACT.md`: a convention, a seam, a pinned value, what a later slice must not break.
 
-The Slices list answers it, in the present — never a guess about who will read a line later; a rule evicted on a guess is a constraint lost silently. Two tie-breaks:
-
-- **Until `stage: done` the work is unfinished.** Every slice marked done and the answer is still "yes": close-out re-verifies against what binds. Contract content drains when the work does, not when the last slice closes.
-- **Both "follows scope" and "arrived with a slice" → `CONTRACT.md`**, the section keeping a one-line pointer. An interface pinned at Discernment is part of the decision *and* of what binds the build; it goes where the builder reads.
+The Slices list answers it, in the present — never a guess about who will read a line later. Two tie-breaks: **until `stage: done` the work is unfinished**, because close-out re-verifies against what binds; and **both "follows scope" and "arrived with a slice" → `CONTRACT.md`**, the section keeping a one-line pointer, because an interface pinned at Discernment goes where the builder reads.
 
 ## The measure
 
-**The snapshot's ceiling is 6000 characters** — characters, not lines (a line budget rewards not pressing return, and one physical line has been measured at 842 columns) and not bytes.
+**The snapshot's ceiling is 6000 characters** — characters, not lines and not bytes. ⚠ `wc -m` counts *bytes* wherever the locale is unset or `C`, which is most non-interactive shells. Count with `LC_ALL=C.UTF-8 wc -m`, or `python3 -c "import sys;print(len(open(sys.argv[1],encoding='utf-8').read()))" <file>`.
 
-⚠ `wc -m` counts *bytes* wherever the locale is unset or `C`, which is most non-interactive shells: on a compliant 4939-character CJK snapshot it reported 9596. Count with `LC_ALL=C.UTF-8 wc -m`, or `python3 -c "import sys;print(len(open(sys.argv[1],encoding='utf-8').read()))" <file>`.
+The format's instrument is [measure.py](measure.py) beside this file: `count <file>` is that one-liner, `snapshots` gives every snapshot whole and roster excluded against the ceiling, `links` reads both directions of the invariant (below), `anchors <slug>` lists a log's keys and what already links each, so a close can link without opening the log, `distill` lists the done works and whether their logs carry the distilled line, `status` is what `/genius` shows. `/genius`, `/compact`, `/reconcile` and `/distill` run it before they read; the one-liner stays written here for a session where injection is disabled by policy.
 
-The format's instrument is [measure.py](measure.py) beside this file: `count <file>` is that one-liner, `snapshots` gives every snapshot whole and roster excluded against the ceiling, `links` reads both directions of the invariant (below), `anchors <slug>` lists a log's keys and what already links each, for a close that must link without opening the log, `distill` lists the done works and whether their logs carry the distilled line, `status` is what `/genius` shows — and `/genius`, `/compact`, `/reconcile` and `/distill` run it before they read, so the numbers arrive counted. A session where injection is disabled by policy is why the one-liner stays written here.
-
-The number is a ceiling, never a target: **the mechanism is the question, and the count is how you check it was asked.** Under the ceiling without the question is not compacted, it is small — `/compact` puts the question to a snapshot that drifted. Over it is not a style problem: history is leaking into state, or the question went unasked. 100 physical lines stays a smoke alarm and decides nothing.
-
-**The Slices roster is measured out.** It grows by slice count, and it cannot move out because it *is* the progress view: a closed slice line is neither a constraint nor scope, it is the work's shape. One line per slice, no budget. A roster that dominates the file says this is two pieces of work, and the fix is the cut, not the prose. (An expand → migrate → contract plan lists its batches as a range on one line; they are one slice's shape.) `CONTRACT.md` has no ceiling: growing by slice count is what it is for.
+The number is a ceiling, never a target: **the mechanism is the question, and the count is how you check it was asked.** Under the ceiling without the question is not compacted, it is small; over it, history is leaking into state. **The Slices roster is measured out**: it grows by slice count and it *is* the progress view, one line per slice, no budget; a roster that dominates the file says this is two pieces of work, and the fix is the cut. `CONTRACT.md` has no ceiling: growing by slice count is what it is for.
 
 ## The snapshot
 
@@ -89,11 +82,11 @@ Active `assumed:` lines, `owed:` lines — a criterion closed on nobody's eyes y
 
 The sections name what each stage owes the next session; the structure flexes to the work. Mid-flight, a stage's working material — Invention's paths, an interview's open questions — is state and sits here until the stage that consumes it compacts it into its conclusion. A stage that never ran has neither a section nor a log entry: absence is the record.
 
-**Slices hold the current cut only.** A reshaped slice leaves no corpse; the reshape is a log entry. Three marks: `[ ]` not started, `[x]` closed, `[~]` in progress — first red test run, close not yet — carrying its start date and a link to a `slice-N-wip` entry (red, green, still owed; appended to as the build moves), because a session dies whenever it dies and `[ ]` over half-built code sends the next one to rebuild what exists or build on it blind. **Every slice is one line.** An open one carries its name, its `after:`, its issue and a link to its criteria in `CONTRACT.md` — never the criteria themselves: the builder reads the contract and the status view reads the roster, and two copies come apart at the first bump. A closed one carries its date and a link to *every* log entry that backs it — evidence, displaced text, review, patch, wip — a floor, not a cap (the invariant says why). What it built is in the diff; what it ran is in the log; what it left binding is in `CONTRACT.md`. **Order is build order, top to bottom**: a slice waits on every slice above it unless `after:` names what it waits on (`after: none` waits on nothing). The default is the safe reading; the explicit form is what lets a coordinator run two slices at once. Absence never means parallel. An edge is more than an order: the seam it crosses has a test in the contract, and the waiting slice's close holds that test green (the contract, below).
+**Slices hold the current cut only.** A reshaped slice leaves no corpse; the reshape is a log entry. Three marks: `[ ]` not started, `[x]` closed, `[~]` in progress — first red test run, close not yet — with its start date and a link to a `slice-N-wip` entry (red, green, still owed; appended to as the build moves), because a session dies whenever it dies and `[ ]` over half-built code sends the next one to rebuild what exists or build on it blind. **Every slice is one line.** An open one carries its name, its `after:`, its issue and a link to its criteria in `CONTRACT.md` — never the criteria themselves, because two copies come apart at the first bump. A closed one carries its date and a link to *every* log entry that backs it. **Order is build order, top to bottom**: a slice waits on every slice above it unless `after:` names what it waits on (`after: none` waits on nothing); the explicit form is what lets a coordinator run two slices at once, and absence never means parallel. An edge is more than an order: the seam it crosses has a test in the contract, and the waiting slice's close holds that test green (below).
 
-**Open grows by how many times the user was met**, so it is drained, never shortened, and the door opens at every slice close: a consumed `assumed:` goes to the log with what consumed it; an `owed:` line goes to the log with what the user saw when they looked, and never before, because a criterion whose instrument is their eyes has no other evidence to close on; an item that is work in its own right goes to the log verbatim, and `.genius/BACKLOG.md` takes a one-line seed pointing at that anchor — never straight to the backlog, because the invariant names two exits and a seed is lossy by design. A drained line leaves nothing to point from, so the section carries `[drained](<slug>.log.md#open-displaced-<date>)`, one per drain, never one overwritten by the next: the log is append-only, each drain is its own dated entry, and an overwritten link is text nobody can reach. Those links are what an emptied Open leaves behind.
+**Open grows by how many times the user was met**, so it is drained, never shortened, and the door opens at every slice close: a consumed `assumed:` goes to the log with what consumed it; an `owed:` line goes to the log with what the user saw when they looked, and never before, because a criterion whose instrument is their eyes has no other evidence to close on; an item that is work in its own right goes to the log verbatim, and `.genius/BACKLOG.md` takes a one-line seed pointing at that anchor — never straight to the backlog, because a seed is lossy by design. A drained line leaves nothing to point from, so the section carries `[drained](<slug>.log.md#open-displaced-<date>)`, one per drain, never overwritten by the next: an overwritten link is text nobody can reach.
 
-**`next:` says the exact command and is rewritten by every close it survives.** `stage:` plus the roster does not imply it: every slice done and Open still holding items gives a cold reader three different first moves. **At `stage: done` the resting shape stays** — Problem, Decision, changelog, roster — whatever a literal reading of the question says: they are what the work *was*, and `HISTORY.md` and `/reconcile` point at them expecting to find them. What close-out still routes is what a stage left lying around, never a section the template names.
+**`next:` says the exact command and is rewritten by every close it survives** — `stage:` plus the roster does not imply it. **At `stage: done` the resting shape stays** — Problem, Decision, changelog, roster — whatever a literal reading of the question says: they are what the work *was*, and `HISTORY.md` and `/reconcile` expect to find them.
 
 ## The contract
 
@@ -120,11 +113,11 @@ One block per convention a slice introduced, each naming where it came from.
 ### The option table — S2 established, S6 reads it. [source](<slug>.log.md#slice-2)
 ```
 
-**A seam names its test, and that test is a criterion at both ends of every `after:` edge that crosses it.** The slice that provides the seam turns the test green; each slice that waits on it holds the same test green in its own tree before it can close — so an edge in the roster carries evidence and not an assumption, a parallel builder's branch is verified on its way back by exactly the tests on its edges, and close-out's reviewer can spend its weight on the joints no seam test reaches. Both ends, because a builder tests what it built and the one reader who needs what the seam promised is the slice on the other side; one test both must pass is the seam's promise as an instrument, the same instrument at each end by construction. A seam no test can reach — a visual, a config — names whose eyes decide, like any criterion. And the seam's shape moves only by a version bump: a provider that reshapes its seam and its own test in one commit has broken every slice waiting on it with no line saying so.
+**A seam names its test, and that test is a criterion at both ends of every `after:` edge that crosses it.** The providing slice turns it green; each waiting slice holds the same test green in its own tree before it can close — so an edge carries evidence and not an assumption, a parallel builder's branch is verified on its way back by the tests on its edges, and close-out's reviewer spends its weight on the joints no seam test reaches. A seam no test can reach names whose eyes decide, like any criterion. The seam's shape moves only by a version bump: a provider that reshapes its seam and its own test in one commit has broken every slice waiting on it with no line saying so.
 
-**A version bump replaces the plan layer whole**, the old version going to the log; the snapshot keeps the one-line changelog. **The established layer survives the bump untouched and is never drained** — not at a bump, not at done: its blocks are exactly what binds the slices not yet built, and the log records, it does not bind. At done the contract stays whole as the version the work was verified against; distillation touches the log alone. A block's title names who established it — provenance, never a trigger for removal: evicting on provenance throws away the newest rule in the file.
+**A version bump replaces the plan layer whole**, the old version going to the log; the snapshot keeps the one-line changelog. **The established layer survives the bump untouched and is never drained** — not at a bump, not at done: its blocks are exactly what binds the slices not yet built, and the log records, it does not bind. A block's title names who established it — provenance, never a trigger for removal.
 
-Readers: `/enable` and `/tenacity`, about to build or verify against it; `/discern`, when attacking a plan that already has one. `/reconcile`, `/errata` and `/compact` only when already pointed at a work. `/genius`, resuming, and `/wonder` never open it; the snapshot's pointer is enough.
+Readers: `/enable` and `/tenacity`, about to build or verify against it; `/discern`, when attacking a plan that already has one; `/reconcile`, `/errata` and `/compact` only when already pointed at a work. `/genius` and `/wonder` never open it.
 
 ## The log
 
@@ -135,13 +128,8 @@ Append-only; created at its first entry, not before. Each entry opens with a keb
 2026-07-03 — the interview as it ran: the rounds, the answers, the wording the
 problem statement went through before the user said "yes, that's it".
 
-## discernment
-2026-07-04 — the whole battlefield: every path, every attack, the ones that
-landed and the ones the survivor walked out of.
-
 ## contract-v2
-2026-07-09 — superseded by v3 on 2026-07-12. The version as it stood, whole,
-with (appended when v3 landed) what overturned it.
+2026-07-09 — superseded by v3 on 2026-07-12. The version whole, with what overturned it.
 
 ## slice-1
 2026-07-08 — per criterion, the command and its result, one line each:
@@ -150,32 +138,28 @@ with (appended when v3 landed) what overturned it.
 ## slice-2-wip
 2026-07-12 — started. red: editor renders rule list. green: —. owed: save, validation.
 2026-07-12 — green: renders. red: save round-trips. baseline: `npm test` had 2 failures before this slice (`export.test.ts`), holding at no new failures.
-
-## reshape-s3
-2026-07-12 — S3 split into S3/S5; the discovery that forced it, and the exchange
-where the user confirmed the change.
 ```
 
-Keys are unique by construction — stages run once, versions and slices are numbered; anything else takes a short descriptive key, date-suffixed on collision. **Letters, digits and hyphens only**: prose after the key is a different anchor, and every link to it is already broken (the repair is in the edges file). An entry is written by its stage as it runs, never assembled afterwards, and corrected by appending below it, never by editing it. Entries stay behavioral — interfaces, contracts, criteria; code paths and line numbers go stale before the next session reads them. The log is never compacted, summarized or tidied in flight; at done, Tenacity distills it once, announced by a first line beginning `distilled` (`/distill` catches up work that closed without it). It is never opened to find an anchor either: `measure.py anchors <slug>` lists every key and what links it, because a session that opens the log to link one entry carries the whole log in its context to the end of the work, and pays for it on every turn after.
+Keys are unique by construction — stages run once, versions and slices are numbered; anything else takes a short descriptive key, date-suffixed on collision. **Letters, digits and hyphens only**: prose after the key is a different anchor, and every link to it is already broken (the repair is in the edges file). An entry is written by its stage as it runs, never assembled afterwards, and corrected by appending below it, never by editing it. Entries stay behavioral — interfaces, contracts, criteria; code paths and line numbers go stale before the next session reads them. The log is never compacted or tidied in flight; at done, Tenacity distills it once, announced by a first line beginning `distilled` (`/distill` catches up work that closed without it). It is never opened to find an anchor either: `measure.py anchors <slug>` lists every key and what links it, because a log opened whole stays in the session's context to the end of the work.
 
 ## The invariant
 
-The snapshot is rewritten freely under one invariant: **nothing leaves it except into the log or into `CONTRACT.md`, already anchored, with a link left where its section points.** Hold that and rewriting loses nothing, and the snapshot stays the only path anyone needs — every entry reachable from the section it backs, nothing found by convention or guessing.
+The snapshot is rewritten freely under one invariant: **nothing leaves it except into the log or into `CONTRACT.md`, already anchored, with a link left where its section points.** Hold that and rewriting loses nothing, and the snapshot stays the only path anyone needs.
 
 A collapse is routing, never a delete, and it is mechanical:
 
 1. Before a closed slice's paragraph collapses to its line: **does it hold a constraint `CONTRACT.md` does not already have?** That moves there first.
-2. Whatever the snapshot displaces is appended to the log verbatim, as a new entry keyed `<the anchor the line already links>-displaced-<date>` — `slice-1-displaced-2026-07-08`; for a section with no anchor of its own (Open, Problem), the section's name — and the displaced-from line carries that second link beside its first. The log is append-only, so displaced text lands at the end, not under the older anchor; without the second link the move breaks the promise it exists to keep.
-3. Never read the log to decide how much of the paragraph is redundant. That judgement is made at the moment a close is trying to finish, and the paragraph is usually a summary that was never in the log (measured: early entries held 57–78% of their slices' distinctive tokens). Appending costs the log length, the law it already grows by; guessing costs a fact nobody can recover.
+2. Whatever the snapshot displaces is appended to the log verbatim, as a new entry keyed `<the anchor the line already links>-displaced-<date>` (for a section with no anchor of its own, the section's name), and the displaced-from line carries that second link beside its first — without it the move breaks the promise it exists to keep.
+3. Never read the log to decide how much of the paragraph is redundant: the paragraph is usually a summary that was never in the log. Appending costs the log length; guessing costs a fact nobody can recover.
 
 Compaction displaces at the moment of the action that displaces — the slice close, the bump — never as a filing sweep someone must remember.
 
 ## Links
 
-- **Inside a work's folder, links are relative to that folder**: `CONTRACT.md`, `<slug>.log.md#anchor`, `proto-a.html` — never `.genius/<slug>/…`. A root-relative path breaks the moment the folder moves, and two bases in one file are worse than either, because a reader cannot tell which one a link used.
-- **The files at `.genius/` link relative to `.genius/`**, one level above a work's folder: `<slug>/<slug>.md`, `<slug>/<slug>.log.md#anchor`.
+- **Inside a work's folder, links are relative to that folder**: `CONTRACT.md`, `<slug>.log.md#anchor`, `proto-a.html` — never `.genius/<slug>/…`. A root-relative path breaks the moment the folder moves, and two bases in one file are worse than either.
+- **The files at `.genius/` link relative to `.genius/`**: `<slug>/<slug>.md`, `<slug>/<slug>.log.md#anchor`.
 
 ## Also
 
 - Short, never stripped: the `record-prose` skill holds the sentence discipline. The ceiling never buys itself a shortened kill-reason — only a line that moved to where it belongs.
-- Work that ran `/architect` or `/designer` keeps the confirmed design as a snapshot section and its study as a log entry. The design's own artifact lives in the folder, named by the section that points at it; the committed language still lands in the project's `DESIGN.md`, and the committed architecture in its `ARCHITECTURE.md`.
+- Work that ran `/architect` or `/designer` keeps the confirmed design as a snapshot section and its study as a log entry; the committed language lands in the project's `DESIGN.md`, the architecture in `ARCHITECTURE.md`.
