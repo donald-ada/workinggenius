@@ -20,7 +20,7 @@ The workflow runs on defaults (`.genius/` for work files, verify commands discov
 - **`DESIGN.md` — the visual language.** Never scaffolded here: it is the *output* of the `/designer` conversation, and a template written without it is the model-default aesthetic it exists to prevent. Ask one question — does this project have an interface someone will see? — and the answer decides whether the pointer carries the DESIGN.md line.
 - **`ARCHITECTURE.md` — the committed architecture.** The same rule: the *output* of `/architect`, never scaffolded. Where one exists, the pointer says to read it before designing across its boundaries; where the project is greenfield, the pointer routes to `/architect` first.
 
-Three settings, and it stays three: configuration is for what a session must know and cannot infer from the repo. Preferences — how deep to interview, which style you like — are said in plain words when they matter, not switches.
+Three settings, and it stays three: configuration is for what a session must know and cannot infer from the repo. Preferences are said in plain words when they matter, not switches.
 
 ## Where the pointer goes
 

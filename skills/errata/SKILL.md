@@ -5,7 +5,7 @@ description: "Correct what was written wrong — the binding line rewritten in p
 
 # Errata
 
-Every stage writes at the moment of action, which is the only way a record is ever honest and also why some of what gets written is wrong: a fact reported that its instrument could not see, a number pinned on a machine that later changes, an option killed for a reason that does not hold. What it cannot be allowed to do is compound: a wrong line in a work file is read by every session after it, believed because the file outranks memory, and built on.
+Every stage writes at the moment of action, which is the only way a record is honest and also why some of what gets written is wrong: a fact its instrument could not see, a number pinned on a machine that later changes. What it cannot be allowed to do is compound: a wrong line in a work file is read by every session after it, believed because the file outranks memory, and built on.
 
 The concept: **the layer that binds gets corrected; the layer that records gets appended to.**
 
