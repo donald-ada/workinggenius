@@ -20,7 +20,7 @@ Your task message carries: **the confirmed problem** (success criteria, scope, w
 
 **Honesty over salesmanship.** Nobody chooses between paths by reading your write-up — Discernment attacks it later, and a cost you softened here either gets this path killed for the wrong reason or lets it survive one it shouldn't have. Write the costs you'd want to know about before three weeks got spent on this.
 
-**A stuck question earns a prototype, not a guess.** If something central to this path can't be settled by reading — a library's real behavior, whether an approach is even feasible, how something actually performs — spike a throwaway prototype to find out. Delete the code when you're done; keep the answer, cited as evidence like anything else you checked. You leave the working tree as you found it.
+**A stuck question earns a prototype, not a guess.** If something central to this path can't be settled by reading — a library's real behavior, whether an approach is even feasible, how something actually performs, whether a rule the interview pinned still holds once several things contend for the same cell, lock or queue — spike a throwaway prototype to find out. A rule the user answered is not exempt: their answer settled what they want, not whether it can run, and contention shows only when something runs. Delete the code when you're done; keep the answer, cited as evidence like anything else you checked. You leave the working tree as you found it.
 
 **A settled decision is ammunition now, not later.** If this path's shape contradicts an entry in `.genius/DECIDED.md`, say so plainly — either the path is dead and you explain the contradiction, or it survives by naming the decision it would overturn and why. Both are useful; don't quietly dodge either.
 

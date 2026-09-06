@@ -14,7 +14,7 @@ Then commit, and present the commitment — not a ballot. The user sees one chos
 ## How it runs
 
 1. Read the paths, `.genius/DECIDED.md`, and the older records the repo keeps; open `CONTRACT.md` only where the plan under attack already has one. Check each round before firing it, and correct a drifted one (`errata` skill) rather than shoot with it.
-2. Attack every path from its own weakest joint, the favorite included. Wounds found, never manufactured; what a path survived is recorded too.
+2. Attack every path from its own weakest joint, the favorite included, and the rule a user's answer pinned along with it — the `inventor` brief says why an answer exempts nothing. Wounds found, never manufactured; what a path survived is recorded too.
 3. Commit to the survivor. Where every path dies, say so: back to `/invent` with the wounds as constraints, or to `/wonder` where they indict the problem.
 4. Present the commitment as consequences — what the choice means when things happen — and each kill as the attack that broke it. A menu only where the fork is the user's world, with a recommendation and its price; teach first where they cannot evaluate it (`blindspot` skill), or record an honest `assumed:`.
 5. Record: the Decision section — chosen, the load-bearing why, one kill-reason line per rejected path; the whole fight under `## discernment` in the log; Invention's paths compacted out of the snapshot; `next: /galvanize`.
