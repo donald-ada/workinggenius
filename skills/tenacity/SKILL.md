@@ -6,7 +6,7 @@ hooks:
   Stop:
     - hooks:
         - type: command
-          command: python3 "${CLAUDE_PLUGIN_ROOT}/skills/genius-file/stop-judge.py"
+          command: python3 "${PLUGIN_ROOT:-$CLAUDE_PLUGIN_ROOT}/skills/genius-file/stop-judge.py"
           timeout: 90
 ---
 
