@@ -1,7 +1,7 @@
-import type { On } from 'claude-code'
+import type { On, SessionMessage } from 'claude-code'
 import { describe, expect, test, tier } from 'claude-code/testing'
 
-import { conditionOf, hasRunningTask, isInBuild, reasonOf } from '../hooks/verdict'
+import { compactNoteOf, conditionOf, hasRunningTask, isInBuild, isInFlight, reasonOf } from '../hooks/verdict'
 
 tier('user')
 
@@ -25,6 +25,8 @@ const STATUS_IN_BUILD = [
 const STATUS_IDLE = STATUS_IN_BUILD.replace('stage: enablement', 'stage: invention')
 
 const STALL = 'Slice 1 closed. Next I will dispatch slice 2 to a builder.'
+/** The one message a compaction leaves at least. */
+const ONE_MESSAGE: SessionMessage = { role: 'user', text: 'Build slice 2.', toolUses: [] }
 const BLOCK_REASON = 'Dispatching is doing: the step you announced is yours to take now.'
 
 /** The world beneath the judge, answered from memory: the conditions file, the instrument, the model. */
@@ -90,6 +92,16 @@ describe('verdict', () => {
     expect(hasRunningTask([{ type: 'subagent' }])).toBe(true)
     expect(hasRunningTask([{ type: 'shell' }])).toBe(false)
     expect(hasRunningTask(undefined)).toBe(false)
+  })
+
+  test('work in flight is read off the status line, and the compaction note carries the status verbatim', async () => {
+    expect(isInFlight(STATUS_IN_BUILD)).toBe(true)
+    expect(isInFlight(STATUS_IDLE)).toBe(true)
+    expect(isInFlight('work dir: .genius/ (default, nothing pinned)\nin flight: none\ndone: 2')).toBe(false)
+    expect(isInFlight('work dir: .genius/ — not present; nothing in flight, no history, no backlog')).toBe(false)
+    const note = compactNoteOf(STATUS_IN_BUILD)
+    expect(note).toContain('re-read that snapshot whole')
+    expect(note).toContain('next: /enable demo, slice 2')
   })
 })
 
@@ -187,4 +199,28 @@ describe('register', () => {
     expect(seen.classicRan).toBe(1)
     expect(seen.completions).toEqual([])
   })
+
+  test('a compaction with work in flight carries the note on its instructions, after what the person typed', async ($, on) => {
+    seat(on, {})
+    let handed: string | undefined
+    on('session.compact', ($, e) => {
+      handed = e.instructions
+      return { messages: e.messages }
+    })
+    await $.session.compact({ trigger: 'manual', instructions: 'keep the numbers', messages: [ONE_MESSAGE] })
+    expect(handed?.startsWith('keep the numbers')).toBe(true)
+    expect(handed).toContain('next: /enable demo, slice 2')
+  })
+
+  test('a compaction with nothing in flight, or no instrument, passes through as it came', async ($, on) => {
+    seat(on, { status: 'work dir: .genius/ — not present; nothing in flight, no history, no backlog' })
+    let handed: string | undefined = 'unset'
+    on('session.compact', ($, e) => {
+      handed = e.instructions
+      return { messages: e.messages }
+    })
+    await $.session.compact({ trigger: 'auto', messages: [ONE_MESSAGE] })
+    expect(handed).toBeUndefined()
+  })
 })
+

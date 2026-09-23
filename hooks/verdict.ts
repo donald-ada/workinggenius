@@ -50,3 +50,30 @@ export function isInBuild(status: string): boolean {
 export function hasRunningTask(tasks: readonly { type: string }[] | undefined): boolean {
   return (tasks ?? []).some(task => task.type === 'subagent' || task.type === 'workflow')
 }
+
+/**
+ * Whether the instrument's `status` output lists any work in flight: the
+ * compaction note rides only where there is a snapshot to re-read.
+ */
+export function isInFlight(status: string): boolean {
+  const m = status.match(/^in flight \((\d+)\):/m)
+  return m !== null && Number(m[1]) > 0
+}
+
+/**
+ * The note appended to a compaction's instructions where work is in flight:
+ * what the summary must keep, and the instrument's own status verbatim so
+ * the slugs and `next:` commands survive as written. No parsing, no decision.
+ */
+export function compactNoteOf(status: string): string {
+  return [
+    'This session is working on a piece of work tracked in Working Genius work files. Keep in the summary:',
+    'the work\'s slug, its stage, its exact `next:` command, and the paths of its snapshot',
+    '(`<work dir>/<slug>/<slug>.md`) and of the `CONTRACT.md` beside it. The first act after this',
+    'compaction is to re-read that snapshot whole: the file outranks this summary. The instrument\'s',
+    'status as compaction began:',
+    '',
+    status.trim(),
+  ].join('\n')
+}
+

@@ -1,4 +1,4 @@
 {
-  "description": "The two judges as a function hook, where function hooks are on: installed with the plugin but armed only once skill.prompt sees /enable or /tenacity in this session, never by installation; classic.Stop and classic.SubagentStop judged by the session's own model on the turn's last message alone, with every failure of the judge's own allowing the stop and handing it to the classic command hook beneath",
+  "description": "Where function hooks are on: the two judges, installed with the plugin but armed only once skill.prompt sees /enable or /tenacity in this session, never by installation — classic.Stop and classic.SubagentStop judged by the session's own model on the turn's last message alone, every failure of the judge's own allowing the stop and handing it to the classic command hook beneath; a session.compact hook that, with work in flight, appends the work-file note and the instrument's status to the compaction instructions; and a skill.prompt line per preloaded discipline skill, the measurement of whether a preload reaches a spawned agent",
   "modules": ["./register.ts"]
 }

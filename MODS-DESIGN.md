@@ -1,6 +1,6 @@
 # 用 Claude Mods 升级 Working Genius — 设计稿
 
-状态：第一步（judge 迁移）已落地并实测，见 §7；第二、三步未动。写于 2026-09-23，对照 Claude Code 2.1.280 与 `anthropics/claude-code` 仓库 `mods/` 目录（类型声明由 2.1.277 生成）。本文所有"已测"均为本日在本仓库副本上的一手实测，命令与最小复现件见附录 A。
+状态：第一步（judge 迁移）与第二步（preload 测量、压缩注释）已落地并实测，见 §7；第三步未动。写于 2026-09-23，对照 Claude Code 2.1.280 与 `anthropics/claude-code` 仓库 `mods/` 目录（类型声明由 2.1.277 生成）。本文所有"已测"均为本日在本仓库副本上的一手实测，命令与最小复现件见附录 A。
 
 ## 0. 一句话结论
 
@@ -266,4 +266,12 @@ export const register: Register = (on) => {
 | 双判 | 日志只有 `[hook]` 行，没有 `stop-judge.py` 的行：模块不经 `next` 直接作答时，其下的 settings hook 不运行。模块自身失败时才 `next(e)` 交给 classic judge |
 
 设计里的一处修正：`hooks/register.ts` 在插件根的 `hooks/`，所以根目录是 `new URL('..', import.meta.url)`，不是草案里的 `'../..'`。
+
+**第二步（同日）。** `session.compact` hook：instrument 的 status 显示有工作在飞时，把"保留 slug、stage、`next:`、快照与 `CONTRACT.md` 路径，压缩后先整读快照"的注释连同 status 原文追加到压缩指令；`skill.prompt` 对三个纪律 skill 各记一行日志，作为 preload 的测量仪。3.2 里"再保"的 `agent.spawn` hook **不需要做**：测量给出的答案是 preload 到达了。
+
+| 门槛 | 结果 |
+|---|---|
+| builder spawn 的 preload | 一次 `Agent(subagent_type: workinggenius:builder)`，日志出现 `skill.prompt workinggenius:genius-file`、`record-prose`、`decision-record` 三行：三个 preload 都在子代理处展开。第一次只见一行，原因是日志函数并发读写覆盖，改为串行写后三行齐全——测量仪先于结论被修正 |
+| `/compact` 后的摘要 | 一轮对话后 `claude -p --continue "/compact keep the numbers"`：日志 `session.compact manual: the work-file note rides the instructions`；摘要末尾出现 "Working Genius Metadata (preserved for re-entry)" 块，含 work dir、slug、stage、contract、`next: /enable demo, slice 2`、快照路径，"Optional Next Step" 也写成了那条命令 |
+| kit | 15/15；`tsc` 通过；validate 通过 |
 
