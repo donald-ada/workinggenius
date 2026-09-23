@@ -5,6 +5,7 @@ git init -q .
 git config user.email demo@example.com
 git config user.name demo
 mkdir -p .genius/demo tests
+: > tests/__init__.py   # unittest's discover with -s tests -t . needs the package on Python 3.11; without it the pinned command fails before any test runs
 cat > greet.py <<'PY'
 """Greetings. Slice 1 gave hello(); slice 2 adds greet(name)."""
 

@@ -8,5 +8,5 @@ context:
 execution:
   max_turns: 40
   timeout_seconds: 900
-  allowed_tools: [Read, Glob, Grep, Write, Edit, Bash, Skill]
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Bash, Skill, Agent]   # Agent: the enable skill spawns the reviewer before the closing commit
   prompt: "The piece of work `demo` is tracked under .genius/ and stands at its enablement stage; its snapshot names slice 2 as next. Build slice 2."

@@ -296,5 +296,7 @@ export const register: Register = (on) => {
 | no-hijack | haiku | 1.0 | 无 `.genius/`、无阶段 skill、任务照做 |
 | nothing-in-flight | sonnet | 1.0 | `genius-file` 触发，答"没有在飞"，给出 `/genius <idea>` 或 `/wonder`。haiku 下 skill 根本不触发（0 次），是小模型触发率的事实 |
 | genius-starts-wonder | sonnet | 1.0 | `wonder` 触发，分轮提问带建议，不写代码 |
-| enable-red-before-green | sonnet | 0.57 | `enable` 触发；测试先写先跑再改实现（Write@16、Bash@11 都先于 Edit@17），套件跑了两次；但日志无 `## slice-2`，roster 的 S2 未勾，hand-back 无逐条证据。纪律成立，close 没落地。这是套件抓到的第一个发现；手动复现的结果另记 |
+| enable-red-before-green | sonnet | 0.57 | `enable` 触发；测试先写、先跑、再改实现（Write@15、Bash@7 先于 Edit@16）。日志无 `## slice-2`、S2 未勾、hand-back 无证据——原因见下：是 runner，不是 skill |
+
+**enable 用例 0.57 的原因（`--keep-temp` 留下 trace 后查明）。** eval 的 sandbox 在本容器里让 Bash 完全失效：每次调用，连 `true` 都返回 `apply-seccomp: write /proc/self/uid_map: Operation not permitted`（bubblewrap 在这个以 root 运行的受限容器里建不了 user namespace）。模型在死掉的 shell 下做的事恰恰是 skill 要求的：先写 `tests/test_greet.py`，再改 `greet.py`，把 S2 标成 `[~]`，三条准则以 `owed:` 挂在 Open，请用户自己跑那两条命令再关。所以 0.57 是 harness 的分数，不是 skill 的。同一容器里不经 eval sandbox 的手动运行（`claude -p`，sonnet，40 轮，$0.90）把 slice 完整关掉了：脏基线（脚手架的 `tests/` 缺 `__init__.py`，Python 3.11 下 pinned 的 verify 命令直接失败——脚手架已修）、红 → 绿、reviewer 子代理零发现、`## slice-2-wip` 与 `## slice-2` 两条日志、S2 勾上、一个 commit。**结论：这个用例要在 bubblewrap 能建 user namespace 的机器上跑（普通开发机可以）；本容器只能跑不需要 shell 的用例。** 另外两个 runner 事实不变：斜杠命令不是 prompt；`--keep-temp` 是看 trace 的唯一办法（默认删）。
 
