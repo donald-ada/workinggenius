@@ -77,3 +77,54 @@ export function compactNoteOf(status: string): string {
   ].join('\n')
 }
 
+/** One work in flight as the instrument's `status` lists it: the line's own format, never a work file's. */
+export type InFlight = { slug: string; stage: string; next: string }
+
+/**
+ * The works in flight, read off the instrument's `status` lines
+ * (`- <slug> — stage: <stage> · contract: <v> · next: <command> · snapshot …`).
+ */
+export function inFlightOf(status: string): InFlight[] {
+  const works: InFlight[] = []
+  for (const line of status.split('\n')) {
+    const m = line.match(/^- (\S+) — stage: (\S+) · contract: \S+ · next: (.*?) · snapshot /)
+    if (m) works.push({ slug: m[1] as string, stage: m[2] as string, next: m[3] as string })
+  }
+  return works
+}
+
+/**
+ * The plugin's status line under the prompt: one work's slug, stage and
+ * `next:` as the snapshot states it; several works as a count pointing at
+ * `/genius`; none as no line. It shows, never suggests: the command is the
+ * file's own line, the same one `/genius` prints.
+ */
+export function statusLineOf(status: string): string | undefined {
+  const works = inFlightOf(status)
+  const one = works[0]
+  if (one === undefined) return undefined
+  if (works.length === 1) return `Working Genius · ${one.slug} · ${one.stage} · next: ${one.next}`
+  return `Working Genius · ${works.length} in flight · /genius`
+}
+
+/**
+ * The slug a written path names as a snapshot — the format puts it at
+ * `<work dir>/<slug>/<slug>.md`, the file named for its folder — else
+ * undefined. A path of that shape outside the work dir costs one
+ * `measure.py snapshots` run that lists no such slug.
+ */
+export function snapshotSlugOf(path: string): string | undefined {
+  const m = path.replace(/\\/g, '/').match(/(?:^|\/)([^/]+)\/([^/]+)\.md$/)
+  return m !== null && m[1] === m[2] ? m[1] : undefined
+}
+
+/**
+ * The instrument's `snapshots` line for a slug, framed as the context that
+ * follows a write of that snapshot: the count, at the moment of the action,
+ * and never a decision.
+ */
+export function snapshotLineOf(snapshots: string, slug: string): string | undefined {
+  const line = snapshots.split('\n').find(l => l.startsWith(`- ${slug} (`))
+  return line === undefined ? undefined : `Working Genius instrument, after this write: ${line.slice(2)}`
+}
+

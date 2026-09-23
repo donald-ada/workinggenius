@@ -1,7 +1,17 @@
 import type { On, SessionMessage } from 'claude-code'
 import { describe, expect, test, tier } from 'claude-code/testing'
 
-import { compactNoteOf, conditionOf, hasRunningTask, isInBuild, isInFlight, reasonOf } from '../hooks/verdict'
+import {
+  compactNoteOf,
+  conditionOf,
+  hasRunningTask,
+  isInBuild,
+  isInFlight,
+  reasonOf,
+  snapshotLineOf,
+  snapshotSlugOf,
+  statusLineOf,
+} from '../hooks/verdict'
 
 tier('user')
 
@@ -24,6 +34,18 @@ const STATUS_IN_BUILD = [
 
 const STATUS_IDLE = STATUS_IN_BUILD.replace('stage: enablement', 'stage: invention')
 
+const STATUS_TWO = STATUS_IN_BUILD.replace('in flight (1):', 'in flight (2):').replace(
+  'done: 0',
+  '- other — stage: wonder · contract: none · next: /wonder · snapshot 900 chars, 900 roster excluded\ndone: 0',
+)
+
+const STATUS_NONE = 'work dir: .genius/ (default, nothing pinned)\nin flight: none\ndone: 2 (HISTORY.md: 2 lines)\nbacklog: 3 seeds, 0 past the 300-character line bound'
+
+const SNAPSHOTS = [
+  '- demo (enablement) — 6412 chars whole, 6100 roster excluded — over the ceiling ⚠ of 6000',
+  '- other (wonder) — 900 chars whole, 900 roster excluded — under the ceiling of 6000',
+].join('\n')
+
 const STALL = 'Slice 1 closed. Next I will dispatch slice 2 to a builder.'
 /** The one message a compaction leaves at least. */
 const ONE_MESSAGE: SessionMessage = { role: 'user', text: 'Build slice 2.', toolUses: [] }
@@ -33,17 +55,22 @@ const BLOCK_REASON = 'Dispatching is doing: the step you announced is yours to t
 function seat(
   on: On,
   world: { status?: string; verdict?: string; failing?: 'process' | 'model' },
-): { completions: string[]; logged: string[]; classicRan: number } {
-  const seen = { completions: [] as string[], logged: [] as string[], classicRan: 0 }
+): { completions: string[]; logged: string[]; status: (string | undefined)[]; classicRan: number } {
+  const seen = { completions: [] as string[], logged: [] as string[], status: [] as (string | undefined)[], classicRan: 0 }
   on('env.get', () => ({ value: undefined }))
   on('fs.read', () => ({ value: CONDITIONS }))
   on('ui.log', ($, e) => {
     seen.logged.push(e.text)
     return { value: undefined }
   })
-  on('process.run', () => {
+  on('process.run', ($, e) => {
     if (world.failing === 'process') throw new Error('no python here')
-    return { value: { exitCode: 0, stdout: world.status ?? STATUS_IN_BUILD, stderr: '' } }
+    const isSnapshots = e.argv.includes('snapshots')
+    return { value: { exitCode: 0, stdout: isSnapshots ? SNAPSHOTS : (world.status ?? STATUS_IN_BUILD), stderr: '' } }
+  })
+  on('ui.status', ($, e) => {
+    seen.status.push(e.text)
+    return { value: undefined }
   })
   on('model.complete', ($, e) => {
     if (world.failing === 'model') throw new Error('api down')
@@ -102,6 +129,22 @@ describe('verdict', () => {
     const note = compactNoteOf(STATUS_IN_BUILD)
     expect(note).toContain('re-read that snapshot whole')
     expect(note).toContain('next: /enable demo, slice 2')
+  })
+
+  test('the status line shows one work as its slug, stage and next, several as a count, none as nothing', async () => {
+    expect(statusLineOf(STATUS_IN_BUILD)).toBe('Working Genius · demo · enablement · next: /enable demo, slice 2')
+    expect(statusLineOf(STATUS_TWO)).toBe('Working Genius · 2 in flight · /genius')
+    expect(statusLineOf(STATUS_NONE)).toBeUndefined()
+  })
+
+  test('a snapshot is the file named for its folder, and its count is the instrument\'s line', async () => {
+    expect(snapshotSlugOf('/w/.genius/demo/demo.md')).toBe('demo')
+    expect(snapshotSlugOf('C:\\w\\.genius\\demo\\demo.md')).toBe('demo')
+    expect(snapshotSlugOf('/w/.genius/demo/demo.log.md')).toBeUndefined()
+    expect(snapshotSlugOf('/w/.genius/demo/CONTRACT.md')).toBeUndefined()
+    expect(snapshotSlugOf('/w/README.md')).toBeUndefined()
+    expect(snapshotLineOf(SNAPSHOTS, 'demo')).toBe('Working Genius instrument, after this write: demo (enablement) — 6412 chars whole, 6100 roster excluded — over the ceiling ⚠ of 6000')
+    expect(snapshotLineOf(SNAPSHOTS, 'nope')).toBeUndefined()
   })
 })
 
@@ -221,6 +264,38 @@ describe('register', () => {
     })
     await $.session.compact({ trigger: 'auto', messages: [ONE_MESSAGE] })
     expect(handed).toBeUndefined()
+  })
+
+  test('work in flight at the start pins the status line, and each finished turn refreshes it', async ($, on) => {
+    const seen = seat(on, {})
+    on('session.start', ($, e) => ({ cwd: e.cwd }))
+    on('turn.complete', () => ({ text: 'done' }))
+    await $.session.start({ cwd: '/w', surface: 'terminal', isInteractive: true })
+    expect(seen.status).toEqual(['Working Genius · demo · enablement · next: /enable demo, slice 2'])
+    await $.turn.complete({ reason: 'answer', turnId: 't1', durationMs: 1, answer: 'done' } as never)
+    expect(seen.status.length).toBe(2)
+  })
+
+  test('nothing in flight at the start: no status line, and a turn runs no instrument until the flow is entered', async ($, on) => {
+    const seen = seat(on, { status: STATUS_NONE })
+    on('session.start', ($, e) => ({ cwd: e.cwd }))
+    on('turn.complete', () => ({ text: 'done' }))
+    on('skill.prompt', ($, e) => ({ text: e.text }))
+    await $.session.start({ cwd: '/w', surface: 'terminal', isInteractive: true })
+    await $.turn.complete({ reason: 'answer', turnId: 't1', durationMs: 1, answer: 'done' } as never)
+    expect(seen.status).toEqual([])
+    await $.skill.prompt({ skill: 'workinggenius:genius', text: 'the map' })
+    await $.turn.complete({ reason: 'answer', turnId: 't2', durationMs: 1, answer: 'done' } as never)
+    expect(seen.status).toEqual([undefined])
+  })
+
+  test('a write that lands on a snapshot carries the instrument\'s count as context; other writes do not', async ($, on) => {
+    seat(on, {})
+    on('tool.call', () => ({ result: { type: 'text', file: { filePath: 'x', content: '' } } as never }))
+    const r = await $.tool.call({ tool: 'Write', file_path: '/w/.genius/demo/demo.md', content: '# Demo' })
+    expect(r.context?.[0]).toContain('6100 roster excluded — over the ceiling')
+    const other = await $.tool.call({ tool: 'Write', file_path: '/w/src/app.ts', content: 'x' })
+    expect(other.context).toBeUndefined()
   })
 })
 

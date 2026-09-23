@@ -1,6 +1,6 @@
 # 用 Claude Mods 升级 Working Genius — 设计稿
 
-状态：第一步（judge 迁移）与第二步（preload 测量、压缩注释）已落地并实测，见 §7；第三步未动。写于 2026-09-23，对照 Claude Code 2.1.280 与 `anthropics/claude-code` 仓库 `mods/` 目录（类型声明由 2.1.277 生成）。本文所有"已测"均为本日在本仓库副本上的一手实测，命令与最小复现件见附录 A。
+状态：三步都已落地并实测，见 §7；第三步只做了状态行与写时报数，pane 未做。写于 2026-09-23，对照 Claude Code 2.1.280 与 `anthropics/claude-code` 仓库 `mods/` 目录（类型声明由 2.1.277 生成）。本文所有"已测"均为本日在本仓库副本上的一手实测，命令与最小复现件见附录 A。
 
 ## 0. 一句话结论
 
@@ -274,4 +274,14 @@ export const register: Register = (on) => {
 | builder spawn 的 preload | 一次 `Agent(subagent_type: workinggenius:builder)`，日志出现 `skill.prompt workinggenius:genius-file`、`record-prose`、`decision-record` 三行：三个 preload 都在子代理处展开。第一次只见一行，原因是日志函数并发读写覆盖，改为串行写后三行齐全——测量仪先于结论被修正 |
 | `/compact` 后的摘要 | 一轮对话后 `claude -p --continue "/compact keep the numbers"`：日志 `session.compact manual: the work-file note rides the instructions`；摘要末尾出现 "Working Genius Metadata (preserved for re-entry)" 块，含 work dir、slug、stage、contract、`next: /enable demo, slice 2`、快照路径，"Optional Next Step" 也写成了那条命令 |
 | kit | 15/15；`tsc` 通过；validate 通过 |
+
+**第三步（同日，最小切片）。** `$.ui.status` 状态行：一件在飞 → `Working Genius · <slug> · <stage> · next: <command>`，多件 → `N in flight · /genius`，没有 → 清空；`session.start` 时有在飞工作则钉上，之后每个 `turn.complete` 刷新，但只在本会话"进入过 flow"（展开过任一 `workinggenius:` skill，或启动时已有在飞工作）之后——没进入过的会话既不跑 instrument 也不显示。`tool.call` 命中 `Write`/`Edit` 且路径形如 `<slug>/<slug>.md` 时，把 `measure.py snapshots` 里该 slug 的那一行作为 `context` 附在工具结果之后。**pane 没做**：三步里代码最多，且它的价值（状态上屏、模型上下文零成本）只能在交互式终端里量；留作下一件工作。
+
+| 门槛 | 结果 |
+|---|---|
+| kit | 20/20（状态行的三种形态、路径→slug、instrument 行→context、启动钉行与逐轮刷新、未进入 flow 的会话零 instrument 调用）；`tsc` 通过；validate 通过 |
+| 写快照后的报数 | 临时项目里让 haiku 用 Edit 改 `demo.md`：会话 transcript 里工具结果之后出现附件 `<system-reminder>\ntool.call hook additional context: Working Genius instrument, after this write: demo (enablement) — 531 chars whole, 393 roster excluded — under the ceiling of 6000</system-reminder>`。`--output-format stream-json` 不显示附件，第一次因此误以为没到 |
+| 状态行的显示 | 未测：无头会话没有 surface。kit 证明了调用发生；在终端里看到它是下一次交互式测量 |
+
+**未测清单（接第 2 节）。** 交互式终端下的拦停与状态行；managed 组织机器；Desktop 上 `process.run` 缺席时的降级（代码路径是 catch 后不显示、不判）。
 

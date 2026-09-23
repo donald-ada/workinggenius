@@ -1,6 +1,16 @@
 import type { EngineInterface, Register } from 'claude-code'
 
-import { compactNoteOf, conditionOf, hasRunningTask, isInBuild, isInFlight, reasonOf } from './verdict'
+import {
+  compactNoteOf,
+  conditionOf,
+  hasRunningTask,
+  isInBuild,
+  isInFlight,
+  reasonOf,
+  snapshotLineOf,
+  snapshotSlugOf,
+  statusLineOf,
+} from './verdict'
 
 /** The plugin's directory: this module is hooks/register.ts, so one level up. */
 // import.meta.url is the module's own file at run time (measured on 2.1.280); the declarations do not type it.
@@ -20,6 +30,13 @@ const PRELOADS = /^workinggenius:(genius-file|record-prose|decision-record)$/
  * no judge, exactly as the classic hooks in those skills' frontmatter behave.
  */
 let armed = false
+/**
+ * Whether the flow was entered in this session — a workinggenius skill
+ * expanded, or work was in flight when the session started — which is what
+ * the status line waits for: a session that never entered it gets no line
+ * and runs no instrument at its turns.
+ */
+let entered = false
 let logPath: string | undefined
 /** Log writes queue behind one another: three preloads expand at once, and a read-modify-write of the file would keep one line of three. */
 let writing: Promise<void> = Promise.resolve()
@@ -58,6 +75,27 @@ async function statusOf($: EngineInterface): Promise<string | undefined> {
   return r.exitCode === 0 ? r.stdout : undefined
 }
 
+/** The status line under the prompt, from the instrument's status: set, replaced, or cleared when nothing is in flight. */
+async function refreshStatusLine($: EngineInterface): Promise<void> {
+  const status = await statusOf($)
+  $.ui.status(status === undefined ? undefined : statusLineOf(status))
+}
+
+/**
+ * After a write that landed on a snapshot, the instrument's count of it as
+ * context beneath the tool's result: the number at the moment of the action
+ * (the format's ceiling is checked there), read from `measure.py snapshots`.
+ */
+async function withSnapshotCount($: EngineInterface, filePath: string, context: readonly string[] | undefined): Promise<readonly string[] | undefined> {
+  const slug = snapshotSlugOf(filePath)
+  if (slug === undefined) return context
+  const r = await $.process.run(['python3', MEASURE, 'snapshots'], { timeoutMs: 10_000 })
+  const line = r.exitCode === 0 ? snapshotLineOf(r.stdout, slug) : undefined
+  if (line === undefined) return context
+  entered = true
+  return [...(context ?? []), line]
+}
+
 /** The instrument, not a parser: does `measure.py status` list a work at enablement or tenacity. */
 async function isWorkInBuild($: EngineInterface): Promise<boolean> {
   const status = await statusOf($)
@@ -86,7 +124,53 @@ async function judge($: EngineInterface, key: string, message: string): Promise<
 }
 
 export const register: Register = on => {
+  on('session.start', async ($, e, next) => {
+    try {
+      const status = await statusOf($)
+      if (status !== undefined && isInFlight(status)) {
+        entered = true
+        $.ui.status(statusLineOf(status))
+      }
+    } catch {
+      // no instrument here (no python, a surface without process.run): no line, nothing else changes
+    }
+    return next(e)
+  })
+
+  on('turn.complete', async ($, e, next) => {
+    const r = await next(e)
+    if (entered) {
+      try {
+        await refreshStatusLine($)
+      } catch {
+        // as above
+      }
+    }
+    return r
+  })
+
+  on('tool.call', { tool: 'Write' }, async ($, e, next) => {
+    const r = await next(e)
+    if (e.tool !== 'Write' || r.deny !== undefined || r.isError) return r
+    try {
+      return { ...r, context: await withSnapshotCount($, e.file_path, r.context) }
+    } catch {
+      return r
+    }
+  })
+
+  on('tool.call', { tool: 'Edit' }, async ($, e, next) => {
+    const r = await next(e)
+    if (e.tool !== 'Edit' || r.deny !== undefined || r.isError) return r
+    try {
+      return { ...r, context: await withSnapshotCount($, e.file_path, r.context) }
+    } catch {
+      return r
+    }
+  })
+
   on('skill.prompt', async ($, e, next) => {
+    if (e.skill.startsWith('workinggenius:')) entered = true
     if (ARMING.test(e.skill)) {
       if (!armed) await log($, `armed by ${e.skill}`)
       armed = true
