@@ -15,7 +15,9 @@ timeout, unparsable output — allows the stop: a judge that fails closed would
 hold a session hostage to its own plumbing.
 
 The script reads one frontmatter field, `stage:`, to know whether to ask; the
-judgment is the model's, and no line is written to any file.
+judgment is the model's, and no line is written to any file. The two conditions
+live in judge-conditions.md beside this file, shared with the function hook
+in hooks/register.ts, so the judge text has one home.
 """
 import json
 import os
@@ -35,25 +37,19 @@ MODEL = 'haiku'
 NESTED_TIMEOUT = 45
 MESSAGE_TAIL = 6000
 
-COORDINATOR = (
-    'A Claude Code turn is ending; the assistant is coordinating a tracked piece of work and nothing is '
-    'running in the background. Below is the final message of the turn. Decide one thing: does it announce '
-    'a step the assistant itself would take next — dispatching a slice or a builder, spawning or waiting on '
-    'a reviewer, running verification, closing a slice — and end there, asking the user nothing and reporting '
-    'no result of that step? If yes, answer {"ok": false, "reason": "Dispatching is doing: the step you '
-    'announced is yours to take now, before the turn ends — or, if it needs the user, ask them."}. If the '
-    'message asks the user something, waits on their decision, reports a close, a hand-back, a finding or an '
-    'outcome, or does not concern tracked work, answer {"ok": true}. Respond with that JSON only.'
-)
+CONDITIONS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'judge-conditions.md')
 
-BUILDER = (
-    'A builder subagent is finishing; below is what it hands back. Decide one thing: does it claim the slice '
-    'is done, built, implemented, passing or complete while carrying no line that names a command and what '
-    'it showed for its criteria? If yes, answer {"ok": false, "reason": "Hand back evidence, not a claim: per '
-    'criterion, the command and what it showed — or the stop, with what it changes and your recommendation."}. '
-    'If it hands back per-criterion command-and-result lines, or a stop — a discovery, what it changes, a '
-    'recommendation — or a named blocker it cannot work around, answer {"ok": true}. Respond with that JSON only.'
-)
+
+def condition(key):
+    """One `## <key>` section of judge-conditions.md beside this file — the conditions' one
+    home, read by this hook and by hooks/register.ts alike. Unreadable or absent: None, and
+    the stop is allowed, like every other failure of the judge's own."""
+    try:
+        body = open(CONDITIONS, encoding='utf-8').read()
+    except OSError:
+        return None
+    m = re.search(r'^## ' + re.escape(key) + r'\n(.*?)(?=^## |\Z)', body, re.S | re.M)
+    return m.group(1).strip() if m else None
 
 
 def work_in_build():
@@ -114,15 +110,19 @@ def main():
         if not work_in_build():
             log('Stop allow: no work at enablement or tenacity')
             return 0
-        condition = COORDINATOR
+        condition_key = 'coordinator'
     elif event == 'SubagentStop':
         if 'builder' not in (data.get('agent_type') or ''):
             return 0
-        condition = BUILDER
+        condition_key = 'builder'
     else:
         return 0
+    text = condition(condition_key)
+    if not text:
+        log(f'{event} allow: no condition {condition_key!r} in judge-conditions.md')
+        return 0
     try:
-        verdict = ask(condition, message[-MESSAGE_TAIL:])
+        verdict = ask(text, message[-MESSAGE_TAIL:])
     except Exception as e:
         log(f'{event} allow: judge failed ({type(e).__name__})')
         return 0

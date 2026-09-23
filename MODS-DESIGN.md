@@ -1,6 +1,6 @@
 # 用 Claude Mods 升级 Working Genius — 设计稿
 
-状态：提案，未落地。写于 2026-09-23，对照 Claude Code 2.1.280 与 `anthropics/claude-code` 仓库 `mods/` 目录（类型声明由 2.1.277 生成）。本文所有"已测"均为本日在本仓库副本上的一手实测，命令与最小复现件见附录 A。
+状态：第一步（judge 迁移）已落地并实测，见 §7；第二、三步未动。写于 2026-09-23，对照 Claude Code 2.1.280 与 `anthropics/claude-code` 仓库 `mods/` 目录（类型声明由 2.1.277 生成）。本文所有"已测"均为本日在本仓库副本上的一手实测，命令与最小复现件见附录 A。
 
 ## 0. 一句话结论
 
@@ -251,3 +251,19 @@ export const register: Register = (on) => {
 - 类型声明（2.1.277 生成）：https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts
 - What's new（Week 36/37：`/skill-doctor`、`claude plugin eval`）：https://code.claude.com/docs/en/whats-new
 - Changelog（2.1.269 `claude plugin eval`；2.1.271 agent `omitClaudeMd`；2.1.277 `AGENTS.md`、`SubagentStop` matcher 修复）：https://code.claude.com/docs/en/changelog
+
+## 7. 落地记录
+
+**第一步（2026-09-23，Claude Code 2.1.280）。** `hooks/hooks.json` + `hooks/register.ts` + `hooks/verdict.ts`（纯函数：判决解析、条件切段、在建判断、后台任务判断）、`tests/register.test.ts`（12 个 kit 用例：拦停、放行、三个免费检查、两条失败路径、builder、未布防直通、用例间模块不泄漏）、`types/claude-code.d.ts`（2.1.280 生成）、`tsconfig.json`、`skills/genius-file/judge-conditions.md`（两个条件的唯一家，`stop-judge.py` 改为读它）。门槛逐条：
+
+| 门槛 | 结果 |
+|---|---|
+| `claude plugin validate .claude-plugin/plugin.json` | 通过；`--strict` 只因根目录 `CLAUDE.md` 的既有警告而失败 |
+| `tsc -p tsconfig.json` | 通过（2.1.280 的声明已把 `model.complete` 改为返回 `ModelCompleteResult`；`import.meta.url` 未声明，代码里以断言取用） |
+| `claude plugin test .` | 12/12。2.1.280 的 kit 新增了 `$.classic.<Event>`，拦停路径可以在 kit 里测了 |
+| `/enable` 后的两轮实测 | 临时项目里一件工作处于 enablement；haiku 被要求只回复"Next I will dispatch slice 2 to a builder."。模块以 coordinator 的理由拦停 → 模型下一轮改为向用户提问 → 第二次 Stop 带 `stop_hook_active`，放行。`num_turns=2` |
+| 未输入 `/enable`/`/tenacity` 的会话 | 同一句话，judge 日志为空，一轮结束 |
+| 双判 | 日志只有 `[hook]` 行，没有 `stop-judge.py` 的行：模块不经 `next` 直接作答时，其下的 settings hook 不运行。模块自身失败时才 `next(e)` 交给 classic judge |
+
+设计里的一处修正：`hooks/register.ts` 在插件根的 `hooks/`，所以根目录是 `new URL('..', import.meta.url)`，不是草案里的 `'../..'`。
+
