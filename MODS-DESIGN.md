@@ -287,3 +287,5 @@ export const register: Register = (on) => {
 
 **pane（同日）。** `ui.render` 命中 `Pane`、id `genius-map`：每件在飞工作一个块（slug 与 stage、`next:`、快照对上限与 slice 计数），然后 done 与 backlog 计数；模块在 `session.start` 注册 `/genius-map` 命令切换显示；有在飞工作时自动打开，除非此人关过它（`$.store` 记住）；surface 放不下时撤回打开，仿 `/diff`。kit 24/24：`$.ui.mount` 挂载 pane 后找到 `demo · enablement` 与 `next: /enable demo, slice 2` 两行；命令的开/关与存储；无在飞工作不自动打开。终端里的显示仍未测（无头会话没有 surface）。
 
+**人手势检查点（同日）。** `mcp__workinggenius__confirm` 工具：进入 flow 后（展开过任一 `workinggenius:` skill，或启动时有在飞工作）才向模型声明；调用时开一个带陈述与两个按钮的 pane，只有人按了 *Yes, that's it* 或 *Not yet*、按 Esc 关掉、或十分钟无人按，工具才返回并说明是哪种；无 surface 的会话立刻返回"这里没人能按，请用文字问"。按钮的按下是 surface 的动作，模型做不到。`wonder`、`discern`、`galvanize` 各加一句"会话提供 `confirm` 工具时，yes 经它取得"，理由放在 `genius-file`。另有 `prompt.submit`：进入 flow 后，来源不是 composer/bridge 的消息（peer、coordinator、schedule、notification、sdk）带一行 context 注明来源，只陈述事实。kit 29/29：Yes/Not yet/超时/无 surface 四种结局、工具只在进入 flow 后声明一次、来源注释在进入 flow 后且非 composer 时才出现。两个裁定点的默认答案：`sdk` 一律注明来源（事实），skill 自行决定；按钮结果不写任何文件，只作为工具结果回到模型，由模型按 skill 记录。
+

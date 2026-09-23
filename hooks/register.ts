@@ -3,16 +3,18 @@ import type { EngineInterface, Register } from 'claude-code'
 import {
   compactNoteOf,
   conditionOf,
+  confirmTextOf,
   hasRunningTask,
   isInBuild,
   isInFlight,
+  originNoteOf,
   paneLinesOf,
   reasonOf,
   snapshotLineOf,
   snapshotSlugOf,
   statusLineOf,
 } from './verdict'
-import type { PaneLine } from './verdict'
+import type { ConfirmOutcome, PaneLine } from './verdict'
 
 /** The plugin's directory: this module is hooks/register.ts, so one level up. */
 // import.meta.url is the module's own file at run time (measured on 2.1.280); the declarations do not type it.
@@ -30,6 +32,16 @@ const COMMAND_DESCRIPTION =
   'Show or hide the Working Genius map beside the transcript: every piece of work in flight, its stage, its next: command, the snapshot against the ceiling, the done and backlog counts, all from the instrument and none from the model.'
 /** The person closed the pane: it stays closed at later starts until /genius-map opens it again. */
 const STORE_CLOSED = 'genius-map:closed-by-person'
+/**
+ * The confirm tool: the flow's live checkpoint as a gesture. It returns only
+ * when the person pressed a button on a surface, which a model cannot do for
+ * them, or when nobody did within the wait.
+ */
+const CONFIRM_TOOL = 'confirm'
+const CONFIRM_ID = 'wg-confirm'
+const CONFIRM_WAIT_MS = 10 * 60 * 1000
+const CONFIRM_DESCRIPTION =
+  "Ask the person at the keyboard to confirm a Working Genius checkpoint by pressing a button: the problem statement at Wonder, the consequences of the decision at Discernment, the cut at Galvanizing. Pass the statement they are confirming, written back to them in their words. Returns only once they pressed Yes or Not yet, or after ten minutes; in a session with no surface to press on it returns at once saying so, and the yes is then asked in text."
 /** The discipline skills the three agents preload: a `skill.prompt` of one is the measurement CLAUDE.md names as missing. */
 const PRELOADS = /^workinggenius:(genius-file|record-prose|decision-record)$/
 
@@ -50,6 +62,9 @@ let entered = false
 /** The instrument's last status output, what the pane draws from; undefined until it has answered. */
 let statusText: string | undefined
 let isPaneOpen = false
+let isConfirmRegistered = false
+/** The confirmation a tool call is waiting on, its statement and the settle its buttons call. */
+let pending: { statement: string; settle: (outcome: ConfirmOutcome) => void } | undefined
 let logPath: string | undefined
 /** Log writes queue behind one another: three preloads expand at once, and a read-modify-write of the file would keep one line of three. */
 let writing: Promise<void> = Promise.resolve()
@@ -109,6 +124,64 @@ async function openPane($: EngineInterface): Promise<boolean> {
   }
   isPaneOpen = true
   return true
+}
+
+/** Declares the confirm tool once the flow is entered, from the next prompt on; a session outside the flow never lists it. */
+async function ensureConfirmTool($: EngineInterface): Promise<void> {
+  if (isConfirmRegistered) return
+  isConfirmRegistered = true
+  try {
+    await $.tool.register({
+      name: CONFIRM_TOOL,
+      description: CONFIRM_DESCRIPTION,
+      inputSchema: {
+        type: 'object',
+        properties: {
+          statement: { type: 'string', description: 'What the person is confirming, written back to them in their words.' },
+        },
+        required: ['statement'],
+      },
+    })
+  } catch (err) {
+    isConfirmRegistered = false
+    await log($, `confirm tool not registered (${String(err)})`)
+  }
+}
+
+/**
+ * One confirmation: the pane with the statement and two buttons, held open
+ * until a press, a dismissal or the wait runs out; the outcome as the tool's
+ * text. Where nothing draws, it says so at once.
+ */
+async function confirm($: EngineInterface, statement: string): Promise<{ result: unknown; text: string }> {
+  const surfaces = await $.session.surfaces()
+  const surface = surfaces[0]
+  if (surface === undefined) {
+    return {
+      result: { pressed: null, reason: 'no-surface' },
+      text: 'No surface to press on in this session, so nobody can confirm by a gesture here. Ask for the yes in text; where it cannot come from the person, record it as assumed: (genius-file skill).',
+    }
+  }
+  if (pending !== undefined) {
+    return { result: { pressed: null, reason: 'busy' }, text: 'A confirmation is already waiting on the person; ask one thing at a time.' }
+  }
+  let settle: (outcome: ConfirmOutcome) => void = () => undefined
+  const pressed = new Promise<ConfirmOutcome>(resolve => {
+    settle = resolve
+  })
+  pending = { statement, settle }
+  const opened = await $.ui.open({ id: CONFIRM_ID, title: 'Confirm', focus: true, closeOnEscape: true, rows: 8 })
+  if (!opened.isPlaced) {
+    pending = undefined
+    await $.ui.close({ id: CONFIRM_ID }).catch(() => undefined)
+    return { result: { pressed: null, reason: 'not-placed' }, text: 'The surface could not place the confirmation (too narrow); ask for the yes in text.' }
+  }
+  const outcome = await Promise.race([pressed, $.clock.sleep(CONFIRM_WAIT_MS).then((): ConfirmOutcome => 'timeout')])
+  pending = undefined
+  await $.ui.close({ id: CONFIRM_ID }).catch(() => undefined)
+  const at = new Date(await $.clock.now()).toISOString()
+  await log($, `confirm ${outcome} at ${at}`)
+  return { result: { pressed: outcome, at, surface }, text: confirmTextOf(outcome, statement, at, surface) }
 }
 
 /** How each kind of map line is drawn. */
@@ -182,6 +255,7 @@ export const register: Register = on => {
       if (status !== undefined && isInFlight(status)) {
         entered = true
         $.ui.status(statusLineOf(status))
+        await ensureConfirmTool($)
         const closed = await $.store.get(STORE_CLOSED).catch(() => undefined)
         if (closed !== true) await openPane($)
       }
@@ -192,12 +266,56 @@ export const register: Register = on => {
   })
 
   on('ui.render', { component: 'Pane' }, ($, e, next) => {
+    if (e.requestId === CONFIRM_ID) {
+      const { Box, Text, Button } = $.ui.resolve(e)
+      const waiting = pending
+      return Box({
+        flexDirection: 'column',
+        gap: 1,
+        children: [
+          Text({ bold: true, children: 'Confirm this checkpoint' }),
+          Text({ wrap: 'wrap', children: waiting?.statement ?? '' }),
+          Box({
+            flexDirection: 'row',
+            gap: 2,
+            children: [
+              Button({ key: 'yes', label: "Yes, that's it", hotkey: 'y', onPress: () => waiting?.settle('yes') }),
+              Button({ key: 'no', label: 'Not yet', hotkey: 'n', onPress: () => waiting?.settle('no') }),
+            ],
+          }),
+        ],
+      })
+    }
     if (e.requestId !== PANE_ID) return next(e)
     const { Box, Text } = $.ui.resolve(e)
     return Box({
       flexDirection: 'column',
       children: paneLinesOf(statusText).map(line => Text({ ...styleOf(line), children: line.text })),
     })
+  })
+
+  on('ui.close', { id: CONFIRM_ID }, ($, e, next) => {
+    if (e.origin.kind === 'person') pending?.settle('dismissed')
+    return next(e)
+  })
+
+  on('tool.call', { tool: `mcp__workinggenius__${CONFIRM_TOOL}` }, async ($, e) => {
+    const statement = String((e as unknown as Record<string, unknown>).statement ?? '').trim()
+    if (statement === '') {
+      return { result: { pressed: null, reason: 'no-statement' }, text: 'Nothing to confirm: pass the statement the person is confirming, in their words.' }
+    }
+    try {
+      return await confirm($, statement)
+    } catch (err) {
+      pending = undefined
+      return { result: { pressed: null, reason: 'failed' }, text: `The confirmation could not be shown (${String(err)}); ask for the yes in text.` }
+    }
+  })
+
+  on('prompt.submit', ($, e, next) => {
+    const isPersons = e.origin.kind === 'composer' || e.origin.kind === 'bridge'
+    if (!entered || isPersons) return next(e)
+    return next({ ...e, context: [...(e.context ?? []), originNoteOf(e.origin.kind)] })
   })
 
   on('command.run', { command: COMMAND }, async ($, e, next) => {
@@ -254,7 +372,10 @@ export const register: Register = on => {
   })
 
   on('skill.prompt', async ($, e, next) => {
-    if (e.skill.startsWith('workinggenius:')) entered = true
+    if (e.skill.startsWith('workinggenius:')) {
+      entered = true
+      await ensureConfirmTool($)
+    }
     if (ARMING.test(e.skill)) {
       if (!armed) await log($, `armed by ${e.skill}`)
       armed = true

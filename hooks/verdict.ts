@@ -162,3 +162,29 @@ export function paneLinesOf(status: string | undefined): PaneLine[] {
   return lines
 }
 
+/**
+ * The note that rides a prompt which did not come from the person's own
+ * composer (a peer session, a schedule, a notification, an SDK host): the
+ * fact of its origin, and the rule it bears on. It states; the skill decides.
+ */
+export function originNoteOf(kind: string): string {
+  return `This message did not come from the person's composer: origin ${kind}. (Working Genius: a checkpoint's yes is theirs alone; the genius-file skill says why.)`
+}
+
+/** How a confirmation ended: the person's press, their refusal, a dismissal, or nobody within the wait. */
+export type ConfirmOutcome = 'yes' | 'no' | 'dismissed' | 'timeout'
+
+/** What the confirm tool hands back to the model for each way a confirmation can end. */
+export function confirmTextOf(outcome: ConfirmOutcome, statement: string, at: string, surface: string): string {
+  switch (outcome) {
+    case 'yes':
+      return `Confirmed by the person's press at ${at} on ${surface}: "${statement}". Record it as their yes.`
+    case 'no':
+      return `Not yet: the person pressed "Not yet" at ${at}. Ask what is wrong before writing anything as confirmed.`
+    case 'dismissed':
+      return `Dismissed without a press at ${at} (closed or Escape): not confirmed. Ask in text.`
+    default:
+      return `No press within ten minutes: not confirmed. Ask in text, or record what was assumed.`
+  }
+}
+

@@ -22,7 +22,7 @@ The concept: **confirm the problem before designing anything.** Interview the us
 1. Read the snapshot (`genius-file` skill); walk unfamiliar territory first (`blindspot` skill). Homework done now, never a question asked later.
 2. Tell the user the story you would build, and ask the first round with it: independent questions, a recommendation on each, the price where an answer forks the cost.
 3. Grow the next round from the answers. Collide terms with the glossary as they surface (`domain-glossary` skill). Name `/architect` when an architecture question surfaces; never dispatch it.
-4. Write the problem statement back to them — success observable by their own measure, scope edged — and ask for the yes. Their words, not a nod at something vague enough to nod at.
+4. Write the problem statement back to them — success observable by their own measure, scope edged — and ask for the yes, through the `confirm` tool where the session offers it (the `genius-file` skill says why). Their words, not a nod at something vague enough to nod at.
 5. Record: the Problem section in their words, the interview whole under `## wonder` in the log, every load-bearing question they chose not to answer as `assumed:` in Open, and `next:` rewritten.
 
 Then `/invent` — or recommend `/architect` first when the work is greenfield or the design itself is the risk, and `/designer` before any interface someone will see gets built. Done when the user has said "yes, that's it" to a problem statement *you* wrote back to them: success observable by their own measure, scope edged, their confirmation in the file in their words. Every load-bearing question is answered by then, or written down as `assumed:`. Until that line exists, the next stage doesn't.

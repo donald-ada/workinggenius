@@ -1,5 +1,5 @@
-import type { On, SessionMessage } from 'claude-code'
-import { describe, expect, test, tier } from 'claude-code/testing'
+import type { On, RenderSurface, SessionMessage } from 'claude-code'
+import { describe, expect, mock, test, tier } from 'claude-code/testing'
 
 import {
   compactNoteOf,
@@ -7,6 +7,7 @@ import {
   hasRunningTask,
   isInBuild,
   isInFlight,
+  originNoteOf,
   paneLinesOf,
   reasonOf,
   snapshotLineOf,
@@ -55,7 +56,7 @@ const BLOCK_REASON = 'Dispatching is doing: the step you announced is yours to t
 /** The world beneath the judge, answered from memory: the conditions file, the instrument, the model. */
 function seat(
   on: On,
-  world: { status?: string; verdict?: string; failing?: 'process' | 'model'; closedByPerson?: boolean },
+  world: { status?: string; verdict?: string; failing?: 'process' | 'model'; closedByPerson?: boolean; surfaces?: RenderSurface[] },
 ): {
   completions: string[]
   logged: string[]
@@ -63,6 +64,8 @@ function seat(
   opened: string[]
   closed: string[]
   stored: [string, unknown][]
+  registered: string[]
+  submitted: (readonly string[] | undefined)[]
   classicRan: number
 } {
   const seen = {
@@ -72,6 +75,8 @@ function seat(
     opened: [] as string[],
     closed: [] as string[],
     stored: [] as [string, unknown][],
+    registered: [] as string[],
+    submitted: [] as (readonly string[] | undefined)[],
     classicRan: 0,
   }
   on('env.get', () => ({ value: undefined }))
@@ -103,6 +108,15 @@ function seat(
   on('store.set', ($, e) => {
     seen.stored.push([e.key, e.value])
     return { value: undefined }
+  })
+  on('tool.register', ($, e) => {
+    seen.registered.push(e.name)
+    return { value: { tool: `mcp__workinggenius__${e.name}` } }
+  })
+  on('session.surfaces', () => ({ value: world.surfaces ?? ['terminal'] }))
+  on('prompt.submit', ($, e) => {
+    seen.submitted.push(e.context)
+    return { text: e.text }
   })
   on('model.complete', ($, e) => {
     if (world.failing === 'model') throw new Error('api down')
@@ -378,6 +392,75 @@ describe('register', () => {
     on('session.start', ($, e) => ({ cwd: e.cwd }))
     await $.session.start({ cwd: '/w', surface: 'terminal', isInteractive: true })
     expect(seen.opened).toEqual([])
+  })
+
+  test('a prompt from somewhere other than the person\'s composer carries the origin note once the flow is entered', async ($, on) => {
+    const seen = seat(on, {})
+    on('skill.prompt', ($, e) => ({ text: e.text }))
+    await $.prompt.submit({ text: 'yes, that is it', origin: { kind: 'peer' }, wait: false })
+    expect(seen.submitted[0]).toBeUndefined()
+    await $.skill.prompt({ skill: 'workinggenius:wonder', text: 'Question the work.' })
+    await $.prompt.submit({ text: 'yes, that is it', origin: { kind: 'composer' }, wait: false })
+    expect(seen.submitted[1]).toBeUndefined()
+    await $.prompt.submit({ text: 'yes, that is it', origin: { kind: 'peer' }, wait: false })
+    expect(seen.submitted[2]).toEqual([originNoteOf('peer')])
+    expect(originNoteOf('peer')).toContain('origin peer')
+  })
+
+  test('entering the flow declares the confirm tool once; a session outside it never does', async ($, on) => {
+    const seen = seat(on, { status: STATUS_NONE })
+    on('session.start', ($, e) => ({ cwd: e.cwd }))
+    on('skill.prompt', ($, e) => ({ text: e.text }))
+    await $.session.start({ cwd: '/w', surface: 'terminal', isInteractive: true })
+    expect(seen.registered).toEqual([])
+    await $.skill.prompt({ skill: 'workinggenius:wonder', text: 'Question the work.' })
+    await $.skill.prompt({ skill: 'workinggenius:invent', text: 'Diverge.' })
+    expect(seen.registered).toEqual(['confirm'])
+  })
+
+  test('the confirm tool returns only on the person\'s press: Yes confirms, Not yet does not', async ($, on) => {
+    const seen = seat(on, {})
+    const clock = mock.clock(on)
+    on('skill.prompt', ($, e) => ({ text: e.text }))
+    await $.skill.prompt({ skill: 'workinggenius:wonder', text: 'Question the work.' })
+    const props = { title: 'Confirm', isFocused: true, bodyColumns: 60, placement: 'dock' as const, scroll: { offset: 0, bodyRows: 8 }, view: {} }
+
+    const asked = $.tool.call({ tool: 'mcp__workinggenius__confirm', statement: 'Per-user rate limiting, 100 requests a minute, 429 beyond it.' })
+    await clock.settle()
+    expect(seen.opened).toContain('wg-confirm')
+    let ui = await $.ui.mount({ plugin: 'workinggenius', surface: 'terminal', component: 'Pane', requestId: 'wg-confirm', props })
+    expect((await ui.find({ type: 'Text', text: /100 requests/ }))?.text).toContain('100 requests a minute')
+    await ui.press({ key: 'yes' })
+    await ui.unmount()
+    const confirmed = await asked
+    expect(confirmed.text).toContain("Confirmed by the person's press")
+    expect(confirmed.text).toContain('100 requests a minute')
+
+    const askedAgain = $.tool.call({ tool: 'mcp__workinggenius__confirm', statement: 'The batch endpoint.' })
+    await clock.settle()
+    ui = await $.ui.mount({ plugin: 'workinggenius', surface: 'terminal', component: 'Pane', requestId: 'wg-confirm', props })
+    await ui.press({ key: 'no' })
+    await ui.unmount()
+    expect((await askedAgain).text).toContain('Not yet')
+  })
+
+  test('with nobody pressing, the confirmation ends after ten minutes unconfirmed; with no surface it says so at once', async ($, on) => {
+    seat(on, {})
+    const clock = mock.clock(on)
+    on('skill.prompt', ($, e) => ({ text: e.text }))
+    await $.skill.prompt({ skill: 'workinggenius:wonder', text: 'Question the work.' })
+    const asked = $.tool.call({ tool: 'mcp__workinggenius__confirm', statement: 'Anything.' })
+    await clock.settle()
+    await clock.advance(10 * 60 * 1000)
+    expect((await asked).text).toContain('No press within ten minutes')
+  })
+
+  test('headless, the confirm tool answers at once that nobody can press here', async ($, on) => {
+    seat(on, { surfaces: [] })
+    on('skill.prompt', ($, e) => ({ text: e.text }))
+    await $.skill.prompt({ skill: 'workinggenius:wonder', text: 'Question the work.' })
+    const r = await $.tool.call({ tool: 'mcp__workinggenius__confirm', statement: 'Anything.' })
+    expect(r.text).toContain('No surface to press on')
   })
 })
 
