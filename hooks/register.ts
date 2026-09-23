@@ -6,11 +6,13 @@ import {
   hasRunningTask,
   isInBuild,
   isInFlight,
+  paneLinesOf,
   reasonOf,
   snapshotLineOf,
   snapshotSlugOf,
   statusLineOf,
 } from './verdict'
+import type { PaneLine } from './verdict'
 
 /** The plugin's directory: this module is hooks/register.ts, so one level up. */
 // import.meta.url is the module's own file at run time (measured on 2.1.280); the declarations do not type it.
@@ -20,6 +22,14 @@ const CONDITIONS = `${ROOT}/skills/genius-file/judge-conditions.md`
 const MODEL = 'haiku'
 const MESSAGE_TAIL = 6000
 const ARMING = /(^|:)(enable|tenacity)$/
+/** The map pane and the command that shows or hides it: `/genius-map`. */
+const PANE_ID = 'genius-map'
+const PANE_TITLE = 'Working Genius'
+const COMMAND = 'genius-map'
+const COMMAND_DESCRIPTION =
+  'Show or hide the Working Genius map beside the transcript: every piece of work in flight, its stage, its next: command, the snapshot against the ceiling, the done and backlog counts, all from the instrument and none from the model.'
+/** The person closed the pane: it stays closed at later starts until /genius-map opens it again. */
+const STORE_CLOSED = 'genius-map:closed-by-person'
 /** The discipline skills the three agents preload: a `skill.prompt` of one is the measurement CLAUDE.md names as missing. */
 const PRELOADS = /^workinggenius:(genius-file|record-prose|decision-record)$/
 
@@ -37,6 +47,9 @@ let armed = false
  * and runs no instrument at its turns.
  */
 let entered = false
+/** The instrument's last status output, what the pane draws from; undefined until it has answered. */
+let statusText: string | undefined
+let isPaneOpen = false
 let logPath: string | undefined
 /** Log writes queue behind one another: three preloads expand at once, and a read-modify-write of the file would keep one line of three. */
 let writing: Promise<void> = Promise.resolve()
@@ -75,10 +88,42 @@ async function statusOf($: EngineInterface): Promise<string | undefined> {
   return r.exitCode === 0 ? r.stdout : undefined
 }
 
-/** The status line under the prompt, from the instrument's status: set, replaced, or cleared when nothing is in flight. */
-async function refreshStatusLine($: EngineInterface): Promise<void> {
+/**
+ * The map, refreshed from the instrument: the status line under the prompt
+ * (set, replaced, or cleared when nothing is in flight) and, while the pane
+ * is open, its drawing.
+ */
+async function refreshMap($: EngineInterface): Promise<void> {
   const status = await statusOf($)
+  statusText = status
   $.ui.status(status === undefined ? undefined : statusLineOf(status))
+  if (isPaneOpen) $.ui.invalidate('ui.render')
+}
+
+/** Opens the pane; false where the surface has no room yet (the open is withdrawn, so a later resize does not seat it unasked). */
+async function openPane($: EngineInterface): Promise<boolean> {
+  const opened = await $.ui.open({ id: PANE_ID, title: PANE_TITLE, holdToasts: true })
+  if (!opened.isPlaced) {
+    await $.ui.close({ id: PANE_ID }).catch(() => undefined)
+    return false
+  }
+  isPaneOpen = true
+  return true
+}
+
+/** How each kind of map line is drawn. */
+function styleOf(line: PaneLine): { bold?: boolean; dimColor?: boolean; wrap?: 'wrap' } {
+  switch (line.kind) {
+    case 'title':
+    case 'work':
+      return { bold: true }
+    case 'next':
+      return {}
+    case 'detail':
+      return { dimColor: true, wrap: 'wrap' }
+    default:
+      return { dimColor: true }
+  }
 }
 
 /**
@@ -93,6 +138,7 @@ async function withSnapshotCount($: EngineInterface, filePath: string, context: 
   const line = r.exitCode === 0 ? snapshotLineOf(r.stdout, slug) : undefined
   if (line === undefined) return context
   entered = true
+  if (isPaneOpen) refreshMap($).catch(() => undefined)
   return [...(context ?? []), line]
 }
 
@@ -126,14 +172,52 @@ async function judge($: EngineInterface, key: string, message: string): Promise<
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     try {
+      await $.command.register({ name: COMMAND, description: COMMAND_DESCRIPTION })
+    } catch {
+      // a session that refuses the command (another plugin's, a policy) keeps the rest
+    }
+    try {
       const status = await statusOf($)
+      statusText = status
       if (status !== undefined && isInFlight(status)) {
         entered = true
         $.ui.status(statusLineOf(status))
+        const closed = await $.store.get(STORE_CLOSED).catch(() => undefined)
+        if (closed !== true) await openPane($)
       }
     } catch {
-      // no instrument here (no python, a surface without process.run): no line, nothing else changes
+      // no instrument here (no python, a surface without process.run): no line, no pane, nothing else changes
     }
+    return next(e)
+  })
+
+  on('ui.render', { component: 'Pane' }, ($, e, next) => {
+    if (e.requestId !== PANE_ID) return next(e)
+    const { Box, Text } = $.ui.resolve(e)
+    return Box({
+      flexDirection: 'column',
+      children: paneLinesOf(statusText).map(line => Text({ ...styleOf(line), children: line.text })),
+    })
+  })
+
+  on('command.run', { command: COMMAND }, async ($, e, next) => {
+    if (e.command !== COMMAND) return next(e)
+    if (isPaneOpen) {
+      await $.ui.close({ id: PANE_ID }).catch(() => undefined)
+      isPaneOpen = false
+      await $.store.set(STORE_CLOSED, true).catch(() => undefined)
+      return { text: 'Genius map hidden' }
+    }
+    await refreshMap($).catch(() => undefined)
+    if (!(await openPane($))) return { text: 'The map waits for a wider terminal: 110 columns in the fullscreen layout.' }
+    entered = true
+    await $.store.set(STORE_CLOSED, false).catch(() => undefined)
+    return { text: 'Genius map shown' }
+  })
+
+  on('ui.close', { id: PANE_ID }, async ($, e, next) => {
+    isPaneOpen = false
+    if (e.origin.kind === 'person') await $.store.set(STORE_CLOSED, true).catch(() => undefined)
     return next(e)
   })
 
@@ -141,7 +225,7 @@ export const register: Register = on => {
     const r = await next(e)
     if (entered) {
       try {
-        await refreshStatusLine($)
+        await refreshMap($)
       } catch {
         // as above
       }

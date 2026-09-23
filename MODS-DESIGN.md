@@ -1,6 +1,6 @@
 # 用 Claude Mods 升级 Working Genius — 设计稿
 
-状态：三步都已落地并实测，见 §7；第三步只做了状态行与写时报数，pane 未做。写于 2026-09-23，对照 Claude Code 2.1.280 与 `anthropics/claude-code` 仓库 `mods/` 目录（类型声明由 2.1.277 生成）。本文所有"已测"均为本日在本仓库副本上的一手实测，命令与最小复现件见附录 A。
+状态：三步都已落地并实测，见 §7，pane 也已做（kit 证明绘制，终端里看到它仍是待做的交互式测量）。写于 2026-09-23，对照 Claude Code 2.1.280 与 `anthropics/claude-code` 仓库 `mods/` 目录（类型声明由 2.1.277 生成）。本文所有"已测"均为本日在本仓库副本上的一手实测，命令与最小复现件见附录 A。
 
 ## 0. 一句话结论
 
@@ -284,4 +284,6 @@ export const register: Register = (on) => {
 | 状态行的显示 | 未测：无头会话没有 surface。kit 证明了调用发生；在终端里看到它是下一次交互式测量 |
 
 **未测清单（接第 2 节）。** 交互式终端下的拦停与状态行；managed 组织机器；Desktop 上 `process.run` 缺席时的降级（代码路径是 catch 后不显示、不判）。
+
+**pane（同日）。** `ui.render` 命中 `Pane`、id `genius-map`：每件在飞工作一个块（slug 与 stage、`next:`、快照对上限与 slice 计数），然后 done 与 backlog 计数；模块在 `session.start` 注册 `/genius-map` 命令切换显示；有在飞工作时自动打开，除非此人关过它（`$.store` 记住）；surface 放不下时撤回打开，仿 `/diff`。kit 24/24：`$.ui.mount` 挂载 pane 后找到 `demo · enablement` 与 `next: /enable demo, slice 2` 两行；命令的开/关与存储；无在飞工作不自动打开。终端里的显示仍未测（无头会话没有 surface）。
 

@@ -128,3 +128,37 @@ export function snapshotLineOf(snapshots: string, slug: string): string | undefi
   return line === undefined ? undefined : `Working Genius instrument, after this write: ${line.slice(2)}`
 }
 
+/** One line of the map pane, by the weight it is drawn with. */
+export type PaneLine = { kind: 'title' | 'work' | 'next' | 'detail' | 'dim'; text: string }
+
+/**
+ * The map's lines, from the instrument's status: one block per work in
+ * flight (slug and stage, the `next:` command, the snapshot's count against
+ * the ceiling and the slices), then the done and backlog counts. Display
+ * only: it re-frames the instrument's output and decides nothing.
+ */
+export function paneLinesOf(status: string | undefined): PaneLine[] {
+  const lines: PaneLine[] = [{ kind: 'title', text: 'Working Genius' }]
+  if (status === undefined) {
+    lines.push({ kind: 'dim', text: 'The instrument has not answered yet.' })
+    return lines
+  }
+  const detailOf = new Map<string, string>()
+  for (const line of status.split('\n')) {
+    const m = line.match(/^- (\S+) — stage: \S+ · contract: \S+ · next: .*? · (snapshot .*)$/)
+    if (m) detailOf.set(m[1] as string, m[2] as string)
+  }
+  const works = inFlightOf(status)
+  if (works.length === 0) lines.push({ kind: 'dim', text: 'Nothing in flight. /genius <idea> starts a piece of work.' })
+  for (const work of works) {
+    lines.push({ kind: 'work', text: `${work.slug} · ${work.stage}` })
+    lines.push({ kind: 'next', text: `next: ${work.next}` })
+    const detail = detailOf.get(work.slug)
+    if (detail !== undefined) lines.push({ kind: 'detail', text: detail })
+  }
+  for (const line of status.split('\n')) {
+    if (/^(done:|backlog:)/.test(line)) lines.push({ kind: 'dim', text: line })
+  }
+  return lines
+}
+

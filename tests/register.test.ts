@@ -7,6 +7,7 @@ import {
   hasRunningTask,
   isInBuild,
   isInFlight,
+  paneLinesOf,
   reasonOf,
   snapshotLineOf,
   snapshotSlugOf,
@@ -54,9 +55,25 @@ const BLOCK_REASON = 'Dispatching is doing: the step you announced is yours to t
 /** The world beneath the judge, answered from memory: the conditions file, the instrument, the model. */
 function seat(
   on: On,
-  world: { status?: string; verdict?: string; failing?: 'process' | 'model' },
-): { completions: string[]; logged: string[]; status: (string | undefined)[]; classicRan: number } {
-  const seen = { completions: [] as string[], logged: [] as string[], status: [] as (string | undefined)[], classicRan: 0 }
+  world: { status?: string; verdict?: string; failing?: 'process' | 'model'; closedByPerson?: boolean },
+): {
+  completions: string[]
+  logged: string[]
+  status: (string | undefined)[]
+  opened: string[]
+  closed: string[]
+  stored: [string, unknown][]
+  classicRan: number
+} {
+  const seen = {
+    completions: [] as string[],
+    logged: [] as string[],
+    status: [] as (string | undefined)[],
+    opened: [] as string[],
+    closed: [] as string[],
+    stored: [] as [string, unknown][],
+    classicRan: 0,
+  }
   on('env.get', () => ({ value: undefined }))
   on('fs.read', () => ({ value: CONDITIONS }))
   on('ui.log', ($, e) => {
@@ -70,6 +87,21 @@ function seat(
   })
   on('ui.status', ($, e) => {
     seen.status.push(e.text)
+    return { value: undefined }
+  })
+  on('command.register', ($, e) => ({ value: { command: e.name } }))
+  on('ui.open', ($, e) => {
+    seen.opened.push(e.id)
+    return { value: { isPlaced: true } }
+  })
+  on('ui.close', ($, e) => {
+    seen.closed.push(e.id)
+    return { value: undefined }
+  })
+  on('ui.invalidate', () => ({ value: undefined }))
+  on('store.get', () => ({ value: world.closedByPerson === true ? true : undefined }))
+  on('store.set', ($, e) => {
+    seen.stored.push([e.key, e.value])
     return { value: undefined }
   })
   on('model.complete', ($, e) => {
@@ -135,6 +167,17 @@ describe('verdict', () => {
     expect(statusLineOf(STATUS_IN_BUILD)).toBe('Working Genius · demo · enablement · next: /enable demo, slice 2')
     expect(statusLineOf(STATUS_TWO)).toBe('Working Genius · 2 in flight · /genius')
     expect(statusLineOf(STATUS_NONE)).toBeUndefined()
+  })
+
+  test('the map\'s lines come from the status: a block per work, then the counts; nothing in flight says how to start', async () => {
+    const lines = paneLinesOf(STATUS_IN_BUILD).map(l => `${l.kind}: ${l.text}`)
+    expect(lines[0]).toBe('title: Working Genius')
+    expect(lines).toContain('work: demo · enablement')
+    expect(lines).toContain('next: next: /enable demo, slice 2')
+    expect(lines.some(l => l.startsWith('detail: snapshot 3000 chars'))).toBe(true)
+    expect(lines).toContain('dim: done: 0 (no HISTORY.md)')
+    expect(paneLinesOf(STATUS_NONE).map(l => l.kind)).toEqual(['title', 'dim', 'dim', 'dim'])
+    expect(paneLinesOf(undefined).length).toBe(2)
   })
 
   test('a snapshot is the file named for its folder, and its count is the instrument\'s line', async () => {
@@ -296,6 +339,45 @@ describe('register', () => {
     expect(r.context?.[0]).toContain('6100 roster excluded — over the ceiling')
     const other = await $.tool.call({ tool: 'Write', file_path: '/w/src/app.ts', content: 'x' })
     expect(other.context).toBeUndefined()
+  })
+
+  test('work in flight at the start opens the map pane, which draws the work from the instrument', async ($, on) => {
+    const seen = seat(on, {})
+    on('session.start', ($, e) => ({ cwd: e.cwd }))
+    await $.session.start({ cwd: '/w', surface: 'terminal', isInteractive: true })
+    expect(seen.opened).toEqual(['genius-map'])
+    const ui = await $.ui.mount({
+      plugin: 'workinggenius',
+      surface: 'terminal',
+      component: 'Pane',
+      requestId: 'genius-map',
+      props: { title: 'Working Genius', isFocused: false, bodyColumns: 60, placement: 'dock', scroll: { offset: 0, bodyRows: 20 }, view: {} },
+    })
+    expect((await ui.find({ type: 'Text', text: /demo · enablement/ }))?.text).toBe('demo · enablement')
+    expect((await ui.find({ type: 'Text', text: /next: / }))?.text).toBe('next: /enable demo, slice 2')
+    await ui.unmount()
+  })
+
+  test('a pane the person closed stays closed at the next start; /genius-map shows it again and hides it', async ($, on) => {
+    const seen = seat(on, { closedByPerson: true })
+    on('session.start', ($, e) => ({ cwd: e.cwd }))
+    on('command.run', () => ({ text: '' }))
+    await $.session.start({ cwd: '/w', surface: 'terminal', isInteractive: true })
+    expect(seen.opened).toEqual([])
+    let r = await $.command.run({ command: 'genius-map', args: '', origin: { kind: 'composer' }, presentation: { isFullscreen: true, columns: 160 } })
+    expect(r.text).toBe('Genius map shown')
+    expect(seen.opened).toEqual(['genius-map'])
+    r = await $.command.run({ command: 'genius-map', args: '', origin: { kind: 'composer' }, presentation: { isFullscreen: true, columns: 160 } })
+    expect(r.text).toBe('Genius map hidden')
+    expect(seen.closed).toEqual(['genius-map'])
+    expect(seen.stored).toEqual([['genius-map:closed-by-person', false], ['genius-map:closed-by-person', true]])
+  })
+
+  test('nothing in flight: no pane opens on its own', async ($, on) => {
+    const seen = seat(on, { status: STATUS_NONE })
+    on('session.start', ($, e) => ({ cwd: e.cwd }))
+    await $.session.start({ cwd: '/w', surface: 'terminal', isInteractive: true })
+    expect(seen.opened).toEqual([])
   })
 })
 
