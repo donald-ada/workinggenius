@@ -289,3 +289,12 @@ export const register: Register = (on) => {
 
 **人手势检查点（同日）。** `mcp__workinggenius__confirm` 工具：进入 flow 后（展开过任一 `workinggenius:` skill，或启动时有在飞工作）才向模型声明；调用时开一个带陈述与两个按钮的 pane，只有人按了 *Yes, that's it* 或 *Not yet*、按 Esc 关掉、或十分钟无人按，工具才返回并说明是哪种；无 surface 的会话立刻返回"这里没人能按，请用文字问"。按钮的按下是 surface 的动作，模型做不到。`wonder`、`discern`、`galvanize` 各加一句"会话提供 `confirm` 工具时，yes 经它取得"，理由放在 `genius-file`。另有 `prompt.submit`：进入 flow 后，来源不是 composer/bridge 的消息（peer、coordinator、schedule、notification、sdk）带一行 context 注明来源，只陈述事实。kit 29/29：Yes/Not yet/超时/无 surface 四种结局、工具只在进入 flow 后声明一次、来源注释在进入 flow 后且非 composer 时才出现。两个裁定点的默认答案：`sdk` 一律注明来源（事实），skill 自行决定；按钮结果不写任何文件，只作为工具结果回到模型，由模型按 skill 记录。
 
+**skills 的 eval 套件（同日）。** `evals/` 四个用例，每个对应 skill 的一条主张：`no-hijack`（普通请求不进 flow）、`nothing-in-flight`（问在飞工作，从 instrument 回答、不编造）、`genius-starts-wonder`（新想法进 flow：提问不建设）、`enable-red-before-green`（脚手架项目里建一个 slice：先红后绿，证据进日志）。两个关于 runner 的实测：**斜杠命令不是 prompt**，`/genius`、`/enable demo, slice 2` 作为用例 prompt 得到 0 轮、无报错，所以用户专用命令在 eval 之外，用例改为一个人会怎么说；授权 `Bash`/`Write`/`Edit` 的用例需要 runner 的 sandbox（Linux 上 `bubblewrap` + `socat`），没有则拒跑。分数（2026-09-23，`--runs 1 --ablation none`）：
+
+| 用例 | 模型 | 分数 | 说明 |
+|---|---|---|---|
+| no-hijack | haiku | 1.0 | 无 `.genius/`、无阶段 skill、任务照做 |
+| nothing-in-flight | sonnet | 1.0 | `genius-file` 触发，答"没有在飞"，给出 `/genius <idea>` 或 `/wonder`。haiku 下 skill 根本不触发（0 次），是小模型触发率的事实 |
+| genius-starts-wonder | sonnet | 1.0 | `wonder` 触发，分轮提问带建议，不写代码 |
+| enable-red-before-green | sonnet | 0.57 | `enable` 触发；测试先写先跑再改实现（Write@16、Bash@11 都先于 Edit@17），套件跑了两次；但日志无 `## slice-2`，roster 的 S2 未勾，hand-back 无逐条证据。纪律成立，close 没落地。这是套件抓到的第一个发现；手动复现的结果另记 |
+
