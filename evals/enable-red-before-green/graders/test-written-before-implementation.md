@@ -2,8 +2,8 @@
 type: tool_order
 before:
   tool: Write
-  input_match: 'test_greet'
+  input_match: '"file_path"\s*:\s*"[^"]*test_greet\.py"'
 after:
   tool: Edit
-  input_match: 'greet\.py'
+  input_match: '"file_path"\s*:\s*"[^"]*/greet\.py"'
 ---

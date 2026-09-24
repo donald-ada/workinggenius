@@ -5,5 +5,5 @@ before:
   input_match: 'unittest'
 after:
   tool: Edit
-  input_match: 'greet\.py'
+  input_match: '"file_path"\s*:\s*"[^"]*/greet\.py"'
 ---
