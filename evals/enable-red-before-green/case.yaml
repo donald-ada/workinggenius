@@ -1,0 +1,12 @@
+schema_version: "1.1"
+name: enable-red-before-green
+description: One slice built by /enable in a scaffolded project. The failing test is written and run before the implementation changes; the close leaves per-criterion evidence in the log and the slice checked in the snapshot.
+tags: [flow, enable]
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  max_turns: 40
+  timeout_seconds: 900
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Bash, Skill, Agent]   # Agent: the enable skill spawns the reviewer before the closing commit
+  prompt: "The piece of work `demo` is tracked under .genius/ and stands at its enablement stage; its snapshot names slice 2 as next. Build slice 2."
