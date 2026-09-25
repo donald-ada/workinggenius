@@ -11,7 +11,7 @@ A decision is never written twice. The flow already writes every decision at ful
 
 ```markdown
 - **Raw SQL over any ORM** — schema drift burned v1; queries are few and
-  hand-debugged. [The fight](checkout-rework/checkout-rework.log.md#discernment)
+  hand-debugged. [The fight](checkout-rework/log/discernment.md#discernment)
 ```
 
 Verdict in bold, the why in one line, the link relative to `.genius/`. A decision that landed outside the flow — no work file, no battlefield — carries its why in the line itself, one honest sentence rather than a verdict alone.

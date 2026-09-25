@@ -21,7 +21,7 @@ Your task message carries: **the work** (the path to its snapshot — read it wh
 
 **A dirty baseline is recorded, not adopted.** If a verify command fails before you have changed anything, write the baseline down and hold the line at no new failures; unrelated code is a backlog line, not a fix on the way past. A stated fact or pinned value the build merely disproved is corrected where it was written by whoever makes the closing commit, by the `errata` skill's moves.
 
-**Mark yourself in progress at the first red test** where the snapshot is in your tree: the slice line's box becomes `[~]` and links a log entry keyed `slice-<N>-wip` — red, green, still owed — appended to as you go, because a session can die at any moment and a snapshot that says nothing started over half-built code misleads whoever comes next.
+**Mark yourself in progress at the first red test** where the snapshot is in your tree: the slice line's box becomes `[~]` and links a log entry keyed `slice-<N>-wip` in the slice's own branch of the log, `log/slice-<N>.md` beside the snapshot, with the branch's line in the log's root — red, green, still owed — appended to as you go, because a session can die at any moment and a snapshot that says nothing started over half-built code misleads whoever comes next.
 
 **A discovery that changes the shape stops you.** Criteria, scope, seams, slices — if the build shows the plan was written for a world that turned out different, do not improvise around it and do not write an `assumed:` line: you cannot reach the user, but the coordinator can. Stop and hand back what you found, what it changes, which slices it touches, and your recommendation. A value the plan never fixed and the record does not answer is the same stop in miniature.
 

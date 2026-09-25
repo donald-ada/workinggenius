@@ -128,7 +128,7 @@ def broken_links(path, body):
     base = os.path.dirname(path)
     out = []
     for t in LINK.findall(body):
-        if t.startswith('http') or t.endswith('.log.md') or t == 'CONTRACT.md':
+        if t.startswith('http') or t.endswith('.log.md') or t == 'CONTRACT.md' or t.startswith('log/') or '/log/' in t:
             continue
         if not os.path.exists(os.path.normpath(os.path.join(base, t))):
             out.append(t)

@@ -26,7 +26,7 @@ Four questions in this order, because each earlier one can take away what a late
 
 ## How it runs
 
-**Read `.genius/` and nothing else**, and inside it only what the questions need: the backlog, `HISTORY.md`, the work snapshots in flight and done, and one log entry by the anchor a seed's link names — never a log whole. Not the code. That bound separates this pass from a session reading the whole project; one such run reached the same rulings after opening over forty files. A judgment it cannot reach inside `.genius/` is reported as unreached, never guessed — "the repo may have satisfied this one" goes to `/reconcile`.
+**Read `.genius/` and nothing else**, and inside it only what the questions need: the backlog, `HISTORY.md`, the work snapshots in flight and done, and one log entry by the anchor a seed's link names, in the one branch it names — never a log whole. Not the code. That bound separates this pass from a session reading the whole project; one such run reached the same rulings after opening over forty files. A judgment it cannot reach inside `.genius/` is reported as unreached, never guessed — "the repo may have satisfied this one" goes to `/reconcile`.
 
 **Read-only until the user has ruled, one line at a time.** Each proposal carries the seed's own words, which question it answers, what it wants done, and where the text goes. Categories and counts are wrong here: every one of these is "is this still worth doing", the user's alone. An honest zero proves nothing was manufactured, so say it when there is nothing.
 

@@ -1,10 +1,14 @@
 # Format Edges
 
-What [FILE-FORMAT.md](FILE-FORMAT.md) leaves out on purpose: the one repair a session meets rarely, and the measurements behind rules that would otherwise read as arbitrary. Read it when you meet the case, or before disagreeing with a rule. `/compact` links here, and `/reconcile` reaches it through the format's pointer, when they meet a key with prose after it; a slice close never reads it.
+What [FILE-FORMAT.md](FILE-FORMAT.md) leaves out on purpose: the two cases a session meets rarely, and the measurements behind rules that would otherwise read as arbitrary. Read it when you meet the case, or before disagreeing with a rule. `/compact` links here, and `/reconcile` reaches it through the format's pointer, when they meet a key with prose after it; a slice close never reads it.
 
 ## A heading that broke its own anchor
 
 A log heading that appends prose after its key (`## s4-board 配置状态牌四件`) is a different anchor from the key, so every link to it is already broken. **The repair is the link, never the heading** — and every link to it, not the first one you saw. The heading records and the snapshot binds; fixing the heading edits a record to spare a binding file an edit, which is the layering exactly backwards (`errata` skill). This is the case that most tempts a retroactive pass into editing a log, and the one `/compact` checks for before calling a link's target missing: it looks missing and is not.
+
+## A log from before the tree
+
+A log written before it became a tree holds its entries in `<slug>.log.md` itself, under their own `##` keys. **They stay where they are**: the log is never edited, and `.genius/BACKLOG.log.md`, which can never be repaired, may point at them as `<slug>.log.md#<key>`. The next entry goes to its branch under `log/`, with its line appended to the root below the old entries, so the file reads its old entries first and the tree after, and `measure.py anchors` lists both. Moving the old entries out would be a pass that edits a record to tidy a shape, which is what the format's one-format rule never asks of a record.
 
 ## What was measured
 

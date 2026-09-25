@@ -36,8 +36,8 @@ Work files: `.genius/` (committed)
 Before starting substantial work, find that work's snapshot — `<slug>.md` inside its own folder in the
 directory above. It is the work's current truth: the confirmed problem, the decision and its
 kill-reasons, which contract version binds, the slices and where they stand, and `next:` naming the
-exact command that moves it forward. Beside it: `<slug>.log.md`, the history, opened only if a question
-needs it; `CONTRACT.md`, what binds the slices not yet built, opened when you are about to build,
+exact command that moves it forward. Beside it: the history, a tree — `<slug>.log.md` naming one branch per
+stage or slice under `log/` — of which only the branch a question needs is opened; `CONTRACT.md`, what binds the slices not yet built, opened when you are about to build,
 attack or verify against it; and that work's own artifacts. That one folder is everything a session
 needs — other slugs, in flight or done, stay closed. Anything written into a work's folder links
 relative to that folder, never from the repo root. The user types `/genius` for status across all
