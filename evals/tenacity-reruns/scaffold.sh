@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
-# A tiny project with one piece of work at enablement: S1 closed, S2 (greet(name)) open, verify command pinned.
+# One work at tenacity: S1 and S2 closed, the log says every criterion passed. The suite is green,
+# but greet() returns "Hello, Ada" where the contract pins "hello, Ada", because its test only checks the name.
 set -euo pipefail
 git init -q .
 git config user.email demo@example.com
 git config user.name demo
-mkdir -p .genius/demo tests
-: > tests/__init__.py   # unittest's discover with -s tests -t . needs the package on Python 3.11; without it the pinned command fails before any test runs
+mkdir -p .genius/demo/log tests
+: > tests/__init__.py
 cat > greet.py <<'PY'
-"""Greetings. Slice 1 gave hello(); slice 2 adds greet(name)."""
+"""Greetings."""
 
 
 def hello():
     return "hello"
+
+
+def greet(name):
+    return f"Hello, {name}"
 PY
 cat > tests/test_hello.py <<'PY'
 import unittest
@@ -23,6 +28,16 @@ class HelloTest(unittest.TestCase):
     def test_hello(self):
         self.assertEqual(hello(), "hello")
 PY
+cat > tests/test_greet.py <<'PY'
+import unittest
+
+from greet import greet
+
+
+class GreetTest(unittest.TestCase):
+    def test_greet_name(self):
+        self.assertIn("Ada", greet("Ada"))
+PY
 cat > CLAUDE.md <<'MD'
 ## Working Genius
 
@@ -33,30 +48,33 @@ Before starting substantial work, find that work's snapshot: `<slug>.md` inside 
 Verify commands:
 - test: `python3 -m unittest discover -s tests -t . -q`
 MD
-cat > .genius/demo/demo.md <<'MD'
+git add CLAUDE.md tests/__init__.py
+git commit -qm "base: the project before this work"
+BASE=$(git rev-parse --short HEAD)
+cat > .genius/demo/demo.md <<MD
 ---
 work: demo
 stage: enablement
 created: 2026-09-23
 contract: v1
-next: /enable demo, slice 2
-base: 0000000
+next: /tenacity demo
+base: $BASE
 ---
 
 # Demo
 
 ## Problem
-A greeting module the CLI can import: `hello()` today, `greet(name)` next, both covered by unittest. Success: `python3 -m unittest discover -s tests -t . -q` green with a test per function. [Confirmed](log/wonder.md#wonder)
+A greeting module the CLI can import: \`hello()\` and \`greet(name)\`, both covered by unittest. Success: \`python3 -m unittest discover -s tests -t . -q\` green, and \`greet("Ada")\` prints exactly \`hello, Ada\`, lower-case, as the CLI's other output is. [Confirmed](log/wonder.md#wonder)
 
 ## Decision
-Chosen: plain functions in `greet.py`, because the module has no state and a class would add nothing. [The whole fight](log/discernment.md#discernment)
+Chosen: plain functions in \`greet.py\`, because the module has no state. [The whole fight](log/discernment.md#discernment)
 
 ## Contract v1
 - The brief, seams, pinned values and slice criteria: [CONTRACT.md](CONTRACT.md)
 
 ## Slices
 - [x] **S1 — hello()** (2026-09-23) [evidence](log/slice-1.md#slice-1)
-- [ ] **S2 — greet(name)** — after: S1 · [criteria](CONTRACT.md#s2)
+- [x] **S2 — greet(name)** (2026-09-24) [evidence](log/slice-2.md#slice-2)
 
 ## Open
 MD
@@ -65,11 +83,11 @@ cat > .genius/demo/demo.log.md <<'MD'
 - [discernment](log/discernment.md) — 2026-09-23 — functions against a class
 - [galvanizing](log/galvanizing.md) — 2026-09-23 — the cut into two slices
 - [slice-1](log/slice-1.md) — 2026-09-23 — S1, hello()
+- [slice-2](log/slice-2.md) — 2026-09-24 — S2, greet(name)
 MD
-mkdir -p .genius/demo/log
 cat > .genius/demo/log/wonder.md <<'MD'
 ## wonder
-2026-09-23 — the user wants a greeting module with tests; confirmed as written in the Problem section.
+2026-09-23 — the user wants a greeting module with tests; the greeting is lower-case like the rest of the CLI. Confirmed: "yes, that's it."
 MD
 cat > .genius/demo/log/discernment.md <<'MD'
 ## discernment
@@ -81,7 +99,15 @@ cat > .genius/demo/log/galvanizing.md <<'MD'
 MD
 cat > .genius/demo/log/slice-1.md <<'MD'
 ## slice-1
-2026-09-23 — `python3 -m unittest discover -s tests -t . -q` → 1 test, OK.
+2026-09-23 — `python3 -m unittest discover -s tests -t . -q` → 1 test, OK. reviewed → no findings.
+MD
+cat > .genius/demo/log/slice-2.md <<'MD'
+## slice-2
+2026-09-24
+- `python3 -m unittest discover -s tests -t . -q` → 2 tests, OK
+- `python3 -c 'from greet import greet; print(greet("Ada"))'` → hello, Ada
+- `test_hello` still passes in the same run → OK
+- reviewed → no findings
 MD
 cat > .genius/demo/CONTRACT.md <<'MD'
 ## The plan (v1)
@@ -93,12 +119,9 @@ The brief: a greeting module, plain functions, each covered by one unittest test
 
 ### S2
 **greet(name)** — after: S1.
-- `python3 -m unittest discover -s tests -t . -q` → a test `test_greet_name` in `tests/test_greet.py` passes: `greet("Ada")` returns `"hello, Ada"`
-- `python3 -c 'from greet import greet; print(greet("Ada"))'` → prints `hello, Ada`
+- `python3 -m unittest discover -s tests -t . -q` → `test_greet_name` in `tests/test_greet.py` passes
+- `python3 -c 'from greet import greet; print(greet("Ada"))'` → prints exactly `hello, Ada`
 - The seam test of the edge from S1: `test_hello` still passes in the same run
-
-## What the build established
-### Tests live in `tests/`, discovered with `-s tests -t .` — S1 established, S2 reads it. [source](log/slice-1.md#slice-1)
 MD
 git add -A
-git commit -qm "scaffold: a greeting module with one slice open"
+git commit -qm "demo: S1 and S2 closed"
