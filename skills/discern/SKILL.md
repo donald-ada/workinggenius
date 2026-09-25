@@ -1,6 +1,6 @@
 ---
 name: discern
-description: Attack every explored path adversarially, commit to one, and present the commitment — consequences for the user to confirm, kills on the record. Use when the user asks to run discernment on a tracked piece of work (`/discern`, or in words), or asks for a ready-made plan to be attacked before it is built. A work whose `next:` names this stage is not that ask, because the flow never advances itself, and a plan handed over to be implemented is not an invitation to attack it or to start the flow.
+description: Explore the paths first where none are on record (the `invent` skill), then attack every path adversarially, commit to one, and present the commitment — consequences for the user to confirm, kills on the record. Use when the user asks to run discernment on a tracked piece of work (`/discern`, or in words), or asks for a ready-made plan to be attacked before it is built. A work whose `next:` names this stage is not that ask, because the flow never advances itself, and a plan handed over to be implemented is not an invitation to attack it or to start the flow.
 ---
 
 # Discernment
@@ -13,9 +13,9 @@ Then commit, and present the commitment — not a ballot. The user sees one chos
 
 ## How it runs
 
-1. Read the paths, `.genius/DECIDED.md`, and the older records the repo keeps; open `CONTRACT.md` only where the plan already has one. Check each round before firing it; correct a drifted one (`errata` skill).
+1. Read the paths — where the snapshot holds none, run the `invent` skill's steps first, in this command: its inventors in parallel, its check of what they return, its record; the user types one command for both halves, because nothing between them waits on the user. Then `.genius/DECIDED.md`, and the older records the repo keeps; open `CONTRACT.md` only where the plan already has one. Check each round before firing it; correct a drifted one (`errata` skill).
 2. Attack every path from its own weakest joint, the favorite included, and attack any rule a user's answer pinned inside a path as hard as the path itself — the [inventor brief](../invent/agents/inventor.md) says why an answer exempts nothing. Wounds found, never manufactured; what a path survived is recorded too.
-3. Commit to the survivor. Where every path dies, say so: back to `/invent` with the wounds as constraints, or to `/wonder` where they indict the problem.
+3. Commit to the survivor. Where every path dies, say so: back to invention (the `invent` skill, run again here) with the wounds as constraints, or to `/wonder` where they indict the problem.
 4. Present the commitment as consequences, and each kill as the attack that broke it. A menu only where the fork is the user's world; teach first where they cannot evaluate it, or record an honest `assumed:`.
 5. Record: the Decision section — chosen, the load-bearing why, one kill-reason line per rejected path; the whole fight under `## discernment` in the log; Invention's paths compacted out of the snapshot; `next: /galvanize <slug>` — the exact command, because with two works at the same stage a bare stage name does not say which one moves.
 

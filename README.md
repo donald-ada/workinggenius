@@ -15,7 +15,7 @@ Patrick Lencioni's *Six Types of Working Genius* names the six stages every piec
 | **Enablement** — building with feedback | A huge diff, no tests, revealed big-bang at the end. |
 | **Tenacity** — finishing with evidence | "Done!" — on stale evidence, or none. It was "done" three times. |
 
-This plugin walks every piece of work through all six — and every stage is a command you type, so one you don't type simply doesn't run: the work file shows what ran and what didn't. Gaps stay visible instead of becoming mysteries.
+This plugin walks every piece of work through all six — and every stage runs only when you type its command (Invention runs inside `/discern`, since nothing in it waits on you), so one you don't type simply doesn't run: the work file shows what ran and what didn't. Gaps stay visible instead of becoming mysteries.
 
 ## Install
 
@@ -34,8 +34,7 @@ Then, in any project:
 /wonder                                   # correct its story, answer its questions, confirm the problem
 /architect                                # (greenfield) build-or-adopt first, then one committed architecture
 /designer                                 # (UI work) settle the look before the pixels
-/invent                                   # genuinely diverge — alternatives exist to be beaten
-/discern                                  # attack every path, commit to one, record the kills
+/discern                                  # fresh inventors diverge, then attack every path, commit to one, record the kills
 /galvanize                                # slice into fresh-session-ready vertical slices
 /enable                                   # build one slice, red-before-green, tight loops
 /tenacity                                 # verify everything fresh, review, clean up, commit
@@ -51,11 +50,10 @@ Then, in any project:
 
 - **/genius** — status of all work, the backlog of what the flow discovered and nobody started, genius-gap diagnosis, post-mortem patterns, mid-flow entry points
 
-**The six stages** (each a command you type — the flow never advances itself):
+**The six stages** (five commands you type — the flow never advances itself):
 
 - **/wonder** — the live interview that turns a raw idea into a user-confirmed problem
-- **/invent** — genuine divergence before commitment: structurally different paths, each grounded in the repo
-- **/discern** — try to kill every path, including the favorite; commit to one, kills on the record
+- **/discern** — first Invention: fresh inventors find structurally different paths, each grounded in the repo; then try to kill every path, including the favorite; commit to one, kills on the record (`/invent` alone still explores without attacking)
 - **/galvanize** — the decision converted into slices a fresh session can grab cold
 - **/enable** — one slice per fresh context, tests leading the code, reality voting every few minutes
 - **/tenacity** — "done" as a claim about fresh evidence: everything re-run and read, then cleanup, commit, post-mortem

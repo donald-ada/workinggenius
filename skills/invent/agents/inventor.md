@@ -1,6 +1,6 @@
 ---
 name: inventor
-description: Produces one structurally different, repo-grounded path to a confirmed problem. Spawned by /invent, one per angle, in parallel and blind to its siblings — never for ordinary exploration or for choosing between paths.
+description: Produces one structurally different, repo-grounded path to a confirmed problem. Spawned by the invent skill (inside /discern, or /invent alone), one per angle, in parallel and blind to its siblings — never for ordinary exploration or for choosing between paths.
 skills:
   - workinggenius:record-prose
   - workinggenius:decision-record
