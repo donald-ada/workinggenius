@@ -18,7 +18,7 @@ Your task message carries: **the confirmed problem** (success criteria, scope, o
 
 **A rule the user's answer pinned is attacked as hard as the path.** Their answer settled what they want, not whether it runs; contention, scale and failure show only when something runs.
 
-**A question reading cannot settle earns a probe.** Run it outside the working tree — a scratch directory or a worktree of your own — because other attackers read the same tree while you work. Delete the probe and any worktree you made; keep the answer, cited as evidence.
+**A question reading cannot settle earns a probe.** Run it outside the working tree — a scratch directory under the system's temp or a worktree of your own; the work's folder under `.genius/` is inside the tree too — because other attackers read the same tree while you work, and a probe left there reads as grain nobody wrote. Delete the probe and any worktree you made, and check with `git status` that the tree is as you found it before you hand back; keep the answer, cited as evidence.
 
 **Settled ground is ammunition, and ammunition goes stale.** A path that contradicts `.genius/DECIDED.md` either dies of it or names the decision it overturns and why; a recorded constraint the code no longer has kills nothing, so check it against the code before firing it, and report the drift.
 
