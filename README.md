@@ -1,6 +1,6 @@
 # Working Genius
 
-A development workflow for Claude Code — 22 skills, three subagents (an inventor, a builder and a reviewer, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
+A development workflow for Claude Code — 22 skills, four subagents (an inventor, an attacker, a builder and a reviewer, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -25,7 +25,7 @@ In Claude Code:
 /plugin marketplace add donald-ada/workinggenius
 ```
 
-Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — three subagents, two judges registered when you type `/enable` or `/tenacity` and never by installation, blocking the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
+Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — four subagents, two judges registered when you type `/enable` or `/tenacity` and never by installation, blocking the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
 
 Then, in any project:
 
@@ -34,7 +34,7 @@ Then, in any project:
 /wonder                                   # correct its story, answer its questions, confirm the problem
 /architect                                # (greenfield) build-or-adopt first, then one committed architecture
 /designer                                 # (UI work) settle the look before the pixels
-/discern                                  # fresh inventors diverge, then attack every path, commit to one, record the kills
+/discern                                  # fresh inventors diverge, blind attackers hit every path, commit to one, record the kills
 /galvanize                                # slice into fresh-session-ready vertical slices
 /enable                                   # build one slice, red-before-green, tight loops
 /tenacity                                 # verify everything fresh, review, clean up, commit
@@ -53,7 +53,7 @@ Then, in any project:
 **The six stages** (five commands you type — the flow never advances itself):
 
 - **/wonder** — the live interview that turns a raw idea into a user-confirmed problem
-- **/discern** — first Invention: fresh inventors find structurally different paths, each grounded in the repo; then try to kill every path, including the favorite; commit to one, kills on the record (`/invent` alone still explores without attacking)
+- **/discern** — first Invention: fresh inventors find structurally different paths, each grounded in the repo; then one blind attacker per path tries to kill it, the favorite included; commit to one, kills on the record (`/invent` alone still explores without attacking)
 - **/galvanize** — the decision converted into slices a fresh session can grab cold
 - **/enable** — one slice per fresh context, tests leading the code, reality voting every few minutes
 - **/tenacity** — "done" as a claim about fresh evidence: everything re-run and read, then cleanup, commit, post-mortem

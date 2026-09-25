@@ -9,8 +9,10 @@ by hand.
     measure.py anchors <slug>    a log's branches, their keys and what already links each — for a close that links without opening the log
     measure.py distill           done works and whether their logs carry the distilled line
     measure.py count <file>...   characters in each file
+    measure.py append <slug> <branch> <key> [<about>]   stdin → one log entry; see cmd_append
 
-It counts and never decides. It always exits 0 and never raises: a skill
+It counts and never decides; the one command that writes, `append`, writes
+only what it is handed, where the caller named, and refuses rather than guesses. It always exits 0 and never raises: a skill
 that injects this command is aborted whole if the command fails, and a
 count that could not be taken is worth reporting, never worth losing the
 skill over. The rules it measures against live in FILE-FORMAT.md and
@@ -286,6 +288,78 @@ def cmd_anchors(slug):
             print(f'newest branch in the root: {rooted[-1]}')
 
 
+def read_stdin(wait=2.0):
+    """The entry body, from stdin — but never a hang: a terminal, or a pipe that sends nothing
+    within `wait` seconds, reads as empty, and the append is refused for an empty body."""
+    try:
+        import select
+        if sys.stdin is None or sys.stdin.isatty():
+            return ''
+        ready, _, _ = select.select([sys.stdin], [], [], wait)
+        return sys.stdin.read() if ready else ''
+    except Exception:
+        return ''
+
+
+def cmd_append(slug, branch, key, about, body):
+    """Append one entry to a work's log: `## <key>` and the body from stdin, at the end of
+    `log/<branch>.md`. A branch that does not exist yet is created, and its line appended to
+    the root, `- [<branch>](log/<branch>.md) — <date> — <about>`, so the caller must say what
+    the branch is about. A key that is already the last entry of that branch takes the body
+    below it (a `-wip` entry growing as the loop moves); a key anywhere else in the log is
+    refused, because keys are unique and a second copy is a broken anchor. It writes only
+    what it is handed, where the caller named: the branch and the key are the caller's call,
+    and on anything it cannot do it writes nothing and says why."""
+    d, _ = work_dir()
+    if not (slug and branch and key):
+        print('measure: append needs <slug> <branch> <key> [<about>], the entry body on stdin')
+        return
+    for name, v in (('branch', branch), ('key', key)):
+        if not re.fullmatch(r'[A-Za-z0-9-]+', v):
+            print(f'measure: append refused — {name} {v!r} is not letters, digits and hyphens only')
+            return
+    folder = os.path.join(d, slug)
+    if not os.path.isfile(os.path.join(folder, slug + '.md')):
+        print(f'measure: append refused — no snapshot at {os.path.join(folder, slug + ".md")}')
+        return
+    body = body.strip('\n')
+    if not body:
+        print('measure: append refused — the entry body on stdin is empty')
+        return
+    path = os.path.join(folder, 'log', branch + '.md')
+    rel = f'log/{branch}.md'
+    continuing = False
+    for erel, anchor, raw, epath in log_entries(folder, slug):
+        if raw == key:
+            last = [r for lv, _a, r in headings(epath) if lv == 2][-1:]
+            if os.path.normpath(epath) == os.path.normpath(path) and last == [key]:
+                continuing = True
+            else:
+                print(f'measure: append refused — key {key!r} already exists in {erel}; '
+                      f'take a new key (date-suffixed on collision)')
+                return
+    root = os.path.join(folder, slug + '.log.md')
+    new_branch = not os.path.isfile(path)
+    if new_branch and not about:
+        print(f'measure: append refused — {rel} is a new branch; say what it is about, '
+              f'for its line in the root')
+        return
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'a', encoding='utf-8') as f:
+        if continuing:
+            f.write(body + '\n')
+        else:
+            prefix = '\n' if os.path.getsize(path) and not text(path).endswith('\n\n') else ''
+            f.write(f'{prefix}## {key}\n{body}\n')
+    if new_branch:
+        line = f'- [{branch}]({rel}) — {datetime.date.today().isoformat()} — {about}\n'
+        existing = text(root) if os.path.isfile(root) else ''
+        with open(root, 'a', encoding='utf-8') as f:
+            f.write(('' if not existing or existing.endswith('\n') else '\n') + line)
+    what = 'continued' if continuing else ('new branch, root line added' if new_branch else 'appended')
+    print(f'{rel}#{key} — {what}')
+
+
 # ---- distill: the scope rule as a scan ---------------------------------------
 
 def cmd_distill():
@@ -393,8 +467,11 @@ def main(argv):
             cmd_anchors(argv[2] if len(argv) > 2 else None)
         elif cmd == 'count':
             cmd_count(argv[2:])
+        elif cmd == 'append':
+            a = argv[2:6] + [None] * (4 - len(argv[2:6]))
+            cmd_append(a[0], a[1], a[2], a[3], read_stdin())
         else:
-            print(f'measure: unknown command {cmd!r}; one of status, snapshots, links, anchors, distill, count')
+            print(f'measure: unknown command {cmd!r}; one of status, snapshots, links, anchors, distill, count, append')
     except Exception as e:  # never fail: see the docstring
         print(f'measure: could not measure ({type(e).__name__}: {e})')
     return 0

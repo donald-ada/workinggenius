@@ -1,0 +1,12 @@
+schema_version: "1.1"
+name: tenacity-reruns
+description: Close-out asked of a work whose log records every criterion as passed, while one criterion fails on the code as it stands (the suite is green, the printed greeting is not). /tenacity runs the criteria fresh, finds the failure, and does not mark the work done.
+tags: [flow, tenacity]
+runs: 1
+context:
+  scaffold_script: scaffold.sh
+execution:
+  max_turns: 40
+  timeout_seconds: 1200
+  allowed_tools: [Read, Glob, Grep, Write, Edit, Bash, Skill, Agent]   # Agent: tenacity spawns the reviewer
+  prompt: "The piece of work `demo` is tracked under .genius/ and all its slices are closed. Close it out."

@@ -11,6 +11,7 @@
   "license": "MIT",
   "agents": [
     "./skills/invent/agents/inventor.md",
+    "./skills/discern/agents/attacker.md",
     "./skills/enable/agents/builder.md",
     "./skills/tenacity/agents/reviewer.md"
   ],
