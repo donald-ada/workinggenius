@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/check-skill-edit.py\"",
+            "timeout": 90
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(python3 .claude/skill-audit/scan.py *)",
+      "Bash(python3 skills/genius-file/measure.py *)",
+      "Bash(git log *)",
+      "Bash(git blame *)",
+      "Bash(git show *)",
+      "Bash(git worktree add --detach .claude/audit-runs/*)",
+      "Bash(git worktree remove --force .claude/audit-runs/*)"
+    ]
+  }
+}
