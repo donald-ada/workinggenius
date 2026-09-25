@@ -28,7 +28,7 @@ cat > CLAUDE.md <<'MD'
 
 Work files: `.genius/` (committed)
 
-Before starting substantial work, find that work's snapshot: `<slug>.md` inside its own folder in the directory above. It is the work's current truth; `CONTRACT.md` beside it binds the slices not yet built; the history is a tree, `<slug>.log.md` naming one branch per stage or slice under `log/`, and only the branch a question needs is opened. Anything written into a work's folder links relative to that folder. The flow is /wonder → /invent → /discern → /galvanize → /enable → /tenacity, and every stage is a command the user types.
+Before starting substantial work, find that work's snapshot: `<slug>.md` inside its own folder in the directory above. It is the work's current truth; `CONTRACT.md` beside it binds the slices not yet built; the history is a tree, `<slug>.log.md` naming one branch per stage or slice under `log/`, and only the branch a question needs is opened. Anything written into a work's folder links relative to that folder. The flow is /wonder → /discern (which runs Invention first) → /galvanize → /enable → /tenacity, and every stage runs only when the user types its command.
 
 Verify commands:
 - test: `python3 -m unittest discover -s tests -t . -q`
