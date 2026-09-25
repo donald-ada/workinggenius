@@ -14,7 +14,7 @@ The concept: **the layer that binds gets corrected; the layer that records gets 
 One question sorts any line into its layer: **would a cold session act differently because of this line?**
 
 - **Yes — it binds.** The snapshot, the work's `CONTRACT.md`, `.genius/DECIDED.md`, `CONTEXT.md`, `DESIGN.md`, `ARCHITECTURE.md`, `.genius/BACKLOG.md`'s seeds, the `## Working Genius` section. A wrong line here is an instruction, and it gets rewritten in place.
-- **No — it records.** Everything in the log (`<slug>.log.md`, `.genius/BACKLOG.log.md`), and every file at `stage: done`. Append the correction; never edit the line, because the record is the evidence of what a session believed when it acted, and an edited one can no longer explain the work that was built on it. ⚠ A rule about correcting, not a freeze on routing: a done snapshot still gets compacted by `/compact`, because nothing there is wrong, only misfiled. What stays forbidden at done is rewriting a line because it turned out to be false.
+- **No — it records.** Everything in the log (a work's root `<slug>.log.md` and its `log/` branches, `.genius/BACKLOG.log.md`), and every file at `stage: done`. Append the correction; never edit the line, because the record is the evidence of what a session believed when it acted, and an edited one can no longer explain the work that was built on it. ⚠ A rule about correcting, not a freeze on routing: a done snapshot still gets compacted by `/compact`, because nothing there is wrong, only misfiled. What stays forbidden at done is rewriting a line because it turned out to be false.
 
 A fact that was wrong is usually in both, and both get handled — the binding copy rewritten, the record it came from annotated.
 

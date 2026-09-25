@@ -1,5 +1,5 @@
 ---
 type: regex
-pattern: '## slice-2[\s\S]*unittest[^\n]*→'
-target: { source: file, path: .genius/demo/demo.log.md }
+pattern: '## slice-2\n[\s\S]*unittest[^\n]*→'
+target: { source: file, path: .genius/demo/log/slice-2.md }
 ---
