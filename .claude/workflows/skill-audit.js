@@ -76,12 +76,13 @@ const SCAN = {
 const REPORT = {
   type: 'object',
   properties: {
-    report: { type: 'string' },
+    report: { type: 'string', description: 'the path of report.md' },
+    report_text: { type: 'string', description: 'the full text of report.md' },
     diff: { type: 'string' },
     checks: { type: 'string', description: 'the repository checks run on the patched tree, command → result' },
     headline: { type: 'string', description: 'the two or three highest-impact findings, in prose' },
   },
-  required: ['report', 'diff', 'checks', 'headline'],
+  required: ['report', 'report_text', 'diff', 'checks', 'headline'],
 }
 
 // ---- the lenses (their questions live in .claude/skill-audit/LENSES.md) --------
@@ -217,7 +218,7 @@ log(`${confirmed.length} confirmed, ${refuted.length} refuted, ${flags.length} f
 // ---- Report: the report and the diff, the diff checked on a scratch tree.
 phase('Report')
 const report = await agent(
-  `Write the skill audit's two deliverables into ${scan.out}/ from the verified findings below. Change nothing in the working tree.
+  `Write the skill audit's two deliverables into ${scan.out}/ from the verified findings below. Change nothing in the working tree. Write files with Bash (a quoted heredoc, or a short python3 script), never the Write tool, which refuses a workflow subagent; and return the report's full text as well, so it survives if the file does not.
 
 1. **${scan.out}/report.md** — at the top: the date, the scope (${units.map(u => u.name).join(', ')}), the depth (${opts.depth}), the target models (as .claude/skill-audit/LENSES.md states them), counts per lens and per status, and the two or three highest-impact confirmed findings in prose. Then every confirmed finding, highest confidence first: location \`file:line\`, the quoted text, pattern, why, confidence, action and replacement, and the skeptics' votes one line each. Then the flags. Then the refuted findings one line each with the evidence that refuted them, because a refutation is what keeps the next run from raising them again.
 2. **${scan.out}/proposed.diff** — one hunk per confirmed finding with action remove, rewrite, move or add, at high or medium confidence. Build it on a scratch worktree so the working tree is never touched: \`git worktree add --detach ${scan.out}/tree HEAD\`, make each edit there (a \`move\` whose destination is a commit message is listed in the report, not the diff), then \`git -C ${scan.out}/tree diff > ${scan.out}/proposed.diff\`. Two findings on one passage are reconciled into one edit. Where an edit changes skills/ and the change would merge, the release rule in CLAUDE.md applies: say in the report that plugin.json's version must move, and do not bump it in the diff.
