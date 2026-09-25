@@ -1,6 +1,6 @@
 {
   "name": "workinggenius",
-  "version": "0.32.0",
+  "version": "0.33.0",
   "description": "A development workflow that walks every piece of work through the six Working Geniuses — Wonder, Invention, Discernment, Galvanizing, Enablement, Tenacity — every stage a command the user types, every checkpoint a live exchange.",
   "author": {
     "name": "zhangxiaolong",
@@ -12,7 +12,8 @@
   "agents": [
     "./skills/invent/agents/inventor.md",
     "./skills/enable/agents/builder.md",
-    "./skills/tenacity/agents/reviewer.md"
+    "./skills/tenacity/agents/reviewer.md",
+    "./skills/designer/agents/design-critic.md"
   ],
   "keywords": [
     "workflow",

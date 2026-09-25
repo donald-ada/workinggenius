@@ -1,6 +1,6 @@
 # Working Genius
 
-A development workflow for Claude Code — 22 skills, three subagents (an inventor, a builder and a reviewer, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
+A development workflow for Claude Code — 22 skills, four subagents (an inventor, a builder, a reviewer and a design critic, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -25,7 +25,7 @@ In Claude Code:
 /plugin marketplace add donald-ada/workinggenius
 ```
 
-Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — three subagents, two judges registered when you type `/enable` or `/tenacity` and never by installation, blocking the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
+Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — four subagents, two judges registered when you type `/enable` or `/tenacity` and never by installation, blocking the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
 
 Then, in any project:
 
@@ -63,7 +63,7 @@ Then, in any project:
 **Support:**
 
 - **/architect** — adopt an existing system or build — and if build, one committed architecture in `ARCHITECTURE.md`: qualities ranked, boundaries by ownership, stressed against the field and the future, proven by a walking skeleton, confirmed in consequences
-- **/designer** — the style conversation building momentum never starts: audience first, 13 template bases, taste settled by looking at real states, accessibility computed as the floor, one committed language of tokens with roles in `DESIGN.md`
+- **/designer** — the style conversation building momentum never starts: audience first, a brief Claude Code's `/design` draws directions from (13 template bases when you name a look), taste settled by looking at real states, a critic reading the chosen one against the brief, accessibility computed as the floor, one committed language of tokens with roles in `DESIGN.md`
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
