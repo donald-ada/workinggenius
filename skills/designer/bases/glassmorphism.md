@@ -4,7 +4,7 @@
 # Glassmorphism
 
 ## Brand
-provide fast, reliable communication for individuals, teams, and communities while maintaining a clean interface and high performance across desktop environments.
+Frosted translucent layers over vivid backgrounds.
 
 ## Style Foundations
 - Visual style: clean, high-contrast, bold, enterprise, liquidglass effect, glassmorphism

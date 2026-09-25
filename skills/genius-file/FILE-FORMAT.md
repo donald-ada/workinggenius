@@ -6,7 +6,7 @@ One piece of work = one folder at `.genius/<slug>/`. Slug: short kebab-case, nam
 |---|---|---|---|
 | `<slug>.md` — the **snapshot** | the work's current truth | *scope* | everyone, whole, before acting |
 | `<slug>.log.md` — the **log** | everything that happened on the way | *time* | nobody whole; one link at a time |
-| `CONTRACT.md` — the **contract** | the brief, the test seams, the pinned values, each slice's criteria, the conventions the build introduced | *slice count* | `/enable`, `/discern`, `/tenacity` (＋ three parameterised readers, below) |
+| `CONTRACT.md` — the **contract** | the brief, the test seams, the pinned values, each slice's criteria, the conventions the build introduced | *slice count* | `/enable`, `/discern`, `/tenacity` (＋ five parameterised readers, below) |
 | anything else | this work's artifacts — a prototype, a screenshot, a report | — | whoever the snapshot's pointer names |
 
 `.genius/` itself keeps only what spans works: `BACKLOG.md` with `BACKLOG.log.md` behind it ([BACKLOG-FORMAT.md](BACKLOG-FORMAT.md)), `DECIDED.md`, `HISTORY.md`. So `ls .genius/` lists pieces of work, one entry each.
@@ -80,13 +80,13 @@ Active `assumed:` lines, `owed:` lines — a criterion closed on nobody's eyes y
 **Post-mortem:** <one line, at done — the weakest genius this run; a repeat names its adjustment>
 ```
 
-The sections name what each stage owes the next session; the structure flexes to the work. Mid-flight, a stage's working material — Invention's paths, an interview's open questions — is state and sits here until the stage that consumes it compacts it into its conclusion. A stage that never ran has neither a section nor a log entry: absence is the record.
+The sections name what each stage owes the next session; the structure flexes to the work. Mid-flight, a stage's working material — Invention's paths, an interview's open questions — is state and sits here until the stage that consumes it compacts it into its conclusion. A stage that never ran has neither a section nor a log entry: absence is the record. The one exception is an agreed design that starts at `/galvanize`: the Problem and Decision it needs are written from that design, each heading marked `(backfilled from <where the design came from>)`, with no log entry, because a section no stage confirmed must not read as one that was, and the heading mark keeps that visible without a log entry recording a stage that never ran.
 
 **Slices hold the current cut only.** A reshaped slice leaves no corpse; the reshape is a log entry. Three marks: `[ ]` not started, `[x]` closed, `[~]` in progress — first red test run, close not yet — with its start date and a link to a `slice-N-wip` entry (red, green, still owed; appended to as the build moves), because a session dies whenever it dies and `[ ]` over half-built code sends the next one to rebuild what exists or build on it blind. **Every slice is one line.** An open one carries its name, its `after:`, its issue and a link to its criteria in `CONTRACT.md` — never the criteria themselves, because two copies come apart at the first bump. A closed one carries its date and a link to *every* log entry that backs it. **Order is build order, top to bottom**: a slice waits on every slice above it unless `after:` names what it waits on (`after: none` waits on nothing); the explicit form is what lets a coordinator run two slices at once, and absence never means parallel. An edge is more than an order: the seam it crosses has a test in the contract, and the waiting slice's close holds that test green (below).
 
 **Open grows by how many times the user was met**, so it is drained, never shortened, and the door opens at every slice close: a consumed `assumed:` goes to the log with what consumed it; an `owed:` line goes to the log with what the user saw when they looked, and never before, because a criterion whose instrument is their eyes has no other evidence to close on; an item that is work in its own right goes to the log verbatim, and `.genius/BACKLOG.md` takes a one-line seed pointing at that anchor — never straight to the backlog, because a seed is lossy by design. A drained line leaves nothing to point from, so the section carries `[drained](<slug>.log.md#open-displaced-<date>)`, one per drain, never overwritten by the next: an overwritten link is text nobody can reach.
 
-**`next:` says the exact command and is rewritten by every close it survives** — `stage:` plus the roster does not imply it. **At `stage: done` the resting shape stays** — Problem, Decision, changelog, roster — whatever a literal reading of the question says: they are what the work *was*, and `HISTORY.md` and `/reconcile` expect to find them.
+**`stage:` is rewritten by each stage command as its first write, to that stage's value in the template's list** (`/invent` → `invention`, `/discern` → `discernment`, `/galvanize` → `galvanizing`). `/genius` reports it, and the judges that `/enable` and `/tenacity` register read it to know whether a build is running; `done` is set only by Tenacity's close-out or an honest abandonment. **`next:` says the exact command and is rewritten by every close it survives** — `stage:` plus the roster does not imply it. **At `stage: done` the resting shape stays** — Problem, Decision, changelog, roster — whatever a literal reading of the question says: they are what the work *was*, and `HISTORY.md` and `/reconcile` expect to find them.
 
 ## The contract
 
@@ -117,7 +117,7 @@ One block per convention a slice introduced, each naming where it came from.
 
 **A version bump replaces the plan layer whole**, the old version going to the log; the snapshot keeps the one-line changelog. **The established layer survives the bump untouched and is never drained** — not at a bump, not at done: its blocks are exactly what binds the slices not yet built, and the log records, it does not bind. A block's title names who established it — provenance, never a trigger for removal.
 
-Readers: `/enable` and `/tenacity`, about to build or verify against it; `/discern`, when attacking a plan that already has one; `/reconcile`, `/errata` and `/compact` only when already pointed at a work. `/genius` and `/wonder` never open it.
+Readers: `/enable` and `/tenacity`, about to build or verify against it; `/discern`, when attacking a plan that already has one; `/galvanize`, when the work already ran it and `/discern` attacked its contract; `/reconcile`, `/compact`, `/distill` and the `errata` skill only when already pointed at a work. `/genius` and `/wonder` never open it.
 
 ## The log
 
@@ -162,4 +162,4 @@ Compaction displaces at the moment of the action that displaces — the slice cl
 ## Also
 
 - Short, never stripped: the `record-prose` skill holds the sentence discipline. The ceiling never buys itself a shortened kill-reason — only a line that moved to where it belongs.
-- Work that ran `/architect` or `/designer` keeps the confirmed design as a snapshot section and its study as a log entry; the committed language lands in the project's `DESIGN.md`, the architecture in `ARCHITECTURE.md`.
+- Work that ran `/architect` or `/designer` keeps a snapshot section pointing at the committed design and its study as a log entry; the committed language lands in the project's `DESIGN.md`, the architecture in `ARCHITECTURE.md`, and the snapshot points there rather than copying it, because a design held in two binding files is corrected in one and obeyed in the other.

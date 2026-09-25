@@ -1,11 +1,13 @@
 ---
 name: domain-glossary
-description: Maintain the project's shared vocabulary in CONTEXT.md — challenge conflicting terms, sharpen fuzzy language, record resolutions inline. Use when a term conflicts with or is missing from the glossary, when a decision names a new concept, or when another skill needs the glossary discipline.
+description: Maintain the project's shared vocabulary in CONTEXT.md — challenge conflicting terms, sharpen fuzzy language, record resolutions inline. Use when a term being settled with the user conflicts with the glossary or means two things, when a decision names a new project concept that later work will need a word for, or when another skill needs the glossary discipline. Reading CONTEXT.md to use its vocabulary is not this skill, and an ordinary request that uses a term is not an invitation to start a glossary.
 ---
 
 # Domain Glossary
 
-One shared language between the user, the agent and the code — Domain-Driven Design's *ubiquitous language* — living in `CONTEXT.md` at the repo root: a glossary and nothing else. A term sharpened during one piece of work serves every later one: shorter conversations, consistent naming in code and tests.
+One shared language between the user, the agent and the code — Domain-Driven Design's *ubiquitous language* — living in `CONTEXT.md` at the repo root: a glossary and nothing else. A term sharpened during one piece of work serves every later one: shorter conversations, consistent naming in code and tests. Left alone, each conversation coins its own word for the same thing, the code ends up naming one concept three ways, and a term settled once is fought over again by a session that never saw the fight.
+
+The concept: **one concept, one word — written into the glossary the moment it is settled.**
 
 ## Format
 
@@ -30,7 +32,7 @@ Killed: *trash*, *delete* — each carried both meanings at once.
 - **A fought term keeps its fight.** A term that collided carries the collision in one line: what collided, which won, why. A resolution recorded without its collision gets re-litigated.
 - **Published API names outrank opinion.** A misleading name that's public API can't be renamed — define it *against* its general meaning instead ("not actually a cryptographic salt; the name is API, the definition rules").
 - **Tight definitions**, one or two sentences, of what it *is*. **Project concepts only** — general programming concepts don't belong. **No implementation details**: not a spec, a scratchpad or a decision log — decisions live in their work file, indexed in `.genius/DECIDED.md`.
-- **Create lazily**, at the first resolved term. **Don't hijack**: an existing `CONTEXT.md` with other content keeps it; append the `## Language` section and stay scoped to it.
+- **Create lazily**, at the first resolved term, because an empty skeleton is premature documentation. **Don't hijack**: an existing `CONTEXT.md` with other content keeps it, because that content belongs to whoever wrote it and not to this discipline; append the `## Language` section and stay scoped to it.
 
 ## The discipline
 

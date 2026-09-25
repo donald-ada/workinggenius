@@ -4,7 +4,7 @@
 # Premium
 
 ## Brand
-Apple design style
+Premium product style.
 
 ## Style Foundations
 - Visual style: modern

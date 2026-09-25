@@ -1,6 +1,6 @@
 ---
 name: discern
-description: Attack every explored path adversarially, commit to one, and present the commitment — consequences for the user to confirm, kills on the record. Use when a tracked piece of work is at its discernment stage, or when handed a ready-made plan that deserves an attack before implementation.
+description: Attack every explored path adversarially, commit to one, and present the commitment — consequences for the user to confirm, kills on the record. Use when the user asks to run discernment on a tracked piece of work (`/discern`, or in words), or asks for a ready-made plan to be attacked before it is built. A work whose `next:` names this stage is not that ask, because the flow never advances itself, and a plan handed over to be implemented is not an invitation to attack it or to start the flow.
 ---
 
 # Discernment
@@ -14,10 +14,10 @@ Then commit, and present the commitment — not a ballot. The user sees one chos
 ## How it runs
 
 1. Read the paths, `.genius/DECIDED.md`, and the older records the repo keeps; open `CONTRACT.md` only where the plan already has one. Check each round before firing it; correct a drifted one (`errata` skill).
-2. Attack every path from its own weakest joint, the favorite included, and the rule a user's answer pinned along with it — the `inventor` brief says why an answer exempts nothing. Wounds found, never manufactured; what a path survived is recorded too.
+2. Attack every path from its own weakest joint, the favorite included, and attack any rule a user's answer pinned inside a path as hard as the path itself — the [inventor brief](../invent/agents/inventor.md) says why an answer exempts nothing. Wounds found, never manufactured; what a path survived is recorded too.
 3. Commit to the survivor. Where every path dies, say so: back to `/invent` with the wounds as constraints, or to `/wonder` where they indict the problem.
 4. Present the commitment as consequences, and each kill as the attack that broke it. A menu only where the fork is the user's world; teach first where they cannot evaluate it, or record an honest `assumed:`.
-5. Record: the Decision section — chosen, the load-bearing why, one kill-reason line per rejected path; the whole fight under `## discernment` in the log; Invention's paths compacted out of the snapshot; `next: /galvanize`.
+5. Record: the Decision section — chosen, the load-bearing why, one kill-reason line per rejected path; the whole fight under `## discernment` in the log; Invention's paths compacted out of the snapshot; `next: /galvanize <slug>` — the exact command, because with two works at the same stage a bare stage name does not say which one moves.
 
 An unrecorded kill-reason gets re-proposed in six weeks. A decision a future stranger would re-fight earns its line in the decision index at close-out (`decision-record` skill holds the test); most stay with their work file. The fight is kept whole in the log — every attack tried on every path, the ones that landed and the ones the survivor walked out of, because what a design survived tells the builder how much load it was proved to take — under one anchor the Decision section links. The snapshot keeps the decision itself: chosen, the load-bearing why in a few lines, one kill-reason line per rejected path. A kill-reason that names no attack is an opinion.
 

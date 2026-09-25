@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 The workflow runs on defaults (`.genius/` for work files, verify commands discovered per run, no issue mirror), so this skill is about the pointer as much as the settings: a fresh session knows none of it until an instruction file tells it. Run it once per repo, as a conversation: look first (existing `CLAUDE.md`/`AGENTS.md`, any `.genius/` in flight, the task runner, a `CONTEXT.md` or `DESIGN.md` already alive), propose what you found, let the user correct each choice.
 
+The concept: **a setting no instruction file carries does not exist for the next session, so the pointer counts as much as the settings.** Done when the work-file directory exists, any confirmed `CONTEXT.md` terms are written, and a fresh session reading only `CLAUDE.md` finds the `## Working Genius` section through `@AGENTS.md`, with every setting and doc line in it confirmed by the user.
+
 **A — Work-file directory.** Default `.genius/` at the repo root. Recommend committing — done files are decision history every session can read. Create the directory now (a `.gitkeep` where it would be empty).
 
 **B — Verify commands.** Propose the discovered typecheck / test / lint commands; the user corrects them. Pin each in its quiet form — `pytest -q --tb=short`, never `-v` — because a coordinator re-runs every criterion of every slice and carries each run's output in its context to the end of the work.
@@ -55,7 +57,8 @@ Project docs — read before writing, improve while working:
   re-fight earns its line at close-out (decision-record skill), and overturning one moves its line.
 - `.genius/BACKLOG.md`: work discovered but not started. The moment one surfaces, give it one line
   here (genius-file skill); `/genius` lights these up. Order is what to do next, top to bottom.
-  What leaves goes to `.genius/BACKLOG.log.md` — nothing is deleted to make this file shorter.
+  What leaves goes to `.genius/BACKLOG.log.md`, or into the work it became (genius-file
+  skill) — nothing is deleted to make this file shorter.
   `/triage` asks whether a line still belongs; `/reconcile` asks whether the code has satisfied it.
 - `.genius/HISTORY.md`: one line per finished work — what it was and which genius was weakest.
   Written and read at close-out (tenacity skill), so a repeat weakness is caught without reopening
@@ -69,4 +72,4 @@ Verify commands:
 - lint: `<command>`
 ```
 
-Tailor the docs list to what setup found: a project with no interface drops the `DESIGN.md` line, one whose shape is settled and unremarkable drops the `ARCHITECTURE.md` line — each doc kept carries its read-trigger and its write-trigger, because a doc nothing tells sessions to update was current once. Write it as instructions, not description — "check `.genius/` before starting" is followed; "work files live in `.genius/`" is merely true. Editing the section directly is the normal way to change these later; re-running this skill is only for starting over.
+Tailor the section to what setup found, because a fresh session obeys every line it is handed: the `Issue tracking: github` line only where C turned it on (galvanize publishes issues whenever the line is there), `(committed)` only where the user chose to commit; a project with no interface drops the `DESIGN.md` line, one whose shape is settled and unremarkable drops the `ARCHITECTURE.md` line — each doc kept carries its read-trigger and its write-trigger, because a doc nothing tells sessions to update was current once. Write it as instructions, not description — "check `.genius/` before starting" is followed; "work files live in `.genius/`" is merely true. Editing the section directly is the normal way to change these later; re-running this skill is only for starting over.

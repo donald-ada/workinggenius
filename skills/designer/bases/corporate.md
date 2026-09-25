@@ -4,7 +4,7 @@
 # Corporate
 
 ## Brand
-Corporate UI/UX design focuses on professionalism, consistency, and brand alignment, typically featuring minimalist layouts, structured grids, and, in 2026, AI-driven personalization
+Corporate UI/UX design focuses on professionalism, consistency, and brand alignment, typically featuring minimalist layouts and structured grids.
 
 ## Style Foundations
 - Visual style: enterprise, premium

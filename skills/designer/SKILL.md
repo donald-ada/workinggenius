@@ -15,7 +15,7 @@ The concept: **know who is looking and where; name the base and the delta; settl
 
 - **Audience and context come before taste.** Who uses this, on what, for how long, in what state of mind — a nurse glancing at a phone between patients, an analyst at a desk for eight hours — decides density, type size, motion budget and contrast before anyone has an opinion about colors. Ask it first, in one exchange, because a delta chosen against the wrong audience is a beautiful mistake.
 
-- **Then the base — and how much of it survives.** An existing surface, a brand guide, a shipped base (13 curated templates in this skill's `bases/` folder — minimal, editorial, neobrutalism, glassmorphism, neumorphism, bento, mono, retro, neon, paper, premium, corporate, claymorphism — vendored MIT from [awesome-design-skills](https://github.com/bergside/awesome-design-skills), trimmed to their foundations and tokens), a famous style, or nothing. Delta zero is adopting: one exchange, no research. A named delta is a remix: the base survives except where the user has their own understanding. No base is crafting from the problem itself. **Cost follows the delta**; a shipped base is a starting *token set*, and the language is the delta written down.
+- **Then the base — and how much of it survives.** An existing surface, a brand guide, a shipped base (13 curated templates in this skill's `bases/` folder — minimal, editorial, neobrutalism, glassmorphism, neumorphism, bento, mono, retro, neon, paper, premium, corporate, claymorphism — vendored MIT from [awesome-design-skills](https://github.com/bergside/awesome-design-skills), trimmed to their foundations and tokens), a famous style, or nothing. Delta zero is adopting: one exchange about the base and no research. The tile and the computed floor still run, because a shipped base's tokens are not guaranteed to pass (mono's text on its surface is 3.82:1). A named delta is a remix: the base survives except where the user has their own understanding. No base is crafting from the problem itself. **Cost follows the delta**; a shipped base is a starting *token set*, and the language is the delta written down.
 
 - **A file base is read; an impression base is honored, never impersonated.** A template in hand is ground truth — read it, cite it. A vibe-named base ("Notion-like") yields *our* tokens in its spirit, never invented hex codes presented as facts about someone else's product.
 
@@ -29,7 +29,7 @@ The concept: **know who is looking and where; name the base and the delta; settl
 
 - **Tokens are the contract, and they carry roles, not just values.** `color.surface`, `color.text.muted`, `color.accent` bind screens; `#F4F1EA` binds nothing. Type is a scale with a stated ratio and a role per step; spacing a scale on one base; radius, elevation, duration and easing named the same way. Dark mode is decided here — a second value per role, or a deliberate "light only" — because a theme that arrives by drift arrives with half its contrast ratios unmeasured.
 
-- **Commit one language to `DESIGN.md`.** The recorded language is auditable: a later review holds a UI diff against it and asks three questions — does it use the roles, does it spend boldness where the signature says, do its states exist. A "no" to any is a finding, not a taste. Craft is the floor whatever the direction; the user buys down from professional, never up.
+- **Commit one language to `DESIGN.md`.** The recorded language is auditable: a later review holds a UI diff against it and asks three questions — does it use the roles, does it spend boldness where the signature says, do its states exist. A "no" to any is a finding, not a taste. Craft is the floor whatever the direction; the user buys down from professional, never up to it.
 
 ## The record
 
@@ -66,7 +66,7 @@ Each with its source. What was looked at and rejected, and why.
 What the language deliberately avoids.
 ```
 
-One language per product: a recorded `DESIGN.md` is consumed, not redone — later screens speak it, a screen that wants to break it is a conversation, not a drift, and an incoming template's own design file is a base input, never a second language. It is binding: rewritten in place when a fight overturns a rule (`errata` skill).
+The study — the base named, the forks the tiles put and what the user saw that settled each, the references hunted — is a log entry under `## designer` where the work has a work file (`genius-file` skill), and the snapshot keeps a section pointing at `DESIGN.md`, because a handoff that never mentions the design sends the next session to redo it. One language per product: a recorded `DESIGN.md` is consumed, not redone — later screens speak it, a screen that wants to break it is a conversation, not a drift, and an incoming template's own design file is a base input, never a second language. It is binding: rewritten in place when a fight overturns a rule (`errata` skill).
 
 ## How it runs
 
@@ -74,6 +74,6 @@ One language per product: a recorded `DESIGN.md` is consumed, not redone — lat
 2. Name the base with the user — file, impression, or none — and ask where they have opinions, plus the one open door.
 3. Build the tile: the same screen under the proposed language, in its real states, two or three ways only where a fork is open. Compute the contrast ratios before showing it; adjust what fails.
 4. Look together; settle each fork by what they see. Hunt live references, price stated, only for what nothing at hand settles.
-5. Write `DESIGN.md` — tokens with roles, the signature, the floor with its numbers — and delete the tiles.
+5. Write `DESIGN.md` — tokens with roles, the signature, the floor with its numbers — and the log entry where there is a work, and delete the tiles.
 
 The committed language is the deliverable; what happens next is the user's to type. Done when the user has chosen by looking at real states, every token has a role, every text/surface pair has a computed ratio at or above the floor, and the signature is one place.
