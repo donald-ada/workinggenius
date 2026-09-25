@@ -14,7 +14,7 @@ The concept: **the layer that binds gets corrected; the layer that records gets 
 One question sorts any line into its layer: **would a cold session act differently because of this line?**
 
 - **Yes — it binds.** The snapshot, the work's `CONTRACT.md`, `.genius/DECIDED.md`, `CONTEXT.md`, `DESIGN.md`, `ARCHITECTURE.md`, `.genius/BACKLOG.md`'s seeds, the `## Working Genius` section. A wrong line here is an instruction, and it gets rewritten in place.
-- **No — it records.** Everything in the log (`<slug>.log.md`, `.genius/BACKLOG.log.md`), and every file at `stage: done`. Append the correction; never edit the line. ⚠ A rule about correcting, not a freeze on routing: a done snapshot still gets compacted by `/compact`, because nothing there is wrong, only misfiled. What stays forbidden at done is rewriting a line because it turned out to be false.
+- **No — it records.** Everything in the log (`<slug>.log.md`, `.genius/BACKLOG.log.md`), and every file at `stage: done`. Append the correction; never edit the line, because the record is the evidence of what a session believed when it acted, and an edited one can no longer explain the work that was built on it. ⚠ A rule about correcting, not a freeze on routing: a done snapshot still gets compacted by `/compact`, because nothing there is wrong, only misfiled. What stays forbidden at done is rewriting a line because it turned out to be false.
 
 A fact that was wrong is usually in both, and both get handled — the binding copy rewritten, the record it came from annotated.
 
@@ -60,4 +60,4 @@ Not a cleanup pass on the log: nothing there is compressed or tidied, because a 
 
 Not a second home for corrections: no `ERRATA.md`, nothing a reader has to know to go and check — every correction lives in the two places the wrong line already lived.
 
-Not a deletion tool. A line removed without its retirement note leaves a hole that reads exactly like a stage that never ran. Nothing is removed silently, including something you wrote an hour ago. Tenacity's close-out distillation — and `/distill`, its retroactive form — is the one carve-out: a single announced move on work that is finished and verified; while work is in flight, nothing is removed, ever.
+Not a deletion tool. A line removed without its retirement note leaves a hole that reads exactly like a stage that never ran. Nothing is removed silently, including something you wrote an hour ago. Tenacity's close-out distillation — and `/distill`, its retroactive form — is the one carve-out: a single announced move on work that is finished and verified; while work is in flight, no log loses a line, and nothing leaves a binding copy without the record saying where it went or why.

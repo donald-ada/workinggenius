@@ -1,6 +1,6 @@
 ---
 name: wonder
-description: Question the work before doing it — the interview that turns a raw idea into a confirmed problem statement. Use when a tracked piece of work is at its wonder stage, or when the user asks to start the Working Genius flow — or to be questioned — on a new idea. An ordinary request to build something is not an invitation to start the flow.
+description: Question the work before doing it — the interview that turns a raw idea into a confirmed problem statement. Use when the user asks to run the interview on a tracked piece of work (`/wonder`, or in words), or when the user asks to start the Working Genius flow — or to be questioned — on a new idea. An ordinary request to build something is not an invitation to start the flow.
 argument-hint: "the idea or request to question"
 ---
 
@@ -19,7 +19,7 @@ The concept: **confirm the problem before designing anything.** Interview the us
 
 ## How it runs
 
-1. Read the snapshot (`genius-file` skill); walk unfamiliar territory first (`blindspot` skill). Homework done now, never a question asked later.
+1. Read the snapshot, or for a new idea create the work file first, as `/genius` does (`genius-file` skill), because every record in step 5 lands there; walk unfamiliar territory first (`blindspot` skill). Homework done now, never a question asked later.
 2. Tell the user the story you would build, and ask the first round with it: independent questions, a recommendation on each, the price where an answer forks the cost.
 3. Grow the next round from the answers. Collide terms with the glossary as they surface (`domain-glossary` skill). Name `/architect` when an architecture question surfaces; never dispatch it.
 4. Write the problem statement back to them — success observable by their own measure, scope edged — and ask for the yes. Their words, not a nod at something vague enough to nod at.

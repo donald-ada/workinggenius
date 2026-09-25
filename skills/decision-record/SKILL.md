@@ -22,7 +22,7 @@ An index line is earned by one question: **would a future stranger re-fight this
 
 ## The discipline
 
-- **Written when the record is finished** — Tenacity's close-out asks the test of everything the work settled; a standalone `/architect` study writes its line when the design is confirmed. Never a second write-up: the line points, the record carries.
+- **Written when the record is finished**, because the line points at a fight, and a fight the work can still reopen or abandon is not yet settled — Tenacity's close-out asks the test of everything the work settled; a standalone `/architect` study writes its line when the design is confirmed; a decision that landed outside the flow writes its line when it lands, because there the line *is* the record. Never a second write-up: the line points, the record carries.
 - **Read before contradicting, and before introducing.** The index is the ammunition `/discern` and `/architect` load: a design that touches a settled decision either dies of the fight on record or names the decision it overturns and why. It is also where an inventor or a builder looks before introducing a seam or a convention, and reuses the one it finds.
 - **Overturning moves the line.** A new fight that beats a settled decision rewrites its line — new verdict, new link — and the old record stays as written. The index carries what the project believes now; the files carry how it came to believe it.
 

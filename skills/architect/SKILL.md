@@ -27,7 +27,7 @@ The concept: **first ask whether to build at all; then design one architecture t
 
 - **Name what changes cheaply, because the design chose it.** An architecture is a bet on which changes will come: it makes some cheap and, by the same move, others dear. Say both — "adding a payment provider is one adapter; changing what a payment *is* touches every boundary" — so the next session knows which requests are a slice and which are a re-architecture.
 
-- **Where a rule can be checked, write the check.** A dependency direction, a latency budget, a boundary nothing may reach around — each is a fitness function: a test, a lint rule, a script the CI runs. Write the ones the architecture depends on, or name them as the first slices, because a rule enforced by a test is an architecture and a rule enforced by memory is a wish. The rest say whose eyes decide.
+- **Where a rule can be checked, write the check.** A dependency direction, a latency budget, a boundary nothing may reach around — each is a fitness function: a test, a lint rule, a script the CI runs. Write the ones the architecture depends on, or name them as the slices that follow the walking skeleton, because a rule enforced by a test is an architecture and a rule enforced by memory is a wish. The rest say whose eyes decide.
 
 - **The walking skeleton proves the architecture before anything is built on it.** The thinnest end-to-end path through every boundary, deployed the way production will deploy it, is the first thing to build and the last chance to change the shape cheaply; `/galvanize` takes it as S1.
 
@@ -77,7 +77,7 @@ The first slice: the thinnest end-to-end path, and how it proves the shape.
 What the design deliberately does not do, and what would have to change for it to.
 
 ## Open
-Forks still owed a ruling. An `assumed:` line lives in the work's snapshot where one exists.
+Forks still owed a ruling. An `assumed:` line lives in the work snapshot's Open (`genius-file` skill) where a work exists, and in this section otherwise, because an assumption recorded nowhere is the hollow confirmation it was meant to replace.
 ```
 
 The study — the field read, the stressors walked, the confirming exchange — is a log entry under `## architect` where the work has a work file (`genius-file` skill), and the snapshot keeps a section pointing at `ARCHITECTURE.md`. A confirmed design a future stranger would re-fight gets its line in `.genius/DECIDED.md` (`decision-record` skill). One architecture per system: a recorded `ARCHITECTURE.md` is consumed, not redone — later work designs inside its boundaries, a change that wants to cross one is a conversation, not a drift, and a subsystem gets its own file only when its qualities rank differently from the whole's.
@@ -85,7 +85,7 @@ The study — the field read, the stressors walked, the confirming exchange — 
 ## How it runs
 
 1. Read what is already settled: `.genius/DECIDED.md`, `CONTEXT.md`, an existing `ARCHITECTURE.md`, records that predate this plugin. A study on record is consumed; research only what it does not cover.
-2. Study the field, sources in hand, and put build-or-adopt to the user with your recommendation and its price. Adopt wins → record it and stop.
+2. Study the field, sources in hand, and put build-or-adopt to the user with your recommendation and its price. Adopt wins → record what is adopted, the delta it leaves and the sources that showed it covers the need: a line in `.genius/DECIDED.md` (`decision-record` skill), plus the study as a log entry under `## architect` where there is a work. Then stop. An adopt with no record gets re-fought by the next session that wants to build, and that line, confirmed by the user, is this path's done.
 3. Ask for the ranked qualities and the load that is real; turn each quality into a scenario; ask the stack forks that belong to the user's world.
 4. Design one architecture — boundaries by ownership, contracts across them, the envelope, the stack with selectors, cheap and dear — and attack it: the field's convergences, the stressors, the settled decisions. Change what an attack breaks; record what it walked out of.
 5. Play it back as consequences until the user says that's what they want; teach or record `assumed:` where they can't call a fork.

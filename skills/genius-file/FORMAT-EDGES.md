@@ -1,6 +1,6 @@
 # Format Edges
 
-What [FILE-FORMAT.md](FILE-FORMAT.md) leaves out on purpose: the one repair a session meets rarely, and the measurements behind rules that would otherwise read as arbitrary. Read it when you meet the case, or before disagreeing with a rule. `/compact`, `/distill` and `/reconcile` read it as a matter of course; a slice close never does.
+What [FILE-FORMAT.md](FILE-FORMAT.md) leaves out on purpose: the one repair a session meets rarely, and the measurements behind rules that would otherwise read as arbitrary. Read it when you meet the case, or before disagreeing with a rule. `/compact` links here, and `/reconcile` reaches it through the format's pointer, when they meet a key with prose after it; a slice close never reads it.
 
 ## A heading that broke its own anchor
 
@@ -16,3 +16,4 @@ The rules are what they are because of these, and a rule reopens the way every r
 - **The log does not already hold what a collapse displaces.** On a real work file the log carried every distinctive token of the later slices' paragraphs and only 57–78% of the first two slices', because early entries are thinner than the summaries written above them. That is why a collapse appends verbatim and never reads the log to decide what is redundant. (`5a5f6de`)
 - **Provenance is not a removal trigger.** Block titles in the contract's established layer are written as "who established this", not "who still needs it"; an eviction pass keyed on those titles threw away the newest rule in the file. That is why the established layer is never drained.
 - **A seed that became its work can still lose content.** Measured once: a backlog seed's stated rule reached no section of the work that absorbed it. That is why the line leaves only after checking the work took the seed's content up. (`84f227b`)
+- **A line bound does not bound the file.** On one real project sixteen commits took `BACKLOG.md` from 748 to 10062 characters, and none of them left it smaller. That is why the backlog gets a log behind it and the same invariant a work has. (`96d2144`)

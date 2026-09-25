@@ -4,7 +4,7 @@
 # mono design
 
 ## Brand
-Join the private club where people are building, monetizing, and marketing products with AI.
+
 
 ## Style Foundations
 - Visual style: minimal, clean, high-contrast, playful, matrix

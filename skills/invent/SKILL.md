@@ -1,6 +1,6 @@
 ---
 name: invent
-description: Genuinely explore structurally different approaches before committing — the alternatives exist to be beaten, not to be presented. Use when a tracked piece of work is at its invention stage.
+description: Genuinely explore structurally different approaches before committing — the alternatives exist to be beaten, not to be presented. Use when the user asks to run invention on a tracked piece of work (`/invent`, or in words). A work whose `next:` names this stage is not that ask, because the flow never advances itself.
 ---
 
 # Invention
@@ -16,9 +16,9 @@ Each inventor is the plugin's `inventor` agent ([agents/inventor.md](agents/inve
 ## How it runs
 
 1. Read the snapshot's Problem, `.genius/DECIDED.md`, `CONTEXT.md`, and any `/architect` study on record. No grain to read at all → stop and offer `/architect`.
-2. Choose the angles: the three this skill names, or the sub-decisions the study left open. More than one, never a fixed count.
+2. Choose the angles: kinds of structural difference like the ones this skill names, or the sub-decisions the study left open, as many as the uncertainty warrants, because the count follows how open the problem is and not a habit. More than one, because one path is anchoring.
 3. Spawn one `inventor` agent per angle, in parallel, each handed the confirmed problem, its angle and the work's folder — nothing of the conversation. Stay awake until every one returns; dispatch synchronously where you cannot be sure the harness wakes you.
 4. Verify each returned path's claims against the repo yourself.
-5. Record the paths in the snapshot as state waiting for the attack — shape, what it makes easy, what it costs, what it was checked against — and `next: /discern`.
+5. Record the paths in the snapshot as state waiting for the attack — shape, what it makes easy, what it costs, what it was checked against — and `next: /discern <slug>`, the exact command, because with two works at the same stage a bare stage name does not say which one moves.
 
 Then `/discern`. Done when the snapshot carries real alternatives, each showing the ground it stands on, ready to be attacked, not to be chosen from. They are state while they wait; Discernment's close compacts them to kill-reason lines and moves the full paths to the log.
