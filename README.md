@@ -63,7 +63,7 @@ Then, in any project:
 **Support:**
 
 - **/architect** — adopt an existing system or build — and if build, one committed architecture in `ARCHITECTURE.md`: qualities ranked, boundaries by ownership, stressed against the field and the future, proven by a walking skeleton, confirmed in consequences
-- **/designer** — the style conversation building momentum never starts: audience first, a brief Claude Code's `/design` draws directions from (13 template bases when you name a look), taste settled by looking at real states, a critic reading the chosen one against the brief, accessibility computed as the floor, one committed language of tokens with roles in `DESIGN.md`
+- **/designer** — the style conversation building momentum never starts: audience first, a written brief every direction is drawn under (13 template bases when you name a look), taste settled by looking at real states, a critic reading the chosen one against the brief, accessibility computed as the floor, one committed language of tokens with roles in `DESIGN.md`
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
