@@ -41,8 +41,8 @@ stage or slice under `log/` — of which only the branch a question needs is ope
 attack or verify against it; and that work's own artifacts. That one folder is everything a session
 needs — other slugs, in flight or done, stay closed. Anything written into a work's folder links
 relative to that folder, never from the repo root. The user types `/genius` for status across all
-of them and the next command; the flow is /wonder → /invent → /discern → /galvanize → /enable →
-/tenacity, and every stage is a command they type.
+of them and the next command; the flow is /wonder → /discern (which runs Invention first) → /galvanize →
+/enable → /tenacity, and every stage runs only when they type its command.
 
 Project docs — read before writing, improve while working:
 - `CONTEXT.md`: the project's vocabulary. Name things in its terms; the moment a conversation
