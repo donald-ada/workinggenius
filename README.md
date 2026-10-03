@@ -1,6 +1,6 @@
 # Working Genius
 
-A development workflow for Claude Code — 22 skills, five subagents (an inventor, an attacker, a builder, a reviewer and a design critic, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
+A development workflow for Claude Code — 24 skills, five subagents (an inventor, an attacker, a builder, a reviewer and a design critic, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -40,6 +40,17 @@ Then, in any project:
 /tenacity                                 # verify everything fresh, review, clean up, commit
 ```
 
+Small work, where the problem needs confirming and no design is in question, takes the short path — the same depth at every stage it runs, and the stages it skips are skips you make by not typing them:
+
+```
+/genius fix the date parser on two-digit years   # start it
+/wonder                                          # confirm the problem and how you'll judge it done
+/enable <slug>                                   # build it straight against those criteria, tests first
+/tenacity                                        # verify fresh, review, commit
+```
+
+Two commands stand outside the flow and track nothing: `/attack` puts a plan you hand over under blind attack, and `/fresh-eyes` has a diff reviewed by eyes that never saw it written.
+
 `/genius` at any time shows where every piece of work stands and what to run next. Run `/setup-working-genius` once per repo: it pins the work-file directory, verify commands, and issue tracking, and writes the pointer that tells every future session this project works this way.
 
 **One piece of work = one folder** at `.genius/<slug>/` — the snapshot (current truth, bounded by a character ceiling), the append-only log behind it, a tree of one short root and one branch per stage or slice, so a session opens only the branch it needs, the contract that binds the unbuilt slices, and the work's own artifacts. The files — not conversation memory — carry the work: the confirmed problem, the options and their kill-reasons, the slices and where they stand. Any fresh session picks up exactly where the last one stopped. Not every piece of work deserves all six stages — dropping one is your call, made by not typing it; the snapshot's missing section is the record.
@@ -62,6 +73,8 @@ Then, in any project:
 
 - **/architect** — adopt an existing system or build — and if build, one committed architecture in `ARCHITECTURE.md`: qualities ranked, boundaries by ownership, stressed against the field and the future, proven by a walking skeleton, confirmed in consequences
 - **/designer** — the style conversation building momentum never starts: audience first, a written brief every direction is drawn under (13 template bases when you name a look), taste settled by looking at real states, a critic reading the chosen one against the brief, accessibility computed as the floor, one committed language of tokens with roles in `DESIGN.md`
+- **/attack** — any plan or set of approaches under blind attack, one attacker per path, the wounds checked against the repo before you see them; nothing tracked
+- **/fresh-eyes** — a diff reviewed against what you say it should do, by a reviewer with no memory of how it was written; findings checked before you see them, nothing tracked
 - **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
