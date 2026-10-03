@@ -9,7 +9,7 @@ argument-hint: "optional: the diff or range, and what it should do"
 
 The close-out review, without the flow around it. Its failure mode is the review by the mind that wrote the code, which reads what it meant instead of what it wrote.
 
-The concept: **the diff goes to a reviewer that never saw it being written, judged against what it was for, and its findings come back as claims to check.** What the reviewer is told, why it is never told what not to flag, and why its findings are verified before anything is fixed are `/tenacity`'s, in [../tenacity/SKILL.md](../tenacity/SKILL.md); what differs is only what surrounds the review.
+The concept: **the diff goes to a reviewer that never saw it being written, judged against what it was for, and its findings come back as claims to check.** What the reviewer is told, why it is never told what not to flag, and why its findings are verified before anything is fixed are `/tenacity`'s, in [../tenacity/SKILL.md](../tenacity/SKILL.md). What differs is only what surrounds the review.
 
 ## How it runs
 

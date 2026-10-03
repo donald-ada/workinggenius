@@ -9,7 +9,7 @@ argument-hint: "the plan or approaches to attack, or where they are written"
 
 Discernment's attack, without the flow around it. Its failure mode is the one `/discern` exists for: a plausible-but-wrong plan going ahead because nobody tried to kill it, here on a plan that was never tracked and never will be.
 
-The concept: **the paths the user names go to blind attackers, and the user gets back the wounds with their evidence, not a verdict dressed as one.** What an attack is, why each path gets its own fresh attacker, and why what comes back is a claim until checked against the repo are `/discern`'s, in [../discern/SKILL.md](../discern/SKILL.md), and this command takes them from there whole; what differs is only what surrounds the attack.
+The concept: **the paths the user names go to blind attackers, and the user gets back the wounds with their evidence, not a verdict dressed as one.** What an attack is, why each path gets its own fresh attacker, and why what comes back is a claim until checked against the repo are `/discern`'s, in [../discern/SKILL.md](../discern/SKILL.md). This command takes them from there whole; what differs is only what surrounds the attack.
 
 ## How it runs
 

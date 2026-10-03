@@ -30,6 +30,13 @@ Four questions in this order, because each earlier one can take away what a late
 
 **Read-only until the user has ruled, one line at a time.** Each proposal carries the seed's own words, which question it answers, what it wants done, and where the text goes. Categories and counts are wrong here: every one of these is "is this still worth doing", the user's alone. An honest zero proves nothing was manufactured, so say it when there is nothing.
 
-Then the calls land, each through the discipline that owns it: a retirement or a correction through `errata`'s moves into `BACKLOG.log.md`, a merge by the format's own mechanics, a promotion offered as `/genius <the seed's what>` for the user to type, because the flow never starts a work for them and `/genius` removes the line when it does, a reorder as a write of the lines. ⚠ One lands as a bare deletion: a seed that *became* its work writes no entry (the format says why), and filing it as a retirement puts a body in the log nothing was displaced into.
+Then the calls land, each through the discipline that owns it:
+
+- a retirement or a correction through `errata`'s moves into `BACKLOG.log.md`
+- a merge by the format's own mechanics
+- a promotion offered as `/genius <the seed's what>` for the user to type, because the flow never starts a work for them and `/genius` removes the line when it does
+- a reorder as a write of the lines
+
+⚠ One lands as a bare deletion: a seed that *became* its work writes no entry (the format says why), and filing it as a retirement puts a body in the log nothing was displaced into.
 
 Done when every line in scope has been through the questions that scope allows and carries a ruling or an explicit no-change, and everything undecidable inside `.genius/` is named.

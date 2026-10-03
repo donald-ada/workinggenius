@@ -43,4 +43,15 @@ Those are the counts; what this command adds is the reading — which stage, wha
 
 ## When work feels wrong
 
-The skipped or rushed genius is the usual cause — match the symptom: built the wrong thing → Wonder; the design fights the codebase → Invention or Discernment; the same decision keeps getting re-litigated → kill-reasons never recorded; sessions stall with nobody sure what's next → slices not grabbable; huge untested diff → Enablement; "done" three times → Tenacity; session after session builds on something the repo stopped doing → the binding docs drifted, `/reconcile`; the backlog has grown past reading and the same idea appears twice → `/triage`. Repair the most upstream gap first — downstream inherits its fix. Not everything starts at Wonder: an agreed design starts at `/galvanize` (the Problem and Decision it needs are written from the agreed design, each heading marked `(backfilled from <source>)`, per the `genius-file` format); an imported plan gets `/discern`'s attack before it gets slices; a bug gets the `diagnose` skill's loop. And not everything ends at slices: small work built directly after Wonder is built by `/enable <slug>` with no Slices section — the same loop, aimed at the Problem's success criteria — and still closes at `/tenacity`.
+The skipped or rushed genius is the usual cause. Match the symptom:
+
+- built the wrong thing → Wonder
+- the design fights the codebase → Invention or Discernment
+- the same decision keeps getting re-litigated → kill-reasons never recorded
+- sessions stall with nobody sure what's next → slices not grabbable
+- huge untested diff → Enablement
+- "done" three times → Tenacity
+- session after session builds on something the repo stopped doing → the binding docs drifted, `/reconcile`
+- the backlog has grown past reading and the same idea appears twice → `/triage`
+
+Repair the most upstream gap first — downstream inherits its fix. Not everything starts at Wonder: an agreed design starts at `/galvanize` (the Problem and Decision it needs are written from the agreed design, each heading marked `(backfilled from <source>)`, per the `genius-file` format); an imported plan gets `/discern`'s attack before it gets slices; a bug gets the `diagnose` skill's loop. And not everything ends at slices: small work built directly after Wonder is built by `/enable <slug>` with no Slices section — the same loop, aimed at the Problem's success criteria — and still closes at `/tenacity`.
