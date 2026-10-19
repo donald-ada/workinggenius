@@ -41,7 +41,7 @@ def text(path):
 
 def work_dir():
     """setup pins it as a `Work files: `<dir>`` line in the project's instruction file."""
-    for name in ('CLAUDE.md', 'AGENTS.md', os.path.join('.claude', 'CLAUDE.md')):
+    for name in ('AGENTS.md', 'CLAUDE.md'):
         try:
             m = re.search(r'Work files:\s*`([^`]+)`', text(name))
         except OSError:

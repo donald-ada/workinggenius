@@ -3,18 +3,6 @@ name: enable
 description: Build one slice at a time with red-before-green tests at the agreed seams, tight feedback loops, and fresh-eyes review at every slice close. Use when the user asks to build a tracked piece of work or one of its slices (`/enable`, or in words) — including small work that never cut slices, built against its confirmed problem. A work whose `next:` names this stage is not that ask, because the flow never advances itself.
 argument-hint: "a work slug to coordinate all slices, or 'slug, slice N' to build one"
 allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py *)
-hooks:
-  Stop:
-    - hooks:
-        - type: command
-          command: python3 "${CLAUDE_PLUGIN_ROOT}/skills/genius-file/stop-judge.py"
-          timeout: 90
-  SubagentStop:
-    - matcher: "workinggenius:builder"
-      hooks:
-        - type: command
-          command: python3 "${CLAUDE_PLUGIN_ROOT}/skills/genius-file/stop-judge.py"
-          timeout: 90
 ---
 
 # Enablement
@@ -62,6 +50,6 @@ Then red → green, at the agreed seams, until the criteria are covered: the fai
 
 The evidence goes in the log, not the commit message (`genius-file` skill says why), and the close you report to the user names where it is — the log entry's anchor — or carries its lines, because "all criteria verified" with nowhere to look is a claim they can only take on faith. The entry is appended to the slice's branch and linked without opening the rest of the log — `python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py append <slug> slice-N slice-N`, the entry on stdin, writes it, and `anchors <slug>` lists the branches and keys that exist and what links them — and the close is composed first and written once per file. Compact the snapshot in the same commit: the format's question to each line, each answer routed. ⚠ **A convention this slice introduced lands in `CONTRACT.md` even where it never became a snapshot line**: something settled at the keyboard binds the slices not yet built all the same, and the next builder opens that file, not this slice's log. **Open is drained here rather than left for close-out**: a line the slice consumed leaves with what consumed it; one that turned out to be work in its own right leaves as a seed in `.genius/BACKLOG.md`. What the build merely disproved — a stated fact, a value that measured differently — is the `errata` skill's line-level correction.
 
-**A slice earns its close under fresh eyes, not just green tests.** Before the closing commit, hand the slice's diff to the plugin's `reviewer` agent ([agents/reviewer.md](../tenacity/agents/reviewer.md)), its task message naming the diff, the criteria and the contract it is judged against, and where the record lives. Don't tell it what not to flag, because the diff's weakest joint is the one you didn't think to name. Treat its findings as claims to verify, because a review sent looking will find something and a finding fixed unchecked costs the fix. Fix what's real before the commit; what's real but not this slice's job goes to `.genius/BACKLOG.md` or an Open line. The slice's log entry notes the outcome in one line — `reviewed → 2 findings fixed, 1 to backlog` — so close-out can trust the slice was reviewed without re-reading its diff, and Tenacity's reviewer is free for what slice-sized eyes cannot see: the seams between slices.
+**A slice earns its close under fresh eyes, not just green tests.** Before the closing commit, hand the slice's diff to the `reviewer` agent ([agents/reviewer.md](../tenacity/agents/reviewer.md)), its task message naming the diff, the criteria and the contract it is judged against, and where the record lives. Don't tell it what not to flag, because the diff's weakest joint is the one you didn't think to name. Treat its findings as claims to verify, because a review sent looking will find something and a finding fixed unchecked costs the fix. Fix what's real before the commit; what's real but not this slice's job goes to `.genius/BACKLOG.md` or an Open line. The slice's log entry notes the outcome in one line — `reviewed → 2 findings fixed, 1 to backlog` — so close-out can trust the slice was reviewed without re-reading its diff, and Tenacity's reviewer is free for what slice-sized eyes cannot see: the seams between slices.
 
 Then `/tenacity`. Done when every slice is built and every criterion checked against output that actually ran — its log entry naming, per criterion, what ran and what it showed. A criterion checked in your head has not been checked.

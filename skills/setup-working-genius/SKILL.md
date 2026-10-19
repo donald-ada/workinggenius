@@ -6,9 +6,9 @@ disable-model-invocation: true
 
 # Setup Working Genius
 
-The workflow runs on defaults (`.genius/` for work files, verify commands discovered per run, no issue mirror), so this skill is about the pointer as much as the settings: a fresh session knows none of it until an instruction file tells it. Run it once per repo, as a conversation: look first (existing `CLAUDE.md`/`AGENTS.md`, any `.genius/` in flight, the task runner, a `CONTEXT.md` or `DESIGN.md` already alive), propose what you found, let the user correct each choice.
+The workflow runs on defaults (`.genius/` for work files, verify commands discovered per run, no issue mirror), so this skill is about the pointer as much as the settings: a fresh session knows none of it until an instruction file tells it. Run it once per repo, as a conversation: look first (any existing `AGENTS.md` or client-named instruction file, any `.genius/` in flight, the task runner, a `CONTEXT.md` or `DESIGN.md` already alive), propose what you found, let the user correct each choice.
 
-The concept: **a setting no instruction file carries does not exist for the next session, so the pointer counts as much as the settings.** Done when the work-file directory exists, any confirmed `CONTEXT.md` terms are written, and a fresh session reading only `CLAUDE.md` finds the `## Working Genius` section through `@AGENTS.md`, with every setting and doc line in it confirmed by the user.
+The concept: **a setting no instruction file carries does not exist for the next session, so the pointer counts as much as the settings.** Done when the work-file directory exists, any confirmed `CONTEXT.md` terms are written, and a fresh session reading only `AGENTS.md` finds the `## Working Genius` section, with every setting and doc line in it confirmed by the user.
 
 **A — Work-file directory.** Default `.genius/` at the repo root. Recommend committing — done files are decision history every session can read. Create the directory now (a `.gitkeep` where it would be empty).
 
@@ -26,7 +26,7 @@ Three settings, and it stays three: configuration is for what a session must kno
 
 ## Where the pointer goes
 
-Agents don't share one instruction file: Claude Code reads `CLAUDE.md`, most others read `AGENTS.md`. So write **both**: the section goes in `AGENTS.md`, and `CLAUDE.md` carries `@AGENTS.md` as its first line to import it. Update existing files in place and preserve everything in them. **Move** any `## Working Genius` section already in `CLAUDE.md` whole into `AGENTS.md`, lessons included, leaving only the import: two copies of these settings is worse than none, because a model reading both picks between them arbitrarily.
+The pointer goes in `AGENTS.md` at the repo root — the one instruction file every Agent Skills client reads. Update it in place and preserve everything already in it. Where an older, client-named instruction file (`CLAUDE.md` and the like) still carries a `## Working Genius` section, **move it whole** into `AGENTS.md`, lessons included, and leave that file otherwise untouched: two copies of these settings is worse than none, because a model reading both picks between them arbitrarily.
 
 ```markdown
 ## Working Genius

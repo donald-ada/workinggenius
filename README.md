@@ -1,6 +1,8 @@
 # Working Genius
 
-A development workflow for Claude Code — 24 skills, five subagents (an inventor, an attacker, a builder, a reviewer and a design critic, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
+`v0.35.0`
+
+A client-agnostic development workflow — 24 skills, five subagents (an inventor, an attacker, a builder, a reviewer and a design critic, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -15,17 +17,16 @@ Patrick Lencioni's *Six Types of Working Genius* names the six stages every piec
 | **Enablement** — building with feedback | A huge diff, no tests, revealed big-bang at the end. |
 | **Tenacity** — finishing with evidence | "Done!" — on stale evidence, or none. It was "done" three times. |
 
-This plugin walks every piece of work through all six — and every stage runs only when you type its command (Invention runs inside `/discern`, since nothing in it waits on you), so one you don't type simply doesn't run: the work file shows what ran and what didn't. Gaps stay visible instead of becoming mysteries.
+This package walks every piece of work through all six — and every stage runs only when you type its command (Invention runs inside `/discern`, since nothing in it waits on you), so one you don't type simply doesn't run: the work file shows what ran and what didn't. Gaps stay visible instead of becoming mysteries.
 
 ## Install
 
-In Claude Code:
+Nothing to build, nothing to run: the skills are plain markdown folders under `skills/`, and the five subagents are markdown briefs inside the skill that spawns each. Install by pointing an Agent Skills client at this repo's `skills/`:
 
-```
-/plugin marketplace add donald-ada/workinggenius
-```
+- **Command Code** — put the skill folders on the client's path: `cmd --skill ./skills` for one session, `"skills": ["./skills"]` in a `settings.json`, or copy/symlink them into `~/.commandcode/skills/` (all projects) or `.commandcode/skills/` (this project). Its subagents load only from `.commandcode/agents/` or `~/.commandcode/agents/`, so copy `skills/*/agents/*.md` there and give each a `tools:` line (`tools: "*"`), because Command Code grants an agent nothing by default.
+- **Any other Agent Skills client** — point it at `skills/`, or copy the folders into its skills directory; where the client has a subagent registry, register the briefs under `skills/*/agents/`.
 
-Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — five subagents, two judges registered when you type `/enable` or `/tenacity` and never by installation, blocking the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
+What rides inside the skills is the client's: five subagents and the format's own instrument, `skills/genius-file/measure.py`, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
 
 Then, in any project:
 
