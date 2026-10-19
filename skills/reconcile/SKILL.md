@@ -3,7 +3,6 @@ name: reconcile
 description: Check the project's binding documents against the repo they describe — settled decisions, glossary terms, pinned commands, in-flight plan contracts, the links between file and record — and route every drift to its correction.
 disable-model-invocation: true
 argument-hint: "optional: a work slug, or one doc to check"
-allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py *)
 ---
 
 # Reconcile
@@ -18,11 +17,11 @@ The user types it, at the moments the answer changes something: before designing
 
 ## What gets checked
 
-Every line, against the repo — never against what you remember of it. With an argument, only that slug or that doc. Two of the checks are the instrument's, read as this command was invoked — every snapshot against its ceiling, and both directions of the links; where a policy notice shows instead (shell injection disabled), run it before reporting, because a ceiling or a link reported without the instrument's output is a drift you cannot show:
+Every line, against the repo — never against what you remember of it. With an argument, only that slug or that doc. Two of the checks are the instrument's, read as this command was invoked — every snapshot against its ceiling, and both directions of the links; run it before reporting, the paths relative to this skill's own folder, because a ceiling or a link reported without the instrument's output is a drift you cannot show:
 
-```!
-python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py snapshots
-python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py links
+```bash
+python3 ../genius-file/measure.py snapshots
+python3 ../genius-file/measure.py links
 ```
 
 - **`.genius/DECIDED.md`** — does each decision's constraint still exist in the code, and does its link still reach the fight that settled it?

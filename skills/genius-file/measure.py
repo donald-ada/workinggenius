@@ -13,7 +13,7 @@ by hand.
 
 It counts and never decides; the one command that writes, `append`, writes
 only what it is handed, where the caller named, and refuses rather than guesses. It always exits 0 and never raises: a skill
-that injects this command is aborted whole if the command fails, and a
+whose instrument fails would stall, and a
 count that could not be taken is worth reporting, never worth losing the
 skill over. The rules it measures against live in FILE-FORMAT.md and
 BACKLOG-FORMAT.md beside it; the numbers here are read from there.

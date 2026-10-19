@@ -3,7 +3,6 @@ name: compact
 description: Put the compaction question to a snapshot that drifted — route what no longer constrains unfinished work, and say what moves before moving it. In flight or done; the log is appended to, never edited or trimmed.
 disable-model-invocation: true
 argument-hint: "optional: a work slug, or nothing to put the question to every in-flight snapshot"
-allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py *)
 ---
 
 # Compact
@@ -12,11 +11,11 @@ Every close is supposed to compact — the question in [genius-file's format](..
 
 The concept: **the same question, the same destinations, applied where a close did not — and nothing moves before the user has seen what moves.** The format owns the question, its destinations and its tie-breaks; reading it there is the first step. What this command adds is the retroactive pass, the proposal, and the checks below.
 
-The counts as this command was invoked — every snapshot, whole and roster excluded, against the ceiling — and both directions of the invariant: links whose target or anchor is missing, log entries nothing links, keys with prose after them. Where a policy notice shows instead (shell injection disabled), run it before proposing:
+The counts as this command was invoked — every snapshot, whole and roster excluded, against the ceiling — and both directions of the invariant: links whose target or anchor is missing, log entries nothing links, keys with prose after them. Run it before proposing, the paths relative to this skill's own folder:
 
-```!
-python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py snapshots
-python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py links
+```bash
+python3 ../genius-file/measure.py snapshots
+python3 ../genius-file/measure.py links
 ```
 
 - **Scope: a snapshot with a log beside it, in flight or done.** Unlike `/distill`, being finished is no bar: routing a misfiled line is not correcting a wrong one (`errata` skill carries the carve-out). **The log is appended to and never otherwise touched.** A heading whose key carries prose after it is the case that most tempts a pass to break that rule. [FORMAT-EDGES.md](../genius-file/FORMAT-EDGES.md) holds the repair: it is the link, not the heading, and every link to it, not the first one you saw. ⚠ **A link whose target is genuinely not in the log is reported, never repaired** — check first that it is not the prose-after-key case. Repairing it would mean writing the log, which this command does not do, or guessing an anchor, which puts a wrong door where a missing one at least reads as missing; the call is the user's.

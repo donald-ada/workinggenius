@@ -3,7 +3,6 @@ name: distill
 description: Retroactively distill the logs of finished work — delete what the repo now answers, keep what code cannot say. Done work only; in-flight logs are never touched.
 disable-model-invocation: true
 argument-hint: "optional: a work slug, or nothing to sweep all undistilled done work"
-allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py *)
 ---
 
 # Distill
@@ -12,10 +11,10 @@ Tenacity distills a log at close-out. Work that finished before that rule existe
 
 The concept: **close-out's one rule — does the repo answer this now? — applied where close-out never was, with the check close-out didn't need.** At close-out the verification is minutes old; here it may be months, so the rule is a live question per item:
 
-- **Scope: done, has a log, undistilled.** Only works at `stage: done` with a log whose root, `<slug>.log.md`, does not open with `distilled`. In-flight logs are never touched, whatever the argument says, because the repo can only answer for work that is finished and verified, and this deletion is `errata`'s one carve-out for exactly that work; a slug that names in-flight work is skipped for that reason. The scan is the instrument's — where a policy notice shows instead, run it before proposing:
+- **Scope: done, has a log, undistilled.** Only works at `stage: done` with a log whose root, `<slug>.log.md`, does not open with `distilled`. In-flight logs are never touched, whatever the argument says, because the repo can only answer for work that is finished and verified, and this deletion is `errata`'s one carve-out for exactly that work; a slug that names in-flight work is skipped for that reason. The scan is the instrument's — run it before proposing, the path relative to this skill's own folder:
 
-  ```!
-  python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py distill
+  ```bash
+  python3 ../genius-file/measure.py distill
   ```
 - **An item leaves only if the repo still answers it.** Per-criterion evidence goes where the test it names is still in the tree; a test the repo has since dropped makes that line possibly the last record standing, so it stays. Superseded contract bodies go (each keeps its one-line why); the interview's play-by-play goes where the snapshot carries the confirmed problem; a close-out review report shrinks to its stub where the snapshot carries its findings. What code can never answer always stays: decisions and kill-reasons, corrections and what overturned them, the user's words as they said them.
 - **A pointed-at entry stays, whatever its category.** Before an entry leaves, check nothing still links to it. ⚠ **Check `.genius/BACKLOG.log.md` first**, because it is append-only and its pointers can never be repaired; then `.genius/DECIDED.md`, `.genius/BACKLOG.md`, and ⚠ **the work's own `CONTRACT.md`**. Its established layer names its source entry per block and is never drained, so its `[source]` links are still live months later, and per-criterion evidence is exactly what a block established by a slice points at.

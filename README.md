@@ -26,7 +26,7 @@ Nothing to build, nothing to run: the skills are plain markdown folders under `s
 - **Command Code** — put the skill folders on the client's path: `cmd --skill ./skills` for one session, `"skills": ["./skills"]` in a `settings.json`, or copy/symlink them into `~/.commandcode/skills/` (all projects) or `.commandcode/skills/` (this project). Its subagents load only from `.commandcode/agents/` or `~/.commandcode/agents/`, so copy `skills/*/agents/*.md` there and give each a `tools:` line (`tools: "*"`), because Command Code grants an agent nothing by default.
 - **Any other Agent Skills client** — point it at `skills/`, or copy the folders into its skills directory; where the client has a subagent registry, register the briefs under `skills/*/agents/`.
 
-What rides inside the skills is the client's: five subagents and the format's own instrument, `skills/genius-file/measure.py`, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
+What rides inside the skills is the client's: five subagents and the format's own instrument, `skills/genius-file/measure.py`, which `/genius`, `/compact`, `/reconcile` and `/distill` run before they read.
 
 Then, in any project:
 

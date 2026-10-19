@@ -3,7 +3,6 @@ name: genius
 description: The map of the Working Genius workflow — where each piece of work stands, what to run next, and where genius gaps are hiding.
 disable-model-invocation: true
 argument-hint: "optional: a work slug, or a new idea to start tracking"
-allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py *)
 ---
 
 # The Genius Map
@@ -27,10 +26,10 @@ State lives in `.genius/<slug>/<slug>.md` — the bounded snapshot a cold sessio
 
 ## What to do when invoked
 
-The counts first, taken as this command was invoked: the block below is replaced by the instrument's output before you read it, and where a policy notice shows instead (shell injection disabled), run it before saying a number, because a number said without one is a guess:
+The counts first, taken as this command was invoked — run the instrument before you read anything else, the path relative to this skill's own folder:
 
-```!
-python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py status
+```bash
+python3 ../genius-file/measure.py status
 ```
 
 Those are the counts; what this command adds is the reading — which stage, what is unfinished, what went stale — never the arithmetic.

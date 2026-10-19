@@ -40,7 +40,7 @@ The format's instrument is [measure.py](measure.py) beside this file:
 - `distill` lists the done works and whether their logs carry the distilled line
 - `status` is what `/genius` shows
 
-`/genius`, `/compact`, `/reconcile` and `/distill` run it before they read; the one-liner stays written here for a session where injection is disabled by policy.
+`/genius`, `/compact`, `/reconcile` and `/distill` run it before they read, each naming the path relative to its own folder; the one-liner stays written here for a session with no script to hand.
 
 The number is a ceiling, never a target: **the mechanism is the question, and the count is how you check it was asked.** Under the ceiling without the question is not compacted, it is small; over it, history is leaking into state. **The Slices roster is measured out**: it grows by slice count and it *is* the progress view, one line per slice, no budget; a roster that dominates the file says this is two pieces of work, and the fix is the cut. `CONTRACT.md` has no ceiling: growing by slice count is what it is for.
 
