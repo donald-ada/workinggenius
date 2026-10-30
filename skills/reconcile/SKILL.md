@@ -8,7 +8,7 @@ allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/../genius-file/measure.py *)
 
 # Reconcile
 
-The `errata` skill catches what a session trips over. Nobody trips over the rest: `.genius/DECIDED.md`, `CONTEXT.md`, `DESIGN.md`, `ARCHITECTURE.md`, the pinned verify commands, the contracts of work still in flight. Those are read as authoritative by every fresh session precisely because nothing in the flow reads them adversarially, and each keeps being obeyed until something expensive happens.
+The binding documents — `.genius/DECIDED.md`, `CONTEXT.md`, `DESIGN.md`, `ARCHITECTURE.md`, the pinned verify commands, the contracts of work still in flight — are read as authoritative by every fresh session precisely because nothing in the flow reads them adversarially, and each keeps being obeyed until something expensive happens. The `errata` skill catches what a session trips over; nobody trips over these, so this skill goes looking.
 
 The concept: **the binding documents are claims about a repo that has moved. Go check them against it.**
 
