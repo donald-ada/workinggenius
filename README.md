@@ -75,7 +75,7 @@ Two commands stand outside the flow and track nothing: `/attack` puts a plan you
 - **/designer** — the style conversation building momentum never starts: audience first, a written brief every direction is drawn under (13 template bases when you name a look), taste settled by looking at real states, a critic reading the chosen one against the brief, accessibility computed as the floor, one committed language of tokens with roles in `DESIGN.md`
 - **/attack** — any plan or set of approaches under blind attack, one attacker per path, the wounds checked against the repo before you see them; nothing tracked
 - **/fresh-eyes** — a diff reviewed against what you say it should do, by a reviewer with no memory of how it was written; findings checked before you see them, nothing tracked
-- **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
+- **/waitwhat** — type it when an answer lost you: why it is being done this way, in plain everyday words, with no quiz at the end; a repeat sends the missing concept to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
 - **/triage** — the backlog's own rules put to its lines: seeds that shouldn't still be there, pairs that are one discovery, seeds that outgrew a line, the order nobody stated — one at a time, your call
