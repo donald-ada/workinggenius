@@ -1,6 +1,6 @@
 # The Backlog and Its Log
 
-The cross-work files at `.genius/` — `BACKLOG.md` with `BACKLOG.log.md` behind it — have a format of their own, split out of [FILE-FORMAT.md](FILE-FORMAT.md) because a slice close never needs it: it is read by `/genius`, `/triage`, `/reconcile` and `/distill`, and by whichever stage is about to route an Open line out as a seed.
+The cross-work files at `.genius/` — `BACKLOG.md` with `BACKLOG.log.md` behind it — have a format of their own, split out of [FILE-FORMAT.md](FILE-FORMAT.md) because a slice close never needs it: it is read by `/genius`, `/triage` and `/reconcile`, and by whichever stage is about to route an Open line out as a seed.
 
 **The seed's shape:** `- **<what>** — <why it matters>. From [<slug>](<slug>/log/<branch>.md#<anchor>), <date>.` One physical line, 300 characters at most (`record-prose` holds why); the `From` link is relative to `.genius/` (FILE-FORMAT's link rule). A seed found outside any work (a `diagnose` hunt, a stray edge) has no log to anchor to, so its `From` names the commit that surfaced it instead: `From <short-hash>, <date>.`
 

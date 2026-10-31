@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """The work-file format's instrument: counts characters, never bytes, and
-reads what /genius, /compact, /reconcile and /distill would otherwise count
+reads what /genius, /compact and /reconcile would otherwise count
 by hand.
 
     measure.py status            the /genius view: work dir, in-flight works, done, backlog, history
     measure.py snapshots         every snapshot's count, whole and roster excluded, against the ceiling
     measure.py links [<slug>]    both directions of the invariant: links that resolve, entries nothing links
     measure.py anchors <slug>    a log's branches, their keys and what already links each — for a close that links without opening the log
-    measure.py distill           done works and whether their logs carry the distilled line
     measure.py count <file>...   characters in each file
     measure.py append <slug> <branch> <key> [<about>]   stdin → one log entry; see cmd_append
 
@@ -306,7 +305,7 @@ def cmd_append(slug, branch, key, about, body):
     `log/<branch>.md`. A branch that does not exist yet is created, and its line appended to
     the root, `- [<branch>](log/<branch>.md) — <date> — <about>`, so the caller must say what
     the branch is about. A key that is already the last entry of that branch takes the body
-    below it (a `-wip` entry growing as the loop moves); a key anywhere else in the log is
+    below it; a key anywhere else in the log is
     refused, because keys are unique and a second copy is a broken anchor. It writes only
     what it is handed, where the caller named: the branch and the key are the caller's call,
     and on anything it cannot do it writes nothing and says why."""
@@ -358,34 +357,6 @@ def cmd_append(slug, branch, key, about, body):
             f.write(('' if not existing or existing.endswith('\n') else '\n') + line)
     what = 'continued' if continuing else ('new branch, root line added' if new_branch else 'appended')
     print(f'{rel}#{key} — {what}')
-
-
-# ---- distill: the scope rule as a scan ---------------------------------------
-
-def cmd_distill():
-    d, _ = work_dir()
-    if not os.path.isdir(d):
-        print(f'work dir {d}/ not present; nothing done, nothing to distill')
-        return
-    rows = []
-    for slug, snap in snapshots(d):
-        if frontmatter(text(snap)).get('stage') != 'done':
-            continue
-        root, branches = log_tree(os.path.dirname(snap), slug)
-        if not root and not branches:
-            rows.append(f'- {slug} — no log')
-            continue
-        body = text(root) if root else ''
-        size = len(body) + sum(len(text(p)) for p in branches)
-        shape = f'log {size} chars, {len(branches)} branches'
-        first = body.splitlines()[0].strip() if body.strip() else ''
-        if first.startswith('distilled'):
-            rows.append(f'- {slug} — {shape}, first line: {first}')
-        else:
-            rows.append(f'- {slug} — {shape}, undistilled')
-    print(f'done works: {len(rows)}')
-    for r in rows:
-        print(r)
 
 
 # ---- the rest ----------------------------------------------------------------
@@ -461,8 +432,6 @@ def main(argv):
             cmd_snapshots()
         elif cmd == 'links':
             cmd_links(argv[2] if len(argv) > 2 else None)
-        elif cmd == 'distill':
-            cmd_distill()
         elif cmd == 'anchors':
             cmd_anchors(argv[2] if len(argv) > 2 else None)
         elif cmd == 'count':
@@ -471,7 +440,7 @@ def main(argv):
             a = argv[2:6] + [None] * (4 - len(argv[2:6]))
             cmd_append(a[0], a[1], a[2], a[3], read_stdin())
         else:
-            print(f'measure: unknown command {cmd!r}; one of status, snapshots, links, anchors, distill, count, append')
+            print(f'measure: unknown command {cmd!r}; one of status, snapshots, links, anchors, count, append')
     except Exception as e:  # never fail: see the docstring
         print(f'measure: could not measure ({type(e).__name__}: {e})')
     return 0

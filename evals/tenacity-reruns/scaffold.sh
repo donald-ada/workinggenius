@@ -67,7 +67,7 @@ base: $BASE
 A greeting module the CLI can import: \`hello()\` and \`greet(name)\`, both covered by unittest. Success: \`python3 -m unittest discover -s tests -t . -q\` green, and \`greet("Ada")\` prints exactly \`hello, Ada\`, lower-case, as the CLI's other output is. [Confirmed](log/wonder.md#wonder)
 
 ## Decision
-Chosen: plain functions in \`greet.py\`, because the module has no state. [The whole fight](log/discernment.md#discernment)
+Chosen: plain functions in \`greet.py\`, because the module has no state. [The attacks](log/discernment.md#discernment)
 
 ## Contract v1
 - The brief, seams, pinned values and slice criteria: [CONTRACT.md](CONTRACT.md)

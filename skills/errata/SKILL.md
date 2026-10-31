@@ -60,4 +60,4 @@ Not a cleanup pass on the log: nothing there is compressed or tidied, because a 
 
 Not a second home for corrections: no `ERRATA.md`, nothing a reader has to know to go and check — every correction lives in the two places the wrong line already lived.
 
-Not a deletion tool. A line removed without its retirement note leaves a hole that reads exactly like a stage that never ran. Nothing is removed silently, including something you wrote an hour ago. Tenacity's close-out distillation — and `/distill`, its retroactive form — is the one carve-out: a single announced move on work that is finished and verified; while work is in flight, no log loses a line, and nothing leaves a binding copy without the record saying where it went or why.
+Not a deletion tool. A line removed without its retirement note leaves a hole that reads exactly like a stage that never ran. Nothing is removed silently, including something you wrote an hour ago. No log loses a line, in flight or at done, and nothing leaves a binding copy without the record saying where it went or why.
