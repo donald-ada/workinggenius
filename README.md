@@ -1,6 +1,6 @@
 # Working Genius
 
-A development workflow for Claude Code — 24 skills, five subagents (an inventor, an attacker, a builder, a reviewer and a design critic, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
+A development workflow for Claude Code — 23 skills, five subagents (an inventor, an attacker, a builder, a reviewer and a design critic, each shipped inside the skill that spawns it), and a work-file format that carries a piece of work between sessions. Built on one observation:
 
 > **Work doesn't fail at random. It fails at whichever stage got skipped.**
 
@@ -25,7 +25,7 @@ In Claude Code:
 /plugin marketplace add donald-ada/workinggenius
 ```
 
-Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — five subagents, two judges registered when you type `/enable` or `/tenacity` and never by installation, blocking the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact`, `/reconcile` and `/distill` read.
+Nothing to build, nothing to run. The skills are plain markdown folders under `skills/`; what rides inside them is Claude Code's — five subagents, two judges registered when you type `/enable` or `/tenacity` and never by installation, blocking the two failures the flow has measured (a coordinator that announces a dispatch and ends its turn, a builder that hands back a claim instead of evidence), and the format's own instrument, whose counts are injected before `/genius`, `/compact` and `/reconcile` read.
 
 Then, in any project:
 
@@ -53,7 +53,7 @@ Two commands stand outside the flow and track nothing: `/attack` puts a plan you
 
 `/genius` at any time shows where every piece of work stands and what to run next. Run `/setup-working-genius` once per repo: it pins the work-file directory, verify commands, and issue tracking, and writes the pointer that tells every future session this project works this way.
 
-**One piece of work = one folder** at `.genius/<slug>/` — the snapshot (current truth, bounded by a character ceiling), the append-only log behind it, a tree of one short root and one branch per stage or slice, so a session opens only the branch it needs, the contract that binds the unbuilt slices, and the work's own artifacts. The files — not conversation memory — carry the work: the confirmed problem, the options and their kill-reasons, the slices and where they stand. Any fresh session picks up exactly where the last one stopped. Not every piece of work deserves all six stages — dropping one is your call, made by not typing it; the snapshot's missing section is the record.
+**One piece of work = one folder** at `.genius/<slug>/` — the snapshot (current truth, bounded by a character ceiling), the append-only log behind it, holding only what the code and its commits cannot answer, a tree of one short root and one branch per stage or slice, so a session opens only the branch it needs, the contract that binds the unbuilt slices, and the work's own artifacts. The files — not conversation memory — carry the work: the confirmed problem, the options and their kill-reasons, the slices and where they stand. Any fresh session picks up exactly where the last one stopped. Not every piece of work deserves all six stages — dropping one is your call, made by not typing it; the snapshot's missing section is the record.
 
 ## Skills
 
@@ -75,11 +75,10 @@ Two commands stand outside the flow and track nothing: `/attack` puts a plan you
 - **/designer** — the style conversation building momentum never starts: audience first, a written brief every direction is drawn under (13 template bases when you name a look), taste settled by looking at real states, a critic reading the chosen one against the brief, accessibility computed as the floor, one committed language of tokens with roles in `DESIGN.md`
 - **/attack** — any plan or set of approaches under blind attack, one attacker per path, the wounds checked against the repo before you see them; nothing tracked
 - **/fresh-eyes** — a diff reviewed against what you say it should do, by a reviewer with no memory of how it was written; findings checked before you see them, nothing tracked
-- **/waitwhat** — type it when an answer lost you: the re-pitch adds the missing premises; a repeat sends the term to the glossary
+- **/waitwhat** — type it when an answer lost you: why it is being done this way, in plain everyday words, with no quiz at the end; a repeat sends the missing concept to the glossary
 - **/blindspot** — the unknown-unknowns pass: territory before unfamiliar work, judgment before a choice, a quiz before acceptance
 - **/reconcile** — the drift sweep: settled decisions, glossary terms, pinned commands and live contracts checked against the repo they describe, each finding carrying what produced it
 - **/triage** — the backlog's own rules put to its lines: seeds that shouldn't still be there, pairs that are one discovery, seeds that outgrew a line, the order nobody stated — one at a time, your call
-- **/distill** — retroactive log distillation for done work that closed before the rule existed: what the repo now answers leaves, what it cannot stays
 - **/compact** — the compaction question put to a snapshot that drifted: what no longer constrains unfinished work is routed out, a file in some other shape brought to the format on the way, proposed before moved
 - **/setup-working-genius** — per-repo pinning of directory, verify commands, and issue tracking, plus the cross-agent pointer
 - **genius-file** (model-invoked) — the work-file discipline: the files carry the work, absence is the record

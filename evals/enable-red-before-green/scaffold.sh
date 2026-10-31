@@ -49,7 +49,7 @@ base: 0000000
 A greeting module the CLI can import: `hello()` today, `greet(name)` next, both covered by unittest. Success: `python3 -m unittest discover -s tests -t . -q` green with a test per function. [Confirmed](log/wonder.md#wonder)
 
 ## Decision
-Chosen: plain functions in `greet.py`, because the module has no state and a class would add nothing. [The whole fight](log/discernment.md#discernment)
+Chosen: plain functions in `greet.py`, because the module has no state and a class would add nothing. [The attacks](log/discernment.md#discernment)
 
 ## Contract v1
 - The brief, seams, pinned values and slice criteria: [CONTRACT.md](CONTRACT.md)
